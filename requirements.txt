@@ -1,0 +1,9 @@
+# Dependencias del agente (versiones fijas para que la corrida sea reproducible)
+openai==3.26.1
+python-dotenv==1.2.4
+pydantic==2.14.0
+dnspython==2.9.0
+tenacity==9.2.1
+
+# Desarrollo: pruebas
+pytest==9.1.1
