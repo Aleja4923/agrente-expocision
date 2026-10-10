@@ -14,42 +14,31 @@ Uso:  venv\\Scripts\\python.exe scripts\\probar_gateway.py
 """
 
 import json
-import os
 import sys
 import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-from dotenv import load_dotenv
 from openai import APIConnectionError, APIStatusError, APITimeoutError, OpenAI
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from auditor.bitacora import Evento, enmascarar, escribir  # noqa: E402
 from auditor.config import (  # noqa: E402
     BASE_URL,
     PRECIOS_USD_POR_MILLON,
-    RAIZ,
     RUTA_LOGS,
+    cargar_llave,
 )
 
-load_dotenv(RAIZ / ".env")
-LLAVE = os.getenv("RETO_KEY", "")
-if not LLAVE:
-    sys.exit("Falta RETO_KEY en el archivo .env (copia .env.example como .env).")
-
+LLAVE = cargar_llave()
 RUN_ID = f"gateway-{uuid.uuid4().hex[:8]}"
-RUTA_LOGS.mkdir(exist_ok=True)
-BITACORA = RUTA_LOGS / f"bitacora-{datetime.now():%Y%m%d}.jsonl"
 SALIDA = RUTA_LOGS / "gateway_resultados.json"
 
 cliente = OpenAI(base_url=BASE_URL, api_key=LLAVE, timeout=90, max_retries=0)
 resultados: dict[str, object] = {}
 paso = 0
-
-
-def enmascarar(texto: str) -> str:
-    """Quita la llave de cualquier texto antes de mostrarlo o guardarlo."""
-    return texto.replace(LLAVE, "pk_***") if LLAVE else texto
+BITACORA = None
 
 
 def leer(obj, *ruta, defecto=None):
@@ -95,31 +84,24 @@ def costo_usd(modelo: str, t: dict) -> float:
 
 def anotar(modelo, t, latencia_ms, ok, nombre):
     """Escribe un evento `llm` en la bitácora con el esquema de la sección 4.4."""
-    global paso
+    global paso, BITACORA
     paso += 1
-    evento = {
-        "ts": datetime.now(timezone.utc).isoformat(),
-        "run_id": RUN_ID,
-        "auditoria_id": None,
-        "dominio": None,
-        "paso": paso,
-        "tipo": "llm" if ok else "error",
-        "modelo": modelo,
-        "tokens_entrada": t.get("tokens_entrada", 0),
-        "tokens_cache": t.get("tokens_cache", 0),
-        "tokens_salida": t.get("tokens_salida", 0),
-        "tokens_razonamiento": t.get("tokens_razonamiento", 0),
-        "costo_usd": round(costo_usd(modelo, t), 8) if t else 0.0,
-        "latencia_ms": latencia_ms,
-        "herramienta": None,
-        "args_hash": None,
-        "ok": ok,
-        "justificacion": f"verificacion_gateway:{nombre}",
-        "motivo_cierre": None,
-    }
-    with BITACORA.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(evento, ensure_ascii=False) + "\n")
-    return evento
+    evento = Evento(
+        run_id=RUN_ID,
+        paso=paso,
+        tipo="llm" if ok else "error",
+        modelo=modelo,
+        tokens_entrada=t.get("tokens_entrada", 0),
+        tokens_cache=t.get("tokens_cache", 0),
+        tokens_salida=t.get("tokens_salida", 0),
+        tokens_razonamiento=t.get("tokens_razonamiento", 0),
+        costo_usd=round(costo_usd(modelo, t), 8) if t else 0.0,
+        latencia_ms=latencia_ms,
+        ok=ok,
+        justificacion=f"verificacion_gateway:{nombre}",
+    )
+    BITACORA = escribir(evento)
+    return evento.model_dump()
 
 
 def describir_error(e: Exception) -> dict:
@@ -268,4 +250,4 @@ resultados["_resumen"] = {"run_id": RUN_ID, "costo_total_usd_calculado": round(t
                           "precios": "provisionales", "ts": datetime.now(timezone.utc).isoformat()}
 SALIDA.write_text(json.dumps(resultados, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
 print(f"\nCosto total calculado (precios provisionales): USD {total:.6f}")
-print(f"Run: {RUN_ID} · bitácora: {BITACORA.name} · detalle: {SALIDA.name}")
+print(f"Run: {RUN_ID} · bitácora: {BITACORA.name if BITACORA else '-'} · detalle: {SALIDA.name}")

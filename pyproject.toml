@@ -1,0 +1,10 @@
+[project]
+name = "auditor-expo"
+version = "0.1.0"
+description = "Agente que audita la exposición digital de una pyme a suplantación de correo y fraudes"
+requires-python = ">=3.12"
+license = "MIT"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
