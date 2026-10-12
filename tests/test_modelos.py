@@ -7,7 +7,6 @@ from auditor.modelos import (
     AccionPriorizada,
     Hallazgo,
     InformeFinal,
-    NivelRiesgo,
     ResultadoHerramienta,
 )
 
@@ -68,33 +67,41 @@ def test_informe_sin_hallazgos_es_valido():
     # Un dominio bien configurado: el agente no debe inventar problemas.
     informe = InformeFinal(
         resumen="Su dominio está bien protegido.",
-        nivel_riesgo="bajo",
         hallazgos_citados=[],
         acciones_priorizadas=[],
     )
-    assert informe.nivel_riesgo is NivelRiesgo.BAJO
+    assert informe.acciones_priorizadas == []
 
 
 def test_accion_que_cita_hallazgo_no_listado_se_rechaza():
     with pytest.raises(ValidationError):
         InformeFinal(
             resumen="r",
-            nivel_riesgo="alto",
             hallazgos_citados=["CORREO-SPF-AUSENTE"],
             acciones_priorizadas=[AccionPriorizada(hallazgo_id="CORREO-DMARC-AUSENTE",
-                                                   por_que_primero="p")],
+                                                   por_que_primero="p", recomendacion="r")],
         )
 
 
 def test_informe_rechaza_campos_extra():
     with pytest.raises(ValidationError):
-        InformeFinal(resumen="r", nivel_riesgo="medio", hallazgos_citados=[],
+        InformeFinal(resumen="r", hallazgos_citados=[],
                      acciones_priorizadas=[], recomendacion_libre="algo inventado")
+
+
+def test_informe_no_acepta_nivel_riesgo():
+    # El nivel de riesgo lo calcula el código (scoring.nivel_riesgo), no Grok.
+    with pytest.raises(ValidationError):
+        InformeFinal(resumen="r", nivel_riesgo="bajo", hallazgos_citados=[], acciones_priorizadas=[])
+
+
+def test_accion_exige_recomendacion():
+    with pytest.raises(ValidationError):
+        AccionPriorizada(hallazgo_id="CORREO-DMARC-AUSENTE", por_que_primero="p")
 
 
 def test_schema_del_informe_sirve_como_herramienta_para_grok():
     schema = InformeFinal.model_json_schema()
-    assert set(schema["required"]) == {"resumen", "nivel_riesgo", "hallazgos_citados",
-                                       "acciones_priorizadas"}
+    assert set(schema["required"]) == {"resumen", "hallazgos_citados", "acciones_priorizadas"}
     assert schema["additionalProperties"] is False
-    assert schema["$defs"]["NivelRiesgo"]["enum"] == ["alto", "medio", "bajo"]
+    assert "recomendacion" in schema["$defs"]["AccionPriorizada"]["required"]

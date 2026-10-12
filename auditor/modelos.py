@@ -97,15 +97,21 @@ class AccionPriorizada(BaseModel):
 
     hallazgo_id: str = Field(description="Id del hallazgo que resuelve esta acción")
     por_que_primero: str = Field(description="Una frase simple: por qué va en este lugar de la lista")
+    recomendacion: str = Field(
+        description="Qué hacer, en lenguaje del dueño, en 1-2 frases. No escribas registros DNS: "
+                    "el informe agrega el dato técnico exacto."
+    )
 
 
 class InformeFinal(BaseModel):
-    """Argumentos de la herramienta `entregar_informe`. Su JSON schema es lo que recibe Grok."""
+    """Argumentos de la herramienta `entregar_informe`. Su JSON schema es lo que recibe Grok.
+
+    No lleva nivel de riesgo: ese lo calcula el código (scoring.nivel_riesgo).
+    """
 
     model_config = ConfigDict(extra="forbid")
 
     resumen: str = Field(description="Tres líneas para el dueño de la pyme, sin jerga técnica")
-    nivel_riesgo: NivelRiesgo
     hallazgos_citados: list[str] = Field(description="Ids de los hallazgos que entregó el arnés")
     acciones_priorizadas: list[AccionPriorizada] = Field(
         description="De la más urgente a la menos urgente; cada una cita un hallazgo"
@@ -127,6 +133,7 @@ class EstadoAuditoria(BaseModel):
     """Todo lo que se sabe de una auditoría en curso; lo actualiza el bucle del agente."""
 
     dominio: str
+    objetivo: str = ""
     lote_id: str
     auditoria_id: str
     intento: int = 1
@@ -135,6 +142,10 @@ class EstadoAuditoria(BaseModel):
     pasos: int = 0
     costo_usd: float = 0.0
     herramientas_llamadas: list[str] = Field(default_factory=list)
-    resultados: list[ResultadoHerramienta] = Field(default_factory=list)
+    # (argumentos que pidió Grok, sin justificación; resultado) en orden de ejecución
+    llamadas: list[tuple[dict[str, Any], ResultadoHerramienta]] = Field(default_factory=list)
     hallazgos: dict[str, Hallazgo] = Field(default_factory=dict)
+    informe: InformeFinal | None = None
+    informe_de_respaldo: bool = False
+    nivel_riesgo: NivelRiesgo | None = None
     motivo_cierre: MotivoCierre | None = None
