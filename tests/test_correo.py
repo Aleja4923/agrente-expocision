@@ -142,6 +142,7 @@ def test_dns_correo_dominio_tipico(monkeypatch):
              "_dmarc.ejemplo.com.co": ["v=DMARC1; p=none; rua=mailto:d@ejemplo.com.co"]},
         mx={"ejemplo.com.co": [(1, "smtp.google.com")]}))
     assert r.ok
+    assert r.datos["dominio"] == "ejemplo.com.co"
     assert r.datos["mx"] == {"servidores": [{"prioridad": 1, "host": "smtp.google.com"}], "proveedor": "google"}
     assert (r.datos["spf"]["cierre"], r.datos["dmarc"]["p"]) == ("~all", "none")
     assert r.contenido_no_confiable["txt_dmarc"] == ["v=DMARC1; p=none; rua=mailto:d@ejemplo.com.co"]

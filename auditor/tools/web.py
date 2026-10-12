@@ -148,6 +148,6 @@ def tls_certificado(entrada: EntradaHost) -> ResultadoHerramienta:
     return ResultadoHerramienta(
         ok=True,
         herramienta="tls_certificado",
-        datos={"valido": valido, "motivo": motivo, **datos, "version_tls": version, "ip": ip},
+        datos={"valido": valido, "motivo": motivo, **datos, "version_tls": version, "ip": ip, "host": host},
         contenido_no_confiable=no_confiable,
     )

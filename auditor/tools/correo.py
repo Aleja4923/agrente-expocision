@@ -211,6 +211,7 @@ def dns_correo(entrada: EntradaDominio) -> ResultadoHerramienta:
         ok=True,
         herramienta="dns_correo",
         datos={
+            "dominio": d,
             "mx": {"servidores": servidores, "proveedor": inferir_proveedor([s["host"] for s in servidores])},
             "spf": analizar_spf(txt, txt_o_vacio),
             "dmarc": analizar_dmarc(txt_dmarc),

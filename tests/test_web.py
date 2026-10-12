@@ -106,7 +106,8 @@ def test_certificado_valido(monkeypatch):
     r, llamadas = revisar(monkeypatch, lambda verificar: (cert(), "TLSv1.3"))
     assert r.ok
     assert r.datos == {"valido": True, "motivo": None, "vence": "2026-11-21", "dias_restantes": 40,
-                       "version_tls": "TLSv1.3", "ip": "93.184.216.34"}
+                       "version_tls": "TLSv1.3", "ip": "93.184.216.34",
+                       "host": "ejemplo.com.co"}
     assert r.contenido_no_confiable["emisor"] == "Let's Encrypt"
     assert llamadas == [("93.184.216.34", "ejemplo.com.co", True)]
 
