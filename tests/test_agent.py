@@ -291,3 +291,20 @@ def test_error_gateway_cierra_ordenado(tmp_path):
 def test_sin_tiempo_del_cliente_es_tope_tiempo(tmp_path):
     grok = GrokGuion(resp(DNS, TLS), ErrorGateway("sin_tiempo", "No quedó tiempo."))
     assert correr(grok, tmp_path).motivo_cierre == "tope_tiempo"
+
+
+# --- fase 7: observador en vivo --------------------------------------------------
+
+def test_observador_recibe_trayectoria(tmp_path):
+    lineas = []
+    grok = GrokGuion(resp(DNS, TLS), resp(("entregar_informe", informe())),
+                     resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
+    correr(grok, tmp_path, observador=lineas.append)
+    texto = "\n".join(lineas)
+    assert "paso 1 · Grok" in texto
+    assert "dns_correo(ejemplo.com.co) «Base para evaluar suplantación.»" in texto
+    assert "✓ MX google, SPF -all, DMARC none" in texto
+    assert "✓ válido, vence en 80 días" in texto
+    assert "⚑ hallazgos: CORREO-DMARC-NONE" in texto
+    assert "✗ informe rechazado" in texto
+    assert lineas[-1] == "fin · informe_entregado · riesgo alto"

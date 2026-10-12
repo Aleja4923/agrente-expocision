@@ -1,0 +1,162 @@
+"""Informe Markdown para el dueño de la pyme.
+
+Grok aporta el resumen, el orden y el texto de cada recomendación. El código aporta los
+hallazgos con su evidencia y el DATO TÉCNICO EXACTO de cada recomendación (plantillas
+fijas por recomendacion_id): así nadie copia en su DNS un registro inventado por el LLM.
+Nunca se copia contenido no confiable al informe.
+"""
+
+from datetime import datetime
+from pathlib import Path
+from typing import Callable
+
+from auditor.config import RUTA_SALIDAS
+from auditor.modelos import EstadoAuditoria, Hallazgo, NivelRiesgo
+
+SEMAFORO = {NivelRiesgo.ALTO: "🔴", NivelRiesgo.MEDIO: "🟡", NivelRiesgo.BAJO: "🟢"}
+SEVERIDAD_LEGIBLE = {"critica": "crítica", "alta": "alta", "media": "media", "baja": "baja",
+                     "informativa": "informativa"}
+
+LIMITACION_DKIM = ("DKIM (la firma digital de sus correos) no se revisa en esta versión, así que este "
+                   "informe no afirma nada sobre ella.")
+AVISO_RESPALDO = ("> Este informe se armó automáticamente con los hallazgos verificados porque la revisión "
+                  "se detuvo antes de tiempo. Los hallazgos son correctos; el texto es más breve de lo habitual.")
+
+
+def _hosts(evidencia: str) -> str:
+    """'a.co: vencido; b.co: autofirmado' -> 'a.co, b.co'."""
+    return ", ".join(parte.split(":", 1)[0].strip() for parte in evidencia.split("; "))
+
+
+def _spf_crear(d: str, ctx: dict) -> str:
+    proveedor = ctx.get("proveedor", "otro")
+    if proveedor == "ninguno":
+        return f"Si {d} no envía correo, publicar un registro TXT en {d}:\nv=spf1 -all"
+    registro = {
+        "google": "v=spf1 include:_spf.google.com ~all",
+        "microsoft": "v=spf1 include:spf.protection.outlook.com -all",
+    }.get(proveedor)
+    if registro:
+        texto = f"Publicar un registro TXT en {d}:\n{registro}"
+    else:
+        texto = (f"Publicar un registro TXT en {d} con el include que le indique su proveedor de correo, "
+                 "terminando en ~all:\nv=spf1 include:<servidor de su proveedor> ~all")
+    return texto + (f"\nAntes, confirme qué otros servicios envían correo con @{d} (tienda en línea, "
+                    "boletines, facturación) y agréguelos al mismo registro.")
+
+
+PLANTILLAS: dict[str, Callable[[str, dict], str]] = {
+    "REC-DMARC-CREAR": lambda d, ctx: (
+        f"Publicar un registro TXT en _dmarc.{d}:\nv=DMARC1; p=none; rua=mailto:dmarc@{d}\n"
+        f"(Cree el buzón dmarc@{d} o cambie la dirección por una que alguien revise.)"),
+    "REC-DMARC-CORREGIR": lambda d, ctx: (
+        f"Dejar un único registro TXT en _dmarc.{d}, con este formato:\nv=DMARC1; p=none; rua=mailto:dmarc@{d}"),
+    "REC-DMARC-ENDURECER": lambda d, ctx: (
+        f"Después de revisar los reportes de DMARC durante 2 a 4 semanas y confirmar qué servicios envían "
+        f"correo legítimo con @{d}:\n"
+        f"1. En _dmarc.{d}, cambiar p=none por p=quarantine (puede agregar t=y para probar primero).\n"
+        f"2. Cuando todo funcione, cambiar a p=reject."),
+    "REC-DMARC-RUA": lambda d, ctx: f"Agregar al registro TXT de _dmarc.{d} la etiqueta:\nrua=mailto:dmarc@{d}",
+    "REC-DMARC-OBSOLETO": lambda d, ctx: (
+        f"En la próxima actualización del registro _dmarc.{d}, quitar las etiquetas "
+        f"{ctx['evidencia'].removeprefix('etiquetas: ')} (el estándar actual, RFC 9989, ya no las usa)."),
+    "REC-SPF-CREAR": _spf_crear,
+    "REC-SPF-UNIR": lambda d, ctx: (
+        f"Dejar un solo registro TXT que empiece por v=spf1 en {d}, uniendo en él todos los include e ip "
+        f"de los registros actuales, y borrar los demás."),
+    "REC-SPF-CERRAR": lambda d, ctx: (
+        f"Cambiar el final del registro SPF de {d} por ~all (o por -all cuando haya confirmado todos los "
+        f"servicios que envían correo con @{d})."),
+    "REC-SPF-SIMPLIFICAR": lambda d, ctx: (
+        f"Reducir el registro SPF de {d} a 10 consultas DNS como máximo (hoy: {ctx['evidencia']}): quitar los "
+        f"include de servicios que ya no use o reemplazarlos por sus rangos ip4/ip6."),
+    "REC-SIN-MX": lambda d, ctx: (
+        f"{d} no tiene servidores MX, pero su SPF autoriza servidores para enviar correo (por ejemplo, "
+        f"boletines). Confirmar que no necesita recibir respuestas en {d}; si las necesita, configurar sus MX. "
+        f"No endurecer DMARC fuera del paso gradual."
+        if ctx.get("envia_correo") else
+        f"Si {d} no envía ni recibe correo, publicar:\n- TXT en {d}: v=spf1 -all\n"
+        f"- TXT en _dmarc.{d}: v=DMARC1; p=reject\n- (opcional) MX nulo en {d}: 0 .  (RFC 7505)"),
+    "REC-TLS-RENOVAR": lambda d, ctx: (
+        f"Renovar o reinstalar el certificado HTTPS de: {_hosts(ctx['evidencia'])}.\n"
+        f"Conviene activar la renovación automática (por ejemplo, con Let's Encrypt)."),
+    "REC-TLS-VERSION": lambda d, ctx: (
+        f"Desactivar TLS 1.0 y TLS 1.1 en el servidor de: {_hosts(ctx['evidencia'])}; dejar habilitados solo "
+        f"TLS 1.2 y TLS 1.3."),
+    "REC-HTTPS": lambda d, ctx: (
+        f"Instalar un certificado HTTPS en: {_hosts(ctx['evidencia'])} (puede ser gratuito, por ejemplo con "
+        f"Let's Encrypt) y redirigir todo el tráfico de http a https."),
+}
+
+
+def _datos_correo(estado: EstadoAuditoria) -> dict:
+    """Datos del último dns_correo exitoso sobre el dominio objetivo (vacío si no hay)."""
+    for _, r in reversed(estado.llamadas):
+        if r.herramienta == "dns_correo" and r.ok and r.datos.get("dominio") == estado.dominio:
+            return r.datos
+    return {}
+
+
+def _envia_correo(datos: dict) -> bool:
+    """True si el SPF autoriza algún servidor (algo más que el cierre 'all')."""
+    registros = datos.get("spf", {}).get("registros", [])
+    return bool(registros) and any(t.lstrip("+-~?").lower() != "all" for t in registros[0].split()[1:])
+
+
+def _bloque_tecnico(estado: EstadoAuditoria, h: Hallazgo) -> str:
+    datos = _datos_correo(estado)
+    contexto = {"proveedor": datos.get("mx", {}).get("proveedor", "otro"), "evidencia": h.evidencia,
+                "envia_correo": _envia_correo(datos)}
+    return PLANTILLAS[h.recomendacion_id](estado.dominio, contexto)
+
+
+def generar_informe(estado: EstadoAuditoria) -> str:
+    """Markdown en español: resumen, qué hacer primero, hallazgos, verificaciones, limitaciones, pie."""
+    d, informe = estado.dominio, estado.informe
+    nivel = estado.nivel_riesgo or NivelRiesgo.BAJO
+    partes = [f"# Informe de exposición digital · {d}", "",
+              f"**Nivel de riesgo: {SEMAFORO[nivel]} {nivel.value.upper()}**", "", informe.resumen.strip(), ""]
+    if estado.informe_de_respaldo:
+        partes += [AVISO_RESPALDO, ""]
+
+    partes += ["## Qué hacer primero", ""]
+    acciones = [a for a in informe.acciones_priorizadas if a.hallazgo_id in estado.hallazgos]
+    if not acciones:
+        partes += ["No encontramos aspectos que requieran acción en lo que revisamos.", ""]
+    for n, a in enumerate(acciones, 1):
+        h = estado.hallazgos[a.hallazgo_id]
+        partes += [f"### {n}. {h.titulo}", f"*Severidad {SEVERIDAD_LEGIBLE[h.severidad.value]} · {h.id}*", "",
+                   a.recomendacion.strip(), "", f"**Por qué va en este lugar:** {a.por_que_primero.strip()}", "",
+                   "**Reenvíe esto a su proveedor:**", "", "```", _bloque_tecnico(estado, h), "```", ""]
+
+    partes += ["## Hallazgos", ""]
+    if not estado.hallazgos:
+        partes += ["No se encontraron hallazgos.", ""]
+    for h in estado.hallazgos.values():
+        partes += [f"### {h.titulo} ({SEVERIDAD_LEGIBLE[h.severidad.value]})", "", h.explicacion_simple, "",
+                   f"- Evidencia: `{h.evidencia}`", ""]
+
+    partes += ["## Verificaciones sugeridas", ""]
+    if any(i.startswith("CORREO-DMARC") for i in estado.hallazgos):
+        partes += [f"- Antes de endurecer DMARC, confirme desde qué dirección salen sus facturas electrónicas; si "
+                   f"salen como @{d}, ese servidor debe estar autorizado en su SPF.", ""]
+    else:
+        partes += ["Ninguna por ahora.", ""]
+
+    partes += ["## Lo que no se pudo verificar", ""]
+    partes += [f"- {limitacion.strip()}" for limitacion in informe.limitaciones] + [f"- {LIMITACION_DKIM}", ""]
+
+    partes += ["---",
+               f"Revisión pasiva con información pública (DNS y certificado del sitio), sin escaneos ni accesos. "
+               f"Fecha: {estado.inicio:%Y-%m-%d %H:%M} UTC · Modelo: {estado.modelo} · "
+               f"Costo: USD {estado.costo_usd:.4f} · Pasos: {estado.pasos} · "
+               f"Auditoría: {estado.auditoria_id} (intento {estado.intento})."]
+    return "\n".join(partes) + "\n"
+
+
+def guardar_informe(estado: EstadoAuditoria, ruta: Path = RUTA_SALIDAS) -> Path:
+    """Escribe salidas/<dominio>-<AAAAMMDD-HHMM>.md en UTF-8 y devuelve la ruta."""
+    ruta.mkdir(parents=True, exist_ok=True)
+    archivo = ruta / f"{estado.dominio}-{datetime.now():%Y%m%d-%H%M}.md"
+    archivo.write_text(generar_informe(estado), encoding="utf-8")
+    return archivo

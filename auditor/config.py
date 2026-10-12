@@ -11,6 +11,7 @@ RUTA_LOGS = RAIZ / "logs"
 RUTA_SALIDAS = RAIZ / "salidas"
 RUTA_CACHE = RAIZ / "cache"
 RUTA_ENV = RAIZ / ".env"
+RUTA_DB = RUTA_CACHE / "auditor.db"
 
 BASE_URL = "https://api.reto.pltk.mx/v1"
 URL_REPO = "https://github.com/Aleja4923/agrente-expocision"

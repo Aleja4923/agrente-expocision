@@ -138,6 +138,21 @@ def informe_de_respaldo(estado: EstadoAuditoria, motivo: str) -> InformeFinal:
                         acciones_priorizadas=acciones, limitaciones=limitaciones)
 
 
+def _resumen_resultado(r: ResultadoHerramienta) -> str:
+    """Una línea legible del resultado, para el modo --verbose."""
+    if not r.ok:
+        return f"✗ {r.error}"
+    d = r.datos
+    if r.herramienta == "dns_correo":
+        return (f"✓ MX {d['mx']['proveedor']}, SPF {d['spf']['cierre']}, "
+                f"DMARC {d['dmarc']['p'] if d['dmarc']['existe'] else 'ausente'}")
+    if r.herramienta == "tls_certificado":
+        if d["valido"]:
+            return f"✓ válido, vence en {d['dias_restantes']} días ({d['version_tls']})"
+        return f"✓ certificado NO válido: {d['motivo']}"
+    return "✓"
+
+
 def _hallazgos_para_grok(estado: EstadoAuditoria) -> list[dict[str, str]]:
     return [{"id": h.id, "severidad": h.severidad.value, "titulo": h.titulo, "evidencia": h.evidencia}
             for h in estado.hallazgos.values()]
@@ -155,8 +170,13 @@ def auditar(
     ejecutor: Ejecutor | None = None,
     reloj: Callable[[], float] = time.monotonic,
     ruta_logs: Path = RUTA_LOGS,
+    observador: Callable[[str], None] | None = None,
 ) -> EstadoAuditoria:
-    """Audita un dominio y devuelve el estado final, siempre con un informe."""
+    """Audita un dominio y devuelve el estado final, siempre con un informe.
+
+    `observador` recibe una línea por evento (para --verbose y el video de la demo).
+    """
+    contar = observador or (lambda _linea: None)
     dominio = normalizar_dominio(dominio)
     objetivo = objetivo or OBJETIVO_POR_DEFECTO.format(dominio=dominio)
     ejecutor = ejecutor or base.ejecutar
@@ -177,6 +197,7 @@ def auditar(
         estado.nivel_riesgo = scoring.nivel_riesgo(estado.hallazgos)
         anotar("fin", motivo_cierre=motivo.value, costo_usd=round(estado.costo_usd, 6),
                ok=not estado.informe_de_respaldo)
+        contar(f"fin · {motivo.value} · riesgo {estado.nivel_riesgo.value}")
         return estado
 
     def preparar(tc: dict[str, str]) -> tuple[dict[str, Any] | str, str | None]:
@@ -215,6 +236,7 @@ def auditar(
         estado.pasos += 1
         estado.costo_usd += r.costo_usd
         mensajes.append(r.mensaje)
+        contar(f"paso {estado.pasos} · Grok · USD {r.costo_usd:.4f} (acumulado {estado.costo_usd:.4f})")
 
         if not r.tool_calls:
             mensajes.append({"role": "user", "content": RECORDATORIO})
@@ -248,6 +270,8 @@ def auditar(
         for (tc, argumentos, justificacion, n), resultado in zip(preparadas, resultados):
             argumentos = argumentos if isinstance(argumentos, dict) else {}
             ejecutadas.append((argumentos, justificacion, resultado))
+            contar(f"   → {tc['nombre']}({_host(argumentos) or '?'}) «{justificacion or ''}»")
+            contar(f"     {_resumen_resultado(resultado)}")
             if resultado.error == "repeticion":
                 anotar("rechazo", herramienta=tc["nombre"], ok=False, justificacion="repeticion")
                 continue
@@ -258,6 +282,8 @@ def auditar(
             if resultado.error == "fuera_de_alcance":
                 anotar("rechazo", herramienta=tc["nombre"], ok=False, justificacion="fuera_de_alcance")
         estado.hallazgos = scoring.evaluar(estado.llamadas, dominio)
+        if normales:
+            contar(f"   ⚑ hallazgos: {', '.join(estado.hallazgos) or 'ninguno'}")
 
         hallazgos = _hallazgos_para_grok(estado)
         for tc, (_, _, resultado) in zip(normales, ejecutadas):
@@ -283,6 +309,7 @@ def auditar(
 
             anotar("rechazo", herramienta="entregar_informe", ok=False,
                    justificacion="; ".join(pendientes + problemas)[:300])
+            contar(f"   ✗ informe rechazado: {'; '.join(pendientes + problemas)[:200]}")
             if pendientes:
                 problemas = [f"falta revisar {p}" for p in pendientes] + problemas
             else:
