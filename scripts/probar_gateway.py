@@ -24,15 +24,11 @@ from openai import APIConnectionError, APIStatusError, APITimeoutError, OpenAI
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from auditor.bitacora import Evento, enmascarar, escribir  # noqa: E402
-from auditor.config import (  # noqa: E402
-    BASE_URL,
-    PRECIOS_USD_POR_MILLON,
-    RUTA_LOGS,
-    cargar_llave,
-)
+from auditor.config import BASE_URL, RUTA_LOGS, cargar_llave  # noqa: E402
+from auditor.llm import calcular_costo  # noqa: E402
 
 LLAVE = cargar_llave()
-RUN_ID = f"gateway-{uuid.uuid4().hex[:8]}"
+LOTE_ID = f"gateway-{uuid.uuid4().hex[:8]}"
 SALIDA = RUTA_LOGS / "gateway_resultados.json"
 
 cliente = OpenAI(base_url=BASE_URL, api_key=LLAVE, timeout=90, max_retries=0)
@@ -75,11 +71,9 @@ def tokens_de(usage) -> dict:
 
 
 def costo_usd(modelo: str, t: dict) -> float:
-    """Costo con precios provisionales; el razonamiento se cobra como salida."""
-    p_in, p_cache, p_out = PRECIOS_USD_POR_MILLON[modelo]
-    salida = t["tokens_salida"] + (t["tokens_razonamiento"] if t["razonamiento_aparte"] else 0)
-    sin_cache = t["tokens_entrada"] - t["tokens_cache"]
-    return (sin_cache * p_in + t["tokens_cache"] * p_cache + salida * p_out) / 1_000_000
+    """Mismo cálculo que llm.py. En `responses` el razonamiento ya viene dentro de la salida."""
+    razonamiento = t["tokens_razonamiento"] if t["razonamiento_aparte"] else 0
+    return calcular_costo(modelo, t["tokens_entrada"], t["tokens_cache"], t["tokens_salida"], razonamiento)
 
 
 def anotar(modelo, t, latencia_ms, ok, nombre):
@@ -87,7 +81,7 @@ def anotar(modelo, t, latencia_ms, ok, nombre):
     global paso, BITACORA
     paso += 1
     evento = Evento(
-        run_id=RUN_ID,
+        lote_id=LOTE_ID,
         paso=paso,
         tipo="llm" if ok else "error",
         modelo=modelo,
@@ -246,8 +240,8 @@ for intento in (1, 2):
 
 # --- Resumen ------------------------------------------------------------------
 total = sum(v.get("costo_usd", 0) for v in resultados.values() if isinstance(v, dict))
-resultados["_resumen"] = {"run_id": RUN_ID, "costo_total_usd_calculado": round(total, 6),
+resultados["_resumen"] = {"lote_id": LOTE_ID, "costo_total_usd_calculado": round(total, 6),
                           "precios": "provisionales", "ts": datetime.now(timezone.utc).isoformat()}
 SALIDA.write_text(json.dumps(resultados, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
 print(f"\nCosto total calculado (precios provisionales): USD {total:.6f}")
-print(f"Run: {RUN_ID} · bitácora: {BITACORA.name if BITACORA else '-'} · detalle: {SALIDA.name}")
+print(f"Lote: {LOTE_ID} · bitácora: {BITACORA.name if BITACORA else '-'} · detalle: {SALIDA.name}")

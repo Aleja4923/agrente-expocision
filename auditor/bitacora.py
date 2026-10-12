@@ -18,13 +18,17 @@ _PATRON_LLAVE = re.compile(r"pk_[A-Za-z0-9_\-]{8,}")
 
 
 class Evento(BaseModel):
-    """Los 18 campos fijos de la bitácora. Un campo extra o mal escrito es un error."""
+    """Los 19 campos fijos de la bitácora. Un campo extra o mal escrito es un error.
+
+    Identidad de cada evento: lote > auditoría > intento (ver docs/GLOSSARY.md).
+    """
 
     model_config = ConfigDict(extra="forbid")
 
     ts: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
-    run_id: str
+    lote_id: str
     auditoria_id: str | None = None
+    intento: int = 1
     dominio: str | None = None
     paso: int = 0
     tipo: TipoEvento

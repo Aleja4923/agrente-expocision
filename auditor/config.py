@@ -31,6 +31,11 @@ USD_POR_TICK = 1e-10
 # No se envía: en la verificación del gateway no cambió el gasto de forma consistente.
 REASONING_EFFORT = None
 
+# Llamadas a Grok: tiempo máximo por intento, intentos y espera máxima entre reintentos.
+TIMEOUT_LLM_SEGUNDOS = 60
+MAX_INTENTOS_LLM = 4
+ESPERA_MAX_SEGUNDOS = 30
+
 # Topes por auditoría: ninguna puede quedarse en bucle ni gastar de más.
 MAX_PASOS = 15
 MAX_USD = 0.15

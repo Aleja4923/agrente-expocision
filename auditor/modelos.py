@@ -127,8 +127,9 @@ class EstadoAuditoria(BaseModel):
     """Todo lo que se sabe de una auditoría en curso; lo actualiza el bucle del agente."""
 
     dominio: str
-    run_id: str
+    lote_id: str
     auditoria_id: str
+    intento: int = 1
     modelo: str
     inicio: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     pasos: int = 0
