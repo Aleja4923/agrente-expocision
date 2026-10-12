@@ -4,6 +4,7 @@ python-dotenv==1.2.4
 pydantic==2.14.0
 dnspython==2.9.0
 tenacity==9.2.1
+cryptography==50.0.2
 
 # Desarrollo: pruebas
 pytest==9.1.1

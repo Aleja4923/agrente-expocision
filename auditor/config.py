@@ -39,6 +39,9 @@ ESPERA_MAX_SEGUNDOS = 30
 # Consultas DNS: tiempo total máximo por consulta.
 DNS_TIMEOUT_SEGUNDOS = 5
 
+# Conexión TLS al puerto 443: tiempo máximo de conexión y handshake.
+TLS_TIMEOUT_SEGUNDOS = 5
+
 # Topes por auditoría: ninguna puede quedarse en bucle ni gastar de más.
 MAX_PASOS = 15
 MAX_USD = 0.15
