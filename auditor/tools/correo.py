@@ -93,19 +93,30 @@ def analizar_spf(txts: list[str], consultar_txt: Callable[[str], list[str]]) -> 
     return r
 
 
+def _etiquetas_dmarc(registro: str) -> dict[str, str]:
+    etiquetas = {}
+    for parte in registro.split(";"):
+        if "=" in parte:
+            clave, valor = parte.split("=", 1)
+            etiquetas[clave.strip().lower()] = valor.strip()
+    return etiquetas
+
+
 def analizar_dmarc(txts: list[str]) -> dict[str, Any]:
     """Etiquetas DMARC según RFC 9989 (p, sp, np, t, psd, rua) y las obsoletas como nota."""
     registros = [t.strip() for t in txts if t.strip().lower().startswith("v=dmarc1")]
     r: dict[str, Any] = {"existe": bool(registros), "valido": False, "multiple": len(registros) > 1,
                          "p": None, "p_ausente": False, "sp": None, "np": None, "t": None, "psd": None,
-                         "rua": [], "pct": None, "etiquetas_obsoletas": []}
+                         "rua": [], "pct": None, "etiquetas_obsoletas": [], "politica_mas_estricta": None}
+    if len(registros) > 1:
+        # Con varios registros nada se aplica, pero hay que saber qué política ya tenía la
+        # empresa: la recomendación nunca debe proponer una más débil.
+        politicas = {_etiquetas_dmarc(x).get("p", "").lower() for x in registros} & POLITICAS_DMARC
+        orden = ["none", "quarantine", "reject"]
+        r["politica_mas_estricta"] = max(politicas, key=orden.index) if politicas else None
     if len(registros) != 1:
         return r
-    etiquetas = {}
-    for parte in registros[0].split(";"):
-        if "=" in parte:
-            clave, valor = parte.split("=", 1)
-            etiquetas[clave.strip().lower()] = valor.strip()
+    etiquetas = _etiquetas_dmarc(registros[0])
     p = etiquetas.get("p", "").lower()
     if not p:
         p, r["p_ausente"] = "none", True

@@ -308,3 +308,9 @@ def test_observador_recibe_trayectoria(tmp_path):
     assert "⚑ hallazgos: CORREO-DMARC-NONE" in texto
     assert "✗ informe rechazado" in texto
     assert lineas[-1] == "fin · informe_entregado · riesgo alto"
+
+
+def test_verbose_muestra_dmarc_duplicado():
+    datos = correo(dmarc={"multiple": True, "valido": False, "p": None})
+    r = ResultadoHerramienta(ok=True, herramienta="dns_correo", datos=datos)
+    assert "DMARC duplicado" in agent._resumen_resultado(r) and "None" not in agent._resumen_resultado(r)

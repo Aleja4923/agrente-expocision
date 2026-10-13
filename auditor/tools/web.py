@@ -9,11 +9,13 @@ import ssl
 from datetime import datetime, timezone
 from typing import Any
 
+import dns.exception
+import dns.resolver
 from cryptography import x509
 from cryptography.x509.oid import NameOID
 from pydantic import BaseModel, Field
 
-from auditor.config import TLS_TIMEOUT_SEGUNDOS
+from auditor.config import DNS_TIMEOUT_SEGUNDOS, TLS_TIMEOUT_SEGUNDOS
 from auditor.modelos import ResultadoHerramienta
 from auditor.tools.base import ip_permitida, registrar
 
@@ -69,12 +71,25 @@ def _ahora() -> datetime:
     return datetime.now(timezone.utc)
 
 
+def _existe_en_dns(host: str) -> bool:
+    """True si el nombre existe en DNS aunque no tenga dirección (p. ej. un dominio con solo MX)."""
+    try:
+        dns.resolver.resolve(host, "A", lifetime=DNS_TIMEOUT_SEGUNDOS)
+        return True
+    except dns.resolver.NoAnswer:
+        return True
+    except (dns.resolver.NXDOMAIN, dns.exception.DNSException):
+        return False
+
+
 def resolver_ip(host: str) -> str:
     """Primera IP del host. Se revisa con ip_permitida y luego se conecta a ESA misma IP."""
     try:
         return socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)[0][4][0]
     except socket.gaierror:
-        raise ErrorConexion("dominio_no_existe") from None
+        # Distinguir "no existe" de "existe pero no tiene sitio web en esa dirección".
+        codigo = "sin_direccion_web" if _existe_en_dns(host) else "dominio_no_existe"
+        raise ErrorConexion(codigo) from None
 
 
 def _conectar(ip: str, host: str, verificar: bool) -> tuple[bytes, str]:
@@ -109,6 +124,8 @@ SUGERENCIAS = {
     "tiempo_agotado": "No respondió a tiempo; puedes reintentar una vez.",
     "ip_bloqueada": "El host apunta a una red privada o especial; no se revisa por seguridad.",
     "dominio_no_existe": "Ese host no existe en DNS.",
+    "sin_direccion_web": "El nombre existe en DNS pero no tiene una dirección web: no hay sitio en ese host. "
+                         "Si es el dominio principal, prueba con www.<dominio>.",
     "tls_fallido": "El servidor no completó la conexión segura; puede usar una versión de TLS muy antigua.",
 }
 

@@ -210,3 +210,8 @@ def test_dominio_sano_sin_hallazgos_riesgo_bajo():
                         "ejemplo.com.co")
     assert hallazgos == {}
     assert nivel_riesgo(hallazgos) == NivelRiesgo.BAJO
+
+
+def test_sin_direccion_web_no_es_sin_https():
+    # Sin sitio web no hay nada inseguro que reportar: es una limitación, no un hallazgo.
+    assert reglas_tls([({"host": "ejemplo.com.co"}, tls_error("sin_direccion_web"))]) == []

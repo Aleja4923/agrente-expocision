@@ -27,7 +27,7 @@ Herramientas como MXToolbox o internet.nl ya hacen los chequeos técnicos gratis
 
 **Grok decide qué investigar; el código decide qué se concluye.**
 
-- **Grok elige el camino** según lo que va encontrando y con un presupuesto que no alcanza para revisarlo todo: qué subdominios mirar, qué dominios parecidos investigar y qué dejar declarado como limitación. Cada decisión queda en la bitácora con una justificación de una línea.
+- **Grok elige el camino** según lo que va encontrando: qué revisar, en qué orden y cuándo tiene suficiente para entregar. Cada auditoría tiene topes (15 pasos, USD 0,15 y 180 s). En esta versión, con dos herramientas, alcanzan con holgura; desde el S2, con subdominios y dominios parecidos por revisar, habrá más candidatos que pasos, y Grok tendrá que priorizar qué investigar y qué dejar declarado como limitación. Cada decisión queda en la bitácora con una justificación de una línea.
 - **Las conclusiones las calculan reglas deterministas en el código:** cada hallazgo tiene un id, una severidad y su evidencia exacta. Grok no puede crear hallazgos ni cambiar su severidad.
 - **Grok redacta y prioriza el plan para el dueño,** pero los datos técnicos (el registro DNS exacto que hay que publicar) los pone el código, literales.
 - **El arnés rechaza un informe** que cite hallazgos inexistentes o que omita uno crítico o alto.

@@ -31,7 +31,9 @@ def _hosts(evidencia: str) -> str:
 def _spf_crear(d: str, ctx: dict) -> str:
     proveedor = ctx.get("proveedor", "otro")
     if proveedor == "ninguno":
-        return f"Si {d} no envía correo, publicar un registro TXT en {d}:\nv=spf1 -all"
+        return (f"Si {d} no envía correo, publicar un registro TXT en {d}:\nv=spf1 -all\n"
+                f"Si sí envía (por ejemplo, desde una tienda en línea o un servicio de boletines), publicar en "
+                f"su lugar el registro que indique ese servicio, terminando en ~all.")
     registro = {
         "google": "v=spf1 include:_spf.google.com ~all",
         "microsoft": "v=spf1 include:spf.protection.outlook.com -all",
@@ -50,6 +52,10 @@ PLANTILLAS: dict[str, Callable[[str, dict], str]] = {
         f"Publicar un registro TXT en _dmarc.{d}:\nv=DMARC1; p=none; rua=mailto:dmarc@{d}\n"
         f"(Cree el buzón dmarc@{d} o cambie la dirección por una que alguien revise.)"),
     "REC-DMARC-CORREGIR": lambda d, ctx: (
+        f"Dejar un único registro TXT en _dmarc.{d}, conservando la política más estricta que ya tiene "
+        f"(p={ctx['politica_dmarc']}) y uniendo en él las direcciones rua de los registros actuales:\n"
+        f"v=DMARC1; p={ctx['politica_dmarc']}; rua=mailto:dmarc@{d}"
+        if ctx.get("politica_dmarc") else
         f"Dejar un único registro TXT en _dmarc.{d}, con este formato:\nv=DMARC1; p=none; rua=mailto:dmarc@{d}"),
     "REC-DMARC-ENDURECER": lambda d, ctx: (
         f"Después de revisar los reportes de DMARC durante 2 a 4 semanas y confirmar qué servicios envían "
@@ -75,7 +81,10 @@ PLANTILLAS: dict[str, Callable[[str, dict], str]] = {
         f"boletines). Confirmar que no necesita recibir respuestas en {d}; si las necesita, configurar sus MX. "
         f"No endurecer DMARC fuera del paso gradual."
         if ctx.get("envia_correo") else
-        f"Si {d} no envía ni recibe correo, publicar:\n- TXT en {d}: v=spf1 -all\n"
+        (f"Si confirma que {d} no envía ni recibe correo, puede publicar esta configuración en lugar de los "
+         f"pasos anteriores de DMARC y SPF (sin correo legítimo, no hace falta la fase de observación):\n"
+         if ctx.get("otros_de_correo") else f"Si {d} no envía ni recibe correo, publicar:\n")
+        + f"- TXT en {d}: v=spf1 -all\n"
         f"- TXT en _dmarc.{d}: v=DMARC1; p=reject\n- (opcional) MX nulo en {d}: 0 .  (RFC 7505)"),
     "REC-TLS-RENOVAR": lambda d, ctx: (
         f"Renovar o reinstalar el certificado HTTPS de: {_hosts(ctx['evidencia'])}.\n"
@@ -106,13 +115,24 @@ def _envia_correo(datos: dict) -> bool:
 def _bloque_tecnico(estado: EstadoAuditoria, h: Hallazgo) -> str:
     datos = _datos_correo(estado)
     contexto = {"proveedor": datos.get("mx", {}).get("proveedor", "otro"), "evidencia": h.evidencia,
-                "envia_correo": _envia_correo(datos)}
+                "envia_correo": _envia_correo(datos),
+                "politica_dmarc": datos.get("dmarc", {}).get("politica_mas_estricta"),
+                "otros_de_correo": any(i.startswith(("CORREO-DMARC", "CORREO-SPF")) for i in estado.hallazgos)}
     return PLANTILLAS[h.recomendacion_id](estado.dominio, contexto)
 
 
 def generar_informe(estado: EstadoAuditoria) -> str:
     """Markdown en español: resumen, qué hacer primero, hallazgos, verificaciones, limitaciones, pie."""
     d, informe = estado.dominio, estado.informe
+    if dominio_no_existe(estado):
+        # Sin dominio no hay riesgo que medir: un semáforo "bajo" sería engañoso.
+        partes = [f"# Informe de exposición digital · {d}", "", f"**El dominio {d} no existe**", "",
+                  informe.resumen.strip(), "",
+                  "No está registrado en internet (no responde en DNS), así que no hay correo ni sitio que revisar. "
+                  "Si es su dominio y debería existir, confirme con su proveedor que el nombre esté bien escrito "
+                  "y que el registro esté vigente.", ""]
+        return _limitaciones_y_pie(estado, partes)
+
     nivel = estado.nivel_riesgo or NivelRiesgo.BAJO
     partes = [f"# Informe de exposición digital · {d}", "",
               f"**Nivel de riesgo: {SEMAFORO[nivel]} {nivel.value.upper()}**", "", informe.resumen.strip(), ""]
@@ -143,9 +163,21 @@ def generar_informe(estado: EstadoAuditoria) -> str:
     else:
         partes += ["Ninguna por ahora.", ""]
 
-    partes += ["## Lo que no se pudo verificar", ""]
-    partes += [f"- {limitacion.strip()}" for limitacion in informe.limitaciones] + [f"- {LIMITACION_DKIM}", ""]
+    return _limitaciones_y_pie(estado, partes)
 
+
+def dominio_no_existe(estado: EstadoAuditoria) -> bool:
+    """True si el último dns_correo sobre el objetivo dijo que el dominio no existe."""
+    for argumentos, r in reversed(estado.llamadas):
+        if r.herramienta == "dns_correo" and (argumentos.get("dominio") or "").lower().strip(".") == estado.dominio:
+            return r.error == "dominio_no_existe"
+    return False
+
+
+def _limitaciones_y_pie(estado: EstadoAuditoria, partes: list[str]) -> str:
+    partes += ["## Lo que no se pudo verificar", ""]
+    partes += [f"- {limitacion.strip()}" for limitacion in estado.informe.limitaciones]
+    partes += [f"- {LIMITACION_DKIM}", ""]
     partes += ["---",
                f"Revisión pasiva con información pública (DNS y certificado del sitio), sin escaneos ni accesos. "
                f"Fecha: {estado.inicio:%Y-%m-%d %H:%M} UTC · Modelo: {estado.modelo} · "

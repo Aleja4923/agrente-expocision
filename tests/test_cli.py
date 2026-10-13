@@ -57,3 +57,14 @@ def test_cli_verbose_imprime_trayectoria(entorno, capsys):
 def test_cli_sin_verbose_no_imprime_trayectoria(entorno, capsys):
     cli.main(["auditar", "ejemplo.com.co"])
     assert "paso 1 · Grok" not in capsys.readouterr().out
+
+
+def test_cli_dominio_inexistente_no_dice_riesgo_bajo(entorno, capsys, monkeypatch):
+    from auditor.modelos import ResultadoHerramienta
+    e = estado(nivel="bajo")
+    e.llamadas = [({"dominio": "ejemplo.com.co"}, ResultadoHerramienta(
+        ok=False, herramienta="dns_correo", error="dominio_no_existe", sugerencia="x"))]
+    monkeypatch.setattr(cli, "auditar", lambda *a, **k: e)
+    assert cli.main(["auditar", "ejemplo.com.co"]) == 0
+    salida = capsys.readouterr().out
+    assert "El dominio no existe" in salida and "BAJO" not in salida

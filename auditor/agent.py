@@ -144,8 +144,9 @@ def _resumen_resultado(r: ResultadoHerramienta) -> str:
         return f"✗ {r.error}"
     d = r.datos
     if r.herramienta == "dns_correo":
-        return (f"✓ MX {d['mx']['proveedor']}, SPF {d['spf']['cierre']}, "
-                f"DMARC {d['dmarc']['p'] if d['dmarc']['existe'] else 'ausente'}")
+        dmarc = d["dmarc"]
+        estado_dmarc = ("duplicado" if dmarc["multiple"] else dmarc["p"] if dmarc["existe"] else "ausente")
+        return f"✓ MX {d['mx']['proveedor']}, SPF {d['spf']['cierre']}, DMARC {estado_dmarc}"
     if r.herramienta == "tls_certificado":
         if d["valido"]:
             return f"✓ válido, vence en {d['dias_restantes']} días ({d['version_tls']})"

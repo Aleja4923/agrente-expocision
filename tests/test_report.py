@@ -138,3 +138,35 @@ def test_sin_mx_y_sin_envio_sugiere_configuracion_nula():
     e = estado(["CORREO-SIN-MX"], proveedor="ninguno")
     e.llamadas[0][1].datos["spf"]["registros"] = ["v=spf1 -all"]
     assert "MX nulo" in generar_informe(e)
+
+
+def test_dmarc_duplicado_conserva_la_politica_mas_estricta():
+    e = estado(["CORREO-DMARC-INVALIDO"])
+    e.llamadas[0][1].datos["dmarc"].update({"multiple": True, "valido": False, "p": None,
+                                            "politica_mas_estricta": "reject"})
+    bloque = generar_informe(e).split("## Hallazgos")[0]
+    assert "p=reject" in bloque and "p=none" not in bloque
+
+
+def test_sin_mx_ni_envio_es_coherente_con_dmarc_y_spf():
+    # Caso real (fase 8, perfil B): sin MX, sin SPF, sin DMARC. Antes salían p=none y p=reject sin aclarar.
+    e = estado(["CORREO-DMARC-AUSENTE", "CORREO-SPF-AUSENTE", "CORREO-SIN-MX"], proveedor="ninguno")
+    e.llamadas[0][1].datos["spf"]["registros"] = []
+    md = generar_informe(e)
+    accion_spf = md.split("### 2.")[1].split("### 3.")[0]
+    assert "v=spf1 -all" in accion_spf and "si sí envía" in accion_spf.lower()
+    accion_mx = md.split("### 3.")[1].split("## Hallazgos")[0]
+    assert "en lugar de los pasos anteriores" in accion_mx
+
+
+def test_dominio_inexistente_sin_semaforo_ni_acciones():
+    # Caso real (fase 8, perfil E): antes decía "🟢 BAJO" y "no requiere acción", que es engañoso.
+    e = estado(nivel="bajo")
+    e.llamadas = [({"dominio": D}, ResultadoHerramienta(ok=False, herramienta="dns_correo",
+                                                         error="dominio_no_existe", sugerencia="x"))]
+    md = generar_informe(e)
+    assert f"**El dominio {D} no existe**" in md
+    for ausente in ("Nivel de riesgo", "🟢", "## Qué hacer primero", "## Verificaciones sugeridas", "## Hallazgos"):
+        assert ausente not in md
+    assert "Resumen escrito por Grok" in md and "## Lo que no se pudo verificar" in md
+    assert "\n---\n" in md

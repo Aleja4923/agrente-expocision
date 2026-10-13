@@ -164,3 +164,35 @@ def test_subdominio_permitido_y_ajeno_bloqueado(monkeypatch):
 def test_tls_certificado_registrada_para_grok():
     import auditor.tools  # noqa: F401
     assert "tls_certificado" in [e["function"]["name"] for e in base.esquemas_para_grok()]
+
+
+# --- fase 8: dominio que existe pero no tiene dirección web --------------------
+
+import socket as _socket  # noqa: E402
+
+
+def _sin_direccion(*_a, **_k):
+    raise _socket.gaierror(11001, "getaddrinfo failed")
+
+
+def test_host_que_existe_sin_direccion_web(monkeypatch):
+    # Caso real (fase 8, perfil D): el dominio tiene MX y DMARC, pero el apex no tiene registro A.
+    monkeypatch.setattr(web.socket, "getaddrinfo", _sin_direccion)
+    monkeypatch.setattr(web, "_existe_en_dns", lambda host: True)
+    with pytest.raises(ErrorConexion) as e:
+        web.resolver_ip("ejemplo.com.co")
+    assert e.value.codigo == "sin_direccion_web"
+
+
+def test_host_que_no_existe(monkeypatch):
+    monkeypatch.setattr(web.socket, "getaddrinfo", _sin_direccion)
+    monkeypatch.setattr(web, "_existe_en_dns", lambda host: False)
+    with pytest.raises(ErrorConexion) as e:
+        web.resolver_ip("noexiste.ejemplo.com.co")
+    assert e.value.codigo == "dominio_no_existe"
+
+
+def test_sin_direccion_web_tiene_sugerencia(monkeypatch):
+    r, llamadas = revisar(monkeypatch, lambda v: (cert(), "TLSv1.3"), ip=ErrorConexion("sin_direccion_web"))
+    assert (r.ok, r.error) == (False, "sin_direccion_web")
+    assert "www." in r.sugerencia and llamadas == []

@@ -184,3 +184,14 @@ def test_txt_crudo_solo_en_no_confiable(monkeypatch):
 def test_dns_correo_registrada_para_grok():
     import auditor.tools  # noqa: F401  (registra las herramientas)
     assert "dns_correo" in [e["function"]["name"] for e in base.esquemas_para_grok()]
+
+
+def test_dmarc_multiple_informa_la_politica_mas_estricta():
+    # Caso real (fase 8): dos registros, ambos p=reject. Nunca se debe recomendar bajar a p=none.
+    r = analizar_dmarc(["v=DMARC1;p=reject;pct=100;rua=mailto:a@x.co", "v=DMARC1; p=quarantine; sp=reject"])
+    assert (r["multiple"], r["valido"]) == (True, False)
+    assert r["politica_mas_estricta"] == "reject"
+
+
+def test_dmarc_multiple_sin_p_valida():
+    assert analizar_dmarc(["v=DMARC1; rua=mailto:a@x.co", "v=DMARC1; p=bloquear"])["politica_mas_estricta"] is None
