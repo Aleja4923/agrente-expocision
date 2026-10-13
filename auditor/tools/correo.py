@@ -43,7 +43,8 @@ def analizar_spf(txts: list[str], consultar_txt: Callable[[str], list[str]]) -> 
     """Registros SPF, cierre y consultas DNS contadas de forma recursiva (include y redirect)."""
     registros = [t.strip() for t in txts if _es_spf(t)]
     r: dict[str, Any] = {"registros": registros, "cantidad": len(registros), "cierre": "ninguno",
-                         "consultas_dns": 0, "consultas_vacias": 0, "permerror": False, "detalle": None}
+                         "consultas_dns": 0, "consultas_vacias": 0, "consultas_con_error": 0,
+                         "permerror": False, "detalle": None}
     if len(registros) != 1:
         if registros:
             r["permerror"], r["detalle"] = True, "hay más de un registro SPF"
@@ -79,7 +80,13 @@ def analizar_spf(txts: list[str], consultar_txt: Callable[[str], list[str]]) -> 
             if destino in visitados:
                 continue
             visitados.add(destino)
-            spf_destino = [x for x in consultar_txt(destino) if _es_spf(x)]
+            try:
+                spf_destino = [x for x in consultar_txt(destino) if _es_spf(x)]
+            except ErrorDNS:
+                # Tiempo agotado o servidor que no responde: no es una consulta "vacía" del RFC,
+                # es algo que no se pudo verificar. No debe producir un permerror falso.
+                r["consultas_con_error"] += 1
+                continue
             if spf_destino:
                 contar(spf_destino[0])
             else:
@@ -90,6 +97,9 @@ def analizar_spf(txts: list[str], consultar_txt: Callable[[str], list[str]]) -> 
         r["permerror"], r["detalle"] = True, f"más de {MAX_CONSULTAS_SPF} consultas DNS"
     elif r["consultas_vacias"] > MAX_CONSULTAS_VACIAS:
         r["permerror"], r["detalle"] = True, f"más de {MAX_CONSULTAS_VACIAS} consultas sin respuesta"
+    elif r["consultas_con_error"]:
+        r["detalle"] = (f"no se pudo verificar todo el SPF: {r['consultas_con_error']} consultas sin respuesta "
+                        "del DNS a tiempo")
     return r
 
 
@@ -175,7 +185,14 @@ class ResolverDNS:
         return [(r.preference, str(r.exchange).rstrip(".")) for r in self._consultar(nombre, "MX")]
 
 
-resolver = ResolverDNS()
+resolver: ResolverDNS | None = None  # se crea al primer uso: si falla, no tumba la importación de las herramientas
+
+
+def _resolver() -> ResolverDNS:
+    global resolver
+    if resolver is None:
+        resolver = ResolverDNS()
+    return resolver
 
 SUGERENCIAS = {
     "dominio_no_existe": "Verifique que el dominio esté bien escrito; si no existe, no hay más que revisar: "
@@ -198,17 +215,23 @@ class EntradaDominio(BaseModel):
 def dns_correo(entrada: EntradaDominio) -> ResultadoHerramienta:
     d = entrada.dominio
 
-    def txt_o_vacio(nombre: str) -> list[str]:
+    dns = _resolver()
+
+    def txt_para_spf(nombre: str) -> list[str]:
+        """Para la recursión del SPF: un nombre inexistente es una consulta vacía (RFC 7208);
+        un tiempo agotado se propaga para contarlo como 'no verificable', no como vacía."""
         try:
-            return resolver.txt(nombre)
-        except ErrorDNS:
-            return []
+            return dns.txt(nombre)
+        except ErrorDNS as e:
+            if e.codigo == "dominio_no_existe":
+                return []
+            raise
 
     try:
-        mx = resolver.mx(d)
-        txt = resolver.txt(d)
+        mx = dns.mx(d)
+        txt = dns.txt(d)
         try:
-            txt_dmarc = resolver.txt(f"_dmarc.{d}")
+            txt_dmarc = dns.txt(f"_dmarc.{d}")
         except ErrorDNS as e:
             if e.codigo != "dominio_no_existe":  # sin _dmarc = no hay DMARC, no es un error
                 raise
@@ -224,7 +247,7 @@ def dns_correo(entrada: EntradaDominio) -> ResultadoHerramienta:
         datos={
             "dominio": d,
             "mx": {"servidores": servidores, "proveedor": inferir_proveedor([s["host"] for s in servidores])},
-            "spf": analizar_spf(txt, txt_o_vacio),
+            "spf": analizar_spf(txt, txt_para_spf),
             "dmarc": analizar_dmarc(txt_dmarc),
         },
         contenido_no_confiable={"txt_dominio": txt, "txt_dmarc": txt_dmarc},

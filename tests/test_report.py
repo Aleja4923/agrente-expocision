@@ -170,3 +170,25 @@ def test_dominio_inexistente_sin_semaforo_ni_acciones():
         assert ausente not in md
     assert "Resumen escrito por Grok" in md and "## Lo que no se pudo verificar" in md
     assert "\n---\n" in md
+
+
+def test_inexistente_sin_redundancia_ni_dkim():
+    e = estado(nivel="bajo")
+    e.llamadas = [({"dominio": D}, ResultadoHerramienta(ok=False, herramienta="dns_correo",
+                                                         error="dominio_no_existe", sugerencia="x"))]
+    md = generar_informe(e)
+    assert "Resumen escrito por Grok" in md
+    assert "No está registrado en internet" not in md  # Grok ya lo explica: sin párrafo repetido
+    assert "DKIM" not in md
+
+
+def test_inexistente_de_respaldo_conserva_explicacion_fija():
+    e = estado(nivel="bajo", respaldo=True)
+    e.llamadas = [({"dominio": D}, ResultadoHerramienta(ok=False, herramienta="dns_correo",
+                                                         error="dominio_no_existe", sugerencia="x"))]
+    assert "No está registrado en internet" in generar_informe(e)
+
+
+def test_limitacion_primera_ip():
+    seccion = generar_informe(estado()).split("## Lo que no se pudo verificar")[1]
+    assert "primera dirección IP" in seccion

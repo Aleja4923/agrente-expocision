@@ -141,3 +141,104 @@ def test_respuesta_vacia_se_devuelve(tmp_path):
     r = cliente(GrokFalso(respuesta(None)), tmp_path).completar([])
     assert r.texto is None
     assert r.tool_calls == []
+
+
+# --- reintentos y errores con nombre (pulido del S1) ----------------------------
+
+import httpx2  # noqa: E402
+import openai  # noqa: E402
+
+URL = "https://api.reto.pltk.mx/v1/chat/completions"
+
+
+def error_http(clase, status, headers=None, body=None):
+    respuesta_http = httpx2.Response(status, request=httpx2.Request("POST", URL), headers=headers or {})
+    return clase("error de prueba", response=respuesta_http, body=body)
+
+
+def cliente_con_esperas(falso, tmp_path, ahora=100.0):
+    esperas = []
+    c = cliente(falso, tmp_path, dormir=esperas.append, reloj=lambda: ahora)
+    return c, esperas
+
+
+def test_429_reintenta_y_luego_funciona(tmp_path):
+    falso = GrokFalso(error_http(openai.RateLimitError, 429), error_http(openai.RateLimitError, 429), respuesta())
+    c, esperas = cliente_con_esperas(falso, tmp_path)
+    assert c.completar([]).texto == "listo"
+    assert len(esperas) == 2 and len(falso.llamadas) == 3
+    tipos = [(e["tipo"], e["justificacion"]) for e in eventos(tmp_path)]
+    assert tipos == [("error", "reintento:429"), ("error", "reintento:429"), ("llm", None)]
+
+
+def test_respeta_retry_after(tmp_path):
+    falso = GrokFalso(error_http(openai.RateLimitError, 429, {"retry-after": "2"}), respuesta())
+    c, esperas = cliente_con_esperas(falso, tmp_path)
+    c.completar([])
+    assert esperas == [2.0]
+
+
+def test_retry_after_se_limita(tmp_path):
+    falso = GrokFalso(error_http(openai.RateLimitError, 429, {"retry-after": "3600"}), respuesta())
+    c, esperas = cliente_con_esperas(falso, tmp_path)
+    c.completar([])
+    assert esperas == [30.0]
+
+
+def test_no_reintenta_si_no_alcanza_el_tiempo(tmp_path):
+    falso = GrokFalso(error_http(openai.RateLimitError, 429, {"retry-after": "10"}), respuesta())
+    c, esperas = cliente_con_esperas(falso, tmp_path, ahora=100.0)
+    with pytest.raises(ErrorGateway) as e:
+        c.completar([], limite=105.0)
+    assert e.value.codigo == "gateway_caido"
+    assert len(falso.llamadas) == 1 and esperas == []
+
+
+def test_timeout_por_intento_respeta_limite(tmp_path):
+    falso = GrokFalso(respuesta())
+    c, _ = cliente_con_esperas(falso, tmp_path, ahora=100.0)
+    c.completar([], limite=120.0)
+    assert falso.llamadas[0]["timeout"] <= 20
+
+
+def test_500_agota_intentos(tmp_path):
+    falso = GrokFalso(*[error_http(openai.InternalServerError, 500) for _ in range(4)])
+    c, esperas = cliente_con_esperas(falso, tmp_path)
+    with pytest.raises(ErrorGateway) as e:
+        c.completar([])
+    assert e.value.codigo == "gateway_caido"
+    assert len(falso.llamadas) == 4 and len(esperas) == 3
+    assert [ev["tipo"] for ev in eventos(tmp_path)] == ["error"] * 4
+
+
+def test_timeout_reintenta(tmp_path):
+    falso = GrokFalso(openai.APITimeoutError(request=httpx2.Request("POST", URL)), respuesta())
+    c, esperas = cliente_con_esperas(falso, tmp_path)
+    assert c.completar([]).texto == "listo" and len(esperas) == 1
+
+
+@pytest.mark.parametrize("clase,status,codigo", [
+    (openai.AuthenticationError, 401, "llave_invalida"),
+    (openai.PermissionDeniedError, 403, "sin_creditos"),
+    (openai.APIStatusError, 402, "sin_creditos"),
+    (openai.BadRequestError, 400, "solicitud_invalida"),
+])
+def test_errores_4xx_no_reintentan(tmp_path, clase, status, codigo):
+    falso = GrokFalso(error_http(clase, status), respuesta())
+    c, esperas = cliente_con_esperas(falso, tmp_path)
+    with pytest.raises(ErrorGateway) as e:
+        c.completar([])
+    assert e.value.codigo == codigo
+    assert len(falso.llamadas) == 1 and esperas == []
+    [evento] = eventos(tmp_path)
+    assert (evento["tipo"], evento["justificacion"]) == ("error", codigo)
+
+
+def test_error_enmascara_llave(tmp_path):
+    falso = GrokFalso(error_http(openai.BadRequestError, 400,
+                                 body={"error": "llave pk_FALSA0123456789abcdef revocada"}))
+    c, _ = cliente_con_esperas(falso, tmp_path)
+    with pytest.raises(ErrorGateway) as e:
+        c.completar([])
+    assert "pk_FALSA" not in str(e.value)
+    assert "pk_FALSA" not in next(tmp_path.glob("bitacora-*.jsonl")).read_text(encoding="utf-8")

@@ -17,6 +17,8 @@ SEMAFORO = {NivelRiesgo.ALTO: "🔴", NivelRiesgo.MEDIO: "🟡", NivelRiesgo.BAJ
 SEVERIDAD_LEGIBLE = {"critica": "crítica", "alta": "alta", "media": "media", "baja": "baja",
                      "informativa": "informativa"}
 
+LIMITACION_PRIMERA_IP = ("El certificado se revisó en la primera dirección IP de cada sitio; si un sitio tiene "
+                         "varias, no se revisaron todas.")
 LIMITACION_DKIM = ("DKIM (la firma digital de sus correos) no se revisa en esta versión, así que este "
                    "informe no afirma nada sobre ella.")
 AVISO_RESPALDO = ("> Este informe se armó automáticamente con los hallazgos verificados porque la revisión "
@@ -127,11 +129,12 @@ def generar_informe(estado: EstadoAuditoria) -> str:
     if dominio_no_existe(estado):
         # Sin dominio no hay riesgo que medir: un semáforo "bajo" sería engañoso.
         partes = [f"# Informe de exposición digital · {d}", "", f"**El dominio {d} no existe**", "",
-                  informe.resumen.strip(), "",
-                  "No está registrado en internet (no responde en DNS), así que no hay correo ni sitio que revisar. "
-                  "Si es su dominio y debería existir, confirme con su proveedor que el nombre esté bien escrito "
-                  "y que el registro esté vigente.", ""]
-        return _limitaciones_y_pie(estado, partes)
+                  informe.resumen.strip(), ""]
+        if estado.informe_de_respaldo:  # el resumen automático es genérico: se agrega la explicación
+            partes += ["No está registrado en internet (no responde en DNS), así que no hay correo ni sitio que "
+                       "revisar. Si es su dominio y debería existir, confirme con su proveedor que el nombre esté "
+                       "bien escrito y que el registro esté vigente.", ""]
+        return _limitaciones_y_pie(estado, partes, limitaciones_fijas=[])
 
     nivel = estado.nivel_riesgo or NivelRiesgo.BAJO
     partes = [f"# Informe de exposición digital · {d}", "",
@@ -174,10 +177,13 @@ def dominio_no_existe(estado: EstadoAuditoria) -> bool:
     return False
 
 
-def _limitaciones_y_pie(estado: EstadoAuditoria, partes: list[str]) -> str:
+def _limitaciones_y_pie(estado: EstadoAuditoria, partes: list[str],
+                        limitaciones_fijas: list[str] | None = None) -> str:
+    """Limitaciones de Grok + las fijas del sistema, y el pie con fecha, modelo y costo."""
+    fijas = [LIMITACION_PRIMERA_IP, LIMITACION_DKIM] if limitaciones_fijas is None else limitaciones_fijas
     partes += ["## Lo que no se pudo verificar", ""]
     partes += [f"- {limitacion.strip()}" for limitacion in estado.informe.limitaciones]
-    partes += [f"- {LIMITACION_DKIM}", ""]
+    partes += [f"- {limitacion}" for limitacion in fijas] + [""]
     partes += ["---",
                f"Revisión pasiva con información pública (DNS y certificado del sitio), sin escaneos ni accesos. "
                f"Fecha: {estado.inicio:%Y-%m-%d %H:%M} UTC · Modelo: {estado.modelo} · "

@@ -23,7 +23,7 @@ from auditor.tools.base import ip_permitida, registrar
 _MOTIVOS = {
     10: "vencido",             # X509_V_ERR_CERT_HAS_EXPIRED
     18: "autofirmado",         # X509_V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT
-    19: "autofirmado",         # X509_V_ERR_SELF_SIGNED_CERT_IN_CHAIN
+    19: "raiz_no_confiable",   # X509_V_ERR_SELF_SIGNED_CERT_IN_CHAIN (la raíz de la cadena no es de confianza)
     20: "cadena_incompleta",   # X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY
     21: "cadena_incompleta",   # X509_V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE
     62: "nombre_no_coincide",  # X509_V_ERR_HOSTNAME_MISMATCH

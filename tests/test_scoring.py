@@ -147,7 +147,7 @@ def test_tls_agrupa_hosts():
         ({"host": "ejemplo.com.co"}, tls(valido=False, motivo="autofirmado")),
         ({"host": "pagos.ejemplo.com.co"}, tls(host="pagos.ejemplo.com.co", valido=False, motivo="nombre_no_coincide")),
     ])
-    assert h.evidencia == "ejemplo.com.co: autofirmado; pagos.ejemplo.com.co: nombre_no_coincide"
+    assert h.evidencia == "ejemplo.com.co: autofirmado; pagos.ejemplo.com.co: nombre del certificado no coincide"
 
 
 def test_cuenta_el_ultimo_resultado():
@@ -215,3 +215,14 @@ def test_dominio_sano_sin_hallazgos_riesgo_bajo():
 def test_sin_direccion_web_no_es_sin_https():
     # Sin sitio web no hay nada inseguro que reportar: es una limitación, no un hallazgo.
     assert reglas_tls([({"host": "ejemplo.com.co"}, tls_error("sin_direccion_web"))]) == []
+
+
+@pytest.mark.parametrize("motivo,texto", [
+    ("nombre_no_coincide", "nombre del certificado no coincide"),
+    ("cadena_incompleta", "cadena de certificados incompleta"),
+    ("raiz_no_confiable", "raíz no confiable"),
+    ("otro", "otro problema de verificación"),
+])
+def test_evidencia_tls_en_palabras(motivo, texto):
+    [h] = reglas_tls([({"host": "pagos.x.co"}, tls(host="pagos.x.co", valido=False, motivo=motivo))])
+    assert h.evidencia == f"pagos.x.co: {texto}"

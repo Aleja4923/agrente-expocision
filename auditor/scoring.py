@@ -150,6 +150,16 @@ def reglas_correo(datos: dict[str, Any]) -> list[Hallazgo]:
     return h
 
 
+MOTIVO_LEGIBLE = {
+    "vencido": "vencido",
+    "autofirmado": "autofirmado",
+    "nombre_no_coincide": "nombre del certificado no coincide",
+    "cadena_incompleta": "cadena de certificados incompleta",
+    "raiz_no_confiable": "raíz no confiable",
+    "otro": "otro problema de verificación",
+}
+
+
 def reglas_tls(llamadas: list[Llamada]) -> list[Hallazgo]:
     """Hallazgos web; cada regla se agrupa en un solo hallazgo con todos los hosts en la evidencia."""
     evidencias: dict[str, list[str]] = {}
@@ -163,7 +173,8 @@ def reglas_tls(llamadas: list[Llamada]) -> list[Hallazgo]:
             d = r.datos
             if not d["valido"]:
                 detalle = f" (venció el {d['vence']})" if d["motivo"] == "vencido" else ""
-                agregar("WEB-TLS-INVALIDO", f"{host}: {d['motivo']}{detalle}")
+                motivo = MOTIVO_LEGIBLE.get(d["motivo"], MOTIVO_LEGIBLE["otro"])
+                agregar("WEB-TLS-INVALIDO", f"{host}: {motivo}{detalle}")
             elif d["dias_restantes"] <= 15:
                 agregar("WEB-TLS-POR-VENCER", f"{host}: vence en {d['dias_restantes']} días")
             if d["version_tls"] in ("TLSv1", "TLSv1.1"):

@@ -195,3 +195,48 @@ def test_dmarc_multiple_informa_la_politica_mas_estricta():
 
 def test_dmarc_multiple_sin_p_valida():
     assert analizar_dmarc(["v=DMARC1; rua=mailto:a@x.co", "v=DMARC1; p=bloquear"])["politica_mas_estricta"] is None
+
+
+# --- pulido del S1: resolvedor diferido y tiempo agotado dentro del SPF ---------
+
+import subprocess  # noqa: E402
+import sys  # noqa: E402
+
+
+def test_resolver_se_crea_al_usarse():
+    # Importar las herramientas no debe crear el resolvedor DNS (si falla, se caerían todas).
+    codigo = "import auditor.tools.correo as c; print(c.resolver is None)"
+    r = subprocess.run([sys.executable, "-c", codigo], capture_output=True, text=True, cwd=".")
+    assert r.stdout.strip() == "True"
+
+
+def _consultas_con_timeout(tabla, lentos):
+    def consultar(nombre):
+        if nombre in lentos:
+            raise ErrorDNS("tiempo_agotado")
+        return tabla.get(nombre, [])
+    return consultar
+
+
+def test_spf_timeout_no_cuenta_como_vacia():
+    r = analizar_spf(["v=spf1 include:a.co include:b.co include:c.co -all"],
+                     _consultas_con_timeout({}, {"a.co", "b.co", "c.co"}))
+    assert (r["consultas_vacias"], r["consultas_con_error"], r["permerror"]) == (0, 3, False)
+
+
+def test_spf_timeout_queda_en_detalle():
+    r = analizar_spf(["v=spf1 include:a.co -all"], _consultas_con_timeout({}, {"a.co"}))
+    assert "no se pudo verificar" in r["detalle"]
+
+
+def test_dns_correo_spf_incompleto_no_genera_lookups(monkeypatch):
+    resolver = ResolverFalso(
+        txt={"ejemplo.com.co": ["v=spf1 include:a.co include:b.co include:c.co -all"],
+             "_dmarc.ejemplo.com.co": ["v=DMARC1; p=reject; rua=mailto:d@ejemplo.com.co"]},
+        mx={"ejemplo.com.co": [(1, "smtp.google.com")]},
+        errores={("txt", "a.co"): "tiempo_agotado", ("txt", "b.co"): "sin_respuesta",
+                 ("txt", "c.co"): "tiempo_agotado"})
+    r = auditar(monkeypatch, resolver)
+    assert r.ok and r.datos["spf"]["permerror"] is False and r.datos["spf"]["consultas_con_error"] == 3
+    from auditor.scoring import reglas_correo
+    assert "CORREO-SPF-LOOKUPS" not in [h.id for h in reglas_correo(r.datos)]

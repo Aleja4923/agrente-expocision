@@ -36,7 +36,7 @@ def cert(cn="ejemplo.com.co", sans=("ejemplo.com.co", "www.ejemplo.com.co"), ven
 
 
 @pytest.mark.parametrize("codigo,motivo", [
-    (10, "vencido"), (18, "autofirmado"), (19, "autofirmado"), (20, "cadena_incompleta"),
+    (10, "vencido"), (18, "autofirmado"), (19, "raiz_no_confiable"), (20, "cadena_incompleta"),
     (21, "cadena_incompleta"), (62, "nombre_no_coincide"), (999, "otro"),
 ])
 def test_motivo_de_error(codigo, motivo):
