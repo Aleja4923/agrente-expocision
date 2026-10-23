@@ -23,6 +23,8 @@ class Severidad(StrEnum):
 class Categoria(StrEnum):
     CORREO = "correo"
     WEB = "web"
+    FRAUDE = "fraude"    # dominios parecidos (interna: el informe nunca muestra esta palabra)
+    DOMINIO = "dominio"  # registro del propio dominio
 
 
 class NivelRiesgo(StrEnum):

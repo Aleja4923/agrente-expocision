@@ -240,3 +240,41 @@ def test_dns_correo_spf_incompleto_no_genera_lookups(monkeypatch):
     assert r.ok and r.datos["spf"]["permerror"] is False and r.datos["spf"]["consultas_con_error"] == 3
     from auditor.scoring import reglas_correo
     assert "CORREO-SPF-LOOKUPS" not in [h.id for h in reglas_correo(r.datos)]
+
+
+# --- S2: spf_autoriza_envio y consulta NS ---------------------------------------
+
+from auditor.tools.correo import ResolverDNS, spf_autoriza_envio  # noqa: E402
+
+
+@pytest.mark.parametrize("txt,esperado", [
+    (["v=spf1 include:_spf.google.com ~all"], True), (["v=spf1 ip4:1.2.3.4 -all"], True),
+    (["v=spf1 -all"], False), (["v=spf1 ~all"], False), ([], False),
+    (["google-site-verification=x"], False), (["V=SPF1 MX -ALL"], True),
+    (["google-site-verification=x", "v=spf1 a -all"], True)])
+def test_spf_autoriza_envio(txt, esperado):
+    assert spf_autoriza_envio(txt) == esperado
+
+
+class _Registro:
+    def __init__(self, target):
+        self.target = target
+
+
+def test_ns_devuelve_hosts_limpios(monkeypatch):
+    r = ResolverDNS()
+    monkeypatch.setattr(r, "_consultar", lambda nombre, tipo: [_Registro("NS1.Ejemplo-DNS.com."),
+                                                               _Registro("ns2.ejemplo-dns.com.")])
+    assert r.ns("ejemplo.com.co") == ["ns1.ejemplo-dns.com", "ns2.ejemplo-dns.com"]
+
+
+def test_ns_sin_respuesta_y_nxdomain(monkeypatch):
+    r = ResolverDNS()
+    monkeypatch.setattr(r, "_consultar", lambda nombre, tipo: [])
+    assert r.ns("ejemplo.com.co") == []
+
+    def nx(nombre, tipo):
+        raise ErrorDNS("dominio_no_existe")
+    monkeypatch.setattr(r, "_consultar", nx)
+    with pytest.raises(ErrorDNS, match="dominio_no_existe"):
+        r.ns("noexiste.com.co")

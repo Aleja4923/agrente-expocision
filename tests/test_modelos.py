@@ -105,3 +105,9 @@ def test_schema_del_informe_sirve_como_herramienta_para_grok():
     assert set(schema["required"]) == {"resumen", "hallazgos_citados", "acciones_priorizadas"}
     assert schema["additionalProperties"] is False
     assert "recomendacion" in schema["$defs"]["AccionPriorizada"]["required"]
+
+
+def test_categorias_del_s2():
+    from auditor.modelos import Categoria
+    assert Categoria("fraude") is Categoria.FRAUDE
+    assert Categoria("dominio") is Categoria.DOMINIO

@@ -226,3 +226,128 @@ def test_sin_direccion_web_no_es_sin_https():
 def test_evidencia_tls_en_palabras(motivo, texto):
     [h] = reglas_tls([({"host": "pagos.x.co"}, tls(host="pagos.x.co", valido=False, motivo=motivo))])
     assert h.evidencia == f"pagos.x.co: {texto}"
+
+# --- S2: dominios parecidos y registro del dominio --------------------------------------
+
+from datetime import date  # noqa: E402
+
+from auditor.scoring import reglas_dominio, reglas_parecidos  # noqa: E402
+
+HOY = date(2026, 10, 23)
+
+
+def busqueda(*con_correo):
+    return {"dominio": "ejemplo.com.co", "generadas": 27, "truncadas": False, "existentes": len(con_correo),
+            "con_correo": [{"dominio": d, "tipo": t, "mx": ["mx.otro.com"], "comparte_servidores": c}
+                           for d, t, c in con_correo], "sin_verificar": [], "ns_propios": [], "mx_propios": []}
+
+
+def inv(parecido, tipo="omision", dias=400, spf=False, mx=True, comparte=False, existe=True):
+    return {"parecido": parecido, "tipo": tipo, "existe": existe, "tiene_mx": mx,
+            "creado": None if dias is None else "2025-01-01T00:00:00+00:00", "dias_desde_registro": dias,
+            "spf_autoriza_envio": spf, "comparte_servidores": comparte, "fuente_registro": "whois", "aviso": None}
+
+
+def por_id(hallazgos):
+    return {h.id: h for h in hallazgos}
+
+
+def test_tipeo_con_spf_es_alta():
+    h = por_id(reglas_parecidos(None, [inv("ejmplo.com.co", spf=True)]))
+    assert h["PARECIDO-ENVIA"].severidad == "alta"
+    assert h["PARECIDO-ENVIA"].evidencia == ("ejmplo.com.co: registrado hace 400 días, con MX, "
+                                                    "SPF autoriza envío")
+
+
+def test_otro_tld_con_spf_antiguo_es_informativa():
+    assert ids(reglas_parecidos(None, [inv("ejemplo.co", tipo="otro_tld", spf=True)])) == ["PARECIDO-MX"]
+
+
+def test_otro_tld_reciente_con_spf_es_alta():
+    hs = reglas_parecidos(None, [inv("ejemplo.co", tipo="otro_tld", dias=5, spf=True)])
+    assert ids(hs) == ["PARECIDO-ENVIA"]
+
+
+@pytest.mark.parametrize("dias,esperado", [(32, "PARECIDO-RECIENTE"), (33, "PARECIDO-MX"),
+                                           (None, "PARECIDO-MX")])
+def test_reciente_es_media(dias, esperado):
+    assert ids(reglas_parecidos(None, [inv("ejmplo.com.co", dias=dias)])) == [esperado]
+
+
+def test_fecha_desconocida_en_evidencia():
+    [h] = reglas_parecidos(None, [inv("ejmplo.com.co", dias=None)])
+    assert h.evidencia == "ejmplo.com.co: con MX (fecha de registro desconocida)"
+
+
+def test_no_investigado_con_mx_es_informativa():
+    [h] = reglas_parecidos(busqueda(("ejemplo.co", "otro_tld", False)), [])
+    assert (h.id, h.severidad, h.evidencia) == ("PARECIDO-MX", "informativa", "ejemplo.co: con MX")
+
+
+def test_defensivo_se_excluye():
+    assert reglas_parecidos(busqueda(("ejernplo.com.co", "homoglifo", True)),
+                            [inv("ejernplo.com.co", dias=3, spf=True, comparte=True)]) == []
+
+
+def test_investigado_sin_mx_no_es_hallazgo():
+    assert reglas_parecidos(None, [inv("ejmplo.com.co", mx=False, dias=3, spf=True)]) == []
+
+
+def test_cada_parecido_en_un_solo_hallazgo():
+    hs = por_id(reglas_parecidos(busqueda(("ejmplo.com.co", "omision", False), ("ejemplo.co", "otro_tld", False)),
+                                 [inv("ejmplo.com.co", spf=True)]))
+    assert set(hs) == {"PARECIDO-ENVIA", "PARECIDO-MX"}
+    assert hs["PARECIDO-MX"].evidencia == "ejemplo.co: con MX"
+
+
+@pytest.mark.parametrize("id_", [i for i in REGLAS if i.startswith("PARECIDO")])
+def test_textos_no_acusan(id_):
+    texto = " ".join(REGLAS[id_][2:4]).lower()
+    assert not any(p in texto for p in ("fraude", "fraudulent", "falso", "estafa"))
+
+
+def whois(vence="2027-04-24T23:59:59+00:00", estados=("clientTransferProhibited",)):
+    return {"dominio": "ejemplo.com.co", "fuente": "whois", "creado": "2003-04-21T00:00:00+00:00", "vence": vence,
+            "dias_para_vencer": 0, "estados": list(estados), "bloqueo_transferencia": True, "servidores_nombre": []}
+
+
+def test_dominio_sano_sin_hallazgos_de_registro():
+    assert reglas_dominio(whois(), HOY) == []
+
+
+@pytest.mark.parametrize("datos", [whois(vence="2026-10-22T00:00:00+00:00"),
+                                   whois(estados=("redemptionPeriod", "clientTransferProhibited"))])
+def test_dominio_vencido_por_fecha_y_por_estado(datos):
+    assert ids(reglas_dominio(datos, HOY)) == ["DOMINIO-VENCIDO"]
+
+
+def test_dominio_por_vencer_30_si_31_no():
+    [h] = reglas_dominio(whois(vence="2026-11-22T00:00:00+00:00"), HOY)
+    assert (h.id, h.severidad, h.evidencia) == ("DOMINIO-POR-VENCER", "media", "vence el 2026-11-22 (en 30 días)")
+    assert reglas_dominio(whois(vence="2026-11-23T00:00:00+00:00"), HOY) == []
+
+
+def test_sin_bloqueo_es_baja():
+    [h] = reglas_dominio(whois(estados=()), HOY)
+    assert (h.id, h.severidad) == ("DOMINIO-SIN-BLOQUEO", "baja")
+
+
+def test_semaforo_medio_con_reciente():
+    hs = {h.id: h for h in reglas_parecidos(None, [inv("ejmplo.com.co", dias=3)])}
+    assert nivel_riesgo(hs) == NivelRiesgo.MEDIO
+
+
+def _ok(herramienta, datos):
+    return ResultadoHerramienta(ok=True, herramienta=herramienta, datos=datos)
+
+
+def test_evaluar_integra_registro_y_parecidos():
+    llamadas = [
+        ({"dominio": "ejemplo.com.co"}, _ok("whois_dominio", whois(estados=()))),
+        ({"dominio": "ejemplo.com.co"}, _ok("buscar_parecidos", busqueda(("ejemplo.co", "otro_tld", False)))),
+        ({"dominio": "ejemplo.com.co", "parecido": "ejmplo.com.co"}, _ok("investigar_parecido", inv("ejmplo.com.co", dias=3))),
+        ({"dominio": "ejemplo.com.co", "parecido": "ejmplo.com.co"},
+         _ok("investigar_parecido", inv("ejmplo.com.co", dias=3, spf=True))),  # cuenta el último
+    ]
+    assert list(evaluar(llamadas, "ejemplo.com.co", hoy=HOY)) == [
+        "PARECIDO-ENVIA", "DOMINIO-SIN-BLOQUEO", "PARECIDO-MX"]

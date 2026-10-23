@@ -44,11 +44,21 @@ DNS_TIMEOUT_SEGUNDOS = 5
 TLS_TIMEOUT_SEGUNDOS = 5
 
 # Topes por auditoría: ninguna puede quedarse en bucle ni gastar de más.
-MAX_PASOS = 15
-MAX_USD = 0.15
-MAX_SEGUNDOS = 180
+# S2: más herramientas y fuentes lentas (WHOIS con pausa, CT); el tope en dinero sigue mandando.
+MAX_PASOS = 20
+MAX_USD = 0.20
+MAX_SEGUNDOS = 300
 MAX_REPETICIONES = 2  #
 MAX_CARACTERES_NO_CONFIABLE = 300
+
+# S2 · dominios parecidos y registro (CONTEXT §6b, spec C+D)
+MAX_VARIANTES = 80               # variantes que genera el código por dominio
+MAX_PARECIDOS_INVESTIGADOS = 4   # cupo por auditoría: obliga a Grok a elegir
+DIAS_REGISTRO_RECIENTE = 32      # "registrado hace poco"
+DIAS_DOMINIO_POR_VENCER = 30
+REGISTRO_TIMEOUT_SEGUNDOS = 10   # WHOIS (puerto 43) y RDAP
+PAUSA_REGISTRO_SEGUNDOS = 1.5    # entre consultas al mismo servidor de registro
+VIGENCIA_CACHE_HORAS = 24
 
 
 def cargar_llave(ruta_env: Path = RUTA_ENV) -> str:

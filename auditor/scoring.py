@@ -6,14 +6,16 @@ las reglas de redacción de CONTEXT.md §7b (nada absoluto, trato de usted).
 La evidencia se arma solo con `datos` parseados, nunca con contenido no confiable.
 """
 
+from datetime import date, datetime
 from typing import Any
 
+from auditor.config import DIAS_DOMINIO_POR_VENCER, DIAS_REGISTRO_RECIENTE
 from auditor.modelos import Categoria, Hallazgo, NivelRiesgo, ResultadoHerramienta, Severidad
-from auditor.tools.base import DominioInvalido, normalizar_dominio
+from auditor.tools.base import DominioInvalido, dominio_registrable, normalizar_dominio
 
 Llamada = tuple[dict[str, Any], ResultadoHerramienta]  # (argumentos que pidió Grok, resultado)
 
-C, W = Categoria.CORREO, Categoria.WEB
+C, W, F, D = Categoria.CORREO, Categoria.WEB, Categoria.FRAUDE, Categoria.DOMINIO
 S = Severidad
 
 # id -> (categoría, severidad, título, explicación simple, recomendacion_id)
@@ -97,6 +99,39 @@ REGLAS: dict[str, tuple[Categoria, Severidad, str, str, str]] = {
         "Su sitio no acepta conexiones HTTPS, así que lo que escriban sus clientes viaja sin cifrar y el "
         "navegador lo marca como no seguro.",
         "REC-HTTPS"),
+    # S2 · dominios parecidos: nunca acusan (CONTEXT §7); puede ser de otro negocio o del mismo dueño.
+    "PARECIDO-ENVIA": (
+        F, S.ALTA, "Un dominio muy parecido al suyo está preparado para enviar correo",
+        "Tiene correo configurado y publica autorización para enviar, así que podría usarse para escribirles a "
+        "sus clientes haciéndose pasar por usted. No prueba que se use para engañar: puede ser de otro negocio "
+        "o suyo.",
+        "REC-PARECIDO-VERIFICAR"),
+    "PARECIDO-RECIENTE": (
+        F, S.MEDIA, "Un dominio muy parecido al suyo se registró hace poco y tiene correo configurado",
+        "Puede recibir correos que sus clientes le escriban con un error de tipeo. Un registro reciente merece "
+        "atención, pero no prueba que se use para engañar: puede ser de otro negocio o suyo.",
+        "REC-PARECIDO-VERIFICAR"),
+    "PARECIDO-MX": (
+        F, S.INFORMATIVA, "Existe un dominio muy parecido al suyo con correo configurado",
+        "Puede recibir correos que sus clientes le escriban con un error de tipeo. No prueba que se use para "
+        "engañar: puede ser de otro negocio o suyo.",
+        "REC-PARECIDO-VERIFICAR"),
+    # S2 · registro del propio dominio
+    "DOMINIO-VENCIDO": (
+        D, S.CRITICA, "Su dominio está vencido",
+        "Si no lo renueva, su correo y su sitio dejan de funcionar y otra persona podría registrarlo y recibir "
+        "los correos dirigidos a usted.",
+        "REC-DOMINIO-RENOVAR"),
+    "DOMINIO-POR-VENCER": (
+        D, S.MEDIA, "Su dominio vence pronto",
+        "Si no se renueva a tiempo, su correo y su sitio dejan de funcionar. Conviene confirmar que la "
+        "renovación automática esté activa.",
+        "REC-DOMINIO-RENOVAR"),
+    "DOMINIO-SIN-BLOQUEO": (
+        D, S.BAJA, "Su dominio no tiene bloqueo de transferencia",
+        "El bloqueo impide que el dominio se pase a otra empresa de registro sin su autorización. Sin él, un "
+        "engaño a su proveedor podría hacerle perder el dominio.",
+        "REC-DOMINIO-BLOQUEO"),
 }
 
 
@@ -184,16 +219,68 @@ def reglas_tls(llamadas: list[Llamada]) -> list[Hallazgo]:
     return [_hallazgo(id_, "; ".join(textos)) for id_, textos in evidencias.items()]
 
 
-def evaluar(llamadas: list[Llamada], objetivo: str) -> dict[str, Hallazgo]:
+def _evidencia_parecido(p: dict[str, Any]) -> str:
+    if p["dias_desde_registro"] is None:
+        texto = f"{p['parecido']}: con MX (fecha de registro desconocida)"
+    else:
+        texto = f"{p['parecido']}: registrado hace {p['dias_desde_registro']} días, con MX"
+    return texto + (", SPF autoriza envío" if p["spf_autoriza_envio"] else "")
+
+
+def reglas_parecidos(busqueda: dict[str, Any] | None, investigados: list[dict[str, Any]]) -> list[Hallazgo]:
+    """Señal por combinación (CONTEXT §6b, spec C+D §5); cada parecido aparece en un solo hallazgo.
+
+    Se excluyen los defensivos (comparten NS o MX con el dueño). Un `otro_tld` (mismo nombre, otro TLD) suele
+    ser de un homónimo: solo sube de severidad si además se registró hace poco.
+    """
+    evidencias: dict[str, list[str]] = {}
+    revisados = set()
+    for p in investigados:
+        revisados.add(p["parecido"])
+        if not (p["existe"] and p["tiene_mx"]) or p["comparte_servidores"]:
+            continue
+        reciente = p["dias_desde_registro"] is not None and p["dias_desde_registro"] <= DIAS_REGISTRO_RECIENTE
+        envia = p["spf_autoriza_envio"] and (reciente or p["tipo"] != "otro_tld")
+        id_ = ("PARECIDO-ENVIA" if envia else "PARECIDO-RECIENTE" if reciente
+               else "PARECIDO-MX")
+        evidencias.setdefault(id_, []).append(_evidencia_parecido(p))
+    for c in (busqueda or {}).get("con_correo", []):
+        if c["dominio"] not in revisados and not c["comparte_servidores"]:
+            evidencias.setdefault("PARECIDO-MX", []).append(f"{c['dominio']}: con MX")
+    return [_hallazgo(id_, "; ".join(textos)) for id_, textos in evidencias.items()]
+
+
+def reglas_dominio(datos: dict[str, Any], hoy: date) -> list[Hallazgo]:
+    """Hallazgos del registro del propio dominio (whois_dominio)."""
+    h: list[Hallazgo] = []
+    vence = datetime.fromisoformat(datos["vence"]).date()
+    dias = (vence - hoy).days
+    estado_baja = next((e for e in datos["estados"] if e in ("redemptionPeriod", "pendingDelete")), None)
+    if dias < 0 or estado_baja:
+        h.append(_hallazgo("DOMINIO-VENCIDO", f"estado {estado_baja}" if estado_baja else f"venció el {vence}"))
+    elif dias <= DIAS_DOMINIO_POR_VENCER:
+        h.append(_hallazgo("DOMINIO-POR-VENCER", f"vence el {vence} (en {dias} días)"))
+    if not any(e in datos["estados"] for e in ("clientTransferProhibited", "serverTransferProhibited")):
+        h.append(_hallazgo("DOMINIO-SIN-BLOQUEO", "sin clientTransferProhibited ni serverTransferProhibited"))
+    return h
+
+
+# Argumento que identifica el "host" de cada herramienta (para quedarse con el último resultado).
+CAMPO_CLAVE = {"tls_certificado": "host", "investigar_parecido": "parecido"}
+
+
+def evaluar(llamadas: list[Llamada], objetivo: str, hoy: date | None = None) -> dict[str, Hallazgo]:
     """Todos los hallazgos de una auditoría, del más grave al menos grave.
 
     Por cada herramienta y host cuenta solo el último resultado. Las reglas de correo
-    se aplican solo al dominio objetivo; las de TLS, a cada host revisado.
+    se aplican solo al dominio objetivo; las de TLS, a cada host revisado; las de registro y
+    parecidos, al dominio registrable del objetivo.
     """
     objetivo = normalizar_dominio(objetivo)
+    registrable = dominio_registrable(objetivo)
     ultimos: dict[tuple[str, str], Llamada] = {}
     for argumentos, r in llamadas:
-        campo = "host" if r.herramienta == "tls_certificado" else "dominio"
+        campo = CAMPO_CLAVE.get(r.herramienta, "dominio")
         try:
             host = normalizar_dominio(str(argumentos.get(campo, "")))
         except DominioInvalido:
@@ -205,6 +292,14 @@ def evaluar(llamadas: list[Llamada], objetivo: str) -> dict[str, Hallazgo]:
         if herramienta == "dns_correo" and r.ok and host == objetivo:
             hallazgos += reglas_correo(r.datos)
     hallazgos += reglas_tls([ll for (herramienta, _), ll in ultimos.items() if herramienta == "tls_certificado"])
+
+    exitosos = [r for (_, r) in ultimos.values() if r.ok]
+    for r in exitosos:
+        if r.herramienta == "whois_dominio" and r.datos["dominio"] == registrable:
+            hallazgos += reglas_dominio(r.datos, hoy or date.today())
+    busqueda = next((r.datos for r in reversed(exitosos)
+                     if r.herramienta == "buscar_parecidos" and r.datos["dominio"] == registrable), None)
+    hallazgos += reglas_parecidos(busqueda, [r.datos for r in exitosos if r.herramienta == "investigar_parecido"])
 
     orden = list(Severidad)  # de crítica a informativa
     return {h.id: h for h in sorted(hallazgos, key=lambda h: orden.index(h.severidad))}

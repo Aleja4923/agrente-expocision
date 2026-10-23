@@ -110,3 +110,66 @@ def test_esquemas_para_grok(eco):
     assert esquema["function"]["name"] == "eco"
     assert esquema["function"]["description"] == "Devuelve el dominio recibido."
     assert "dominio" in esquema["function"]["parameters"]["properties"]
+
+
+# --- S2: dominio registrable y excepción de alcance de parecidos ------------------
+
+@pytest.mark.parametrize("entrada,esperado", [
+    ("tienda.ejemplo.com.co", "ejemplo.com.co"), ("ejemplo.com.co", "ejemplo.com.co"),
+    ("x.ejemplo.co", "ejemplo.co"), ("a.b.ejemplo.com", "ejemplo.com"), ("ejemplo.com", "ejemplo.com")])
+def test_dominio_registrable(entrada, esperado):
+    assert base.dominio_registrable(entrada) == esperado
+
+
+class EntradaParecidoPrueba(BaseModel):
+    dominio: str
+    parecido: str
+
+
+@pytest.fixture
+def parecido(monkeypatch):
+    recibidos, validados = [], []
+
+    @base.registrar("_prueba_parecido", "Prueba.", EntradaParecidoPrueba, campo_parecido="parecido")
+    def _p(e: EntradaParecidoPrueba) -> ResultadoHerramienta:
+        recibidos.append(e.parecido)
+        return ResultadoHerramienta(ok=True, herramienta="_prueba_parecido")
+
+    def validador(registrable):
+        validados.append(registrable)
+        return {"ejernplo.com.co"}
+
+    monkeypatch.setattr(base, "VALIDADOR_PARECIDOS", validador)
+    yield recibidos, validados
+    base.REGISTRO.pop("_prueba_parecido", None)
+
+
+def test_parecido_fuera_de_las_variantes_es_fuera_de_alcance(parecido):
+    r = base.ejecutar("_prueba_parecido", {"dominio": "ejemplo.com.co", "parecido": "google.com"}, "ejemplo.com.co")
+    assert (r.ok, r.error) == (False, "fuera_de_alcance")
+    assert "buscar_parecidos" in r.sugerencia
+    assert parecido[0] == []
+
+
+def test_parecido_valido_pasa_normalizado(parecido):
+    r = base.ejecutar("_prueba_parecido", {"dominio": "ejemplo.com.co", "parecido": "EJERNPLO.com.co."},
+                      "ejemplo.com.co")
+    assert r.ok and parecido[0] == ["ejernplo.com.co"]
+
+
+def test_parecido_se_valida_contra_el_registrable(parecido):
+    base.ejecutar("_prueba_parecido", {"dominio": "tienda.ejemplo.com.co", "parecido": "ejernplo.com.co"},
+                  "tienda.ejemplo.com.co")
+    assert parecido[1] == ["ejemplo.com.co"]
+
+
+def test_parecido_invalido(parecido):
+    r = base.ejecutar("_prueba_parecido", {"dominio": "ejemplo.com.co", "parecido": "a@b"}, "ejemplo.com.co")
+    assert r.error == "dominio_invalido"
+
+
+def test_sin_validador_registrado_rechaza(parecido, monkeypatch):
+    monkeypatch.setattr(base, "VALIDADOR_PARECIDOS", None)
+    r = base.ejecutar("_prueba_parecido", {"dominio": "ejemplo.com.co", "parecido": "ejernplo.com.co"},
+                      "ejemplo.com.co")
+    assert r.error == "fuera_de_alcance"

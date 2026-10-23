@@ -3,6 +3,9 @@
 - `normalizar_dominio`: convierte lo que escriba Grok (URL, mayúsculas, tildes) en un dominio limpio.
 - `en_alcance`: solo se permite el dominio objetivo o sus subdominios.
 - `ip_permitida`: anti-SSRF; solo IPs públicas, nunca la red interna.
+- `dominio_registrable`: el dominio que se compra (ejemplo.com.co), sin subdominios.
+- Excepción de alcance (CONTEXT §7): una herramienta con `campo_parecido` solo acepta las variantes
+  que genera el propio código (`VALIDADOR_PARECIDOS`), nunca un dominio que elija Grok.
 - `registrar` / `ejecutar`: cada herramienta se declara una vez; `ejecutar` valida lo que pide
   Grok, aplica las guardas y NUNCA lanza: todo error vuelve como ResultadoHerramienta.
 """
@@ -51,6 +54,17 @@ def en_alcance(dominio: str, objetivo: str) -> bool:
     return dominio == objetivo or dominio.endswith("." + objetivo)
 
 
+# Sufijos colombianos de segundo nivel: en ellos el dominio registrable tiene 3 etiquetas.
+SUFIJOS_CO = frozenset({"com.co", "net.co", "org.co", "edu.co", "gov.co", "mil.co", "nom.co"})
+
+
+def dominio_registrable(dominio: str) -> str:
+    """tienda.ejemplo.com.co -> ejemplo.com.co; a.ejemplo.com -> ejemplo.com (dominio ya normalizado)."""
+    etiquetas = dominio.split(".")
+    n = 3 if ".".join(etiquetas[-2:]) in SUFIJOS_CO else 2
+    return ".".join(etiquetas[-n:])
+
+
 def ip_permitida(ip: str) -> bool:
     """Solo IPs públicas: bloquea privadas, loopback, link-local, CGNAT y reservadas, también disfrazadas."""
     try:
@@ -69,15 +83,21 @@ class Herramienta:
     entrada: type[BaseModel]
     funcion: Callable[[BaseModel], ResultadoHerramienta]
     campo_dominio: str
+    campo_parecido: str | None = None
 
 
 REGISTRO: dict[str, Herramienta] = {}
 
+# Variantes válidas de un dominio registrable; lo asigna tools/parecidos.py al importarse.
+# Si no hay validador, la excepción de alcance falla cerrada (se rechaza todo).
+VALIDADOR_PARECIDOS: Callable[[str], set[str]] | None = None
 
-def registrar(nombre: str, descripcion: str, entrada: type[BaseModel], campo_dominio: str = "dominio"):
+
+def registrar(nombre: str, descripcion: str, entrada: type[BaseModel], campo_dominio: str = "dominio",
+              campo_parecido: str | None = None):
     """Decorador: declara una herramienta con su modelo de entrada; de ahí sale su esquema para Grok."""
     def decorar(funcion: Callable[[BaseModel], ResultadoHerramienta]):
-        REGISTRO[nombre] = Herramienta(nombre, descripcion, entrada, funcion, campo_dominio)
+        REGISTRO[nombre] = Herramienta(nombre, descripcion, entrada, funcion, campo_dominio, campo_parecido)
         return funcion
     return decorar
 
@@ -114,7 +134,17 @@ def ejecutar(nombre: str, argumentos: str | dict[str, Any], objetivo: str) -> Re
         return fallo("dominio_invalido", f"{e}. Usa el dominio objetivo o uno de sus subdominios.")
     if not en_alcance(dominio, objetivo_n):
         return fallo("fuera_de_alcance", f"Solo se permite {objetivo_n} y sus subdominios.")
-    entrada = entrada.model_copy(update={herramienta.campo_dominio: dominio})
+    cambios = {herramienta.campo_dominio: dominio}
+    if herramienta.campo_parecido:
+        try:
+            parecido = normalizar_dominio(getattr(entrada, herramienta.campo_parecido))
+        except DominioInvalido as e:
+            return fallo("dominio_invalido", f"{e}. Usa una variante que entregó buscar_parecidos.")
+        validas = VALIDADOR_PARECIDOS(dominio_registrable(objetivo_n)) if VALIDADOR_PARECIDOS else set()
+        if parecido not in validas:
+            return fallo("fuera_de_alcance", "Solo se permiten las variantes que entregó buscar_parecidos.")
+        cambios[herramienta.campo_parecido] = parecido
+    entrada = entrada.model_copy(update=cambios)
     try:
         resultado = herramienta.funcion(entrada)
     except Exception as e:  # noqa: BLE001 - ninguna herramienta puede tumbar el bucle

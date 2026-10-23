@@ -39,6 +39,13 @@ def _es_spf(txt: str) -> bool:
     return t == "v=spf1" or t.startswith("v=spf1 ")
 
 
+def spf_autoriza_envio(txts: list[str]) -> bool:
+    """True si el primer SPF autoriza algún servidor (algo más que el cierre 'all', con cualquier calificador)."""
+    registro = next((t for t in txts if _es_spf(t)), None)
+    return registro is not None and any(
+        t.lstrip("+-~?").lower() != "all" for t in registro.split()[1:])
+
+
 def analizar_spf(txts: list[str], consultar_txt: Callable[[str], list[str]]) -> dict[str, Any]:
     """Registros SPF, cierre y consultas DNS contadas de forma recursiva (include y redirect)."""
     registros = [t.strip() for t in txts if _es_spf(t)]
@@ -183,6 +190,9 @@ class ResolverDNS:
 
     def mx(self, nombre: str) -> list[tuple[int, str]]:
         return [(r.preference, str(r.exchange).rstrip(".")) for r in self._consultar(nombre, "MX")]
+
+    def ns(self, nombre: str) -> list[str]:
+        return [str(r.target).rstrip(".").lower() for r in self._consultar(nombre, "NS")]
 
 
 resolver: ResolverDNS | None = None  # se crea al primer uso: si falla, no tumba la importación de las herramientas

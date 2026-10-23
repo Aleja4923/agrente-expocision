@@ -192,3 +192,53 @@ def test_inexistente_de_respaldo_conserva_explicacion_fija():
 def test_limitacion_primera_ip():
     seccion = generar_informe(estado()).split("## Lo que no se pudo verificar")[1]
     assert "primera dirección IP" in seccion
+
+
+# --- S2: parecidos y registro del dominio ------------------------------------------------
+
+from auditor.report import LIMITACION_PARECIDOS, limitaciones_de_parecidos  # noqa: E402
+
+
+def _busqueda(*con_correo, sin_verificar=()):
+    return ResultadoHerramienta(ok=True, herramienta="buscar_parecidos", datos={
+        "dominio": D, "generadas": 27, "truncadas": False, "existentes": len(con_correo),
+        "con_correo": [{"dominio": d, "tipo": "omision", "mx": ["mx.x.com"], "comparte_servidores": False}
+                       for d in con_correo], "sin_verificar": list(sin_verificar), "ns_propios": [], "mx_propios": []})
+
+
+def test_plantilla_parecido_lista_dominios_y_no_acusa():
+    e = estado(["PARECIDO-ENVIA"], evidencias={"PARECIDO-ENVIA":
+               "ejmplo.com.co: registrado hace 12 días, con MX, SPF autoriza envío; ejemplo.co: con MX"})
+    md = generar_informe(e)
+    bloque = md.split("**Reenvíe esto a su proveedor:**")[1].split("```")[1]
+    assert "ejmplo.com.co" in bloque and "ejemplo.co" in bloque
+    assert "Verifique si es suyo o de alguien conocido" in bloque
+    assert "fraude" not in md.lower() and "falso" not in md.lower()
+
+
+def test_plantillas_de_dominio():
+    md = generar_informe(estado(["DOMINIO-POR-VENCER", "DOMINIO-SIN-BLOQUEO"]))
+    assert "renovación automática" in md and "bloqueo de transferencia" in md
+
+
+def test_limitacion_no_investigados():
+    e = estado()
+    e.llamadas += [({"dominio": D}, _busqueda("a.co", "b.co", "c.co")),
+                   ({"dominio": D, "parecido": "a.co"}, ResultadoHerramienta(
+                       ok=True, herramienta="investigar_parecido", datos={"parecido": "a.co"}))]
+    assert limitaciones_de_parecidos(e) == [
+        "Se encontraron 3 dominios parecidos con correo; se investigaron 1. Sin investigar: b.co, c.co."]
+
+
+def test_limitacion_sin_verificar_y_registro():
+    e = estado()
+    e.llamadas += [({"dominio": D}, _busqueda(sin_verificar=["x.co"])),
+                   ({"dominio": D}, ResultadoHerramienta(ok=False, herramienta="whois_dominio",
+                                                         error="tld_no_soportado", sugerencia="s"))]
+    textos = " ".join(limitaciones_de_parecidos(e))
+    assert "x.co" in textos and "registro" in textos
+
+
+def test_limitacion_fija_parecidos_y_pie_nuevo():
+    md = generar_informe(estado())
+    assert LIMITACION_PARECIDOS in md and "registro público de dominios" in md

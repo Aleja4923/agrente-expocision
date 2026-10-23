@@ -12,6 +12,7 @@ from typing import Callable
 
 from auditor.config import RUTA_SALIDAS
 from auditor.modelos import EstadoAuditoria, Hallazgo, NivelRiesgo
+from auditor.tools.correo import spf_autoriza_envio
 
 SEMAFORO = {NivelRiesgo.ALTO: "🔴", NivelRiesgo.MEDIO: "🟡", NivelRiesgo.BAJO: "🟢"}
 SEVERIDAD_LEGIBLE = {"critica": "crítica", "alta": "alta", "media": "media", "baja": "baja",
@@ -21,6 +22,9 @@ LIMITACION_PRIMERA_IP = ("El certificado se revisó en la primera dirección IP 
                          "varias, no se revisaron todas.")
 LIMITACION_DKIM = ("DKIM (la firma digital de sus correos) no se revisa en esta versión, así que este "
                    "informe no afirma nada sobre ella.")
+LIMITACION_PARECIDOS = ("La búsqueda de dominios parecidos cubre errores de tipeo frecuentes y los dominios .co, "
+                        ".com.co y .com; no cubre todos los nombres posibles ni letras de otros alfabetos. A estos "
+                        "dominios solo se les consultó DNS y el registro público; nunca se visitó su sitio web.")
 AVISO_RESPALDO = ("> Este informe se armó automáticamente con los hallazgos verificados porque la revisión "
                   "se detuvo antes de tiempo. Los hallazgos son correctos; el texto es más breve de lo habitual.")
 
@@ -94,6 +98,18 @@ PLANTILLAS: dict[str, Callable[[str, dict], str]] = {
     "REC-TLS-VERSION": lambda d, ctx: (
         f"Desactivar TLS 1.0 y TLS 1.1 en el servidor de: {_hosts(ctx['evidencia'])}; dejar habilitados solo "
         f"TLS 1.2 y TLS 1.3."),
+    "REC-PARECIDO-VERIFICAR": lambda d, ctx: (
+        f"Dominios parecidos a {d}: {_hosts(ctx['evidencia'])}\n"
+        f"1. Verifique si es suyo o de alguien conocido (su agencia, su proveedor) antes de alertar a sus clientes.\n"
+        f"2. Si no lo es y ve correos sospechosos, guarde la evidencia y repórtelo al registrador del dominio y al "
+        f"CAI Virtual de la Policía Nacional.\n"
+        f"3. Puede registrar a su nombre las variantes más cercanas (registro defensivo)."),
+    "REC-DOMINIO-RENOVAR": lambda d, ctx: (
+        f"Renovar el dominio {d} con su registrador ({ctx['evidencia']}) y activar la renovación automática, con "
+        f"un medio de pago vigente y un correo de contacto que alguien revise."),
+    "REC-DOMINIO-BLOQUEO": lambda d, ctx: (
+        f"Pedir al registrador de {d} que active el bloqueo de transferencia (Registrar Lock / "
+        f"clientTransferProhibited). Se quita solo cuando usted decida cambiar de registrador."),
     "REC-HTTPS": lambda d, ctx: (
         f"Instalar un certificado HTTPS en: {_hosts(ctx['evidencia'])} (puede ser gratuito, por ejemplo con "
         f"Let's Encrypt) y redirigir todo el tráfico de http a https."),
@@ -110,8 +126,7 @@ def _datos_correo(estado: EstadoAuditoria) -> dict:
 
 def _envia_correo(datos: dict) -> bool:
     """True si el SPF autoriza algún servidor (algo más que el cierre 'all')."""
-    registros = datos.get("spf", {}).get("registros", [])
-    return bool(registros) and any(t.lstrip("+-~?").lower() != "all" for t in registros[0].split()[1:])
+    return spf_autoriza_envio(datos.get("spf", {}).get("registros", [])[:1])
 
 
 def _bloque_tecnico(estado: EstadoAuditoria, h: Hallazgo) -> str:
@@ -177,15 +192,43 @@ def dominio_no_existe(estado: EstadoAuditoria) -> bool:
     return False
 
 
+def limitaciones_de_parecidos(estado: EstadoAuditoria) -> list[str]:
+    """Lo que quedó sin revisar en registro y parecidos, dicho por el código (no por Grok)."""
+    textos: list[str] = []
+    busqueda = next((r.datos for _, r in reversed(estado.llamadas)
+                     if r.herramienta == "buscar_parecidos" and r.ok), None)
+    investigados = {r.datos.get("parecido") for _, r in estado.llamadas
+                    if r.herramienta == "investigar_parecido" and r.ok}
+    if busqueda:
+        candidatos = [c["dominio"] for c in busqueda["con_correo"] if not c["comparte_servidores"]]
+        pendientes = [c for c in candidatos if c not in investigados]
+        if pendientes:
+            textos.append(f"Se encontraron {len(candidatos)} dominios parecidos con correo; se investigaron "
+                          f"{len(candidatos) - len(pendientes)}. Sin investigar: {', '.join(pendientes)}.")
+        if busqueda["sin_verificar"]:
+            textos.append("Algunos dominios parecidos no respondieron en DNS y no se pudieron verificar: "
+                          f"{', '.join(busqueda['sin_verificar'])}.")
+    for _, r in estado.llamadas:
+        if r.herramienta == "whois_dominio" and not r.ok:
+            textos.append(f"No se pudo consultar el registro público del dominio ({r.error}), así que no se "
+                          "revisó su vencimiento ni su bloqueo de transferencia.")
+            break
+    return textos
+
+
 def _limitaciones_y_pie(estado: EstadoAuditoria, partes: list[str],
                         limitaciones_fijas: list[str] | None = None) -> str:
     """Limitaciones de Grok + las fijas del sistema, y el pie con fecha, modelo y costo."""
-    fijas = [LIMITACION_PRIMERA_IP, LIMITACION_DKIM] if limitaciones_fijas is None else limitaciones_fijas
+    if limitaciones_fijas is None:
+        fijas = [*limitaciones_de_parecidos(estado), LIMITACION_PRIMERA_IP, LIMITACION_DKIM, LIMITACION_PARECIDOS]
+    else:
+        fijas = limitaciones_fijas
     partes += ["## Lo que no se pudo verificar", ""]
     partes += [f"- {limitacion.strip()}" for limitacion in estado.informe.limitaciones]
     partes += [f"- {limitacion}" for limitacion in fijas] + [""]
     partes += ["---",
-               f"Revisión pasiva con información pública (DNS y certificado del sitio), sin escaneos ni accesos. "
+               f"Revisión pasiva con información pública (DNS, certificado del sitio y registro público de dominios), "
+               f"sin escaneos ni accesos. "
                f"Fecha: {estado.inicio:%Y-%m-%d %H:%M} UTC · Modelo: {estado.modelo} · "
                f"Costo: USD {estado.costo_usd:.4f} · Pasos: {estado.pasos} · "
                f"Auditoría: {estado.auditoria_id} (intento {estado.intento})."]

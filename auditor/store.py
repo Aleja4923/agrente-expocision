@@ -3,17 +3,20 @@
 Una fila por intento de auditoría y sus llamadas a herramientas. En el S3 alimenta las
 evaluaciones; en el S4 se le agrega la cola reanudable. La bitácora JSONL sigue siendo
 el registro completo de eventos y costos.
+
+Desde el S2 guarda también la caché del registro de dominios (WHOIS/RDAP): el servicio de
+.co limita las consultas, así que una respuesta se reutiliza durante VIGENCIA_CACHE_HORAS.
 """
 
 import json
 import sqlite3
 from collections.abc import Iterator
 from contextlib import contextmanager
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-from auditor.config import RUTA_DB
+from auditor.config import RUTA_DB, VIGENCIA_CACHE_HORAS
 from auditor.modelos import EstadoAuditoria
 
 _ESQUEMA = """
@@ -26,6 +29,9 @@ create table if not exists auditorias (
 create table if not exists llamadas (
     auditoria_id text not null, intento integer not null, orden integer not null, herramienta text,
     host text, ok integer, error text, primary key (auditoria_id, intento, orden)
+);
+create table if not exists registro_cache (
+    dominio text primary key, existe integer not null, datos text not null, consultado text not null
 );
 """
 
@@ -59,7 +65,7 @@ def guardar_auditoria(estado: EstadoAuditoria, ruta_informe: Path | None, ruta_d
             str(ruta_informe) if ruta_informe else None,
         ))
         conexion.executemany("insert into llamadas values (?,?,?,?,?,?,?)", [
-            (*clave, orden, r.herramienta, argumentos.get("dominio") or argumentos.get("host"), int(r.ok), r.error)
+            (*clave, orden, r.herramienta, argumentos.get("parecido") or argumentos.get("dominio") or argumentos.get("host"), int(r.ok), r.error)
             for orden, (argumentos, r) in enumerate(estado.llamadas, 1)
         ])
 
@@ -81,3 +87,21 @@ def leer_auditoria(auditoria_id: str, intento: int = 1, ruta_db: Path = RUTA_DB)
     datos["informe_de_respaldo"] = bool(datos["informe_de_respaldo"])
     datos["llamadas"] = [{**dict(l), "ok": bool(l["ok"])} for l in llamadas]
     return datos
+
+
+def leer_cache_registro(dominio: str, ahora: datetime, ruta_db: Path = RUTA_DB) -> dict[str, Any] | None:
+    """{"existe", "datos"} si hay una respuesta del registro de menos de VIGENCIA_CACHE_HORAS; si no, None."""
+    with _conectar(ruta_db) as conexion:
+        fila = conexion.execute("select existe, datos, consultado from registro_cache where dominio = ?",
+                                (dominio,)).fetchone()
+    if fila is None or ahora - datetime.fromisoformat(fila[2]) > timedelta(hours=VIGENCIA_CACHE_HORAS):
+        return None
+    return {"existe": bool(fila[0]), "datos": json.loads(fila[1])}
+
+
+def guardar_cache_registro(dominio: str, existe: bool, datos: dict[str, Any], ahora: datetime,
+                           ruta_db: Path = RUTA_DB) -> None:
+    """Guarda (o reemplaza) la respuesta del registro para `dominio`, incluido "no registrado"."""
+    with _conectar(ruta_db) as conexion:
+        conexion.execute("insert or replace into registro_cache values (?,?,?,?)",
+                         (dominio, int(existe), json.dumps(datos, ensure_ascii=False), ahora.isoformat()))

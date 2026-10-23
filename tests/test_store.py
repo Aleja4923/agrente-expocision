@@ -44,3 +44,39 @@ def test_llamadas_en_orden(tmp_path):
 
 def test_leer_inexistente(tmp_path):
     assert leer_auditoria("no-existe", 1, tmp_path / "a.db") is None
+
+
+# --- S2: caché del registro (WHOIS/RDAP) -----------------------------------------
+
+from datetime import datetime, timedelta, timezone  # noqa: E402
+
+from auditor.store import guardar_cache_registro, leer_cache_registro  # noqa: E402
+
+AHORA = datetime(2026, 10, 23, 12, 0, tzinfo=timezone.utc)
+
+
+def test_cache_guarda_y_lee(tmp_path):
+    db = tmp_path / "a.db"
+    guardar_cache_registro("ejemplo.com.co", True, {"creado": "2003-04-21"}, AHORA, db)
+    assert leer_cache_registro("ejemplo.com.co", AHORA + timedelta(hours=1), db) == {
+        "existe": True, "datos": {"creado": "2003-04-21"}}
+
+
+def test_cache_vencida_devuelve_none(tmp_path):
+    db = tmp_path / "a.db"
+    guardar_cache_registro("ejemplo.com.co", True, {}, AHORA, db)
+    assert leer_cache_registro("ejemplo.com.co", AHORA + timedelta(hours=25), db) is None
+
+
+def test_cache_recuerda_no_registrado(tmp_path):
+    db = tmp_path / "a.db"
+    guardar_cache_registro("libre.com.co", False, {}, AHORA, db)
+    assert leer_cache_registro("libre.com.co", AHORA, db) == {"existe": False, "datos": {}}
+
+
+def test_cache_reemplaza_y_sin_entrada(tmp_path):
+    db = tmp_path / "a.db"
+    guardar_cache_registro("ejemplo.com.co", True, {"v": 1}, AHORA, db)
+    guardar_cache_registro("ejemplo.com.co", True, {"v": 2}, AHORA, db)
+    assert leer_cache_registro("ejemplo.com.co", AHORA, db)["datos"] == {"v": 2}
+    assert leer_cache_registro("otro.com.co", AHORA, db) is None

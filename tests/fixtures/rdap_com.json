@@ -1,0 +1,25 @@
+{
+ "objectClassName": "domain",
+ "handle": "0000000_DOMAIN_COM-VRSN",
+ "ldhName": "EJEMPLO.COM",
+ "entities": [
+  {
+   "objectClassName": "entity",
+   "handle": "9999",
+   "roles": ["registrar"],
+   "vcardArray": ["vcard", [["version", {}, "text", "4.0"], ["fn", {}, "text", "Registrador Ejemplo S.A.S."]]]
+  }
+ ],
+ "events": [
+  {"eventAction": "registration", "eventDate": "1997-09-15T04:00:00Z"},
+  {"eventAction": "expiration", "eventDate": "2028-09-14T04:00:00Z"},
+  {"eventAction": "last changed", "eventDate": "2019-09-09T15:39:04Z"},
+  {"eventAction": "last update of RDAP database", "eventDate": "2026-10-23T06:22:35Z"}
+ ],
+ "status": ["client delete prohibited", "client transfer prohibited", "client update prohibited",
+            "server delete prohibited", "server transfer prohibited", "server update prohibited"],
+ "nameservers": [
+  {"objectClassName": "nameserver", "ldhName": "NS1.EJEMPLO-DNS.COM"},
+  {"objectClassName": "nameserver", "ldhName": "NS2.EJEMPLO-DNS.COM"}
+ ]
+}

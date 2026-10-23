@@ -1,0 +1,47 @@
+Domain Name: EJEMPLO.COM.CO
+
+Registry Domain ID: D0000-CNIC
+
+Registrar WHOIS Server: whois.registrador-ejemplo.co
+
+Registrar URL: http://www.registrador-ejemplo.co
+
+Updated Date: 2026-03-28T11:22:02.0Z
+
+Creation Date: 2003-04-21T00:00:00.0Z
+
+Registry Expiry Date: 2027-04-24T23:59:59.0Z
+
+Registrar: Registrador Ejemplo S.A.S.
+
+Registrar IANA ID: 292
+
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+
+Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited
+
+Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited
+
+Registrant Email: Please query the RDDS service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
+
+Admin Email: Please query the RDDS service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
+
+Tech Email: Please query the RDDS service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
+
+Name Server: NS1.EJEMPLO-DNS.COM
+
+Name Server: NS3.EJEMPLO-DNS.COM
+
+Name Server: NS2.EJEMPLO-DNS.COM
+
+Name Server: NS4.EJEMPLO-DNS.COM
+
+DNSSEC: unsigned
+
+Registrar Abuse Contact Email: abusecomplaints@registrador-ejemplo.co
+
+Registrar Abuse Contact Phone: +57.6010000000
+
+URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
+
+>>> Last update of WHOIS database: 2026-10-23T06:22:46.0Z <<<
