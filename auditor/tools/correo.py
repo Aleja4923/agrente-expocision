@@ -194,6 +194,11 @@ class ResolverDNS:
     def ns(self, nombre: str) -> list[str]:
         return [str(r.target).rstrip(".").lower() for r in self._consultar(nombre, "NS")]
 
+    def cname(self, nombre: str) -> str | None:
+        """Destino del CNAME, o None si el nombre no es un alias."""
+        respuesta = self._consultar(nombre, "CNAME")
+        return str(respuesta[0].target).rstrip(".").lower() if respuesta else None
+
 
 resolver: ResolverDNS | None = None  # se crea al primer uso: si falla, no tumba la importación de las herramientas
 

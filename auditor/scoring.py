@@ -81,6 +81,22 @@ REGLAS: dict[str, tuple[Categoria, Severidad, str, str, str]] = {
         "Su dominio no tiene servidores para recibir correo. Puede ser normal si no lo usa para correo; en "
         "ese caso conviene declararlo para que nadie lo use en su nombre.",
         "REC-SIN-MX"),
+    # S2 · DKIM: solo se concluye "no encontrado" donde el selector estándar se conoce (Google y Microsoft).
+    "CORREO-DKIM-NO-ENCONTRADO": (
+        C, S.MEDIA, "No encontramos la firma DKIM de su correo",
+        "Su proveedor de correo publica normalmente esta firma digital y no la encontramos. Sin ella, los "
+        "receptores tienen menos formas de comprobar que sus correos son suyos y DMARC depende solo de SPF.",
+        "REC-DKIM-ACTIVAR"),
+    "CORREO-DKIM-CLAVE-DEBIL": (
+        C, S.ALTA, "La firma DKIM usa una clave demasiado corta",
+        "La clave de su firma DKIM es más corta de lo que hoy se considera seguro, así que podría falsificarse "
+        "y los receptores pueden ignorarla.",
+        "REC-DKIM-ROTAR"),
+    "CORREO-DKIM-CLAVE-1024": (
+        C, S.BAJA, "La firma DKIM usa una clave de 1024 bits",
+        "Su firma DKIM funciona, pero la recomendación actual es una clave de 2048 bits. Conviene cambiarla en "
+        "el próximo mantenimiento.",
+        "REC-DKIM-ROTAR"),
     "WEB-TLS-INVALIDO": (
         W, S.CRITICA, "El certificado de seguridad del sitio no es válido",
         "Los navegadores muestran una advertencia al entrar, lo que espanta a sus clientes y facilita que "
@@ -99,6 +115,37 @@ REGLAS: dict[str, tuple[Categoria, Severidad, str, str, str]] = {
         "Su sitio no acepta conexiones HTTPS, así que lo que escriban sus clientes viaja sin cifrar y el "
         "navegador lo marca como no seguro.",
         "REC-HTTPS"),
+    # S2 · cabeceras de la portada y security.txt
+    "WEB-SIN-REDIRECCION-HTTPS": (
+        W, S.MEDIA, "El sitio no lleva a sus visitantes a la versión segura",
+        "Quien escribe la dirección sin https:// entra a una versión sin cifrar, donde lo que escribe puede "
+        "leerse o alterarse en el camino.",
+        "REC-HTTPS-REDIRECCION"),
+    "WEB-SIN-HSTS": (
+        W, S.BAJA, "El sitio no exige conexión segura a los navegadores",
+        "Sin la cabecera HSTS, el navegador no recuerda que su sitio siempre debe abrirse con cifrado, así que "
+        "una primera visita puede caer en la versión sin cifrar.",
+        "REC-HSTS"),
+    "WEB-SIN-PROTECCION-MARCOS": (
+        W, S.BAJA, "Su sitio puede mostrarse dentro de otras páginas",
+        "Otra página podría mostrar la suya dentro de un marco invisible para que sus visitantes hagan clic sin "
+        "darse cuenta.",
+        "REC-MARCOS"),
+    "WEB-SIN-NOSNIFF": (
+        W, S.INFORMATIVA, "Falta una cabecera de protección básica",
+        "La cabecera X-Content-Type-Options evita que el navegador interprete archivos de una forma distinta a "
+        "la declarada. Es un ajuste sencillo del servidor.",
+        "REC-NOSNIFF"),
+    "WEB-VERSION-EXPUESTA": (
+        W, S.INFORMATIVA, "El servidor muestra qué versión de software usa",
+        "Anunciar la versión exacta facilita que alguien busque fallas conocidas de esa versión. No es un "
+        "problema por sí solo, pero conviene ocultarla.",
+        "REC-OCULTAR-VERSION"),
+    "WEB-SIN-SECURITY-TXT": (
+        W, S.INFORMATIVA, "El sitio no indica a quién avisar de un problema de seguridad",
+        "Un archivo security.txt le dice a quien encuentre un problema en su sitio cómo avisarle. Sin él, ese "
+        "aviso puede no llegarle nunca.",
+        "REC-SECURITY-TXT"),
     # S2 · dominios parecidos: nunca acusan (CONTEXT §7); puede ser de otro negocio o del mismo dueño.
     "PARECIDO-ENVIA": (
         F, S.ALTA, "Un dominio muy parecido al suyo está preparado para enviar correo",
@@ -227,11 +274,13 @@ def _evidencia_parecido(p: dict[str, Any]) -> str:
     return texto + (", SPF autoriza envío" if p["spf_autoriza_envio"] else "")
 
 
-def reglas_parecidos(busqueda: dict[str, Any] | None, investigados: list[dict[str, Any]]) -> list[Hallazgo]:
+def reglas_parecidos(busqueda: dict[str, Any] | None, investigados: list[dict[str, Any]],
+                     creado_dueno: str | None = None) -> list[Hallazgo]:
     """Señal por combinación (CONTEXT §6b, spec C+D §5); cada parecido aparece en un solo hallazgo.
 
     Se excluyen los defensivos (comparten NS o MX con el dueño). Un `otro_tld` (mismo nombre, otro TLD) suele
-    ser de un homónimo: solo sube de severidad si además se registró hace poco.
+    ser de un homónimo: solo sube de severidad si además se registró hace poco. Un parecido registrado ANTES
+    que el dominio del dueño no se creó para imitarlo: se queda en informativa.
     """
     evidencias: dict[str, list[str]] = {}
     revisados = set()
@@ -239,11 +288,16 @@ def reglas_parecidos(busqueda: dict[str, Any] | None, investigados: list[dict[st
         revisados.add(p["parecido"])
         if not (p["existe"] and p["tiene_mx"]) or p["comparte_servidores"]:
             continue
+        evidencia = _evidencia_parecido(p)
+        anterior = bool(p["creado"] and creado_dueno
+                        and datetime.fromisoformat(p["creado"]) < datetime.fromisoformat(creado_dueno))
         reciente = p["dias_desde_registro"] is not None and p["dias_desde_registro"] <= DIAS_REGISTRO_RECIENTE
         envia = p["spf_autoriza_envio"] and (reciente or p["tipo"] != "otro_tld")
-        id_ = ("PARECIDO-ENVIA" if envia else "PARECIDO-RECIENTE" if reciente
-               else "PARECIDO-MX")
-        evidencias.setdefault(id_, []).append(_evidencia_parecido(p))
+        if anterior:
+            id_, evidencia = "PARECIDO-MX", evidencia + " (registrado antes que su dominio)"
+        else:
+            id_ = "PARECIDO-ENVIA" if envia else "PARECIDO-RECIENTE" if reciente else "PARECIDO-MX"
+        evidencias.setdefault(id_, []).append(evidencia)
     for c in (busqueda or {}).get("con_correo", []):
         if c["dominio"] not in revisados and not c["comparte_servidores"]:
             evidencias.setdefault("PARECIDO-MX", []).append(f"{c['dominio']}: con MX")
@@ -265,8 +319,78 @@ def reglas_dominio(datos: dict[str, Any], hoy: date) -> list[Hallazgo]:
     return h
 
 
+HSTS_MINIMO = 15552000  # 180 días
+
+
+def reglas_cabeceras(datos_por_host: list[dict[str, Any]]) -> list[Hallazgo]:
+    """Hallazgos de cabeceras agrupados por regla, con todos los hosts en la evidencia (como TLS).
+
+    Si la portada redirige a otra plataforma o no responde 2xx/3xx, solo cuentan la redirección a https y
+    HSTS: las demás cabeceras no se pueden atribuir al sitio del dueño.
+    """
+    evidencias: dict[str, list[str]] = {}
+
+    def agregar(id_: str, texto: str) -> None:
+        evidencias.setdefault(id_, []).append(texto)
+
+    for d in datos_por_host:
+        h = d["host"]
+        if d["http_responde"] and d["redirige_a_https"] is False:
+            agregar("WEB-SIN-REDIRECCION-HTTPS", f"{h}: http:// responde sin redirigir a https://")
+        if not d["hsts"]["presente"]:
+            agregar("WEB-SIN-HSTS", f"{h}: sin Strict-Transport-Security")
+        elif d["hsts"]["max_age"] is None or d["hsts"]["max_age"] < HSTS_MINIMO:
+            agregar("WEB-SIN-HSTS", f"{h}: max-age={d['hsts']['max_age']} (menos de 180 días)")
+        if not d["evaluable"]:
+            continue
+        if not (d["x_frame_options"] or d["frame_ancestors"]):
+            agregar("WEB-SIN-PROTECCION-MARCOS", f"{h}: sin X-Frame-Options ni frame-ancestors")
+        if not d["nosniff"]:
+            agregar("WEB-SIN-NOSNIFF", f"{h}: sin X-Content-Type-Options: nosniff")
+        if d["servidor_con_version"]:
+            agregar("WEB-VERSION-EXPUESTA", f"{h}: la cabecera Server o X-Powered-By muestra la versión")
+    return [_hallazgo(id_, "; ".join(textos)) for id_, textos in evidencias.items()]
+
+
+def reglas_security_txt(datos: dict[str, Any]) -> list[Hallazgo]:
+    if not datos["existe"]:
+        return [_hallazgo("WEB-SIN-SECURITY-TXT", f"https://{datos['dominio']}/.well-known/security.txt no existe")]
+    if datos["vencido"]:
+        return [_hallazgo("WEB-SIN-SECURITY-TXT", f"security.txt vencido (Expires: {datos['expires']})")]
+    if not datos["tiene_contact"]:
+        return [_hallazgo("WEB-SIN-SECURITY-TXT", "security.txt sin el campo Contact")]
+    return []
+
+
+SELECTORES_ESTANDAR = {"google": ("google",), "microsoft": ("selector1", "selector2")}
+
+
+def _estado_selector(d: dict[str, Any]) -> str:
+    if d["error"]:
+        return f"sin respuesta: {d['error']}"
+    if d["revocada"]:
+        return "clave revocada"
+    return "CNAME sin clave" if d["via_cname"] else "sin registro"
+
+
+def reglas_dkim(selectores: list[dict[str, Any]], proveedor: str) -> list[Hallazgo]:
+    """Hallazgos DKIM del dominio objetivo a partir de todos los selectores probados."""
+    h: list[Hallazgo] = []
+    validos = [d for d in selectores if d["existe"]]
+    probados = {d["selector"] for d in selectores if not d["error"]}
+    estandar = SELECTORES_ESTANDAR.get(proveedor)
+    if estandar and not validos and set(estandar) <= probados:
+        h.append(_hallazgo("CORREO-DKIM-NO-ENCONTRADO", "selectores probados: " + ", ".join(
+            f"{d['selector']} ({_estado_selector(d)})" for d in selectores)))
+    for id_, condicion in (("CORREO-DKIM-CLAVE-DEBIL", lambda b: b < 1024), ("CORREO-DKIM-CLAVE-1024", lambda b: b == 1024)):
+        debiles = [d for d in validos if d["tipo_clave"] == "rsa" and condicion(d["bits"])]
+        if debiles:
+            h.append(_hallazgo(id_, "; ".join(f"{d['selector']}: RSA de {d['bits']} bits" for d in debiles)))
+    return h
+
+
 # Argumento que identifica el "host" de cada herramienta (para quedarse con el último resultado).
-CAMPO_CLAVE = {"tls_certificado": "host", "investigar_parecido": "parecido"}
+CAMPO_CLAVE = {"tls_certificado": "host", "cabeceras_web": "host", "investigar_parecido": "parecido"}
 
 
 def evaluar(llamadas: list[Llamada], objetivo: str, hoy: date | None = None) -> dict[str, Hallazgo]:
@@ -294,12 +418,30 @@ def evaluar(llamadas: list[Llamada], objetivo: str, hoy: date | None = None) -> 
     hallazgos += reglas_tls([ll for (herramienta, _), ll in ultimos.items() if herramienta == "tls_certificado"])
 
     exitosos = [r for (_, r) in ultimos.values() if r.ok]
+
+    hallazgos += reglas_cabeceras([r.datos for (herramienta, _), (_, r) in ultimos.items()
+                                   if herramienta == "cabeceras_web" and r.ok])
+    for r in exitosos:
+        if r.herramienta == "security_txt" and r.datos["dominio"] == objetivo:
+            hallazgos += reglas_security_txt(r.datos)
+
+    # DKIM: Grok puede probar selectores en varias llamadas; se unen (por selector, gana la última).
+    selectores: dict[str, dict[str, Any]] = {}
+    for _, r in llamadas:
+        if r.herramienta == "dkim_selector" and r.ok and r.datos["dominio"] == objetivo:
+            selectores.update({d["selector"]: d for d in r.datos["selectores"]})
+    correo_objetivo = ultimos.get(("dns_correo", objetivo))
+    if selectores and correo_objetivo and correo_objetivo[1].ok:
+        hallazgos += reglas_dkim(list(selectores.values()), correo_objetivo[1].datos["mx"]["proveedor"])
     for r in exitosos:
         if r.herramienta == "whois_dominio" and r.datos["dominio"] == registrable:
             hallazgos += reglas_dominio(r.datos, hoy or date.today())
     busqueda = next((r.datos for r in reversed(exitosos)
                      if r.herramienta == "buscar_parecidos" and r.datos["dominio"] == registrable), None)
-    hallazgos += reglas_parecidos(busqueda, [r.datos for r in exitosos if r.herramienta == "investigar_parecido"])
+    registro_propio = next((r.datos for r in exitosos
+                            if r.herramienta == "whois_dominio" and r.datos["dominio"] == registrable), None)
+    hallazgos += reglas_parecidos(busqueda, [r.datos for r in exitosos if r.herramienta == "investigar_parecido"],
+                                  registro_propio["creado"] if registro_propio else None)
 
     orden = list(Severidad)  # de crítica a informativa
     return {h.id: h for h in sorted(hallazgos, key=lambda h: orden.index(h.severidad))}

@@ -43,6 +43,9 @@ DNS_TIMEOUT_SEGUNDOS = 5
 # Conexión TLS al puerto 443: tiempo máximo de conexión y handshake.
 TLS_TIMEOUT_SEGUNDOS = 5
 
+# Peticiones HTTP (cabeceras y security.txt): tiempo máximo de conexión y respuesta.
+HTTP_TIMEOUT_SEGUNDOS = 10
+
 # Topes por auditoría: ninguna puede quedarse en bucle ni gastar de más.
 # S2: más herramientas y fuentes lentas (WHOIS con pausa, CT); el tope en dinero sigue mandando.
 MAX_PASOS = 20
@@ -59,6 +62,13 @@ DIAS_DOMINIO_POR_VENCER = 30
 REGISTRO_TIMEOUT_SEGUNDOS = 10   # WHOIS (puerto 43) y RDAP
 PAUSA_REGISTRO_SEGUNDOS = 1.5    # entre consultas al mismo servidor de registro
 VIGENCIA_CACHE_HORAS = 24
+
+# S2 · Certificate Transparency (crt.sh con Cert Spotter de respaldo)
+CT_TIMEOUT_CRTSH = 25            # crt.sh es lento con dominios grandes (13 s medidos)
+CT_TIMEOUT_CERTSPOTTER = 15
+CT_ESPERA_REINTENTO = 3          # un reintento a crt.sh antes del respaldo
+MAX_SUBDOMINIOS_MOSTRADOS = 100  # lo que ve Grok, para controlar los tokens
+MAX_HOSTS_EXTRA = 5              # cupo: hosts revisados aparte del objetivo y www
 
 
 def cargar_llave(ruta_env: Path = RUTA_ENV) -> str:

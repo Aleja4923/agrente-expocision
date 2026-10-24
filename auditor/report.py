@@ -6,6 +6,7 @@ fijas por recomendacion_id): así nadie copia en su DNS un registro inventado po
 Nunca se copia contenido no confiable al informe.
 """
 
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Callable
@@ -20,11 +21,13 @@ SEVERIDAD_LEGIBLE = {"critica": "crítica", "alta": "alta", "media": "media", "b
 
 LIMITACION_PRIMERA_IP = ("El certificado se revisó en la primera dirección IP de cada sitio; si un sitio tiene "
                          "varias, no se revisaron todas.")
-LIMITACION_DKIM = ("DKIM (la firma digital de sus correos) no se revisa en esta versión, así que este "
-                   "informe no afirma nada sobre ella.")
+LIMITACION_SIN_DKIM = ("DKIM (la firma digital de sus correos) no se revisó en esta auditoría, así que este "
+                       "informe no afirma nada sobre ella.")
 LIMITACION_PARECIDOS = ("La búsqueda de dominios parecidos cubre errores de tipeo frecuentes y los dominios .co, "
                         ".com.co y .com; no cubre todos los nombres posibles ni letras de otros alfabetos. A estos "
                         "dominios solo se les consultó DNS y el registro público; nunca se visitó su sitio web.")
+LIMITACION_PORTADA = ("Las cabeceras de seguridad se revisaron solo en la portada de cada sitio; otras páginas "
+                      "pueden estar configuradas de otra forma.")
 AVISO_RESPALDO = ("> Este informe se armó automáticamente con los hallazgos verificados porque la revisión "
                   "se detuvo antes de tiempo. Los hallazgos son correctos; el texto es más breve de lo habitual.")
 
@@ -53,6 +56,46 @@ def _spf_crear(d: str, ctx: dict) -> str:
                     "boletines, facturación) y agréguelos al mismo registro.")
 
 
+def _dkim_activar(d: str, ctx: dict) -> str:
+    proveedor = ctx.get("proveedor", "otro")
+    if proveedor == "google":
+        return (f"En la Consola de administración de Google: Menú → Apps → Google Workspace → Gmail → Autenticar "
+                f"correo electrónico. Elija {d}, genere un registro nuevo de 2048 bits (selector google), publique "
+                f"en su DNS el TXT que le muestra la consola en google._domainkey.{d} y, cuando esté publicado, "
+                f"pulse «Iniciar la autenticación».")
+    if proveedor == "microsoft":
+        return (f"En el portal de Microsoft Defender (https://security.microsoft.com/authentication?viewid=DKIM), "
+                f"pestaña DKIM, elija {d}. Publique en su DNS los dos CNAME que indica el portal "
+                f"(selector1._domainkey.{d} y selector2._domainkey.{d}) y active «Sign messages for this domain "
+                f"with DKIM signatures».")
+    return (f"Si su proveedor de correo ofrece DKIM, pida a su proveedor de correo que lo active para {d} con una "
+            f"clave de 2048 bits y publique en su DNS el registro que le entregue.")
+
+
+def _dkim_rotar(d: str, ctx: dict) -> str:
+    proveedor = ctx.get("proveedor", "otro")
+    if proveedor == "google":
+        texto = (f"En la Consola de administración de Google (Gmail → Autenticar correo electrónico), genere para {d} "
+                 f"una clave nueva de 2048 bits, publíquela en su DNS e inicie la autenticación.")
+    elif proveedor == "microsoft":
+        texto = (f"En Exchange Online PowerShell: Rotate-DkimSigningConfig -Identity {d} -KeySize 2048\n"
+                 f"(La rotación tarda unos 4 días en aplicarse; los CNAME selector1 y selector2 no cambian.)")
+    else:
+        texto = (f"Pedir a su proveedor de correo una clave DKIM nueva de 2048 bits para {d}, publicarla en un "
+                 f"selector nuevo y retirar la anterior cuando la nueva funcione.")
+    return f"Clave actual: {ctx['evidencia']}.\n{texto}"
+
+
+def _dmarc_endurecer(d: str, ctx: dict) -> str:
+    texto = (f"Después de revisar los reportes de DMARC durante 2 a 4 semanas y confirmar qué servicios envían "
+             f"correo legítimo con @{d}:\n"
+             f"1. En _dmarc.{d}, cambiar p=none por p=quarantine (puede agregar t=y para probar primero).\n"
+             f"2. Cuando todo funcione, cambiar a p=reject.")
+    if ctx.get("sin_dkim"):
+        texto += "\nSin DKIM, el paso a quarantine depende solo de SPF: conviene activar DKIM antes."
+    return texto
+
+
 PLANTILLAS: dict[str, Callable[[str, dict], str]] = {
     "REC-DMARC-CREAR": lambda d, ctx: (
         f"Publicar un registro TXT en _dmarc.{d}:\nv=DMARC1; p=none; rua=mailto:dmarc@{d}\n"
@@ -63,11 +106,9 @@ PLANTILLAS: dict[str, Callable[[str, dict], str]] = {
         f"v=DMARC1; p={ctx['politica_dmarc']}; rua=mailto:dmarc@{d}"
         if ctx.get("politica_dmarc") else
         f"Dejar un único registro TXT en _dmarc.{d}, con este formato:\nv=DMARC1; p=none; rua=mailto:dmarc@{d}"),
-    "REC-DMARC-ENDURECER": lambda d, ctx: (
-        f"Después de revisar los reportes de DMARC durante 2 a 4 semanas y confirmar qué servicios envían "
-        f"correo legítimo con @{d}:\n"
-        f"1. En _dmarc.{d}, cambiar p=none por p=quarantine (puede agregar t=y para probar primero).\n"
-        f"2. Cuando todo funcione, cambiar a p=reject."),
+    "REC-DMARC-ENDURECER": _dmarc_endurecer,
+    "REC-DKIM-ACTIVAR": _dkim_activar,
+    "REC-DKIM-ROTAR": _dkim_rotar,
     "REC-DMARC-RUA": lambda d, ctx: f"Agregar al registro TXT de _dmarc.{d} la etiqueta:\nrua=mailto:dmarc@{d}",
     "REC-DMARC-OBSOLETO": lambda d, ctx: (
         f"En la próxima actualización del registro _dmarc.{d}, quitar las etiquetas "
@@ -105,11 +146,37 @@ PLANTILLAS: dict[str, Callable[[str, dict], str]] = {
         f"CAI Virtual de la Policía Nacional.\n"
         f"3. Puede registrar a su nombre las variantes más cercanas (registro defensivo)."),
     "REC-DOMINIO-RENOVAR": lambda d, ctx: (
-        f"Renovar el dominio {d} con su registrador ({ctx['evidencia']}) y activar la renovación automática, con "
-        f"un medio de pago vigente y un correo de contacto que alguien revise."),
+        f"Dominio {d}: {ctx['evidencia']}.\n"
+        f"Renovarlo con su registrador y activar la renovación automática, con un medio de pago vigente y un "
+        f"correo de contacto que alguien revise."),
     "REC-DOMINIO-BLOQUEO": lambda d, ctx: (
         f"Pedir al registrador de {d} que active el bloqueo de transferencia (Registrar Lock / "
         f"clientTransferProhibited). Se quita solo cuando usted decida cambiar de registrador."),
+    "REC-HTTPS-REDIRECCION": lambda d, ctx: (
+        f"En el servidor o panel de hosting de: {_hosts(ctx['evidencia'])}\n"
+        f"Activar la redirección permanente (301) de http:// a https:// para todas las páginas. En muchos paneles "
+        f"(cPanel, Cloudflare, Wix, Shopify) es una opción llamada «Forzar HTTPS»."),
+    "REC-HSTS": lambda d, ctx: (
+        f"Agregar en las respuestas HTTPS de: {_hosts(ctx['evidencia'])}\n"
+        f"Strict-Transport-Security: max-age=31536000\n"
+        f"Antes, confirme que todo el sitio funciona con https:// (y sus subdominios, si luego agrega "
+        f"includeSubDomains)."),
+    "REC-MARCOS": lambda d, ctx: (
+        f"Agregar en las respuestas de: {_hosts(ctx['evidencia'])}\n"
+        f"Content-Security-Policy: frame-ancestors 'self'\n"
+        f"(o X-Frame-Options: SAMEORIGIN). Si alguna página suya debe verse dentro de otro sitio, inclúyalo en "
+        f"esa lista."),
+    "REC-NOSNIFF": lambda d, ctx: (
+        f"Agregar en las respuestas de: {_hosts(ctx['evidencia'])}\nX-Content-Type-Options: nosniff"),
+    "REC-OCULTAR-VERSION": lambda d, ctx: (
+        f"En el servidor de: {_hosts(ctx['evidencia'])}\n"
+        f"Ocultar la versión del software (Apache: ServerTokens Prod; Nginx: server_tokens off; PHP: "
+        f"expose_php = Off)."),
+    "REC-SECURITY-TXT": lambda d, ctx: (
+        f"Publicar en https://{d}/.well-known/security.txt un archivo de texto con, por lo menos:\n"
+        f"Contact: mailto:seguridad@{d}\n"
+        f"Expires: <una fecha de hasta un año en el futuro, en formato 2027-12-31T00:00:00Z>\n"
+        f"(RFC 9116. Cree el buzón seguridad@{d} o use una dirección que alguien revise.)"),
     "REC-HTTPS": lambda d, ctx: (
         f"Instalar un certificado HTTPS en: {_hosts(ctx['evidencia'])} (puede ser gratuito, por ejemplo con "
         f"Let's Encrypt) y redirigir todo el tráfico de http a https."),
@@ -134,54 +201,97 @@ def _bloque_tecnico(estado: EstadoAuditoria, h: Hallazgo) -> str:
     contexto = {"proveedor": datos.get("mx", {}).get("proveedor", "otro"), "evidencia": h.evidencia,
                 "envia_correo": _envia_correo(datos),
                 "politica_dmarc": datos.get("dmarc", {}).get("politica_mas_estricta"),
-                "otros_de_correo": any(i.startswith(("CORREO-DMARC", "CORREO-SPF")) for i in estado.hallazgos)}
+                "otros_de_correo": any(i.startswith(("CORREO-DMARC", "CORREO-SPF")) for i in estado.hallazgos),
+                "sin_dkim": "CORREO-DKIM-NO-ENCONTRADO" in estado.hallazgos}
     return PLANTILLAS[h.recomendacion_id](estado.dominio, contexto)
+
+
+@dataclass
+class Accion:
+    n: int
+    titulo: str
+    severidad: str   # legible: "crítica", "alta"...
+    id: str
+    recomendacion: str
+    por_que: str
+    bloque: str      # dato técnico exacto (plantilla del código)
+
+
+@dataclass
+class Contenido:
+    """El informe ya decidido, sin formato: lo dibujan el Markdown y el HTML, así nunca dicen cosas distintas."""
+    dominio: str
+    no_existe: bool
+    nivel: NivelRiesgo | None
+    resumen: str
+    explicacion_no_existe: str | None
+    respaldo: bool
+    acciones: list[Accion]
+    hallazgos: list[Hallazgo]
+    verificaciones: list[str]
+    limitaciones: list[str]
+    pie: str
+
+
+EXPLICACION_NO_EXISTE = ("No está registrado en internet (no responde en DNS), así que no hay correo ni sitio que "
+                         "revisar. Si es su dominio y debería existir, confirme con su proveedor que el nombre esté "
+                         "bien escrito y que el registro esté vigente.")
+
+
+def contenido(estado: EstadoAuditoria) -> Contenido:
+    """Todo lo que dice el informe, en orden: Grok aporta resumen y textos; el código, todo lo demás."""
+    d, informe = estado.dominio, estado.informe
+    no_existe = dominio_no_existe(estado)
+    if no_existe:
+        # Sin dominio no hay riesgo que medir: un semáforo "bajo" sería engañoso.
+        return Contenido(d, True, None, informe.resumen.strip(),
+                         EXPLICACION_NO_EXISTE if estado.informe_de_respaldo else None, False, [], [], [],
+                         _limitaciones(estado, fijas=[]), _pie(estado))
+    acciones = []
+    for n, a in enumerate((a for a in informe.acciones_priorizadas if a.hallazgo_id in estado.hallazgos), 1):
+        h = estado.hallazgos[a.hallazgo_id]
+        acciones.append(Accion(n, h.titulo, SEVERIDAD_LEGIBLE[h.severidad.value], h.id, a.recomendacion.strip(),
+                               a.por_que_primero.strip(), _bloque_tecnico(estado, h)))
+    verificaciones = []
+    if any(i.startswith("CORREO-DMARC") for i in estado.hallazgos):
+        verificaciones.append(f"Antes de endurecer DMARC, confirme desde qué dirección salen sus facturas "
+                              f"electrónicas; si salen como @{d}, ese servidor debe estar autorizado en su SPF.")
+    return Contenido(d, False, estado.nivel_riesgo or NivelRiesgo.BAJO, informe.resumen.strip(), None,
+                     estado.informe_de_respaldo, acciones, list(estado.hallazgos.values()), verificaciones,
+                     _limitaciones(estado), _pie(estado))
 
 
 def generar_informe(estado: EstadoAuditoria) -> str:
     """Markdown en español: resumen, qué hacer primero, hallazgos, verificaciones, limitaciones, pie."""
-    d, informe = estado.dominio, estado.informe
-    if dominio_no_existe(estado):
-        # Sin dominio no hay riesgo que medir: un semáforo "bajo" sería engañoso.
-        partes = [f"# Informe de exposición digital · {d}", "", f"**El dominio {d} no existe**", "",
-                  informe.resumen.strip(), ""]
-        if estado.informe_de_respaldo:  # el resumen automático es genérico: se agrega la explicación
-            partes += ["No está registrado en internet (no responde en DNS), así que no hay correo ni sitio que "
-                       "revisar. Si es su dominio y debería existir, confirme con su proveedor que el nombre esté "
-                       "bien escrito y que el registro esté vigente.", ""]
-        return _limitaciones_y_pie(estado, partes, limitaciones_fijas=[])
-
-    nivel = estado.nivel_riesgo or NivelRiesgo.BAJO
-    partes = [f"# Informe de exposición digital · {d}", "",
-              f"**Nivel de riesgo: {SEMAFORO[nivel]} {nivel.value.upper()}**", "", informe.resumen.strip(), ""]
-    if estado.informe_de_respaldo:
-        partes += [AVISO_RESPALDO, ""]
-
-    partes += ["## Qué hacer primero", ""]
-    acciones = [a for a in informe.acciones_priorizadas if a.hallazgo_id in estado.hallazgos]
-    if not acciones:
-        partes += ["No encontramos aspectos que requieran acción en lo que revisamos.", ""]
-    for n, a in enumerate(acciones, 1):
-        h = estado.hallazgos[a.hallazgo_id]
-        partes += [f"### {n}. {h.titulo}", f"*Severidad {SEVERIDAD_LEGIBLE[h.severidad.value]} · {h.id}*", "",
-                   a.recomendacion.strip(), "", f"**Por qué va en este lugar:** {a.por_que_primero.strip()}", "",
-                   "**Reenvíe esto a su proveedor:**", "", "```", _bloque_tecnico(estado, h), "```", ""]
-
-    partes += ["## Hallazgos", ""]
-    if not estado.hallazgos:
-        partes += ["No se encontraron hallazgos.", ""]
-    for h in estado.hallazgos.values():
-        partes += [f"### {h.titulo} ({SEVERIDAD_LEGIBLE[h.severidad.value]})", "", h.explicacion_simple, "",
-                   f"- Evidencia: `{h.evidencia}`", ""]
-
-    partes += ["## Verificaciones sugeridas", ""]
-    if any(i.startswith("CORREO-DMARC") for i in estado.hallazgos):
-        partes += [f"- Antes de endurecer DMARC, confirme desde qué dirección salen sus facturas electrónicas; si "
-                   f"salen como @{d}, ese servidor debe estar autorizado en su SPF.", ""]
+    c = contenido(estado)
+    partes = [f"# Informe de exposición digital · {c.dominio}", ""]
+    if c.no_existe:
+        partes += [f"**El dominio {c.dominio} no existe**", "", c.resumen, ""]
+        if c.explicacion_no_existe:  # el resumen automático es genérico: se agrega la explicación
+            partes += [c.explicacion_no_existe, ""]
     else:
-        partes += ["Ninguna por ahora.", ""]
-
-    return _limitaciones_y_pie(estado, partes)
+        partes += [f"**Nivel de riesgo: {SEMAFORO[c.nivel]} {c.nivel.value.upper()}**", "", c.resumen, ""]
+        if c.respaldo:
+            partes += [AVISO_RESPALDO, ""]
+        partes += ["## Qué hacer primero", ""]
+        if not c.acciones:
+            partes += ["No encontramos aspectos que requieran acción en lo que revisamos.", ""]
+        for a in c.acciones:
+            partes += [f"### {a.n}. {a.titulo}", f"*Severidad {a.severidad} · {a.id}*", "", a.recomendacion, "",
+                       f"**Por qué va en este lugar:** {a.por_que}", "", "**Reenvíe esto a su proveedor:**", "",
+                       "```", a.bloque, "```", ""]
+        partes += ["## Hallazgos", ""]
+        if not c.hallazgos:
+            partes += ["No se encontraron hallazgos.", ""]
+        for h in c.hallazgos:
+            partes += [f"### {h.titulo} ({SEVERIDAD_LEGIBLE[h.severidad.value]})", "", h.explicacion_simple, "",
+                       f"- Evidencia: `{h.evidencia}`", ""]
+        partes += ["## Verificaciones sugeridas", ""]
+        partes += [f"- {v}" for v in c.verificaciones] + [""] if c.verificaciones else ["Ninguna por ahora.", ""]
+    partes += ["## Lo que no se pudo verificar", ""]
+    partes += [f"- {limitacion}" for limitacion in c.limitaciones] + [""]
+    partes += ["---", c.pie]
+    return "\n".join(partes) + "\n"
 
 
 def dominio_no_existe(estado: EstadoAuditoria) -> bool:
@@ -216,28 +326,66 @@ def limitaciones_de_parecidos(estado: EstadoAuditoria) -> list[str]:
     return textos
 
 
-def _limitaciones_y_pie(estado: EstadoAuditoria, partes: list[str],
-                        limitaciones_fijas: list[str] | None = None) -> str:
-    """Limitaciones de Grok + las fijas del sistema, y el pie con fecha, modelo y costo."""
-    if limitaciones_fijas is None:
-        fijas = [*limitaciones_de_parecidos(estado), LIMITACION_PRIMERA_IP, LIMITACION_DKIM, LIMITACION_PARECIDOS]
-    else:
-        fijas = limitaciones_fijas
-    partes += ["## Lo que no se pudo verificar", ""]
-    partes += [f"- {limitacion.strip()}" for limitacion in estado.informe.limitaciones]
-    partes += [f"- {limitacion}" for limitacion in fijas] + [""]
-    partes += ["---",
-               f"Revisión pasiva con información pública (DNS, certificado del sitio y registro público de dominios), "
-               f"sin escaneos ni accesos. "
-               f"Fecha: {estado.inicio:%Y-%m-%d %H:%M} UTC · Modelo: {estado.modelo} · "
-               f"Costo: USD {estado.costo_usd:.4f} · Pasos: {estado.pasos} · "
-               f"Auditoría: {estado.auditoria_id} (intento {estado.intento})."]
-    return "\n".join(partes) + "\n"
+def limitaciones_de_dkim(estado: EstadoAuditoria) -> list[str]:
+    """Qué selectores DKIM se probaron cuando no se encontró ninguno (o si DKIM no se revisó)."""
+    selectores: dict[str, dict] = {}
+    for _, r in estado.llamadas:
+        if r.herramienta == "dkim_selector" and r.ok and r.datos.get("dominio") == estado.dominio:
+            selectores.update({d["selector"]: d for d in r.datos["selectores"]})
+    if not selectores:
+        return [LIMITACION_SIN_DKIM]
+    if any(d["existe"] for d in selectores.values()):
+        return []
+    nombres = list(selectores)
+    lista = nombres[0] if len(nombres) == 1 else ", ".join(nombres[:-1]) + " y " + nombres[-1]
+    return [f"DKIM se buscó en {'el selector' if len(nombres) == 1 else 'los selectores'} {lista} y no se "
+            "encontró; si su proveedor usa otro nombre de selector, este informe no pudo verlo."]
+
+
+def limitaciones_de_subdominios(estado: EstadoAuditoria) -> list[str]:
+    """Cuántos subdominios mostró CT y cuáles se revisaron, dicho por el código (no por Grok)."""
+    ct = next((r for _, r in reversed(estado.llamadas) if r.herramienta == "subdominios_ct"), None)
+    if ct is None:
+        return []
+    if not ct.ok:
+        return [f"Los registros públicos de certificados no se pudieron consultar ({ct.error}), así que no se "
+                "buscaron subdominios."]
+    gratis = {estado.dominio, f"www.{estado.dominio}"}
+    revisados = sorted({str(a.get("host", "")).lower() for a, r in estado.llamadas
+                        if r.herramienta in ("tls_certificado", "cabeceras_web")
+                        and str(a.get("host", "")).lower() not in gratis})
+    revision = f"se revisaron {len(revisados)}: {', '.join(revisados)}" if revisados else "no se revisó ninguno"
+    return [f"En los registros de certificados aparecen {ct.datos['total']} subdominios; {revision}. Estos "
+            "registros solo muestran sitios que tuvieron certificado HTTPS; puede haber otros."]
+
+
+def _limitaciones(estado: EstadoAuditoria, fijas: list[str] | None = None) -> list[str]:
+    """Las limitaciones que escribió Grok y, después, las que agrega el código."""
+    if fijas is None:
+        fijas = [*limitaciones_de_dkim(estado), *limitaciones_de_parecidos(estado),
+                 *limitaciones_de_subdominios(estado), LIMITACION_PRIMERA_IP, LIMITACION_PARECIDOS]
+        if any(r.herramienta == "cabeceras_web" and r.ok for _, r in estado.llamadas):
+            fijas.append(LIMITACION_PORTADA)
+    return [limitacion.strip() for limitacion in estado.informe.limitaciones] + fijas
+
+
+def _pie(estado: EstadoAuditoria) -> str:
+    return (f"Revisión pasiva con información pública (DNS, certificado y portada del sitio, y registro público de "
+            f"dominios), sin escaneos ni accesos. "
+            f"Fecha: {estado.inicio:%Y-%m-%d %H:%M} UTC · Modelo: {estado.modelo} · "
+            f"Costo: USD {estado.costo_usd:.4f} · Pasos: {estado.pasos} · "
+            f"Auditoría: {estado.auditoria_id} (intento {estado.intento}).")
 
 
 def guardar_informe(estado: EstadoAuditoria, ruta: Path = RUTA_SALIDAS) -> Path:
-    """Escribe salidas/<dominio>-<AAAAMMDD-HHMM>.md en UTF-8 y devuelve la ruta."""
+    """Escribe salidas/<dominio>-<AAAAMMDD-HHMM>.md y, al lado, el mismo informe en .html imprimible.
+
+    Devuelve la ruta del .md; la del HTML es la misma con extensión .html.
+    """
+    from auditor.report_html import generar_informe_html  # report_html importa este módulo
+
     ruta.mkdir(parents=True, exist_ok=True)
     archivo = ruta / f"{estado.dominio}-{datetime.now():%Y%m%d-%H%M}.md"
     archivo.write_text(generar_informe(estado), encoding="utf-8")
+    archivo.with_suffix(".html").write_text(generar_informe_html(estado), encoding="utf-8")
     return archivo

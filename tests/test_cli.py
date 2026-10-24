@@ -68,3 +68,10 @@ def test_cli_dominio_inexistente_no_dice_riesgo_bajo(entorno, capsys, monkeypatc
     assert cli.main(["auditar", "ejemplo.com.co"]) == 0
     salida = capsys.readouterr().out
     assert "El dominio no existe" in salida and "BAJO" not in salida
+
+
+def test_cli_guarda_e_imprime_el_html(entorno, capsys):
+    tmp_path, _ = entorno
+    assert cli.main(["auditar", "ejemplo.com.co"]) == 0
+    [html] = list((tmp_path / "salidas").glob("*.html"))
+    assert f"Informe imprimible: {html}" in capsys.readouterr().out

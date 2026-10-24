@@ -351,3 +351,154 @@ def test_evaluar_integra_registro_y_parecidos():
     ]
     assert list(evaluar(llamadas, "ejemplo.com.co", hoy=HOY)) == [
         "PARECIDO-ENVIA", "DOMINIO-SIN-BLOQUEO", "PARECIDO-MX"]
+
+
+# --- S2: DKIM ----------------------------------------------------------------------------
+
+from auditor.scoring import reglas_dkim  # noqa: E402
+
+
+def sel(nombre, existe=False, bits=None, via_cname=False, revocada=False, error=None):
+    return {"selector": nombre, "existe": existe, "via_cname": via_cname, "destino_cname": None,
+            "destino_microsoft": via_cname, "revocada": revocada, "tipo_clave": "rsa" if bits else None,
+            "bits": bits, "error": error}
+
+
+def test_dkim_google_ausente_es_media():
+    [h] = reglas_dkim([sel("google")], "google")
+    assert (h.id, h.severidad, h.evidencia) == ("CORREO-DKIM-NO-ENCONTRADO", "media",
+                                                "selectores probados: google (sin registro)")
+
+
+def test_dkim_microsoft_necesita_los_dos():
+    assert reglas_dkim([sel("selector1", existe=True, bits=2048, via_cname=True),
+                        sel("selector2", via_cname=True)], "microsoft") == []
+    [h] = reglas_dkim([sel("selector1", via_cname=True), sel("selector2", via_cname=True)], "microsoft")
+    assert h.evidencia == "selectores probados: selector1 (CNAME sin clave), selector2 (CNAME sin clave)"
+    assert reglas_dkim([sel("selector1")], "microsoft") == []  # selector2 sin probar: no hay certeza
+
+
+def test_dkim_google_sin_probar_su_selector_no_concluye():
+    assert reglas_dkim([sel("default")], "google") == []
+
+
+def test_dkim_otro_proveedor_nunca_es_hallazgo_por_ausencia():
+    assert reglas_dkim([sel("default"), sel("k1")], "otro") == []
+
+
+def test_dkim_otro_selector_valido_basta():
+    assert reglas_dkim([sel("google"), sel("mail", existe=True, bits=2048)], "google") == []
+
+
+@pytest.mark.parametrize("bits,id_,severidad", [(512, "CORREO-DKIM-CLAVE-DEBIL", "alta"),
+                                                (1024, "CORREO-DKIM-CLAVE-1024", "baja")])
+def test_dkim_tamano_de_clave(bits, id_, severidad):
+    [h] = reglas_dkim([sel("google", existe=True, bits=bits)], "google")
+    assert (h.id, h.severidad, h.evidencia) == (id_, severidad, f"google: RSA de {bits} bits")
+
+
+def test_dkim_2048_sin_hallazgos():
+    assert reglas_dkim([sel("google", existe=True, bits=2048)], "google") == []
+
+
+def test_evaluar_une_varias_llamadas_dkim():
+    llamadas = [
+        ({"dominio": "ejemplo.com.co"}, ResultadoHerramienta(ok=True, herramienta="dns_correo", datos=correo())),
+        ({"dominio": "ejemplo.com.co"}, ResultadoHerramienta(ok=True, herramienta="dkim_selector", datos={
+            "dominio": "ejemplo.com.co", "selectores": [sel("google")]})),
+        ({"dominio": "ejemplo.com.co"}, ResultadoHerramienta(ok=True, herramienta="dkim_selector", datos={
+            "dominio": "ejemplo.com.co", "selectores": [sel("mail", existe=True, bits=2048)]})),
+    ]
+    assert "CORREO-DKIM-NO-ENCONTRADO" not in evaluar(llamadas, "ejemplo.com.co")
+
+
+# --- S2: cabeceras y security.txt -------------------------------------------------------
+
+from auditor.scoring import reglas_cabeceras, reglas_security_txt  # noqa: E402
+
+
+def cab(host="ejemplo.com.co", **cambios):
+    datos = {"host": host, "http_responde": True, "redirige_a_https": True, "codigo_final": 200,
+             "url_final": f"https://{host}/", "redirecciones": 0, "redirige_fuera": None, "evaluable": True,
+             "hsts": {"presente": True, "max_age": 31536000, "include_subdomains": True}, "x_frame_options": True,
+             "frame_ancestors": False, "nosniff": True, "csp_presente": True, "referrer_policy": True,
+             "servidor_con_version": False}
+    datos.update(cambios)
+    return datos
+
+
+def test_cabeceras_completas_sin_hallazgos():
+    assert reglas_cabeceras([cab()]) == []
+
+
+@pytest.mark.parametrize("cambios,id_,severidad,evidencia", [
+    ({"redirige_a_https": False}, "WEB-SIN-REDIRECCION-HTTPS", "media",
+     "ejemplo.com.co: http:// responde sin redirigir a https://"),
+    ({"hsts": {"presente": False, "max_age": None, "include_subdomains": False}}, "WEB-SIN-HSTS", "baja",
+     "ejemplo.com.co: sin Strict-Transport-Security"),
+    ({"hsts": {"presente": True, "max_age": 300, "include_subdomains": False}}, "WEB-SIN-HSTS", "baja",
+     "ejemplo.com.co: max-age=300 (menos de 180 días)"),
+    ({"x_frame_options": False}, "WEB-SIN-PROTECCION-MARCOS", "baja",
+     "ejemplo.com.co: sin X-Frame-Options ni frame-ancestors"),
+    ({"nosniff": False}, "WEB-SIN-NOSNIFF", "informativa", "ejemplo.com.co: sin X-Content-Type-Options: nosniff"),
+    ({"servidor_con_version": True}, "WEB-VERSION-EXPUESTA", "informativa",
+     "ejemplo.com.co: la cabecera Server o X-Powered-By muestra la versión"),
+])
+def test_regla_de_cabeceras(cambios, id_, severidad, evidencia):
+    [h] = reglas_cabeceras([cab(**cambios)])
+    assert (h.id, h.severidad, h.evidencia) == (id_, severidad, evidencia)
+
+
+def test_frame_ancestors_basta():
+    assert reglas_cabeceras([cab(x_frame_options=False, frame_ancestors=True)]) == []
+
+
+def test_http_cerrado_no_es_hallazgo():
+    assert reglas_cabeceras([cab(http_responde=False, redirige_a_https=None)]) == []
+
+
+def test_no_evaluable_solo_revisa_hsts_y_redireccion():
+    hs = reglas_cabeceras([cab(evaluable=False, x_frame_options=False, nosniff=False, servidor_con_version=True,
+                               hsts={"presente": False, "max_age": None, "include_subdomains": False})])
+    assert ids(hs) == ["WEB-SIN-HSTS"]
+
+
+def test_cabeceras_agrupa_hosts():
+    [h] = reglas_cabeceras([cab(nosniff=False), cab("www.ejemplo.com.co", nosniff=False)])
+    assert h.evidencia.count("sin X-Content-Type-Options") == 2
+
+
+@pytest.mark.parametrize("datos,esperado", [
+    ({"existe": False, "tiene_contact": False, "expires": None, "vencido": False}, ["WEB-SIN-SECURITY-TXT"]),
+    ({"existe": True, "tiene_contact": True, "expires": None, "vencido": True}, ["WEB-SIN-SECURITY-TXT"]),
+    ({"existe": True, "tiene_contact": False, "expires": None, "vencido": False}, ["WEB-SIN-SECURITY-TXT"]),
+    ({"existe": True, "tiene_contact": True, "expires": None, "vencido": False}, []),
+])
+def test_security_txt(datos, esperado):
+    assert ids(reglas_security_txt({"dominio": "ejemplo.com.co", "codigo": 200, **datos})) == esperado
+
+
+def test_evaluar_integra_cabeceras_y_security_txt():
+    llamadas = [
+        ({"host": "ejemplo.com.co"}, ResultadoHerramienta(ok=True, herramienta="cabeceras_web", datos=cab(nosniff=False))),
+        ({"dominio": "ejemplo.com.co"}, ResultadoHerramienta(ok=True, herramienta="security_txt", datos={
+            "dominio": "ejemplo.com.co", "codigo": 404, "existe": False, "tiene_contact": False, "expires": None,
+            "vencido": False})),
+    ]
+    assert set(evaluar(llamadas, "ejemplo.com.co")) == {"WEB-SIN-NOSNIFF", "WEB-SIN-SECURITY-TXT"}
+
+
+def test_parecido_registrado_antes_que_el_dueno_no_sube():
+    p = inv("ejmplo.com.co", spf=True)  # creado 2025-01-01
+    [h] = reglas_parecidos(None, [p], creado_dueno="2025-06-01T00:00:00+00:00")
+    assert (h.id, h.evidencia) == ("PARECIDO-MX", "ejmplo.com.co: registrado hace 400 días, con MX, SPF autoriza "
+                                                  "envío (registrado antes que su dominio)")
+    assert ids(reglas_parecidos(None, [p], creado_dueno="2024-01-01T00:00:00+00:00")) == ["PARECIDO-ENVIA"]
+
+
+def test_evaluar_pasa_la_fecha_del_dueno():
+    llamadas = [
+        ({"dominio": "ejemplo.com.co"}, _ok("whois_dominio", whois() | {"creado": "2025-06-01T00:00:00+00:00"})),
+        ({"dominio": "ejemplo.com.co", "parecido": "ejmplo.com.co"}, _ok("investigar_parecido", inv("ejmplo.com.co", spf=True))),
+    ]
+    assert list(evaluar(llamadas, "ejemplo.com.co", hoy=HOY)) == ["PARECIDO-MX"]

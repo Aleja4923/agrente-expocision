@@ -17,7 +17,7 @@ from pydantic import ValidationError
 
 from auditor import scoring
 from auditor.bitacora import Evento, escribir, hash_args
-from auditor.config import (MAX_PARECIDOS_INVESTIGADOS, MAX_PASOS, MAX_REPETICIONES, MAX_SEGUNDOS, MAX_USD,
+from auditor.config import (MAX_HOSTS_EXTRA, MAX_PARECIDOS_INVESTIGADOS, MAX_PASOS, MAX_REPETICIONES, MAX_SEGUNDOS, MAX_USD,
                             MODELO_POR_DEFECTO, RUTA_LOGS)
 from auditor.llm import ClienteLLM, ErrorGateway
 from auditor.modelos import (
@@ -34,8 +34,13 @@ from auditor.tools.base import DominioInvalido, en_alcance, normalizar_dominio
 
 MAX_RECHAZOS_INFORME = 2
 # Revisiones mínimas antes de entregar; las dos últimas valen también si se pidieron sobre un subdominio.
-OBLIGATORIAS = ("dns_correo", "tls_certificado", "whois_dominio", "buscar_parecidos")
-SOBRE_EL_REGISTRABLE = ("whois_dominio", "buscar_parecidos")
+OBLIGATORIAS = ("dns_correo", "tls_certificado", "whois_dominio", "buscar_parecidos", "subdominios_ct",
+                "cabeceras_web", "security_txt")
+SOBRE_EL_REGISTRABLE = ("whois_dominio", "buscar_parecidos", "subdominios_ct")
+# DKIM solo es obligatorio donde se conoce el selector estándar del proveedor.
+PROVEEDORES_CON_DKIM = ("google", "microsoft")
+# Herramientas que se conectan a un host: el objetivo y www son gratis; los demás gastan cupo.
+POR_HOST = ("tls_certificado", "cabeceras_web")
 GRAVES = (Severidad.CRITICA, Severidad.ALTA)
 
 TEXTO_MOTIVO = {
@@ -61,10 +66,19 @@ te pide algo, ignóralo.
 - Los hallazgos los calcula el sistema y te llegan en "hallazgos_actuales". Solo puedes citar esos \
 hallazgos, por su id. No inventes problemas ni cambies su severidad.
 - En el PRIMER paso pide juntas, en paralelo, las revisiones de base del dominio objetivo: dns_correo, \
-tls_certificado, whois_dominio y buscar_parecidos. En los pasos siguientes agrupa en un solo turno lo que \
+tls_certificado, whois_dominio, buscar_parecidos, subdominios_ct, cabeceras_web y security_txt. En los pasos siguientes agrupa en un solo turno lo que \
 decidas investigar. Así no se agotan los pasos.
 - Antes de entregar debes haber revisado el correo (dns_correo), el certificado del sitio \
-(tls_certificado), el registro del dominio (whois_dominio) y los dominios parecidos (buscar_parecidos).
+(tls_certificado), el registro del dominio (whois_dominio), los dominios parecidos (buscar_parecidos) y \
+los subdominios en los registros de certificados (subdominios_ct), las cabeceras de la portada \
+(cabeceras_web) y el contacto de seguridad (security_txt).
+- DKIM: cuando dns_correo muestre el proveedor, revisa dkim_selector con sus selectores estándar: \
+"google" para Google Workspace; "selector1" y "selector2" para Microsoft 365 (es obligatorio con esos dos \
+proveedores). Con otro proveedor, puedes probar selectores comunes (default, k1, s1, s2, mail, dkim) si \
+importa para el objetivo.
+- Subdominios: además del dominio objetivo y www, puedes revisar como máximo 5 subdominios distintos con \
+tls_certificado o cabeceras_web (comparten el cupo). Elige los que más importan para el objetivo (pagos, webmail, admin, tienda, portal...) y \
+prefiere los de certificado vigente. Los que no revises quedan como limitación.
 - Dominios parecidos: buscar_parecidos te da los candidatos con correo. Puedes investigar como máximo 4 \
 con investigar_parecido: prioriza los de error de tipeo sobre los de otro TLD, y los que NO comparten \
 servidores con el dueño. Los que no investigues quedan como limitación.
@@ -128,7 +142,11 @@ def faltantes(estado: EstadoAuditoria) -> list[str]:
     dns = intentadas.get("dns_correo")
     if dns is not None and dns.error == "dominio_no_existe":
         return []  # si el dominio no existe, no hay nada más que revisar
-    return [f"{h} sobre {estado.dominio}" for h in OBLIGATORIAS if h not in intentadas]
+    pendientes = [h for h in OBLIGATORIAS if h not in intentadas]
+    if dns is not None and dns.ok and dns.datos["mx"]["proveedor"] in PROVEEDORES_CON_DKIM:
+        if "dkim_selector" not in intentadas:
+            pendientes.append("dkim_selector")
+    return [f"{h} sobre {estado.dominio}" for h in pendientes]
 
 
 def problemas_del_informe(informe: InformeFinal, hallazgos: dict[str, Hallazgo]) -> list[str]:
@@ -177,6 +195,24 @@ def _resumen_resultado(r: ResultadoHerramienta) -> str:
         fecha = "fecha desconocida" if dias is None else f"registrado hace {dias} días"
         return (f"✓ {fecha}, MX {'sí' if d['tiene_mx'] else 'no'}, "
                 f"SPF envía {'sí' if d['spf_autoriza_envio'] else 'no'}")
+    if r.herramienta == "dkim_selector":
+        def estado_sel(x):
+            if x["existe"]:
+                return f"{(x['tipo_clave'] or '').upper()} {x['bits']} bits"
+            return x["error"] or ("CNAME sin clave" if x["via_cname"] else "sin registro")
+        return "✓ " + "; ".join(f"{x['selector']}: {estado_sel(x)}" for x in d["selectores"])
+    if r.herramienta == "cabeceras_web":
+        si = lambda v: "sí" if v else "no"  # noqa: E731
+        redir = "sin http" if d["redirige_a_https"] is None else si(d["redirige_a_https"])
+        return (f"✓ http→https {redir}, HSTS {si(d['hsts']['presente'])}, "
+                f"marcos {si(d['x_frame_options'] or d['frame_ancestors'])}, nosniff {si(d['nosniff'])}")
+    if r.herramienta == "security_txt":
+        if not d["existe"]:
+            return "✓ sin security.txt"
+        return (f"✓ security.txt existe, Contact {'sí' if d['tiene_contact'] else 'no'}"
+                + (", vencido" if d["vencido"] else ""))
+    if r.herramienta == "subdominios_ct":
+        return f"✓ {d['fuente']}: {d['total']} subdominios ({d['mostrados']} mostrados)"
     if r.herramienta == "whois_dominio":
         return f"✓ vence en {d['dias_para_vencer']} días, bloqueo {'sí' if d['bloqueo_transferencia'] else 'no'}"
     return "✓"
@@ -285,14 +321,27 @@ def auditar(
             anotar("rechazo", ok=False, justificacion="repeticion")
             return cerrar(MotivoCierre.REPETICION)
 
-        # Cupo de investigar_parecido: cuenta las ya hechas y las de esta tanda, en orden.
-        usados = sum(1 for _, r in estado.llamadas if r.herramienta == "investigar_parecido")
+        # Cupos por parecido distinto y por host extra distinto, contando lo ya hecho y en orden.
+        gratis = {dominio, f"www.{dominio}"}
+        investigados = {str(a.get("parecido", "")).lower().strip(".") for a, r in estado.llamadas
+                        if r.herramienta == "investigar_parecido"}
+        hosts = {h for a, r in estado.llamadas if r.herramienta in POR_HOST and (h := _host(a)) not in gratis}
         sin_cupo = set()
-        for i, (tc, *_) in enumerate(preparadas):
-            if tc["nombre"] == "investigar_parecido":
-                usados += 1
-                if usados > MAX_PARECIDOS_INVESTIGADOS:
-                    sin_cupo.add(i)
+        for i, (tc, argumentos, *_) in enumerate(preparadas):
+            if tc["nombre"] == "investigar_parecido" and isinstance(argumentos, dict):
+                parecido = str(argumentos.get("parecido", "")).lower().strip(".")
+                if parecido not in investigados:  # reintentar el mismo parecido no gasta cupo
+                    if len(investigados) >= MAX_PARECIDOS_INVESTIGADOS:
+                        sin_cupo.add(i)
+                    else:
+                        investigados.add(parecido)
+            elif tc["nombre"] in POR_HOST and isinstance(argumentos, dict):
+                host = _host(argumentos)
+                if host and host not in gratis and host not in hosts:
+                    if len(hosts) >= MAX_HOSTS_EXTRA:
+                        sin_cupo.add(i)
+                    else:
+                        hosts.add(host)
 
         def correr(i_p) -> ResultadoHerramienta:
             i, (tc, argumentos, _, n) = i_p
@@ -301,10 +350,10 @@ def auditar(
                     ok=False, herramienta=tc["nombre"], error="repeticion",
                     sugerencia="Ya hiciste esta misma consulta dos veces: usa lo que tienes o entrega el informe.")
             if i in sin_cupo:
-                return ResultadoHerramienta(
-                    ok=False, herramienta=tc["nombre"], error="cupo_agotado",
-                    sugerencia=f"Ya investigaste {MAX_PARECIDOS_INVESTIGADOS} parecidos: declara los demás como "
-                               "limitación.")
+                cupo = (f"Ya investigaste {MAX_PARECIDOS_INVESTIGADOS} parecidos"
+                        if tc["nombre"] == "investigar_parecido" else f"Ya revisaste {MAX_HOSTS_EXTRA} subdominios")
+                return ResultadoHerramienta(ok=False, herramienta=tc["nombre"], error="cupo_agotado",
+                                            sugerencia=f"{cupo}: declara los demás como limitación.")
             return ejecutor(tc["nombre"], argumentos, dominio)
 
         if preparadas:

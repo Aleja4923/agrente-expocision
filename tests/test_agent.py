@@ -84,6 +84,26 @@ def investigacion_ok(parecido, dias=400, spf=False):
         "comparte_servidores": False, "fuente_registro": "whois", "aviso": None})
 
 
+def ct_ok(*nombres):
+    return ResultadoHerramienta(ok=True, herramienta="subdominios_ct", datos={
+        "dominio": DOMINIO, "fuente": "crtsh", "total": len(nombres), "mostrados": len(nombres), "truncados": False,
+        "subdominios": [{"nombre": n, "ultimo_certificado_vence": "2027-01-01", "vigente": True} for n in nombres]})
+
+
+def cabeceras_ok(host=DOMINIO, **cambios):
+    datos = {"host": host, "http_responde": True, "redirige_a_https": True, "codigo_final": 200,
+             "url_final": f"https://{host}/", "redirecciones": 0, "redirige_fuera": None, "evaluable": True,
+             "hsts": {"presente": True, "max_age": 31536000, "include_subdomains": True}, "x_frame_options": True,
+             "frame_ancestors": False, "nosniff": True, "csp_presente": True, "referrer_policy": True,
+             "servidor_con_version": False} | cambios
+    return ResultadoHerramienta(ok=True, herramienta="cabeceras_web", datos=datos)
+
+
+def security_ok():
+    return ResultadoHerramienta(ok=True, herramienta="security_txt", datos={
+        "dominio": DOMINIO, "codigo": 200, "existe": True, "tiene_contact": True, "expires": None, "vencido": False})
+
+
 class EjecutorFalso:
     def __init__(self, tabla=None):
         self.tabla = tabla or {}
@@ -96,7 +116,9 @@ class EjecutorFalso:
         if clave in self.tabla:
             return self.tabla[clave]
         por_defecto = {"dns_correo": dns_ok, "whois_dominio": whois_ok, "buscar_parecidos": busqueda_ok,
-                       "investigar_parecido": lambda: investigacion_ok(host)}
+                       "investigar_parecido": lambda: investigacion_ok(host), "subdominios_ct": ct_ok,
+                       "dkim_selector": lambda: dkim_ok("google"), "cabeceras_web": lambda: cabeceras_ok(host),
+                       "security_txt": security_ok}
         return por_defecto[nombre]() if nombre in por_defecto else tls_ok(host)
 
 
@@ -112,7 +134,11 @@ DNS = ("dns_correo", {"dominio": DOMINIO, "justificacion": "Base para evaluar su
 TLS = ("tls_certificado", {"host": DOMINIO, "justificacion": "Revisar el sitio."})
 WHOIS = ("whois_dominio", {"dominio": DOMINIO, "justificacion": "Vencimiento y bloqueo del dominio."})
 BUSCAR = ("buscar_parecidos", {"dominio": DOMINIO, "justificacion": "Dominios parecidos con correo."})
-BASE = (DNS, TLS, WHOIS, BUSCAR)  # las cuatro revisiones obligatorias del S2
+CT = ("subdominios_ct", {"dominio": DOMINIO, "justificacion": "Subdominios con certificado."})
+CAB = ("cabeceras_web", {"host": DOMINIO, "justificacion": "Cabeceras de la portada."})
+SEC = ("security_txt", {"dominio": DOMINIO, "justificacion": "Contacto de seguridad."})
+DKIM = ("dkim_selector", {"dominio": DOMINIO, "selectores": ["google"], "justificacion": "Proveedor Google."})
+BASE = (DNS, TLS, WHOIS, BUSCAR, CT, CAB, SEC, DKIM)  # obligatorias del S2 (DKIM, porque el proveedor de prueba es Google)
 
 
 def investigar(parecido):
@@ -140,7 +166,7 @@ def test_camino_feliz(tmp_path):
     assert estado.informe.hallazgos_citados == ["CORREO-DMARC-NONE"]
     assert "CORREO-DMARC-NONE" in estado.hallazgos
     assert estado.pasos == 2 and estado.costo_usd == pytest.approx(0.010)
-    assert [e["tipo"] for e in eventos(tmp_path)] == ["inicio"] + ["herramienta"] * 4 + ["fin"]
+    assert [e["tipo"] for e in eventos(tmp_path)] == ["inicio"] + ["herramienta"] * 8 + ["fin"]
     assert all((e["lote_id"], e["auditoria_id"], e["dominio"]) == ("L1", "A1", DOMINIO) for e in eventos(tmp_path))
 
 
@@ -204,7 +230,7 @@ def test_fuera_de_alcance_registra_rechazo(tmp_path):
 # --- tarea 3: completitud, validador e informe de respaldo -------------------------
 
 def test_entrega_incompleta_se_rechaza(tmp_path):
-    grok = GrokGuion(resp(DNS), resp(("entregar_informe", informe("CORREO-DMARC-NONE"))), resp(TLS, WHOIS, BUSCAR),
+    grok = GrokGuion(resp(DNS), resp(("entregar_informe", informe("CORREO-DMARC-NONE"))), resp(TLS, WHOIS, BUSCAR, CT, CAB, SEC, DKIM),
                      resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
     estado = correr(grok, tmp_path)
     assert estado.motivo_cierre == "informe_entregado" and estado.pasos == 4
@@ -351,17 +377,20 @@ def test_verbose_muestra_dmarc_duplicado():
 
 def test_faltantes_exige_las_cuatro(tmp_path):
     grok = GrokGuion(resp(DNS, TLS), resp(("entregar_informe", informe("CORREO-DMARC-NONE"))),
-                     resp(WHOIS, BUSCAR), resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
+                     resp(WHOIS, BUSCAR, CT, CAB, SEC, DKIM), resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
     estado = correr(grok, tmp_path)
     assert estado.motivo_cierre == "informe_entregado" and estado.pasos == 4
     problemas = json.loads(grok.mensajes[2][-1]["content"])["problemas"]
-    assert any("whois_dominio" in p for p in problemas) and any("buscar_parecidos" in p for p in problemas)
+    assert all(any(h in p for p in problemas) for h in ("whois_dominio", "buscar_parecidos", "subdominios_ct", "cabeceras_web", "security_txt",
+                                                    "dkim_selector"))
 
 
 def test_obligatorias_desde_subdominio_cuentan():
     estado = agent.EstadoAuditoria(dominio=DOMINIO, lote_id="L", auditoria_id="A", modelo="grok-4.7")
     estado.llamadas = [({"dominio": DOMINIO}, dns_ok()), ({"host": DOMINIO}, tls_ok()),
-                       ({"dominio": "www." + DOMINIO}, whois_ok()), ({"dominio": "www." + DOMINIO}, busqueda_ok())]
+                       ({"dominio": "www." + DOMINIO}, whois_ok()), ({"dominio": "www." + DOMINIO}, busqueda_ok()),
+                       ({"dominio": "www." + DOMINIO}, ct_ok()), ({"dominio": DOMINIO}, dkim_ok("google")),
+                       ({"host": DOMINIO}, cabeceras_ok()), ({"dominio": DOMINIO}, security_ok())]
     assert agent.faltantes(estado) == []
 
 
@@ -372,8 +401,8 @@ def test_quinto_investigar_parecido_es_cupo_agotado(tmp_path):
                      resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
     estado = correr(grok, tmp_path, ejecutor)
     assert estado.motivo_cierre == "informe_entregado"
-    assert [a["parecido"] for n, a in ejecutor.recibidos if n == "investigar_parecido"] == parecidos[:4]
-    [quinto] = [json.loads(m["content"]) for m in grok.mensajes[2] if m.get("tool_call_id") == "c4"]
+    assert sorted(a["parecido"] for n, a in ejecutor.recibidos if n == "investigar_parecido") == sorted(parecidos[:4])
+    quinto = [json.loads(m["content"]) for m in grok.mensajes[2] if m.get("tool_call_id") == "c4"][-1]
     assert quinto["resultado"]["error"] == "cupo_agotado"
     assert any(e["tipo"] == "rechazo" and e["justificacion"] == "cupo_agotado" for e in eventos(tmp_path))
     assert sum(1 for _, r in estado.llamadas if r.herramienta == "investigar_parecido") == 4
@@ -401,7 +430,7 @@ def test_verbose_anuncia_la_tanda_antes_de_ejecutar(tmp_path):
     anuncio = next(i for i, l in enumerate(lineas) if "ejecutando en paralelo" in l)
     primera = next(i for i, l in enumerate(lineas) if "→" in l)
     assert anuncio < primera
-    assert "dns_correo, tls_certificado, whois_dominio, buscar_parecidos" in lineas[anuncio]
+    assert "dns_correo, tls_certificado, whois_dominio, buscar_parecidos, subdominios_ct" in lineas[anuncio]
 
 
 def test_verbose_muestra_el_parecido_investigado(tmp_path):
@@ -411,3 +440,102 @@ def test_verbose_muestra_el_parecido_investigado(tmp_path):
                      resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
     correr(grok, tmp_path, ejecutor, observador=lineas.append)
     assert any("investigar_parecido(ejmplo.com.co)" in l for l in lineas)
+
+
+def tls_de(host):
+    return ("tls_certificado", {"host": host, "justificacion": "Subdominio sensible."})
+
+
+def test_sexto_subdominio_es_cupo_agotado(tmp_path):
+    subs = [f"s{i}.{DOMINIO}" for i in range(6)]
+    ejecutor = EjecutorFalso({("subdominios_ct", DOMINIO): ct_ok(*subs)})
+    grok = GrokGuion(resp(*BASE), resp(tls_de("www." + DOMINIO), *[tls_de(h) for h in subs]),
+                     resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
+    estado = correr(grok, tmp_path, ejecutor)
+    revisados = [a["host"] for n, a in ejecutor.recibidos if n == "tls_certificado"]
+    assert sorted(revisados) == sorted([DOMINIO, "www." + DOMINIO] + subs[:5])  # el objetivo y www no gastan cupo
+    assert any(e["tipo"] == "rechazo" and e["justificacion"] == "cupo_agotado" for e in eventos(tmp_path))
+    assert estado.motivo_cierre == "informe_entregado"
+
+
+def test_mismo_subdominio_no_gasta_dos_cupos(tmp_path):
+    subs = [f"s{i}.{DOMINIO}" for i in range(5)]
+    grok = GrokGuion(resp(*BASE), resp(*[tls_de(h) for h in subs]), resp(tls_de(subs[0])),
+                     resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
+    ejecutor = EjecutorFalso()
+    correr(grok, tmp_path, ejecutor)
+    assert [a["host"] for n, a in ejecutor.recibidos if n == "tls_certificado"].count(subs[0]) == 2
+
+
+def test_resumen_verbose_ct():
+    assert agent._resumen_resultado(ct_ok("a.ejemplo.com.co", "b.ejemplo.com.co")) == (
+        "✓ crtsh: 2 subdominios (2 mostrados)")
+
+
+# --- S2: DKIM condicional ---------------------------------------------------------------
+
+def dkim_ok(*selectores):
+    return ResultadoHerramienta(ok=True, herramienta="dkim_selector", datos={"dominio": DOMINIO, "selectores": [
+        {"selector": s, "existe": True, "via_cname": False, "destino_cname": None, "destino_microsoft": False,
+         "revocada": False, "tipo_clave": "rsa", "bits": 2048, "error": None} for s in selectores]})
+
+
+def _estado_con(*llamadas):
+    estado = agent.EstadoAuditoria(dominio=DOMINIO, lote_id="L", auditoria_id="A", modelo="grok-4.7")
+    estado.llamadas = [({"dominio": DOMINIO}, dns_ok(correo(mx={"proveedor": p}))) if isinstance(p := l, str)
+                       else l for l in llamadas]
+    return estado
+
+
+BASE_OK = [({"host": DOMINIO}, tls_ok()), ({"dominio": DOMINIO}, whois_ok()), ({"dominio": DOMINIO}, busqueda_ok()),
+           ({"dominio": DOMINIO}, ct_ok()), ({"host": DOMINIO}, cabeceras_ok()),
+           ({"dominio": DOMINIO}, security_ok())]
+
+
+@pytest.mark.parametrize("proveedor,exige", [("google", True), ("microsoft", True), ("otro", False),
+                                             ("ninguno", False)])
+def test_dkim_obligatorio_segun_proveedor(proveedor, exige):
+    estado = _estado_con(proveedor, *BASE_OK)
+    assert (f"dkim_selector sobre {DOMINIO}" in agent.faltantes(estado)) is exige
+    estado.llamadas.append(({"dominio": DOMINIO}, dkim_ok("google")))
+    assert agent.faltantes(estado) == []
+
+
+def test_resumen_verbose_dkim():
+    r = dkim_ok("google")
+    r.datos["selectores"].append({"selector": "s1", "existe": False, "via_cname": True, "destino_cname": "x",
+                                  "destino_microsoft": False, "revocada": False, "tipo_clave": None, "bits": None,
+                                  "error": None})
+    assert agent._resumen_resultado(r) == "✓ google: RSA 2048 bits; s1: CNAME sin clave"
+
+
+def test_prompt_guia_selectores():
+    assert "dkim_selector" in agent.PROMPT_SISTEMA and "selector1" in agent.PROMPT_SISTEMA
+
+
+def test_reintentar_un_parecido_no_gasta_otro_cupo(tmp_path):
+    parecidos = ["ejmplo.com.co", "ejemlo.com.co", "jeemplo.com.co", "ejjemplo.com.co"]
+    ejecutor = EjecutorFalso({("buscar_parecidos", DOMINIO): busqueda_ok(*parecidos)})
+    grok = GrokGuion(resp(*BASE), resp(*[investigar(p) for p in parecidos[:3]]),
+                     resp(investigar(parecidos[0]), investigar(parecidos[3])),
+                     resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
+    correr(grok, tmp_path, ejecutor)
+    recibidos = [a["parecido"] for n, a in ejecutor.recibidos if n == "investigar_parecido"]
+    assert sorted(recibidos) == sorted(parecidos + [parecidos[0]])
+
+
+def test_cabeceras_de_subdominio_comparten_cupo_con_tls(tmp_path):
+    subs = [f"s{i}.{DOMINIO}" for i in range(5)]
+    grok = GrokGuion(resp(*BASE), resp(*[tls_de(h) for h in subs], ("cabeceras_web", {"host": subs[0], "justificacion": "x"}),
+                                       ("cabeceras_web", {"host": f"s9.{DOMINIO}", "justificacion": "x"})),
+                     resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
+    ejecutor = EjecutorFalso()
+    correr(grok, tmp_path, ejecutor)
+    cab = [a["host"] for n, a in ejecutor.recibidos if n == "cabeceras_web"]
+    assert sorted(cab) == sorted([DOMINIO, subs[0]])  # s9 sería el 6.º host: cupo agotado
+
+
+def test_resumen_verbose_cabeceras_y_security_txt():
+    assert agent._resumen_resultado(cabeceras_ok(nosniff=False)) == (
+        "✓ http→https sí, HSTS sí, marcos sí, nosniff no")
+    assert agent._resumen_resultado(security_ok()) == "✓ security.txt existe, Contact sí"

@@ -242,3 +242,134 @@ def test_limitacion_sin_verificar_y_registro():
 def test_limitacion_fija_parecidos_y_pie_nuevo():
     md = generar_informe(estado())
     assert LIMITACION_PARECIDOS in md and "registro público de dominios" in md
+
+
+# --- S2: subdominios por CT --------------------------------------------------------------
+
+from auditor.report import limitaciones_de_subdominios  # noqa: E402
+
+
+def _ct(*nombres, total=None):
+    return ResultadoHerramienta(ok=True, herramienta="subdominios_ct", datos={
+        "dominio": D, "fuente": "crtsh", "total": total or len(nombres), "mostrados": len(nombres),
+        "truncados": False, "subdominios": [{"nombre": n, "ultimo_certificado_vence": None, "vigente": True}
+                                            for n in nombres]})
+
+
+def _tls(host):
+    return ({"host": host}, ResultadoHerramienta(ok=True, herramienta="tls_certificado", datos={"host": host}))
+
+
+def test_limitacion_subdominios_revisados():
+    e = estado()
+    e.llamadas += [({"dominio": D}, _ct("pagos." + D, "webmail." + D, "admin." + D, total=40)),
+                   _tls(D), _tls("www." + D), _tls("pagos." + D)]
+    assert limitaciones_de_subdominios(e) == [
+        "En los registros de certificados aparecen 40 subdominios; se revisaron 1: pagos.ejemplo.com.co. "
+        "Estos registros solo muestran sitios que tuvieron certificado HTTPS; puede haber otros."]
+
+
+def test_limitacion_ct_fallo():
+    e = estado()
+    e.llamadas += [({"dominio": D}, ResultadoHerramienta(ok=False, herramienta="subdominios_ct",
+                                                         error="ct_no_responde", sugerencia="s"))]
+    assert "no se pudieron consultar" in limitaciones_de_subdominios(e)[0]
+
+
+def test_limitaciones_de_subdominios_en_el_informe():
+    e = estado()
+    e.llamadas += [({"dominio": D}, _ct("pagos." + D))]
+    assert "aparecen 1 subdominios; no se revisó ninguno." in generar_informe(e)
+
+
+def test_limitacion_subdominios_cuenta_cabeceras():
+    e = estado()
+    e.llamadas += [({"dominio": D}, _ct("b2b." + D, total=3)),
+                   ({"host": "b2b." + D}, ResultadoHerramienta(ok=True, herramienta="cabeceras_web", datos={}))]
+    assert "se revisaron 1: b2b.ejemplo.com.co." in limitaciones_de_subdominios(e)[0]
+
+
+# --- S2: DKIM ----------------------------------------------------------------------------
+
+from auditor.report import limitaciones_de_dkim  # noqa: E402
+
+
+def _dkim(*selectores):
+    return ({"dominio": D}, ResultadoHerramienta(ok=True, herramienta="dkim_selector", datos={
+        "dominio": D, "selectores": [{"selector": s, "existe": e, "via_cname": False, "destino_cname": None,
+                                      "destino_microsoft": False, "revocada": False, "tipo_clave": "rsa" if e else None,
+                                      "bits": 2048 if e else None, "error": None} for s, e in selectores]}))
+
+
+def test_dkim_sin_revisar_lo_dice():
+    assert limitaciones_de_dkim(estado()) == [
+        "DKIM (la firma digital de sus correos) no se revisó en esta auditoría, así que este informe no afirma "
+        "nada sobre ella."]
+
+
+def test_dkim_no_encontrado_lo_dice_con_los_selectores():
+    e = estado()
+    e.llamadas.append(_dkim(("default", False), ("k1", False)))
+    assert limitaciones_de_dkim(e) == [
+        "DKIM se buscó en los selectores default y k1 y no se encontró; si su proveedor usa otro nombre de "
+        "selector, este informe no pudo verlo."]
+
+
+def test_dkim_encontrado_no_es_limitacion():
+    e = estado()
+    e.llamadas.append(_dkim(("google", True)))
+    assert limitaciones_de_dkim(e) == []
+
+
+def test_ya_no_hay_limitacion_fija_de_dkim():
+    e = estado()
+    e.llamadas.append(_dkim(("google", True)))
+    assert "no se revisa en esta versión" not in generar_informe(e)
+
+
+@pytest.mark.parametrize("proveedor,texto", [("google", "Autenticar correo electrónico"),
+                                             ("microsoft", "security.microsoft.com/authentication?viewid=DKIM"),
+                                             ("otro", "pida a su proveedor de correo")])
+def test_plantilla_dkim_activar_segun_proveedor(proveedor, texto):
+    md = generar_informe(estado(["CORREO-DKIM-NO-ENCONTRADO"], proveedor=proveedor))
+    assert texto in md
+
+
+@pytest.mark.parametrize("proveedor,texto", [("google", "2048"), ("microsoft", "Rotate-DkimSigningConfig"),
+                                             ("otro", "2048")])
+def test_plantilla_dkim_rotar_segun_proveedor(proveedor, texto):
+    md = generar_informe(estado(["CORREO-DKIM-CLAVE-1024"], proveedor=proveedor,
+                                evidencias={"CORREO-DKIM-CLAVE-1024": "google: RSA de 1024 bits"}))
+    assert texto in md.split("**Reenvíe esto a su proveedor:**")[1]
+
+
+def test_endurecer_dmarc_avisa_si_no_hay_dkim():
+    md = generar_informe(estado(["CORREO-DMARC-NONE", "CORREO-DKIM-NO-ENCONTRADO"]))
+    assert "Sin DKIM, el paso a quarantine depende solo de SPF" in md
+
+
+# --- S2: cabeceras y security.txt -------------------------------------------------------
+
+@pytest.mark.parametrize("id_,texto", [
+    ("WEB-SIN-REDIRECCION-HTTPS", "de http:// a https://"),
+    ("WEB-SIN-HSTS", "Strict-Transport-Security: max-age=31536000"),
+    ("WEB-SIN-PROTECCION-MARCOS", "frame-ancestors 'self'"),
+    ("WEB-SIN-NOSNIFF", "X-Content-Type-Options: nosniff"),
+    ("WEB-VERSION-EXPUESTA", "server_tokens off"),
+])
+def test_plantillas_de_cabeceras_usan_los_hosts(id_, texto):
+    md = generar_informe(estado([id_], evidencias={id_: "www.ejemplo.com.co: detalle; tienda.ejemplo.com.co: detalle"}))
+    bloque = md.split("**Reenvíe esto a su proveedor:**")[1].split("```")[1]
+    assert texto in bloque and "www.ejemplo.com.co, tienda.ejemplo.com.co" in bloque
+
+
+def test_plantilla_security_txt():
+    md = generar_informe(estado(["WEB-SIN-SECURITY-TXT"]))
+    assert f"https://{D}/.well-known/security.txt" in md and f"Contact: mailto:seguridad@{D}" in md
+
+
+def test_limitacion_portada_si_se_revisaron_cabeceras():
+    e = estado()
+    e.llamadas.append(({"host": D}, ResultadoHerramienta(ok=True, herramienta="cabeceras_web", datos={"host": D})))
+    assert "solo en la portada" in generar_informe(e)
+    assert "solo en la portada" not in generar_informe(estado())

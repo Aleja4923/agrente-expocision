@@ -56,6 +56,7 @@ def main(argv: list[str] | None = None) -> int:
     resultado = ("El dominio no existe" if dominio_no_existe(estado)
                  else f"Riesgo: {estado.nivel_riesgo.value.upper()} · Hallazgos: {len(estado.hallazgos)}")
     print(f"\nInforme: {ruta}")
+    print(f"Informe imprimible: {ruta.with_suffix('.html')}")
     print(f"{resultado} · Pasos: {estado.pasos} · Costo: USD {estado.costo_usd:.4f} · "
           f"Cierre: {estado.motivo_cierre.value}")
     return 0

@@ -278,3 +278,11 @@ def test_ns_sin_respuesta_y_nxdomain(monkeypatch):
     monkeypatch.setattr(r, "_consultar", nx)
     with pytest.raises(ErrorDNS, match="dominio_no_existe"):
         r.ns("noexiste.com.co")
+
+
+def test_cname_devuelve_destino_o_none(monkeypatch):
+    r = ResolverDNS()
+    monkeypatch.setattr(r, "_consultar", lambda nombre, tipo: [_Registro("Selector1-X._domainkey.x.onmicrosoft.com.")])
+    assert r.cname("selector1._domainkey.ejemplo.com.co") == "selector1-x._domainkey.x.onmicrosoft.com"
+    monkeypatch.setattr(r, "_consultar", lambda nombre, tipo: [])
+    assert r.cname("google._domainkey.ejemplo.com.co") is None
