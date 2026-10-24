@@ -152,3 +152,25 @@ def test_http_que_redirige_a_https_externo_cuenta(web):
                                                  fuera="tienda.plataforma.com"),
                     (f"https://{D}/", True): resp(f"https://{D}/", 200, BUENAS)}
     assert cabeceras_de().datos["redirige_a_https"] is True
+
+
+# --- revisión: cabeceras repetidas y security.txt que redirige ---------------------------------
+
+def test_cabeceras_repetidas_por_un_proxy_cuentan():
+    d = analizar_cabeceras({"x-frame-options": "SAMEORIGIN, SAMEORIGIN", "x-content-type-options": "nosniff, nosniff"})
+    assert d["x_frame_options"] is True and d["nosniff"] is True
+
+
+def test_security_txt_que_redirige_a_otro_dominio_no_se_da_por_inexistente(web):
+    url = f"https://{D}/.well-known/security.txt"
+    web["tabla"] = {(url, True): resp(url, 301, {"Location": "https://grupo.com/.well-known/security.txt"},
+                                      fuera="grupo.com")}
+    r = base.ejecutar("security_txt", {"dominio": D}, D)
+    assert r.ok and r.datos["existe"] is None and r.datos["redirige_fuera"] == "grupo.com"
+
+
+@pytest.mark.parametrize("codigo,existe", [(404, False), (410, False), (403, None), (500, None)])
+def test_security_txt_solo_404_y_410_son_inexistente(web, codigo, existe):
+    url = f"https://{D}/.well-known/security.txt"
+    web["tabla"] = {(url, True): resp(url, codigo)}
+    assert base.ejecutar("security_txt", {"dominio": D}, D).datos["existe"] is existe

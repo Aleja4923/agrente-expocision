@@ -279,7 +279,7 @@ def test_limitacion_ct_fallo():
 def test_limitaciones_de_subdominios_en_el_informe():
     e = estado()
     e.llamadas += [({"dominio": D}, _ct("pagos." + D))]
-    assert "aparecen 1 subdominios; no se revisó ninguno." in generar_informe(e)
+    assert "aparece 1 subdominio; no se revisó ninguno." in generar_informe(e)
 
 
 def test_limitacion_subdominios_cuenta_cabeceras():
@@ -373,3 +373,49 @@ def test_limitacion_portada_si_se_revisaron_cabeceras():
     e.llamadas.append(({"host": D}, ResultadoHerramienta(ok=True, herramienta="cabeceras_web", datos={"host": D})))
     assert "solo en la portada" in generar_informe(e)
     assert "solo en la portada" not in generar_informe(estado())
+
+
+@pytest.mark.parametrize("total,inicio", [
+    (0, "En los registros de certificados no aparece ningún subdominio."),
+    (1, "En los registros de certificados aparece 1 subdominio; no se revisó ninguno."),
+    (7, "En los registros de certificados aparecen 7 subdominios; no se revisó ninguno."),
+])
+def test_limitacion_subdominios_redaccion(total, inicio):
+    e = estado()
+    e.llamadas.append(({"dominio": D}, _ct(*[f"s{i}.{D}" for i in range(total)], total=total)))
+    assert limitaciones_de_subdominios(e)[0].startswith(inicio)
+
+
+# --- revisión: subdominios, DKIM sin respuesta y CT repetido ---------------------------------
+
+def _tls_error(host, error):
+    return ({"host": host}, ResultadoHerramienta(ok=False, herramienta="tls_certificado", error=error, sugerencia="s"))
+
+
+def test_subdominios_solo_cuenta_revisiones_exitosas_y_normalizadas():
+    e = estado()
+    e.llamadas += [({"dominio": D}, _ct("pagos." + D, "b2b." + D, total=2)), _tls("Pagos." + D + "."),
+                   _tls_error("otro-sitio.com", "fuera_de_alcance"), _tls_error("b2b." + D, "tiempo_agotado"),
+                   _tls(D.upper())]
+    assert "se revisaron 1: pagos.ejemplo.com.co." in limitaciones_de_subdominios(e)[0]
+
+
+def test_subdominios_usa_la_ultima_consulta_exitosa():
+    e = estado()
+    e.llamadas += [({"dominio": D}, _ct("pagos." + D, total=9)),
+                   ({"dominio": "pagos." + D}, ResultadoHerramienta(ok=False, herramienta="subdominios_ct",
+                                                                   error="limite_de_consultas", sugerencia="s"))]
+    assert limitaciones_de_subdominios(e)[0].startswith("En los registros de certificados aparecen 9 subdominios")
+
+
+def test_dkim_selector_sin_respuesta_no_se_da_por_no_encontrado():
+    e = estado()
+    _, r = _dkim(("default", False))
+    r.datos["selectores"].insert(0, {"selector": "google", "existe": False, "via_cname": False, "destino_cname": None,
+                                     "destino_microsoft": False, "revocada": False, "tipo_clave": None, "bits": None,
+                                     "error": "tiempo_agotado"})
+    e.llamadas.append(({"dominio": D}, r))
+    assert limitaciones_de_dkim(e) == [
+        "DKIM se buscó en el selector default y no se encontró; si su proveedor usa otro nombre de selector, este "
+        "informe no pudo verlo.",
+        "El selector DKIM google no respondió en DNS, así que no se pudo verificar."]

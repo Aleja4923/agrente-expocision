@@ -13,6 +13,8 @@ from typing import Callable
 
 from auditor.config import RUTA_SALIDAS
 from auditor.modelos import EstadoAuditoria, Hallazgo, NivelRiesgo
+from auditor.scoring import selectores_dkim
+from auditor.tools.base import DominioInvalido, normalizar_dominio
 from auditor.tools.correo import spf_autoriza_envio
 
 SEMAFORO = {NivelRiesgo.ALTO: "🔴", NivelRiesgo.MEDIO: "🟡", NivelRiesgo.BAJO: "🟢"}
@@ -327,36 +329,60 @@ def limitaciones_de_parecidos(estado: EstadoAuditoria) -> list[str]:
 
 
 def limitaciones_de_dkim(estado: EstadoAuditoria) -> list[str]:
-    """Qué selectores DKIM se probaron cuando no se encontró ninguno (o si DKIM no se revisó)."""
-    selectores: dict[str, dict] = {}
-    for _, r in estado.llamadas:
-        if r.herramienta == "dkim_selector" and r.ok and r.datos.get("dominio") == estado.dominio:
-            selectores.update({d["selector"]: d for d in r.datos["selectores"]})
+    """Qué selectores DKIM se probaron cuando no se encontró ninguno (o si DKIM no se revisó).
+
+    Un selector cuya consulta falló (tiempo agotado) no se da por "no encontrado": se dice aparte.
+    """
+    selectores = selectores_dkim(estado.llamadas, estado.dominio)
     if not selectores:
         return [LIMITACION_SIN_DKIM]
     if any(d["existe"] for d in selectores.values()):
         return []
-    nombres = list(selectores)
-    lista = nombres[0] if len(nombres) == 1 else ", ".join(nombres[:-1]) + " y " + nombres[-1]
-    return [f"DKIM se buscó en {'el selector' if len(nombres) == 1 else 'los selectores'} {lista} y no se "
-            "encontró; si su proveedor usa otro nombre de selector, este informe no pudo verlo."]
+    textos = []
+    sin_clave = [s for s, d in selectores.items() if not d["error"]]
+    sin_respuesta = [s for s, d in selectores.items() if d["error"]]
+    if sin_clave:
+        textos.append(f"DKIM se buscó en {'el selector' if len(sin_clave) == 1 else 'los selectores'} "
+                      f"{_lista(sin_clave)} y no se encontró; si su proveedor usa otro nombre de selector, este "
+                      "informe no pudo verlo.")
+    if sin_respuesta:
+        textos.append(f"El selector DKIM {sin_respuesta[0]} no respondió en DNS, así que no se pudo verificar."
+                      if len(sin_respuesta) == 1 else
+                      f"Los selectores DKIM {_lista(sin_respuesta)} no respondieron en DNS, así que no se pudieron "
+                      "verificar.")
+    return textos
+
+
+def _lista(nombres: list[str]) -> str:
+    return nombres[0] if len(nombres) == 1 else ", ".join(nombres[:-1]) + " y " + nombres[-1]
 
 
 def limitaciones_de_subdominios(estado: EstadoAuditoria) -> list[str]:
     """Cuántos subdominios mostró CT y cuáles se revisaron, dicho por el código (no por Grok)."""
-    ct = next((r for _, r in reversed(estado.llamadas) if r.herramienta == "subdominios_ct"), None)
-    if ct is None:
+    consultas = [r for _, r in estado.llamadas if r.herramienta == "subdominios_ct"]
+    if not consultas:
         return []
-    if not ct.ok:
-        return [f"Los registros públicos de certificados no se pudieron consultar ({ct.error}), así que no se "
-                "buscaron subdominios."]
+    ct = next((r for r in reversed(consultas) if r.ok), None)  # una falla posterior no tapa un éxito
+    if ct is None:
+        return [f"Los registros públicos de certificados no se pudieron consultar ({consultas[-1].error}), así "
+                "que no se buscaron subdominios."]
     gratis = {estado.dominio, f"www.{estado.dominio}"}
-    revisados = sorted({str(a.get("host", "")).lower() for a, r in estado.llamadas
-                        if r.herramienta in ("tls_certificado", "cabeceras_web")
-                        and str(a.get("host", "")).lower() not in gratis})
+    revisados = sorted({h for a, r in estado.llamadas if r.herramienta in ("tls_certificado", "cabeceras_web")
+                        and r.ok and (h := _host_normalizado(a.get("host"))) and h not in gratis})
+    total = ct.datos["total"]
+    nota = "Estos registros solo muestran sitios que tuvieron certificado HTTPS; puede haber otros."
+    if total == 0:
+        return [f"En los registros de certificados no aparece ningún subdominio. {nota}"]
+    cuantos = "aparece 1 subdominio" if total == 1 else f"aparecen {total} subdominios"
     revision = f"se revisaron {len(revisados)}: {', '.join(revisados)}" if revisados else "no se revisó ninguno"
-    return [f"En los registros de certificados aparecen {ct.datos['total']} subdominios; {revision}. Estos "
-            "registros solo muestran sitios que tuvieron certificado HTTPS; puede haber otros."]
+    return [f"En los registros de certificados {cuantos}; {revision}. {nota}"]
+
+
+def _host_normalizado(texto) -> str | None:
+    try:
+        return normalizar_dominio(str(texto or ""))
+    except DominioInvalido:
+        return None
 
 
 def _limitaciones(estado: EstadoAuditoria, fijas: list[str] | None = None) -> list[str]:

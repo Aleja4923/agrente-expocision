@@ -353,6 +353,8 @@ def reglas_cabeceras(datos_por_host: list[dict[str, Any]]) -> list[Hallazgo]:
 
 
 def reglas_security_txt(datos: dict[str, Any]) -> list[Hallazgo]:
+    if datos["existe"] is None:  # no verificable (redirige a otro dominio, 403, 5xx): no se concluye nada
+        return []
     if not datos["existe"]:
         return [_hallazgo("WEB-SIN-SECURITY-TXT", f"https://{datos['dominio']}/.well-known/security.txt no existe")]
     if datos["vencido"]:
@@ -360,6 +362,18 @@ def reglas_security_txt(datos: dict[str, Any]) -> list[Hallazgo]:
     if not datos["tiene_contact"]:
         return [_hallazgo("WEB-SIN-SECURITY-TXT", "security.txt sin el campo Contact")]
     return []
+
+
+def selectores_dkim(llamadas: list[Llamada], objetivo: str) -> dict[str, dict[str, Any]]:
+    """Selectores DKIM probados sobre el objetivo, uniendo varias llamadas (por selector, gana la última).
+
+    Única fuente de esta regla: la usan las reglas de aquí y las limitaciones del informe.
+    """
+    selectores: dict[str, dict[str, Any]] = {}
+    for _, r in llamadas:
+        if r.herramienta == "dkim_selector" and r.ok and r.datos["dominio"] == objetivo:
+            selectores.update({d["selector"]: d for d in r.datos["selectores"]})
+    return selectores
 
 
 SELECTORES_ESTANDAR = {"google": ("google",), "microsoft": ("selector1", "selector2")}
@@ -426,10 +440,7 @@ def evaluar(llamadas: list[Llamada], objetivo: str, hoy: date | None = None) -> 
             hallazgos += reglas_security_txt(r.datos)
 
     # DKIM: Grok puede probar selectores en varias llamadas; se unen (por selector, gana la última).
-    selectores: dict[str, dict[str, Any]] = {}
-    for _, r in llamadas:
-        if r.herramienta == "dkim_selector" and r.ok and r.datos["dominio"] == objetivo:
-            selectores.update({d["selector"]: d for d in r.datos["selectores"]})
+    selectores = selectores_dkim(llamadas, objetivo)
     correo_objetivo = ultimos.get(("dns_correo", objetivo))
     if selectores and correo_objetivo and correo_objetivo[1].ok:
         hallazgos += reglas_dkim(list(selectores.values()), correo_objetivo[1].datos["mx"]["proveedor"])

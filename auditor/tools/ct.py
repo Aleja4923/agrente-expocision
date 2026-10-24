@@ -6,6 +6,7 @@ como respaldo (plan gratuito: 10 consultas por hora, verificado el 2026-10-24).
 No produce hallazgos: entrega candidatos para que Grok elija cuáles revisar, dentro del cupo.
 """
 
+import http.client
 import json
 import time
 import urllib.error
@@ -14,8 +15,8 @@ from datetime import date, datetime, timezone
 from typing import Any
 from urllib.parse import quote
 
-from auditor.config import (CT_ESPERA_REINTENTO, CT_TIMEOUT_CERTSPOTTER, CT_TIMEOUT_CRTSH,
-                            MAX_SUBDOMINIOS_MOSTRADOS, USER_AGENT)
+from auditor.config import (CT_ESPERA_REINTENTO, CT_PLAZO_TOTAL_SEGUNDOS, CT_TIMEOUT_CERTSPOTTER,
+                            CT_TIMEOUT_CRTSH, MAX_SUBDOMINIOS_MOSTRADOS, USER_AGENT)
 from auditor.modelos import ResultadoHerramienta
 from auditor.tools.base import DominioInvalido, dominio_registrable, en_alcance, normalizar_dominio, registrar
 from auditor.tools.correo import EntradaDominio
@@ -24,6 +25,7 @@ MAX_BYTES_CT = 50_000_000  # un banco grande devuelve miles de certificados en c
 
 # Puntos de inyección para las pruebas.
 _dormir = time.sleep
+_reloj = time.monotonic
 _hoy = lambda: datetime.now(timezone.utc).date()  # noqa: E731
 
 Entrada = tuple[list[str], str]  # (nombres del certificado, fecha de vencimiento)
@@ -38,15 +40,23 @@ class ErrorCT(Exception):
 
 
 def _pedir_json(url: str, timeout: float) -> Any:
+    """JSON de una fuente CT. Se lee por trozos con un plazo total: `timeout` vale solo por cada lectura."""
     pedido = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
+    limite = _reloj() + CT_PLAZO_TOTAL_SEGUNDOS
     try:
         with urllib.request.urlopen(pedido, timeout=timeout) as r:
-            return json.loads(r.read(MAX_BYTES_CT).decode("utf-8", errors="replace"))
+            trozos, total = [], 0
+            while total < MAX_BYTES_CT and (trozo := r.read1(65536)):
+                if _reloj() > limite:
+                    raise ErrorCT("ct_no_responde")
+                trozos.append(trozo)
+                total += len(trozo)
+            return json.loads(b"".join(trozos).decode("utf-8", errors="replace"))
     except urllib.error.HTTPError as e:
         raise ErrorCT("limite_de_consultas" if e.code == 429 else "ct_no_responde") from None
     except ValueError:
         raise ErrorCT("respuesta_ilegible") from None
-    except OSError:  # tiempo agotado, conexión rechazada, URLError
+    except (OSError, http.client.HTTPException):  # tiempo agotado, conexión cortada, respuesta incompleta
         raise ErrorCT("ct_no_responde") from None
 
 

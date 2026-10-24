@@ -133,3 +133,54 @@ def test_errores_de_red(web_falsa, error, codigo):
 def test_host_que_no_existe(web_falsa):
     with pytest.raises(ErrorHTTP, match="dominio_no_existe"):
         pedir(f"https://noexiste.{D}/", D)
+
+
+# --- revisión: errores que no deben escaparse y plazo total --------------------------------
+
+def test_redireccion_con_tildes_no_lanza(web_falsa):
+    web_falsa["tabla"] = {("https", D, "/"): UnicodeEncodeError("ascii", "/inicio-español", 10, 11, "no ascii")}
+    with pytest.raises(ErrorHTTP, match="respuesta_invalida"):
+        pedir(f"https://{D}/", D)
+
+
+def test_puerto_invalido_en_redireccion_no_lanza(web_falsa):
+    web_falsa["tabla"] = {("https", D, "/"): (301, {"Location": f"https://www.{D}:99999/"})}
+    with pytest.raises(ErrorHTTP, match="respuesta_invalida"):
+        pedir(f"https://{D}/", D)
+
+
+@pytest.fixture
+def servidor_lento():
+    """Responde la línea de estado y luego manda un byte de cabecera cada 0,1 s, sin terminar nunca."""
+    import socket
+    import time
+    parar = threading.Event()
+    srv = socket.socket()
+    srv.bind(("127.0.0.1", 0))
+    srv.listen(1)
+
+    def atender():
+        conexion, _ = srv.accept()
+        conexion.recv(4096)
+        conexion.sendall(b"HTTP/1.1 200 OK\r\nX-Lento: ")
+        while not parar.is_set():
+            try:
+                conexion.sendall(b"a")
+            except OSError:
+                break
+            time.sleep(0.1)
+        conexion.close()
+
+    threading.Thread(target=atender, daemon=True).start()
+    yield srv.getsockname()[1]
+    parar.set()
+    srv.close()
+
+
+def test_plazo_total_corta_un_servidor_que_gotea(servidor_lento, monkeypatch):
+    import time
+    monkeypatch.setattr(red, "HTTP_PLAZO_TOTAL_SEGUNDOS", 0.6)
+    inicio = time.monotonic()
+    with pytest.raises(TimeoutError):
+        red._enviar("127.0.0.1", D, servidor_lento, False, "GET", "/")
+    assert time.monotonic() - inicio < 3

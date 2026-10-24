@@ -130,3 +130,59 @@ def test_procesar_prefiere_los_menos_profundos():
                 (["zpagos.ejemplo.com.co"], "2027-01-01T00:00:00")]
     assert [s["nombre"] for s in procesar(entradas, D, HOY)] == ["zpagos.ejemplo.com.co",
                                                                  "admin.lab.interno.ejemplo.com.co"]
+
+
+# --- revisión: respuestas cortadas y plazo total --------------------------------------------
+
+import http.client  # noqa: E402
+
+
+class RespuestaFalsa:
+    """Imita la respuesta de urlopen: read1 entrega trozos; un trozo Exception se lanza."""
+
+    def __init__(self, trozos):
+        self.trozos = list(trozos)
+
+    def read1(self, n):
+        trozo = self.trozos.pop(0) if self.trozos else b""
+        if isinstance(trozo, Exception):
+            raise trozo
+        return trozo
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *a):
+        return False
+
+
+def test_respuesta_cortada_es_ct_no_responde(monkeypatch):
+    monkeypatch.setattr(ct.urllib.request, "urlopen",
+                        lambda *a, **k: RespuestaFalsa([b'[{"name_value"', http.client.IncompleteRead(b"x")]))
+    with pytest.raises(ErrorCT, match="ct_no_responde"):
+        ct._pedir_json("https://crt.sh/?q=x", 5)
+
+
+def test_respuesta_cortada_activa_el_respaldo(monkeypatch):
+    def falla(url, timeout):
+        if "crt.sh" in url:
+            raise ErrorCT("ct_no_responde")
+        return [{"dns_names": ["admin.ejemplo.com.co"], "not_after": "2027-01-01T00:00:00Z"}]
+    monkeypatch.setattr(ct, "_pedir_json", falla)
+    monkeypatch.setattr(ct, "_dormir", lambda s: None)
+    r = base.ejecutar("subdominios_ct", {"dominio": D}, D)
+    assert r.ok and r.datos["fuente"] == "certspotter"
+
+
+def test_plazo_total_de_lectura(monkeypatch):
+    reloj = iter([0, 1, 2, 999, 1000])
+    monkeypatch.setattr(ct, "_reloj", lambda: next(reloj))
+    monkeypatch.setattr(ct.urllib.request, "urlopen", lambda *a, **k: RespuestaFalsa([b"[", b"{", b"}", b"]"]))
+    with pytest.raises(ErrorCT, match="ct_no_responde"):
+        ct._pedir_json("https://crt.sh/?q=x", 5)
+
+
+def test_lectura_por_trozos_completa(monkeypatch):
+    monkeypatch.setattr(ct.urllib.request, "urlopen",
+                        lambda *a, **k: RespuestaFalsa([b'[{"name_value": "a.ejemplo.com.co",', b' "not_after": "x"}]']))
+    assert ct._pedir_json("https://crt.sh/?q=x", 5) == [{"name_value": "a.ejemplo.com.co", "not_after": "x"}]

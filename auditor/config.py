@@ -45,6 +45,7 @@ TLS_TIMEOUT_SEGUNDOS = 5
 
 # Peticiones HTTP (cabeceras y security.txt): tiempo máximo de conexión y respuesta.
 HTTP_TIMEOUT_SEGUNDOS = 10
+HTTP_PLAZO_TOTAL_SEGUNDOS = 20   # tope por petición completa: un sitio que "gotea" bytes no la alarga
 
 # Topes por auditoría: ninguna puede quedarse en bucle ni gastar de más.
 # S2: más herramientas y fuentes lentas (WHOIS con pausa, CT); el tope en dinero sigue mandando.
@@ -67,6 +68,7 @@ VIGENCIA_CACHE_HORAS = 24
 CT_TIMEOUT_CRTSH = 25            # crt.sh es lento con dominios grandes (13 s medidos)
 CT_TIMEOUT_CERTSPOTTER = 15
 CT_ESPERA_REINTENTO = 3          # un reintento a crt.sh antes del respaldo
+CT_PLAZO_TOTAL_SEGUNDOS = 60     # tope para leer toda la respuesta (el timeout de arriba es por lectura)
 MAX_SUBDOMINIOS_MOSTRADOS = 100  # lo que ve Grok, para controlar los tokens
 MAX_HOSTS_EXTRA = 5              # cupo: hosts revisados aparte del objetivo y www
 

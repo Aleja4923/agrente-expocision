@@ -539,3 +539,20 @@ def test_resumen_verbose_cabeceras_y_security_txt():
     assert agent._resumen_resultado(cabeceras_ok(nosniff=False)) == (
         "✓ http→https sí, HSTS sí, marcos sí, nosniff no")
     assert agent._resumen_resultado(security_ok()) == "✓ security.txt existe, Contact sí"
+
+
+def test_prompt_dice_que_limitaciones_agrega_el_sistema():
+    texto = agent.PROMPT_SISTEMA
+    assert "no las repitas" in texto
+    for tema in ("DKIM", "parecidos", "subdominios", "portada"):
+        assert tema in texto.split("no las repitas")[1].split("\n- ")[0]
+
+
+def test_hosts_rechazados_no_gastan_cupo(tmp_path):
+    subs = [f"s{i}.{DOMINIO}" for i in range(5)]
+    fuera = ResultadoHerramienta(ok=False, herramienta="tls_certificado", error="fuera_de_alcance", sugerencia="s")
+    ejecutor = EjecutorFalso({("tls_certificado", "otro.com"): fuera})
+    grok = GrokGuion(resp(*BASE), resp(tls_de("otro.com")), resp(*[tls_de(h) for h in subs]),
+                     resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
+    correr(grok, tmp_path, ejecutor)
+    assert sorted(a["host"] for n, a in ejecutor.recibidos if n == "tls_certificado" and a["host"] in subs) == subs

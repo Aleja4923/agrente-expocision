@@ -93,7 +93,10 @@ más fácil, no "cualquiera puede suplantarlo". No inventes actores ni consecuen
 estricto; antes de tocar SPF, confirmar con su proveedor qué servicios envían correo en su nombre.
 - No escribas registros DNS ni comandos: el informe agrega el dato técnico exacto por ti.
 - En "limitaciones" escribe solo lo que tú decidiste no revisar o no pudiste revisar, con exactitud. El \
-sistema agrega por su cuenta las limitaciones fijas y los parecidos sin investigar.
+sistema ya agrega por su cuenta estas limitaciones, así que no las repitas: qué selectores DKIM se probaron, \
+los dominios parecidos sin investigar o sin verificar, cuántos subdominios hay y cuáles se revisaron, las \
+fallas del registro del dominio, que el certificado se revisa en una sola IP, que las cabeceras son solo de \
+la portada y el alcance de la búsqueda de parecidos.
 - Nunca acuses a nadie de fraude.
 """
 
@@ -207,6 +210,8 @@ def _resumen_resultado(r: ResultadoHerramienta) -> str:
         return (f"✓ http→https {redir}, HSTS {si(d['hsts']['presente'])}, "
                 f"marcos {si(d['x_frame_options'] or d['frame_ancestors'])}, nosniff {si(d['nosniff'])}")
     if r.herramienta == "security_txt":
+        if d["existe"] is None:
+            return f"✓ security.txt no verificable (código {d['codigo']})"
         if not d["existe"]:
             return "✓ sin security.txt"
         return (f"✓ security.txt existe, Contact {'sí' if d['tiene_contact'] else 'no'}"
@@ -325,7 +330,8 @@ def auditar(
         gratis = {dominio, f"www.{dominio}"}
         investigados = {str(a.get("parecido", "")).lower().strip(".") for a, r in estado.llamadas
                         if r.herramienta == "investigar_parecido"}
-        hosts = {h for a, r in estado.llamadas if r.herramienta in POR_HOST and (h := _host(a)) not in gratis}
+        hosts = {h for a, r in estado.llamadas if r.herramienta in POR_HOST and (h := _host(a)) not in gratis
+                 and r.error not in ("fuera_de_alcance", "dominio_invalido", "argumentos_invalidos")}
         sin_cupo = set()
         for i, (tc, argumentos, *_) in enumerate(preparadas):
             if tc["nombre"] == "investigar_parecido" and isinstance(argumentos, dict):

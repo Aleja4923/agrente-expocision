@@ -13,10 +13,11 @@
 import http.client
 import socket
 import ssl
+import threading
 from dataclasses import dataclass, field
 from urllib.parse import urljoin, urlsplit
 
-from auditor.config import HTTP_TIMEOUT_SEGUNDOS, USER_AGENT
+from auditor.config import HTTP_PLAZO_TOTAL_SEGUNDOS, HTTP_TIMEOUT_SEGUNDOS, USER_AGENT
 from auditor.tools.base import DominioInvalido, en_alcance, ip_permitida, normalizar_dominio
 from auditor.tools.web import ErrorConexion, resolver_ip
 
@@ -66,9 +67,26 @@ class _ConexionHTTPS(http.client.HTTPSConnection):
 
 
 def _enviar(ip: str, host: str, puerto: int, https: bool, metodo: str, ruta: str) -> tuple[int, dict[str, str], bytes]:
-    """Una petición, sin seguir redirecciones: (código, cabeceras en minúsculas, cuerpo recortado)."""
+    """Una petición, sin seguir redirecciones: (código, cabeceras en minúsculas, cuerpo recortado).
+
+    El timeout del socket vale para cada lectura; un servidor que manda un byte cada pocos segundos lo
+    esquivaría. Por eso un temporizador corta la conexión al cumplirse HTTP_PLAZO_TOTAL_SEGUNDOS.
+    """
     clase = _ConexionHTTPS if https else _ConexionHTTP
     conexion = clase(host, ip, puerto, HTTP_TIMEOUT_SEGUNDOS)
+    vencido = threading.Event()
+
+    def cortar() -> None:
+        vencido.set()
+        if conexion.sock is not None:
+            try:
+                conexion.sock.shutdown(socket.SHUT_RDWR)
+            except OSError:
+                pass
+
+    temporizador = threading.Timer(HTTP_PLAZO_TOTAL_SEGUNDOS, cortar)
+    temporizador.daemon = True
+    temporizador.start()
     try:
         conexion.request(metodo, ruta, headers={"User-Agent": USER_AGENT, "Accept": "*/*"})
         r = conexion.getresponse()
@@ -76,8 +94,16 @@ def _enviar(ip: str, host: str, puerto: int, https: bool, metodo: str, ruta: str
         for nombre, valor in r.getheaders():
             clave = nombre.lower()
             cabeceras[clave] = f"{cabeceras[clave]}, {valor}" if clave in cabeceras else valor
-        return r.status, cabeceras, r.read(MAX_BYTES_HTTP) if metodo == "GET" else b""
+        cuerpo = r.read(MAX_BYTES_HTTP) if metodo == "GET" else b""
+        if vencido.is_set():
+            raise TimeoutError("plazo total agotado")
+        return r.status, cabeceras, cuerpo
+    except (OSError, http.client.HTTPException):
+        if vencido.is_set():
+            raise TimeoutError("plazo total agotado") from None
+        raise
     finally:
+        temporizador.cancel()
         conexion.close()
 
 
@@ -111,7 +137,10 @@ def pedir(url: str, registrable: str, metodo: str = "GET", seguir: bool = True) 
         https = partes.scheme == "https"
         ruta = (partes.path or "/") + (f"?{partes.query}" if partes.query else "")
         try:
+            # Un Location del servidor puede traer un puerto inválido o letras no ASCII: no debe escaparse.
             codigo, cabeceras, cuerpo = _enviar(ip, host, partes.port or (443 if https else 80), https, metodo, ruta)
+        except ValueError:  # puerto fuera de rango o ruta no ASCII (UnicodeEncodeError es un ValueError)
+            raise ErrorHTTP("respuesta_invalida") from None
         except ssl.SSLCertVerificationError:
             raise ErrorHTTP("certificado_invalido") from None
         except ssl.SSLError:

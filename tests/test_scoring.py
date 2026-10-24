@@ -502,3 +502,8 @@ def test_evaluar_pasa_la_fecha_del_dueno():
         ({"dominio": "ejemplo.com.co", "parecido": "ejmplo.com.co"}, _ok("investigar_parecido", inv("ejmplo.com.co", spf=True))),
     ]
     assert list(evaluar(llamadas, "ejemplo.com.co", hoy=HOY)) == ["PARECIDO-MX"]
+
+
+def test_security_txt_no_verificable_no_es_hallazgo():
+    assert reglas_security_txt({"dominio": "ejemplo.com.co", "codigo": 301, "existe": None, "tiene_contact": False,
+                                "expires": None, "vencido": False, "redirige_fuera": "grupo.com"}) == []

@@ -23,6 +23,11 @@ _VERSION = re.compile(r"\d+\.\d+")
 _ahora = lambda: datetime.now(timezone.utc)  # noqa: E731  (inyectable en pruebas)
 
 
+def _primer_valor(valor: str) -> str:
+    """Una cabecera repetida (por ejemplo, la app y el proxy la mandan) llega unida: 'nosniff, nosniff'."""
+    return valor.split(",")[0].strip()
+
+
 def analizar_cabeceras(c: dict[str, str]) -> dict:
     """Qué protecciones declara una respuesta HTTP (cabeceras con nombre en minúsculas)."""
     hsts = c.get("strict-transport-security", "")
@@ -33,9 +38,9 @@ def analizar_cabeceras(c: dict[str, str]) -> dict:
     return {
         "hsts": {"presente": bool(hsts), "max_age": max_age,
                  "include_subdomains": "includesubdomains" in hsts.lower()},
-        "x_frame_options": c.get("x-frame-options", "").strip().upper() in ("DENY", "SAMEORIGIN"),
+        "x_frame_options": _primer_valor(c.get("x-frame-options", "")).upper() in ("DENY", "SAMEORIGIN"),
         "frame_ancestors": "frame-ancestors" in csp.lower(),
-        "nosniff": c.get("x-content-type-options", "").strip().lower() == "nosniff",
+        "nosniff": _primer_valor(c.get("x-content-type-options", "")).lower() == "nosniff",
         "csp_presente": bool(csp),
         "referrer_policy": bool(c.get("referrer-policy")),
         "servidor_con_version": bool(_VERSION.search(c.get("server", "") + " " + c.get("x-powered-by", ""))),
@@ -127,11 +132,17 @@ def security_txt(entrada: EntradaDominio) -> ResultadoHerramienta:
         r = peticiones.pedir(f"https://{dominio}/.well-known/security.txt", dominio_registrable(dominio))
     except ErrorHTTP as e:
         return _fallo("security_txt", e.codigo)
+    no_confiable = {}
     if r.codigo == 200:
         datos = analizar_security_txt(r.cuerpo, r.cabeceras.get("content-type", ""), _ahora())
         no_confiable = {"security_txt": r.cuerpo.decode("utf-8", errors="replace")}
+    elif r.codigo in (404, 410):
+        datos = {"existe": False, "tiene_contact": False, "expires": None, "vencido": False}
     else:
-        datos, no_confiable = {"existe": False, "tiene_contact": False, "expires": None, "vencido": False}, {}
+        # Una redirección a otro dominio (RFC 9116 la permite), un 403 o un error del servidor no prueban
+        # que no exista: queda como no verificable (existe=None), nunca como hallazgo.
+        datos = {"existe": None, "tiene_contact": False, "expires": None, "vencido": False}
     return ResultadoHerramienta(ok=True, herramienta="security_txt",
-                                datos={"dominio": dominio, "codigo": r.codigo, **datos},
+                                datos={"dominio": dominio, "codigo": r.codigo, "redirige_fuera": r.fuera_de_alcance,
+                                       **datos},
                                 contenido_no_confiable=no_confiable)
