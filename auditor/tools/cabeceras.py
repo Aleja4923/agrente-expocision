@@ -7,6 +7,7 @@ de las cabeceras los escribe el servidor, así que solo salen como contenido no 
 """
 
 import re
+from dataclasses import replace
 from datetime import datetime, timezone
 from urllib.parse import urljoin
 
@@ -97,6 +98,8 @@ def _fallo(herramienta: str, codigo: str) -> ResultadoHerramienta:
 def cabeceras_web(entrada: EntradaHost) -> ResultadoHerramienta:
     host = entrada.host
     registrable = dominio_registrable(host)
+    portada = f"https://{host}/"
+    r = None
     try:
         # Se sigue la cadena (en alcance): muchos sitios van de http://d a http://www.d y luego a https.
         r_http = peticiones.pedir(f"http://{host}/", registrable)
@@ -105,12 +108,16 @@ def cabeceras_web(entrada: EntradaHost) -> ResultadoHerramienta:
             saltos.append(urljoin(r_http.url, r_http.cabeceras.get("location", "")))
         http_responde = True
         redirige = any(u.startswith("https://") for u in saltos)
+        if portada in r_http.redirecciones:  # la cadena https ya se recorrió: no se pide dos veces
+            despues = r_http.redirecciones[r_http.redirecciones.index(portada) + 1:]
+            r = replace(r_http, redirecciones=despues)
     except ErrorHTTP:  # sin puerto 80: no hay contenido sin cifrar que proteger
         http_responde, redirige = False, None
-    try:
-        r = peticiones.pedir(f"https://{host}/", registrable)
-    except ErrorHTTP as e:
-        return _fallo("cabeceras_web", e.codigo)
+    if r is None:
+        try:
+            r = peticiones.pedir(portada, registrable)
+        except ErrorHTTP as e:
+            return _fallo("cabeceras_web", e.codigo)
     evaluable = r.fuera_de_alcance is None and 200 <= r.codigo < 400
     return ResultadoHerramienta(
         ok=True, herramienta="cabeceras_web",

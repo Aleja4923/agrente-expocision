@@ -82,7 +82,7 @@ def cabeceras_de(host=D):
 
 
 def test_sitio_bien_configurado(web):
-    web["tabla"] = {(f"http://{D}/", True): resp(f"https://{D}/", 200, redirecciones=[f"https://{D}/"]),
+    web["tabla"] = {(f"http://{D}/", True): resp(f"https://{D}/", 200, BUENAS, redirecciones=[f"https://{D}/"]),
                     (f"https://{D}/", True): resp(f"https://{D}/", 200, BUENAS)}
     r = cabeceras_de()
     assert r.ok and r.datos["http_responde"] and r.datos["redirige_a_https"] is True
@@ -174,3 +174,21 @@ def test_security_txt_solo_404_y_410_son_inexistente(web, codigo, existe):
     url = f"https://{D}/.well-known/security.txt"
     web["tabla"] = {(url, True): resp(url, codigo)}
     assert base.ejecutar("security_txt", {"dominio": D}, D).datos["existe"] is existe
+
+
+# --- revisión #9: no pedir dos veces la portada https --------------------------------------
+
+def test_reutiliza_la_portada_https_si_http_ya_llego_a_ella(web):
+    # http://d -> https://d -> https://www.d (200): la cadena https ya se recorrió, no se pide de nuevo.
+    web["tabla"] = {(f"http://{D}/", True): resp(f"https://www.{D}/", 200, BUENAS,
+                                                 redirecciones=[f"https://{D}/", f"https://www.{D}/"])}
+    r = cabeceras_de()
+    assert r.ok and r.datos["redirige_a_https"] is True
+    assert r.datos["url_final"] == f"https://www.{D}/" and r.datos["redirecciones"] == 1
+    assert r.datos["hsts"]["presente"] is True
+
+
+def test_si_http_no_pasa_por_la_portada_https_se_pide_aparte(web):
+    web["tabla"] = {(f"http://{D}/", True): resp(f"http://{D}/", 200),
+                    (f"https://{D}/", True): resp(f"https://{D}/", 200, BUENAS)}
+    assert cabeceras_de().datos["hsts"]["presente"] is True
