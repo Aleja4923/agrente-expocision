@@ -64,6 +64,14 @@ def fuentes(monkeypatch):
     monkeypatch.setattr(ct, "_consultar_crtsh", crtsh)
     monkeypatch.setattr(ct, "_consultar_certspotter", certspotter)
     monkeypatch.setattr(ct, "_hoy", lambda: HOY)
+    estado["sin_sitio"] = set()
+    estado["resueltos"] = []
+
+    def tiene_sitio(nombre):
+        estado["resueltos"].append(nombre)
+        return nombre not in estado["sin_sitio"]
+
+    monkeypatch.setattr(ct, "_tiene_sitio", tiene_sitio)
     return estado
 
 
@@ -102,6 +110,27 @@ def test_tope_de_mostrados(fuentes, monkeypatch):
     r = correr()
     assert r.datos["total"] == 4 and r.datos["mostrados"] == 2 and r.datos["truncados"] is True
     assert len(r.datos["subdominios"]) == 2
+    assert len(fuentes["resueltos"]) == 2  # solo se resuelven los que ve Grok
+
+
+def test_marca_cuales_tienen_sitio_y_los_pone_primero(fuentes):
+    fuentes["sin_sitio"] = {"pagos.ejemplo.com.co"}
+    r = correr()
+    assert r.datos["con_sitio"] == 3
+    assert [(s["nombre"], s["tiene_sitio"]) for s in r.datos["subdominios"]] == [
+        ("webmail.ejemplo.com.co", True), ("www.ejemplo.com.co", True), ("viejo.ejemplo.com.co", True),
+        ("pagos.ejemplo.com.co", False)]
+
+
+def test_tiene_sitio_solo_resuelve_dns(monkeypatch):
+    monkeypatch.setattr(ct.socket, "getaddrinfo", lambda *a, **k: [(2, 1, 6, "", ("192.0.2.1", 443))])
+    assert ct._tiene_sitio("pagos.ejemplo.com.co") is True
+
+    def sin_direccion(*a, **k):
+        raise ct.socket.gaierror("sin dirección")
+
+    monkeypatch.setattr(ct.socket, "getaddrinfo", sin_direccion)
+    assert ct._tiene_sitio("oms.ejemplo.com.co") is False
 
 
 def test_crtsh_reintenta_una_vez(monkeypatch):

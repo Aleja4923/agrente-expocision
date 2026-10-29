@@ -70,7 +70,7 @@ CT_TIMEOUT_CERTSPOTTER = 15
 CT_ESPERA_REINTENTO = 3          # un reintento a crt.sh antes del respaldo
 CT_PLAZO_TOTAL_SEGUNDOS = 60     # tope para leer toda la respuesta (el timeout de arriba es por lectura)
 MAX_SUBDOMINIOS_MOSTRADOS = 100  # lo que ve Grok, para controlar los tokens
-MAX_HOSTS_EXTRA = 5              # cupo: hosts revisados aparte del objetivo y www
+MAX_HOSTS_EXTRA = 10             # cupo: hosts revisados aparte del objetivo y www
 
 
 def cargar_llave(ruta_env: Path = RUTA_ENV) -> str:

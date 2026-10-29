@@ -76,9 +76,12 @@ los subdominios en los registros de certificados (subdominios_ct), las cabeceras
 "google" para Google Workspace; "selector1" y "selector2" para Microsoft 365 (es obligatorio con esos dos \
 proveedores). Con otro proveedor, puedes probar selectores comunes (default, k1, s1, s2, mail, dkim) si \
 importa para el objetivo.
-- Subdominios: además del dominio objetivo y www, puedes revisar como máximo 5 subdominios distintos con \
-tls_certificado o cabeceras_web (comparten el cupo). Elige los que más importan para el objetivo (pagos, webmail, admin, tienda, portal...) y \
-prefiere los de certificado vigente. Los que no revises quedan como limitación.
+- Subdominios: además del dominio objetivo y www, puedes revisar como máximo 10 subdominios distintos con \
+tls_certificado o cabeceras_web (comparten el cupo). subdominios_ct marca cada uno con "tiene_sitio": no \
+gastes cupo en los que tienen tiene_sitio=false, porque no tienen sitio web que revisar. Entre los que tienen \
+sitio, prioriza los que usan clientes, compradores o vendedores (seguimiento de pedidos, pagos, tienda, \
+portal, acceso o login, webmail) y luego los de administración; prefiere los de certificado vigente. Los \
+que no revises quedan como limitación.
 - Dominios parecidos: buscar_parecidos te da los candidatos con correo. Puedes investigar como máximo 4 \
 con investigar_parecido: prioriza los de error de tipeo sobre los de otro TLD, y los que NO comparten \
 servidores con el dueño. Los que no investigues quedan como limitación.
@@ -95,8 +98,8 @@ estricto; antes de tocar SPF, confirmar con su proveedor qué servicios envían 
 - En "limitaciones" escribe solo lo que tú decidiste no revisar o no pudiste revisar, con exactitud. El \
 sistema ya agrega por su cuenta estas limitaciones, así que no las repitas: qué selectores DKIM se probaron, \
 los dominios parecidos sin investigar o sin verificar, cuántos subdominios hay y cuáles se revisaron, las \
-fallas del registro del dominio, que el certificado se revisa en una sola IP, que las cabeceras son solo de \
-la portada y el alcance de la búsqueda de parecidos.
+fallas del registro del dominio, si security.txt no se pudo verificar, que el certificado se revisa en una \
+sola IP, que las cabeceras son solo de la portada y el alcance de la búsqueda de parecidos.
 - Nunca acuses a nadie de fraude.
 """
 
@@ -217,7 +220,7 @@ def _resumen_resultado(r: ResultadoHerramienta) -> str:
         return (f"✓ security.txt existe, Contact {'sí' if d['tiene_contact'] else 'no'}"
                 + (", vencido" if d["vencido"] else ""))
     if r.herramienta == "subdominios_ct":
-        return f"✓ {d['fuente']}: {d['total']} subdominios ({d['mostrados']} mostrados)"
+        return f"✓ {d['fuente']}: {d['total']} subdominios ({d['mostrados']} mostrados, {d['con_sitio']} con sitio web)"
     if r.herramienta == "whois_dominio":
         return f"✓ vence en {d['dias_para_vencer']} días, bloqueo {'sí' if d['bloqueo_transferencia'] else 'no'}"
     return "✓"
@@ -264,7 +267,7 @@ def auditar(
         if motivo is not MotivoCierre.INFORME_ENTREGADO:
             estado.informe = informe_de_respaldo(estado, TEXTO_MOTIVO[motivo] + detalle)
             estado.informe_de_respaldo = True
-        estado.nivel_riesgo = scoring.nivel_riesgo(estado.hallazgos)
+        estado.nivel_riesgo = scoring.nivel_riesgo(scoring.hallazgos_de_lo_principal(estado.llamadas, dominio))
         anotar("fin", motivo_cierre=motivo.value, costo_usd=round(estado.costo_usd, 6),
                ok=not estado.informe_de_respaldo)
         contar(f"fin · {motivo.value} · riesgo {estado.nivel_riesgo.value}")

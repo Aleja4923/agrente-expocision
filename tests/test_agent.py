@@ -87,7 +87,9 @@ def investigacion_ok(parecido, dias=400, spf=False):
 def ct_ok(*nombres):
     return ResultadoHerramienta(ok=True, herramienta="subdominios_ct", datos={
         "dominio": DOMINIO, "fuente": "crtsh", "total": len(nombres), "mostrados": len(nombres), "truncados": False,
-        "subdominios": [{"nombre": n, "ultimo_certificado_vence": "2027-01-01", "vigente": True} for n in nombres]})
+        "con_sitio": len(nombres),
+        "subdominios": [{"nombre": n, "ultimo_certificado_vence": "2027-01-01", "vigente": True, "tiene_sitio": True}
+                        for n in nombres]})
 
 
 def cabeceras_ok(host=DOMINIO, **cambios):
@@ -446,14 +448,15 @@ def tls_de(host):
     return ("tls_certificado", {"host": host, "justificacion": "Subdominio sensible."})
 
 
-def test_sexto_subdominio_es_cupo_agotado(tmp_path):
-    subs = [f"s{i}.{DOMINIO}" for i in range(6)]
+def test_subdominio_despues_del_cupo_es_cupo_agotado(tmp_path):
+    assert agent.MAX_HOSTS_EXTRA == 10
+    subs = [f"s{i}.{DOMINIO}" for i in range(agent.MAX_HOSTS_EXTRA + 1)]
     ejecutor = EjecutorFalso({("subdominios_ct", DOMINIO): ct_ok(*subs)})
     grok = GrokGuion(resp(*BASE), resp(tls_de("www." + DOMINIO), *[tls_de(h) for h in subs]),
                      resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
     estado = correr(grok, tmp_path, ejecutor)
     revisados = [a["host"] for n, a in ejecutor.recibidos if n == "tls_certificado"]
-    assert sorted(revisados) == sorted([DOMINIO, "www." + DOMINIO] + subs[:5])  # el objetivo y www no gastan cupo
+    assert sorted(revisados) == sorted([DOMINIO, "www." + DOMINIO] + subs[:-1])  # el objetivo y www no gastan cupo
     assert any(e["tipo"] == "rechazo" and e["justificacion"] == "cupo_agotado" for e in eventos(tmp_path))
     assert estado.motivo_cierre == "informe_entregado"
 
@@ -469,7 +472,13 @@ def test_mismo_subdominio_no_gasta_dos_cupos(tmp_path):
 
 def test_resumen_verbose_ct():
     assert agent._resumen_resultado(ct_ok("a.ejemplo.com.co", "b.ejemplo.com.co")) == (
-        "✓ crtsh: 2 subdominios (2 mostrados)")
+        "✓ crtsh: 2 subdominios (2 mostrados, 2 con sitio web)")
+
+
+def test_prompt_dice_el_cupo_de_subdominios_y_el_sitio_web():
+    texto = agent.PROMPT_SISTEMA
+    assert f"como máximo {agent.MAX_HOSTS_EXTRA} subdominios" in texto
+    assert "tiene_sitio" in texto
 
 
 # --- S2: DKIM condicional ---------------------------------------------------------------
@@ -525,14 +534,14 @@ def test_reintentar_un_parecido_no_gasta_otro_cupo(tmp_path):
 
 
 def test_cabeceras_de_subdominio_comparten_cupo_con_tls(tmp_path):
-    subs = [f"s{i}.{DOMINIO}" for i in range(5)]
+    subs = [f"s{i}.{DOMINIO}" for i in range(agent.MAX_HOSTS_EXTRA)]
     grok = GrokGuion(resp(*BASE), resp(*[tls_de(h) for h in subs], ("cabeceras_web", {"host": subs[0], "justificacion": "x"}),
-                                       ("cabeceras_web", {"host": f"s9.{DOMINIO}", "justificacion": "x"})),
+                                       ("cabeceras_web", {"host": f"s99.{DOMINIO}", "justificacion": "x"})),
                      resp(("entregar_informe", informe("CORREO-DMARC-NONE"))))
     ejecutor = EjecutorFalso()
     correr(grok, tmp_path, ejecutor)
     cab = [a["host"] for n, a in ejecutor.recibidos if n == "cabeceras_web"]
-    assert sorted(cab) == sorted([DOMINIO, subs[0]])  # s9 sería el 6.º host: cupo agotado
+    assert sorted(cab) == sorted([DOMINIO, subs[0]])  # s99 se pasaría del cupo
 
 
 def test_resumen_verbose_cabeceras_y_security_txt():

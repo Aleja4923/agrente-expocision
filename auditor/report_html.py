@@ -10,7 +10,7 @@ se muestra como texto y nunca se ejecuta.
 from html import escape
 
 from auditor.modelos import EstadoAuditoria
-from auditor.report import AVISO_RESPALDO, SEVERIDAD_LEGIBLE, contenido
+from auditor.report import AVISO_RESPALDO, SEVERIDAD_LEGIBLE, contenido, titulo_del_nivel
 
 ESTILOS = """
 :root { --texto: #1c2430; --suave: #5b6675; --borde: #d9dee5; --fondo: #ffffff; --panel: #f5f7fa;
@@ -79,7 +79,10 @@ def generar_informe_html(estado: EstadoAuditoria) -> str:
     else:
         nivel = c.nivel.value
         partes += [f'<div class="semaforo nivel-{nivel}"><span class="punto" aria-hidden="true"></span>',
-                   f"<strong>Nivel de riesgo: {NIVEL_TEXTO[nivel]}</strong></div>", _parrafo(c.resumen, "resumen")]
+                   f"<strong>{titulo_del_nivel(c)}: {NIVEL_TEXTO[nivel]}</strong></div>"]
+        if c.aviso_subdominios:
+            partes.append(_parrafo(c.aviso_subdominios, "aviso-subdominios"))
+        partes.append(_parrafo(c.resumen, "resumen"))
         if c.respaldo:
             partes.append(_parrafo(AVISO_RESPALDO.removeprefix("> "), "aviso"))
 

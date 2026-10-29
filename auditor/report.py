@@ -6,6 +6,7 @@ fijas por recomendacion_id): así nadie copia en su DNS un registro inventado po
 Nunca se copia contenido no confiable al informe.
 """
 
+from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -13,7 +14,7 @@ from typing import Callable
 
 from auditor.config import RUTA_SALIDAS
 from auditor.modelos import EstadoAuditoria, Hallazgo, NivelRiesgo
-from auditor.scoring import selectores_dkim
+from auditor.scoring import evaluar, hallazgos_de_lo_principal, selectores_dkim
 from auditor.tools.base import DominioInvalido, normalizar_dominio
 from auditor.tools.correo import spf_autoriza_envio
 
@@ -228,6 +229,7 @@ class Contenido:
     resumen: str
     explicacion_no_existe: str | None
     respaldo: bool
+    aviso_subdominios: str | None
     acciones: list[Accion]
     hallazgos: list[Hallazgo]
     verificaciones: list[str]
@@ -247,7 +249,7 @@ def contenido(estado: EstadoAuditoria) -> Contenido:
     if no_existe:
         # Sin dominio no hay riesgo que medir: un semáforo "bajo" sería engañoso.
         return Contenido(d, True, None, informe.resumen.strip(),
-                         EXPLICACION_NO_EXISTE if estado.informe_de_respaldo else None, False, [], [], [],
+                         EXPLICACION_NO_EXISTE if estado.informe_de_respaldo else None, False, None, [], [], [],
                          _limitaciones(estado, fijas=[]), _pie(estado))
     acciones = []
     for n, a in enumerate((a for a in informe.acciones_priorizadas if a.hallazgo_id in estado.hallazgos), 1):
@@ -259,8 +261,34 @@ def contenido(estado: EstadoAuditoria) -> Contenido:
         verificaciones.append(f"Antes de endurecer DMARC, confirme desde qué dirección salen sus facturas "
                               f"electrónicas; si salen como @{d}, ese servidor debe estar autorizado en su SPF.")
     return Contenido(d, False, estado.nivel_riesgo or NivelRiesgo.BAJO, informe.resumen.strip(), None,
-                     estado.informe_de_respaldo, acciones, list(estado.hallazgos.values()), verificaciones,
+                     estado.informe_de_respaldo, aviso_de_subdominios(estado), acciones,
+                     list(estado.hallazgos.values()), verificaciones,
                      _limitaciones(estado), _pie(estado))
+
+
+SEVERIDAD_EN_PLURAL = {"critica": ("crítico", "críticos"), "alta": ("alto", "altos"), "media": ("medio", "medios"),
+                       "baja": ("bajo", "bajos"), "informativa": ("informativo", "informativos")}
+
+
+def aviso_de_subdominios(estado: EstadoAuditoria) -> str | None:
+    """El semáforo mide solo lo principal; si hay hallazgos que solo están en subdominios, se dice al lado."""
+    principales = hallazgos_de_lo_principal(estado.llamadas, estado.dominio)
+    solo_en_subdominios = evaluar(estado.llamadas, estado.dominio).keys() - principales.keys()
+    cuenta = Counter(h.severidad.value for i, h in estado.hallazgos.items() if i in solo_en_subdominios)
+    if not cuenta:
+        return None
+    partes = []
+    for severidad, (singular, plural) in SEVERIDAD_EN_PLURAL.items():
+        if n := cuenta.get(severidad):
+            palabra = singular if n == 1 else plural
+            partes.append(f"{n} {'hallazgo' if n == 1 else 'hallazgos'} {palabra}" if not partes else f"{n} {palabra}")
+    return ("Este nivel mide su correo, su dominio y su sitio principal. En otros sitios de su dominio "
+            f"(subdominios) hay además {_lista(partes)}; están en la lista de abajo.")
+
+
+def titulo_del_nivel(c: Contenido) -> str:
+    """Si la revisión se cortó, el nivel no puede tranquilizar: se dice que es provisional."""
+    return "Nivel de riesgo provisional" if c.respaldo else "Nivel de riesgo"
 
 
 def generar_informe(estado: EstadoAuditoria) -> str:
@@ -272,7 +300,10 @@ def generar_informe(estado: EstadoAuditoria) -> str:
         if c.explicacion_no_existe:  # el resumen automático es genérico: se agrega la explicación
             partes += [c.explicacion_no_existe, ""]
     else:
-        partes += [f"**Nivel de riesgo: {SEMAFORO[c.nivel]} {c.nivel.value.upper()}**", "", c.resumen, ""]
+        partes += [f"**{titulo_del_nivel(c)}: {SEMAFORO[c.nivel]} {c.nivel.value.upper()}**", ""]
+        if c.aviso_subdominios:
+            partes += [c.aviso_subdominios, ""]
+        partes += [c.resumen, ""]
         if c.respaldo:
             partes += [AVISO_RESPALDO, ""]
         partes += ["## Qué hacer primero", ""]
@@ -373,9 +404,27 @@ def limitaciones_de_subdominios(estado: EstadoAuditoria) -> list[str]:
     nota = "Estos registros solo muestran sitios que tuvieron certificado HTTPS; puede haber otros."
     if total == 0:
         return [f"En los registros de certificados no aparece ningún subdominio. {nota}"]
-    cuantos = "aparece 1 subdominio" if total == 1 else f"aparecen {total} subdominios"
+    con = ct.datos["con_sitio"]
+    if total == 1:
+        cuantos = f"aparece 1 subdominio, {'con' if con else 'sin'} sitio web"
+    else:
+        cuantos = f"aparecen {total} subdominios, {f'{con} con' if con else 'ninguno con'} sitio web"
     revision = f"se revisaron {len(revisados)}: {', '.join(revisados)}" if revisados else "no se revisó ninguno"
     return [f"En los registros de certificados {cuantos}; {revision}. {nota}"]
+
+
+def limitaciones_de_security_txt(estado: EstadoAuditoria) -> list[str]:
+    """Si no se pudo saber si existe security.txt, lo dice el código: sin esto el informe callaba."""
+    consultas = [r for _, r in estado.llamadas if r.herramienta == "security_txt"]
+    if not consultas or any(r.ok and r.datos["existe"] is not None for r in consultas):
+        return []  # un resultado verificado (aunque sea posterior a una falla) no deja limitación
+    inicio = f"No se pudo verificar si {estado.dominio} publica un contacto de seguridad (security.txt): "
+    r = consultas[-1]
+    if not r.ok:
+        return [inicio + f"el sitio no respondió ({r.error})."]
+    if r.datos["redirige_fuera"]:
+        return [inicio + "la dirección redirige a otro dominio, que no se revisa."]
+    return [inicio + f"el servidor respondió con un error (código {r.datos['codigo']})."]
 
 
 def _host_normalizado(texto) -> str | None:
@@ -389,7 +438,8 @@ def _limitaciones(estado: EstadoAuditoria, fijas: list[str] | None = None) -> li
     """Las limitaciones que escribió Grok y, después, las que agrega el código."""
     if fijas is None:
         fijas = [*limitaciones_de_dkim(estado), *limitaciones_de_parecidos(estado),
-                 *limitaciones_de_subdominios(estado), LIMITACION_PRIMERA_IP, LIMITACION_PARECIDOS]
+                 *limitaciones_de_subdominios(estado), *limitaciones_de_security_txt(estado),
+                 LIMITACION_PRIMERA_IP, LIMITACION_PARECIDOS]
         if any(r.herramienta == "cabeceras_web" and r.ok for _, r in estado.llamadas):
             fijas.append(LIMITACION_PORTADA)
     return [limitacion.strip() for limitacion in estado.informe.limitaciones] + fijas

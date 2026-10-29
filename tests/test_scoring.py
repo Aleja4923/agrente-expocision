@@ -507,3 +507,24 @@ def test_evaluar_pasa_la_fecha_del_dueno():
 def test_security_txt_no_verificable_no_es_hallazgo():
     assert reglas_security_txt({"dominio": "ejemplo.com.co", "codigo": 301, "existe": None, "tiene_contact": False,
                                 "expires": None, "vencido": False, "redirige_fuera": "grupo.com"}) == []
+
+
+# --- semáforo: solo lo principal (los subdominios los elige Grok) ------------------------
+
+from auditor.scoring import hallazgos_de_lo_principal  # noqa: E402
+
+SUB = "secure.ejemplo.com.co"
+
+
+def test_nivel_no_depende_de_los_subdominios():
+    llamadas = [({"dominio": "ejemplo.com.co"}, dns()), ({"host": "ejemplo.com.co"}, tls()),
+                ({"host": SUB}, tls(host=SUB, valido=False, motivo="raiz_no_confiable"))]
+    assert "WEB-TLS-INVALIDO" in evaluar(llamadas, "ejemplo.com.co")  # el hallazgo sigue en el informe
+    assert hallazgos_de_lo_principal(llamadas, "ejemplo.com.co") == {}
+    assert nivel_riesgo(hallazgos_de_lo_principal(llamadas, "ejemplo.com.co")) is NivelRiesgo.BAJO
+
+
+@pytest.mark.parametrize("host", ["ejemplo.com.co", "www.ejemplo.com.co", "WWW.Ejemplo.com.co."])
+def test_el_dominio_y_www_si_cuentan_para_el_nivel(host):
+    llamadas = [({"host": host}, tls(host=host, valido=False, motivo="autofirmado"))]
+    assert "WEB-TLS-INVALIDO" in hallazgos_de_lo_principal(llamadas, "ejemplo.com.co")

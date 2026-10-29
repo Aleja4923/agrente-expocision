@@ -458,6 +458,34 @@ def evaluar(llamadas: list[Llamada], objetivo: str, hoy: date | None = None) -> 
     return {h.id: h for h in sorted(hallazgos, key=lambda h: orden.index(h.severidad))}
 
 
+HERRAMIENTAS_POR_HOST = ("tls_certificado", "cabeceras_web")
+
+
+def solo_lo_principal(llamadas: list[Llamada], objetivo: str) -> list[Llamada]:
+    """Las revisiones que se hacen en toda auditoría: correo, registro, parecidos y el sitio del objetivo y www.
+
+    Qué subdominios se revisan lo elige Grok en cada auditoría; si contaran para el semáforo, el mismo
+    dominio daría niveles distintos. Sus hallazgos siguen en el informe, solo no mueven el nivel.
+    """
+    objetivo = normalizar_dominio(objetivo)
+    principales = {objetivo, f"www.{objetivo}"}
+
+    def es_principal(argumentos: dict[str, Any], r: ResultadoHerramienta) -> bool:
+        if r.herramienta not in HERRAMIENTAS_POR_HOST:
+            return True
+        try:
+            return normalizar_dominio(str(argumentos.get("host", ""))) in principales
+        except DominioInvalido:
+            return False
+
+    return [(a, r) for a, r in llamadas if es_principal(a, r)]
+
+
+def hallazgos_de_lo_principal(llamadas: list[Llamada], objetivo: str, hoy: date | None = None) -> dict[str, Hallazgo]:
+    """Los hallazgos con los que se calcula el semáforo."""
+    return evaluar(solo_lo_principal(llamadas, objetivo), objetivo, hoy)
+
+
 def nivel_riesgo(hallazgos: dict[str, Hallazgo]) -> NivelRiesgo:
     """Semáforo calculado por código: alto si hay algo crítico o alto, medio si hay algo medio."""
     severidades = {h.severidad for h in hallazgos.values()}

@@ -4,13 +4,17 @@ CT es el registro público de todos los certificados HTTPS emitidos. Se consulta
 ("best effort": es lento y falla a menudo, CONTEXT §6b) con un reintento, y Cert Spotter
 como respaldo (plan gratuito: 10 consultas por hora, verificado el 2026-10-24).
 No produce hallazgos: entrega candidatos para que Grok elija cuáles revisar, dentro del cupo.
+A cada candidato le marca si tiene sitio web (solo DNS, sin conectarse), para que Grok no gaste cupo
+en nombres que existen pero no tienen dirección.
 """
 
 import http.client
 import json
+import socket
 import time
 import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timezone
 from typing import Any
 from urllib.parse import quote
@@ -22,6 +26,7 @@ from auditor.tools.base import DominioInvalido, dominio_registrable, en_alcance,
 from auditor.tools.correo import EntradaDominio
 
 MAX_BYTES_CT = 50_000_000  # un banco grande devuelve miles de certificados en crt.sh
+HILOS_DNS = 8  # 43 subdominios reales se resolvieron en 0,5 s
 
 # Puntos de inyección para las pruebas.
 _dormir = time.sleep
@@ -85,6 +90,14 @@ def _consultar_certspotter(dominio: str) -> list[Entrada]:
     return [(list(e.get("dns_names") or []), str(e.get("not_after", ""))) for e in dato]
 
 
+def _tiene_sitio(nombre: str) -> bool:
+    """True si el nombre tiene dirección IP. Solo pregunta al DNS: no se conecta al host."""
+    try:
+        return bool(socket.getaddrinfo(nombre, 443, type=socket.SOCK_STREAM))
+    except socket.gaierror:
+        return False
+
+
 def _fecha(texto: str) -> date | None:
     try:
         return datetime.fromisoformat(texto.replace("Z", "+00:00")).date()
@@ -143,6 +156,11 @@ def subdominios_ct(entrada: EntradaDominio) -> ResultadoHerramienta:
                                         sugerencia=SUGERENCIAS[e.codigo])
     subdominios = procesar(entradas, registrable, _hoy())
     mostrados = subdominios[:MAX_SUBDOMINIOS_MOSTRADOS]
+    with ThreadPoolExecutor(max_workers=HILOS_DNS) as pool:
+        for s, sitio in zip(mostrados, pool.map(_tiene_sitio, [s["nombre"] for s in mostrados])):
+            s["tiene_sitio"] = sitio
+    mostrados.sort(key=lambda s: not s["tiene_sitio"])  # estable: dentro de cada grupo se queda el orden de procesar
     return ResultadoHerramienta(ok=True, herramienta="subdominios_ct", datos={
         "dominio": registrable, "fuente": fuente, "total": len(subdominios), "mostrados": len(mostrados),
-        "truncados": len(subdominios) > len(mostrados), "subdominios": mostrados})
+        "truncados": len(subdominios) > len(mostrados), "con_sitio": sum(s["tiene_sitio"] for s in mostrados),
+        "subdominios": mostrados})

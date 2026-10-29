@@ -28,7 +28,7 @@ Además revisa el trío completo SPF, DKIM y DMARC, el registro del dominio (ven
 **Grok decide qué investigar; el código decide qué se concluye.**
 
 - **Grok elige el camino** según lo que va encontrando: qué revisar, en qué orden y cuándo tiene suficiente para entregar. Cada auditoría tiene topes (20 pasos, USD 0,20 y 300 s). Cada decisión queda en la bitácora con una justificación de una línea.
-- **Hay más candidatos que presupuesto.** Grok puede investigar a fondo **4 dominios parecidos** y revisar **5 subdominios** (además del dominio y `www`). El arnés hace cumplir esos cupos, y el código declara en el informe lo que quedó sin revisar.
+- **Hay más candidatos que presupuesto.** Grok puede investigar a fondo **4 dominios parecidos** y revisar **10 subdominios** (además del dominio y `www`); el código le marca cuáles tienen sitio web para que no gaste cupo en los que no. El arnés hace cumplir esos cupos, y el código declara en el informe lo que quedó sin revisar.
 - **Hay dependencias:** primero ve el proveedor de correo y después elige los selectores DKIM (`google` para Google Workspace; `selector1` y `selector2` para Microsoft 365); primero ve la lista de parecidos y después decide cuáles investigar.
 - **Las conclusiones las calculan reglas deterministas en el código:** cada hallazgo tiene un id, una severidad y su evidencia exacta. Grok no puede crear hallazgos ni cambiar su severidad.
 - **Grok redacta y prioriza el plan para el dueño,** pero los datos técnicos (el registro DNS exacto que hay que publicar) los pone el código, literales.
@@ -100,7 +100,7 @@ tests/           536 pruebas sin red ni llave (Grok simulado con guiones)
 - **Bucle propio sobre la librería `openai`, sin framework:** los topes, el validador del informe y la bitácora son lógica propia en cualquier caso, y así cada parte es visible.
 - **Cada auditoría tiene topes:** 20 pasos, USD 0,20 y 300 s. Si Grok repite la misma herramienta con los mismos argumentos, la auditoría se corta.
 - **Siempre hay informe:** si la auditoría se corta por un tope o un error, el código arma un informe de respaldo con los hallazgos verificados.
-- **El nivel de riesgo lo calcula el código**, no Grok: alto si hay algún hallazgo crítico o alto; medio si lo más grave es de severidad media (por ejemplo, un dominio parecido registrado hace poco o un sitio que no redirige a HTTPS); bajo en otro caso.
+- **El nivel de riesgo lo calcula el código**, no Grok: alto si hay algún hallazgo crítico o alto; medio si lo más grave es de severidad media (por ejemplo, un dominio parecido registrado hace poco o un sitio que no redirige a HTTPS); bajo en otro caso. Se calcula con lo que se revisa en toda auditoría: el correo, el registro del dominio, los dominios parecidos y el sitio del dominio y `www`. Los hallazgos de subdominios siguen en el informe con su severidad, y una línea junto al nivel los cuenta, pero no lo mueven: cuáles se revisan lo elige Grok, y el mismo dominio daría niveles distintos. Si la auditoría se corta, el nivel sale como **provisional**.
 - **Un solo contenido, dos formatos:** el informe se arma una vez y se dibuja en Markdown y en HTML, así que nunca dicen cosas distintas. El HTML escapa todo el texto, incluido el que escribe Grok.
 - **Identidad de cada ejecución: lote > auditoría > intento.** Una corrida masiva puede reanudarse tras una caída sin contar dos veces la misma auditoría.
 
@@ -110,18 +110,18 @@ Diez dominios reales con perfiles distintos (seudonimizados), con el código fin
 
 | Perfil | Dominio | Riesgo | Pasos | Costo (USD) | Duración |
 |---|---|---|---|---|---|
-| Pyme `.com.co` con Google Workspace | `pyme-b.com.co` | ALTO | 3 | 0,043 | 42 s |
-| Microsoft 365, dominio `.net` | `pyme-g.net` | ALTO | 3 | 0,078 | 95 s |
-| Dominio `.com` (registro por RDAP) | `tienda-h.com` | ALTO | 4 | 0,058 | 77 s |
-| Marca grande `.com.co` | `pyme-a.com.co` | ALTO | 4 | 0,054 | 69 s |
-| Cientos de subdominios con certificado | `banco-i.com` | ALTO | 3 | 0,054 | 47 s |
-| Correo bien configurado (DMARC `reject`) | `empresa-d.com.co` | MEDIO | 4 | 0,067 | 67 s |
-| Sin sitio web en el dominio raíz | `pyme-e.com.co` | ALTO | 4 | 0,061 | 73 s |
-| Dominio inexistente | — | (no existe) | 2 | 0,014 | 13 s |
-| Pyme sin correo configurado | `pyme-j.com` | ALTO | 3 | 0,058 | 66 s |
-| Dominio `.co` | `empresa-k.co` | ALTO | 4 | 0,060 | 57 s |
+| Pyme `.com.co` con Google Workspace | `pyme-b.com.co` | ALTO | 5 | 0,056 | 69 s |
+| Microsoft 365, dominio `.net` | `pyme-g.net` | ALTO | 4 | 0,082 | 66 s |
+| Dominio `.com` (registro por RDAP) | `tienda-h.com` | ALTO | 4 | 0,093 | 89 s |
+| Marca grande `.com.co` | `pyme-a.com.co` | ALTO | 3 | 0,050 | 105 s |
+| Cientos de subdominios con certificado | `banco-i.com` | ALTO | 3 | 0,097 | 64 s |
+| Correo bien configurado (DMARC `reject`) | `empresa-d.com.co` | BAJO | 4 | 0,100 | 122 s |
+| Sin sitio web en el dominio raíz | `pyme-e.com.co` | ALTO | 4 | 0,106 | 107 s |
+| Dominio inexistente | — | (no existe) | 2 | 0,022 | 27 s |
+| Pyme sin correo configurado | `pyme-j.com` | ALTO | 3 | 0,046 | 53 s |
+| Dominio `.co` | `empresa-k.co` | ALTO | 3 | 0,096 | 61 s |
 
-**Las 10 cerraron con el informe entregado por Grok y ninguna con informe de respaldo.** Costo total USD 0,55; por auditoría: mediana USD 0,058 y máximo USD 0,078 (el tope es 0,20). Pasos: de 2 a 4. Duración: mediana de 66 s. Hallazgos frecuentes: claves DKIM de 1024 bits, sitios o subdominios sin HSTS, dominios sin bloqueo de transferencia y dominios parecidos con correo configurado.
+**Las 10 cerraron con el informe entregado por Grok y ninguna con informe de respaldo.** Costo total USD 0,75; por auditoría: mediana USD 0,088 y máximo USD 0,106 (el tope es 0,20). Pasos: de 2 a 5. Duración: mediana de 68 s. Hallazgos frecuentes: claves DKIM de 1024 bits, sitios o subdominios sin HSTS, dominios sin bloqueo de transferencia y dominios parecidos con correo configurado. En `empresa-d.com.co` el nivel es BAJO porque su correo, su dominio y su sitio principal están bien configurados; los hallazgos de sus subdominios aparecen en el informe y en la línea que acompaña al nivel.
 
 ## Costo medido en el hito S1
 

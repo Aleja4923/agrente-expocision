@@ -249,11 +249,12 @@ def test_limitacion_fija_parecidos_y_pie_nuevo():
 from auditor.report import limitaciones_de_subdominios  # noqa: E402
 
 
-def _ct(*nombres, total=None):
+def _ct(*nombres, total=None, con_sitio=None):
     return ResultadoHerramienta(ok=True, herramienta="subdominios_ct", datos={
         "dominio": D, "fuente": "crtsh", "total": total or len(nombres), "mostrados": len(nombres),
-        "truncados": False, "subdominios": [{"nombre": n, "ultimo_certificado_vence": None, "vigente": True}
-                                            for n in nombres]})
+        "truncados": False, "con_sitio": len(nombres) if con_sitio is None else con_sitio,
+        "subdominios": [{"nombre": n, "ultimo_certificado_vence": None, "vigente": True, "tiene_sitio": True}
+                        for n in nombres]})
 
 
 def _tls(host):
@@ -262,10 +263,11 @@ def _tls(host):
 
 def test_limitacion_subdominios_revisados():
     e = estado()
-    e.llamadas += [({"dominio": D}, _ct("pagos." + D, "webmail." + D, "admin." + D, total=40)),
+    e.llamadas += [({"dominio": D}, _ct("pagos." + D, "webmail." + D, "admin." + D, total=40, con_sitio=12)),
                    _tls(D), _tls("www." + D), _tls("pagos." + D)]
     assert limitaciones_de_subdominios(e) == [
-        "En los registros de certificados aparecen 40 subdominios; se revisaron 1: pagos.ejemplo.com.co. "
+        "En los registros de certificados aparecen 40 subdominios, 12 con sitio web; se revisaron 1: "
+        "pagos.ejemplo.com.co. "
         "Estos registros solo muestran sitios que tuvieron certificado HTTPS; puede haber otros."]
 
 
@@ -279,7 +281,7 @@ def test_limitacion_ct_fallo():
 def test_limitaciones_de_subdominios_en_el_informe():
     e = estado()
     e.llamadas += [({"dominio": D}, _ct("pagos." + D))]
-    assert "aparece 1 subdominio; no se revisó ninguno." in generar_informe(e)
+    assert "aparece 1 subdominio, con sitio web; no se revisó ninguno." in generar_informe(e)
 
 
 def test_limitacion_subdominios_cuenta_cabeceras():
@@ -370,19 +372,21 @@ def test_plantilla_security_txt():
 
 def test_limitacion_portada_si_se_revisaron_cabeceras():
     e = estado()
-    e.llamadas.append(({"host": D}, ResultadoHerramienta(ok=True, herramienta="cabeceras_web", datos={"host": D})))
+    e.llamadas.append(({"host": D}, cabeceras_ok(D)))
     assert "solo en la portada" in generar_informe(e)
     assert "solo en la portada" not in generar_informe(estado())
 
 
-@pytest.mark.parametrize("total,inicio", [
-    (0, "En los registros de certificados no aparece ningún subdominio."),
-    (1, "En los registros de certificados aparece 1 subdominio; no se revisó ninguno."),
-    (7, "En los registros de certificados aparecen 7 subdominios; no se revisó ninguno."),
+@pytest.mark.parametrize("total,con_sitio,inicio", [
+    (0, 0, "En los registros de certificados no aparece ningún subdominio."),
+    (1, 1, "En los registros de certificados aparece 1 subdominio, con sitio web; no se revisó ninguno."),
+    (1, 0, "En los registros de certificados aparece 1 subdominio, sin sitio web; no se revisó ninguno."),
+    (7, 3, "En los registros de certificados aparecen 7 subdominios, 3 con sitio web; no se revisó ninguno."),
+    (7, 0, "En los registros de certificados aparecen 7 subdominios, ninguno con sitio web; no se revisó ninguno."),
 ])
-def test_limitacion_subdominios_redaccion(total, inicio):
+def test_limitacion_subdominios_redaccion(total, con_sitio, inicio):
     e = estado()
-    e.llamadas.append(({"dominio": D}, _ct(*[f"s{i}.{D}" for i in range(total)], total=total)))
+    e.llamadas.append(({"dominio": D}, _ct(*[f"s{i}.{D}" for i in range(total)], total=total, con_sitio=con_sitio)))
     assert limitaciones_de_subdominios(e)[0].startswith(inicio)
 
 
@@ -419,3 +423,87 @@ def test_dkim_selector_sin_respuesta_no_se_da_por_no_encontrado():
         "DKIM se buscó en el selector default y no se encontró; si su proveedor usa otro nombre de selector, este "
         "informe no pudo verlo.",
         "El selector DKIM google no respondió en DNS, así que no se pudo verificar."]
+
+
+# --- security.txt no verificable: lo dice el código ---------------------------------------
+
+from auditor.report import limitaciones_de_security_txt  # noqa: E402
+
+
+def _sec(existe, codigo=200, redirige_fuera=None):
+    return ({"dominio": D}, ResultadoHerramienta(ok=True, herramienta="security_txt", datos={
+        "dominio": D, "codigo": codigo, "redirige_fuera": redirige_fuera, "existe": existe, "tiene_contact": False,
+        "expires": None, "vencido": False}))
+
+
+def test_security_txt_no_verificable_queda_como_limitacion():
+    e = estado()
+    e.llamadas.append(_sec(None, codigo=520))
+    assert limitaciones_de_security_txt(e) == [
+        "No se pudo verificar si ejemplo.com.co publica un contacto de seguridad (security.txt): el servidor "
+        "respondió con un error (código 520)."]
+    assert "código 520" in generar_informe(e)
+
+
+def test_security_txt_que_redirige_fuera_queda_como_limitacion():
+    e = estado()
+    e.llamadas.append(_sec(None, codigo=301, redirige_fuera="https://otro.com/security.txt"))
+    assert "redirige a otro dominio" in limitaciones_de_security_txt(e)[0]
+
+
+def test_security_txt_fallido_queda_como_limitacion():
+    e = estado()
+    e.llamadas.append(({"dominio": D}, ResultadoHerramienta(ok=False, herramienta="security_txt",
+                                                            error="tiempo_agotado", sugerencia="s")))
+    assert "no respondió" in limitaciones_de_security_txt(e)[0]
+
+
+@pytest.mark.parametrize("existe", [True, False])
+def test_security_txt_verificado_no_es_limitacion(existe):
+    e = estado()
+    e.llamadas.append(_sec(existe, codigo=200 if existe else 404))
+    assert limitaciones_de_security_txt(e) == []
+
+
+def test_security_txt_un_exito_posterior_tapa_la_falla():
+    e = estado()
+    e.llamadas += [_sec(None, codigo=520), _sec(False, codigo=404)]
+    assert limitaciones_de_security_txt(e) == []
+
+
+# --- semáforo: lo principal, con aviso de lo que hay en subdominios ------------------------
+
+from auditor.report import aviso_de_subdominios  # noqa: E402
+from tests.test_agent import cabeceras_ok  # noqa: E402
+
+SUB = "secure." + D
+
+
+def _tls_sub(host, **datos):
+    return ({"host": host}, ResultadoHerramienta(ok=True, herramienta="tls_certificado", datos={
+        "valido": True, "motivo": None, "vence": "2027-01-01", "dias_restantes": 80, "version_tls": "TLSv1.3",
+        "ip": "93.184.216.34", "host": host, **datos}))
+
+
+def test_aviso_de_hallazgos_que_solo_estan_en_subdominios():
+    e = estado(ids=["CORREO-DKIM-CLAVE-1024", "WEB-TLS-INVALIDO", "WEB-SIN-HTTPS"])
+    e.llamadas += [_tls_sub(D), _tls_sub(SUB, valido=False, motivo="raiz_no_confiable"),
+                   ({"host": "acceso." + D}, ResultadoHerramienta(ok=False, herramienta="tls_certificado",
+                                                                   error="sin_https", sugerencia="s"))]
+    assert aviso_de_subdominios(e) == (
+        "Este nivel mide su correo, su dominio y su sitio principal. En otros sitios de su dominio "
+        "(subdominios) hay además 1 hallazgo crítico y 1 alto; están en la lista de abajo.")
+    assert aviso_de_subdominios(e) in generar_informe(e)
+
+
+def test_sin_hallazgos_solo_en_subdominios_no_hay_aviso():
+    e = estado(ids=["CORREO-DKIM-CLAVE-1024"])
+    e.llamadas.append(_tls_sub(SUB))
+    assert aviso_de_subdominios(e) is None
+    assert "subdominios) hay además" not in generar_informe(e)
+
+
+def test_respaldo_dice_nivel_provisional():
+    md = generar_informe(estado(nivel="bajo", respaldo=True))
+    assert "**Nivel de riesgo provisional: 🟢 BAJO**" in md
+    assert "**Nivel de riesgo provisional" not in generar_informe(estado(nivel="bajo"))

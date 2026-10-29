@@ -67,3 +67,8 @@ def test_guardar_informe_escribe_md_y_html(tmp_path):
     html = ruta.with_suffix(".html")
     assert ruta.suffix == ".md" and html.exists()
     assert html.read_text(encoding="utf-8").startswith("<!doctype html>")
+
+
+def test_html_respaldo_dice_nivel_provisional():
+    html = generar_informe_html(estado(nivel="bajo", respaldo=True))
+    assert "Nivel de riesgo provisional: BAJO" in html
