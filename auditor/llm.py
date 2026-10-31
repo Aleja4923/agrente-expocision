@@ -127,7 +127,9 @@ class ClienteLLM:
         ruta_logs: Path = RUTA_LOGS,
         dormir: Callable[[float], None] = time.sleep,
         reloj: Callable[[], float] = time.monotonic,
+        reasoning_effort: str | None = REASONING_EFFORT,
     ):
+        self.reasoning_effort = reasoning_effort
         self.lote_id, self.auditoria_id, self.intento = lote_id, auditoria_id, intento
         self.modelo, self.dominio, self.ruta_logs = modelo, dominio, ruta_logs
         self.dormir, self.reloj = dormir, reloj
@@ -160,8 +162,8 @@ class ClienteLLM:
         }
         if herramientas:
             kw["tools"] = herramientas
-        if REASONING_EFFORT:
-            kw["reasoning_effort"] = REASONING_EFFORT
+        if self.reasoning_effort:
+            kw["reasoning_effort"] = self.reasoning_effort
         inicio = self.reloj()
 
         def parar(estado: RetryCallState) -> bool:

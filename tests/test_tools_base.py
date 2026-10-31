@@ -173,3 +173,36 @@ def test_sin_validador_registrado_rechaza(parecido, monkeypatch):
     r = base.ejecutar("_prueba_parecido", {"dominio": "ejemplo.com.co", "parecido": "ejernplo.com.co"},
                       "ejemplo.com.co")
     assert r.error == "fuera_de_alcance"
+
+
+def test_sustituta_reemplaza_solo_la_funcion_final():
+    import auditor.tools  # noqa: F401  (registra las herramientas)
+    falsa = lambda e: ResultadoHerramienta(ok=True, herramienta="dns_correo", datos={"de": "grabacion"})  # noqa: E731
+    r = base.ejecutar("dns_correo", {"dominio": "ejemplo.com"}, "ejemplo.com", sustituta=falsa)
+    assert r.ok and r.datos == {"de": "grabacion"}
+
+
+def test_sustituta_recibe_la_entrada_normalizada():
+    import auditor.tools  # noqa: F401
+    recibidas = []
+
+    def falsa(entrada):
+        recibidas.append(entrada.dominio)
+        return ResultadoHerramienta(ok=True, herramienta="dns_correo")
+
+    base.ejecutar("dns_correo", {"dominio": "EJEMPLO.com."}, "ejemplo.com", sustituta=falsa)
+    assert recibidas == ["ejemplo.com"]
+
+
+def test_sustituta_no_salta_el_alcance():
+    import auditor.tools  # noqa: F401
+    r = base.ejecutar("dns_correo", {"dominio": "ajeno.com"}, "ejemplo.com",
+                      sustituta=lambda e: pytest.fail("no debió ejecutarse"))
+    assert r.error == "fuera_de_alcance"
+
+
+def test_sustituta_no_salta_el_validador_de_parecidos():
+    import auditor.tools  # noqa: F401
+    r = base.ejecutar("investigar_parecido", {"dominio": "ejemplo.com", "parecido": "otro.com"}, "ejemplo.com",
+                      sustituta=lambda e: pytest.fail("no debió ejecutarse"))
+    assert r.error == "fuera_de_alcance"

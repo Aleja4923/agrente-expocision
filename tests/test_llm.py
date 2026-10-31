@@ -242,3 +242,15 @@ def test_error_enmascara_llave(tmp_path):
         c.completar([])
     assert "pk_FALSA" not in str(e.value)
     assert "pk_FALSA" not in next(tmp_path.glob("bitacora-*.jsonl")).read_text(encoding="utf-8")
+
+
+def test_reasoning_effort_se_envia_si_se_pide(tmp_path):
+    falso = GrokFalso(respuesta())
+    cliente(falso, tmp_path, reasoning_effort="low").completar([{"role": "user", "content": "hola"}])
+    assert falso.llamadas[0]["reasoning_effort"] == "low"
+
+
+def test_reasoning_effort_no_se_envia_por_defecto(tmp_path):
+    falso = GrokFalso(respuesta())
+    cliente(falso, tmp_path).completar([{"role": "user", "content": "hola"}])
+    assert "reasoning_effort" not in falso.llamadas[0]

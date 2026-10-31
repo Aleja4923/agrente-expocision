@@ -111,8 +111,12 @@ def esquemas_para_grok(nombres: list[str] | None = None) -> list[dict[str, Any]]
     ]
 
 
-def ejecutar(nombre: str, argumentos: str | dict[str, Any], objetivo: str) -> ResultadoHerramienta:
-    """Valida, aplica guardas y ejecuta una herramienta. Nunca lanza excepciones."""
+def ejecutar(nombre: str, argumentos: str | dict[str, Any], objetivo: str,
+             sustituta: Callable[[BaseModel], ResultadoHerramienta] | None = None) -> ResultadoHerramienta:
+    """Valida, aplica guardas y ejecuta una herramienta. Nunca lanza excepciones.
+
+    `sustituta` reemplaza solo la función final (evals/ entrega así lo grabado): las guardas corren igual.
+    """
     inicio = time.perf_counter()
 
     def fallo(error: str, sugerencia: str) -> ResultadoHerramienta:
@@ -146,7 +150,7 @@ def ejecutar(nombre: str, argumentos: str | dict[str, Any], objetivo: str) -> Re
         cambios[herramienta.campo_parecido] = parecido
     entrada = entrada.model_copy(update=cambios)
     try:
-        resultado = herramienta.funcion(entrada)
+        resultado = (sustituta or herramienta.funcion)(entrada)
     except Exception as e:  # noqa: BLE001 - ninguna herramienta puede tumbar el bucle
         return fallo(f"error_interno: {type(e).__name__}", "Error inesperado; prueba otra herramienta o entrega.")
     resultado.duracion_ms = int((time.perf_counter() - inicio) * 1000)
