@@ -1,0 +1,821 @@
+{
+  "id": "real-16",
+  "origen": "real",
+  "perfil": "pyme_estandar",
+  "grabado_el": "2026-11-05",
+  "dominio": "pyme-q.com.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "pyme-q.com.co",
+        "mx": {
+          "servidores": [],
+          "proveedor": "ninguno"
+        },
+        "spf": {
+          "registros": [],
+          "cantidad": 0,
+          "cierre": "ninguno",
+          "consultas_dns": 0,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": false,
+          "valido": false,
+          "multiple": false,
+          "p": null,
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [],
+        "txt_dmarc": []
+      },
+      "duracion_ms": 314
+    },
+    "whois_dominio|pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "pyme-q.com.co",
+        "fuente": "whois",
+        "creado": "2003-04-08T00:00:00+00:00",
+        "vence": "2027-04-09T23:59:59+00:00",
+        "dias_para_vencer": 155,
+        "estados": [
+          "ok"
+        ],
+        "bloqueo_transferencia": false,
+        "servidores_nombre": [
+          "externo-1.example",
+          "externo-2.example",
+          "externo-3.example",
+          "externo-4.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 223
+    },
+    "security_txt|pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "pyme-q.com.co",
+        "codigo": 403,
+        "redirige_fuera": null,
+        "existe": null,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 350
+    },
+    "buscar_parecidos|pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "pyme-q.com.co",
+        "generadas": 19,
+        "truncadas": false,
+        "existentes": 2,
+        "con_correo": [
+          {
+            "dominio": "pyme-q.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "aspmx.l.google.com",
+              "alt1.aspmx.l.google.com",
+              "alt2.aspmx.l.google.com",
+              "alt3.aspmx.l.google.com",
+              "alt4.aspmx.l.google.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "pyme-q.com",
+            "tipo": "otro_tld",
+            "mx": [
+              "externo-5.example",
+              "externo-6.example"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "externo-3.example",
+          "externo-4.example",
+          "externo-2.example",
+          "externo-1.example"
+        ],
+        "mx_propios": []
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 235
+    },
+    "subdominios_ct|pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "pyme-q.com.co",
+        "fuente": "crtsh",
+        "total": 21,
+        "mostrados": 21,
+        "truncados": false,
+        "con_sitio": 9,
+        "subdominios": [
+          {
+            "nombre": "click.social.pyme-q.com.co",
+            "ultimo_certificado_vence": "2026-12-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "image.social.pyme-q.com.co",
+            "ultimo_certificado_vence": "2027-04-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "view.social.pyme-q.com.co",
+            "ultimo_certificado_vence": "2026-12-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "dev.pyme-q.com.co",
+            "ultimo_certificado_vence": "2023-05-15",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "new.pyme-q.com.co",
+            "ultimo_certificado_vence": "2021-05-25",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "novedades.pyme-q.com.co",
+            "ultimo_certificado_vence": "2025-08-03",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ofertas.pyme-q.com.co",
+            "ultimo_certificado_vence": "2025-10-20",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "referidos.pyme-q.com.co",
+            "ultimo_certificado_vence": "2022-12-10",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.pyme-q.com.co",
+            "ultimo_certificado_vence": "2024-02-04",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "a.pyme-q.com.co",
+            "ultimo_certificado_vence": "2023-11-14",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "aniversario.pyme-q.com.co",
+            "ultimo_certificado_vence": "2019-12-12",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "bi.pyme-q.com.co",
+            "ultimo_certificado_vence": "2023-08-02",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "corporativos.pyme-q.com.co",
+            "ultimo_certificado_vence": "2023-12-22",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "develop.pyme-q.com.co",
+            "ultimo_certificado_vence": "2023-03-06",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "entrena.pyme-q.com.co",
+            "ultimo_certificado_vence": "2020-04-21",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "gac.pyme-q.com.co",
+            "ultimo_certificado_vence": "2023-09-23",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "mujer2020.pyme-q.com.co",
+            "ultimo_certificado_vence": "2020-10-07",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "campana.pyme-q.com.co",
+            "ultimo_certificado_vence": "2020-04-04",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "staging.pyme-q.com.co",
+            "ultimo_certificado_vence": "2021-06-14",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "cloud.social.pyme-q.com.co",
+            "ultimo_certificado_vence": "2026-10-06",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.develop.pyme-q.com.co",
+            "ultimo_certificado_vence": "2022-02-15",
+            "vigente": false,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 22102
+    },
+    "dkim_selector|pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "pyme-q.com.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s1.domainkey.u10850132.wl133.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s2.domainkey.u10850132.wl133.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|image.social.pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-14",
+        "dias_restantes": 160,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "image.social.pyme-q.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 104
+    },
+    "tls_certificado|www.pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-09",
+        "dias_restantes": 124,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "www.pyme-q.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 166
+    },
+    "tls_certificado|pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-09",
+        "dias_restantes": 124,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "pyme-q.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 181
+    },
+    "tls_certificado|click.social.pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "nombre_no_coincide",
+        "vence": "2027-03-06",
+        "dias_restantes": 121,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.4",
+        "host": "click.social.pyme-q.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 349
+    },
+    "cabeceras_web|www.pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.pyme-q.com.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://www.pyme-q.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 458
+    },
+    "cabeceras_web|pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "pyme-q.com.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://pyme-q.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 470
+    },
+    "cabeceras_web|click.social.pyme-q.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 351
+    },
+    "tls_certificado|dev.pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-09",
+        "dias_restantes": 124,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "dev.pyme-q.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 175
+    },
+    "tls_certificado|view.social.pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "nombre_no_coincide",
+        "vence": "2027-01-18",
+        "dias_restantes": 74,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "view.social.pyme-q.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 345
+    },
+    "cabeceras_web|image.social.pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "image.social.pyme-q.com.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://image.social.pyme-q.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 963
+    },
+    "cabeceras_web|dev.pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "dev.pyme-q.com.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://dev.pyme-q.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 470
+    },
+    "cabeceras_web|view.social.pyme-q.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 336
+    },
+    "tls_certificado|novedades.pyme-q.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "nombre_no_coincide",
+        "vence": "2026-12-20",
+        "dias_restantes": 44,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "novedades.pyme-q.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 375
+    },
+    "tls_certificado|ofertas.pyme-q.com.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tls_fallido",
+      "sugerencia": "El servidor no completó la conexión segura; puede usar una versión de TLS muy antigua.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 181
+    },
+    "cabeceras_web|ofertas.pyme-q.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tls_fallido",
+      "sugerencia": "El servidor no completó la conexión segura; tls_certificado da el detalle.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 323
+    },
+    "cabeceras_web|novedades.pyme-q.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 358
+    },
+    "tls_certificado|new.pyme-q.com.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5017
+    },
+    "tls_certificado|referidos.pyme-q.com.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5019
+    },
+    "cabeceras_web|new.pyme-q.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20032
+    },
+    "cabeceras_web|referidos.pyme-q.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20031
+    },
+    "investigar_parecido|pyme-q.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "pyme-q.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2014-04-28T16:41:01+00:00",
+        "dias_desde_registro": 4573,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 461
+    },
+    "investigar_parecido|pyme-q.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "pyme-q.com",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1999-01-06T05:00:00+00:00",
+        "dias_desde_registro": 10165,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 725
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-SIN-MX",
+      "CORREO-SPF-AUSENTE",
+      "CORREO-DMARC-AUSENTE",
+      "DOMINIO-SIN-BLOQUEO",
+      "WEB-SIN-REDIRECCION-HTTPS",
+      "WEB-SIN-HSTS",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "WEB-TLS-INVALIDO@novedades.pyme-q.com.co",
+      "WEB-TLS-INVALIDO@click.social.pyme-q.com.co",
+      "CORREO-DKIM-CLAVE-1024@s2"
+    ],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT",
+      "WEB-SIN-PROTECCION-MARCOS",
+      "WEB-VERSION-EXPUESTA"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

@@ -32,6 +32,7 @@ class Mapa(BaseModel):
     seudonimo: str
     parecidos: dict[str, str] = {}
     nombres_libres: list[str] = []
+    etiquetas: dict[str, str] = {}  # trozos de subdominio que delatan a la empresa (marca, campaña) -> genérico
 
 
 def _etiqueta(registrable: str) -> str:
@@ -72,11 +73,11 @@ def mapear_parecidos(reales: list[Variante], seudonimo: str, existe: Callable[[s
     return mapa
 
 
-def _patron_nombres(mapa: Mapa, palabra_completa: bool) -> re.Pattern:
-    """Nombres libres y etiqueta real; en texto libre solo como palabra completa ("habi" no toca "habilitado")."""
+def _patron_nombres(mapa: Mapa) -> re.Pattern:
+    """Nombres libres y etiqueta real en texto libre, solo como palabra completa ("habi" no toca "habilitado")."""
     nombres = sorted({*mapa.nombres_libres, _etiqueta(mapa.real)}, key=len, reverse=True)
     cuerpo = "|".join(re.escape(n) for n in nombres)
-    return re.compile(rf"(?<![^\W_])(?:{cuerpo})(?![^\W_])" if palabra_completa else cuerpo, re.IGNORECASE)
+    return re.compile(rf"(?<![^\W_])(?:{cuerpo})(?![^\W_])", re.IGNORECASE)
 
 
 class _Reescritor:
@@ -84,8 +85,14 @@ class _Reescritor:
         self.mapa = mapa
         self.etiqueta = _etiqueta(mapa.seudonimo)
         self.dominios = [(mapa.real, mapa.seudonimo), *mapa.parecidos.items()]
-        self.libres_texto = _patron_nombres(mapa, palabra_completa=True)
-        self.libres_dominio = _patron_nombres(mapa, palabra_completa=False)
+        self.libres_texto = _patron_nombres(mapa)
+        # Dentro de un nombre de dominio: nombres libres y etiqueta real -> etiqueta del seudónimo, y la etiqueta
+        # de cada parecido -> la de su variante (Microsoft pone el nombre del dominio en su MX: x-co.mail...).
+        self.cambio_etiqueta = {_etiqueta(r).lower(): _etiqueta(f) for r, f in mapa.parecidos.items()}
+        self.cambio_etiqueta |= {n.lower(): self.etiqueta for n in (*mapa.nombres_libres, _etiqueta(mapa.real))}
+        self.cambio_etiqueta |= {k.lower(): v for k, v in mapa.etiquetas.items()}
+        cuerpo = "|".join(re.escape(n) for n in sorted(self.cambio_etiqueta, key=len, reverse=True))
+        self.libres_dominio = re.compile(cuerpo, re.IGNORECASE)
         self.externos: dict[str, str] = {}
         self.ips: dict[str, str] = {}
 
@@ -94,7 +101,7 @@ class _Reescritor:
 
     def _etiquetas(self, prefijo: str) -> str:
         """Dentro de un nombre de dominio el nombre real se borra aunque esté pegado a otra palabra."""
-        return self.libres_dominio.sub(self.etiqueta, prefijo)
+        return self.libres_dominio.sub(lambda m: self.cambio_etiqueta[m.group().lower()], prefijo)
 
     def dominio(self, d: str) -> str:
         d = d.lower().rstrip(".")
@@ -171,6 +178,7 @@ def restos_reales(texto: str, mapa: Mapa) -> list[str]:
     bajo = texto.lower()
     dominios = [mapa.real, *mapa.parecidos]
     restos = {d for d in dominios if d in bajo}
-    restos |= {m.group().lower() for m in _patron_nombres(mapa, palabra_completa=True).finditer(texto)}
+    restos |= {m.group().lower() for m in _patron_nombres(mapa).finditer(texto)}
     etiquetas = [_etiqueta(p) for p in dominios]
+    restos |= {k.lower() for k in mapa.etiquetas if k.lower() in bajo}
     return sorted(restos | {e for e in etiquetas if re.search(rf"(?<![^\W_]){re.escape(e)}(?![^\W_])", bajo)})

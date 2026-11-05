@@ -22,15 +22,15 @@
         },
         "spf": {
           "registros": [
-            "v=spf1 ip4:203.0.113.10 include:_spf.google.com -all"
+            "v=spf1 a:h0.fab-10.com.co a:h1.fab-10.com.co a:h2.fab-10.com.co a:h3.fab-10.com.co a:h4.fab-10.com.co a:h5.fab-10.com.co a:h6.fab-10.com.co a:h7.fab-10.com.co a:h8.fab-10.com.co a:h9.fab-10.com.co a:h10.fab-10.com.co -all"
           ],
           "cantidad": 1,
           "cierre": "-all",
-          "consultas_dns": 1,
+          "consultas_dns": 11,
           "consultas_vacias": 0,
           "consultas_con_error": 0,
-          "permerror": false,
-          "detalle": null
+          "permerror": true,
+          "detalle": "más de 10 consultas DNS"
         },
         "dmarc": {
           "existe": true,
@@ -54,7 +54,7 @@
       "sugerencia": null,
       "contenido_no_confiable": {
         "txt_dominio": [
-          "v=spf1 ip4:203.0.113.10 include:_spf.google.com -all"
+          "v=spf1 a:h0.fab-10.com.co a:h1.fab-10.com.co a:h2.fab-10.com.co a:h3.fab-10.com.co a:h4.fab-10.com.co a:h5.fab-10.com.co a:h6.fab-10.com.co a:h7.fab-10.com.co a:h8.fab-10.com.co a:h9.fab-10.com.co a:h10.fab-10.com.co -all"
         ],
         "txt_dmarc": [
           "v=DMARC1; p=reject; rua=mailto:dmarc@fab-10.com.co"
@@ -140,8 +140,17 @@
         "dominio": "fab-10.com.co",
         "generadas": 20,
         "truncadas": false,
-        "existentes": 0,
-        "con_correo": [],
+        "existentes": 1,
+        "con_correo": [
+          {
+            "dominio": "ab-10.com.co",
+            "tipo": "omision",
+            "mx": [
+              "mx.ab-10.com.co"
+            ],
+            "comparte_servidores": false
+          }
+        ],
         "sin_verificar": [],
         "ns_propios": [
           "ns1.fab-10.com.co",
@@ -285,16 +294,42 @@
         ]
       },
       "duracion_ms": 0
+    },
+    "investigar_parecido|ab-10.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "ab-10.com.co",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2026-10-23T00:00:00+00:00",
+        "dias_desde_registro": 10,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
     }
   },
   "esperado": {
     "nivel_esperado": "alto",
     "hallazgos_obligatorios": [
-      "DOMINIO-VENCIDO"
+      "DOMINIO-VENCIDO",
+      "CORREO-SPF-LOOKUPS"
     ],
-    "hallazgos_por_decision": [],
+    "hallazgos_por_decision": [
+      "PARECIDO-RECIENTE@ab-10.com.co"
+    ],
     "hallazgos_prohibidos": [
-      "WEB-SIN-SECURITY-TXT"
+      "WEB-SIN-SECURITY-TXT",
+      "PARECIDO-ENVIA"
     ],
     "cierre_esperado": "informe_entregado"
   },

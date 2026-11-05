@@ -235,14 +235,22 @@ def construir() -> list[Caso]:
         clave("dns_correo", d): dns(d, txt=[SPF_SANO, "v=spf1 ip4:203.0.113.20 -all"],
                                     txt_dmarc=[f"v=DMARC1; p=bloquear; rua=mailto:dmarc@{d}"]),
         clave("dkim_selector", d): dkim(d, bits=512),
-        clave("tls_certificado", d): tls(d, version="TLSv1")}),
+        clave("tls_certificado", d): tls(d, version="TLSv1"),
+        clave("whois_dominio", d): whois(d, vence=20)}),
         "alto", obligatorios=["CORREO-SPF-MULTIPLE", "CORREO-DMARC-INVALIDO", "CORREO-DKIM-CLAVE-DEBIL",
-                              "WEB-TLS-VERSION-VIEJA"]))
+                              "WEB-TLS-VERSION-VIEJA", "DOMINIO-POR-VENCER"]))
 
+    # Además de lo suyo, cubre dos reglas que no salieron en los 25 reales: SPF con más de 10 consultas y un
+    # parecido recién registrado que recibe correo pero cuyo SPF no autoriza envío.
     d = "fab-10.com.co"
+    reciente = variante(d, "omision")
     casos.append(caso("fab-10", d, "pyme_estandar", sano(d, {
-        clave("whois_dominio", d): whois(d, vence=-5), clave("security_txt", d): security(d, codigo=520)}),
-        "alto", obligatorios=["DOMINIO-VENCIDO"], prohibidos=["WEB-SIN-SECURITY-TXT"]))
+        clave("dns_correo", d): dns(d, txt=["v=spf1 " + " ".join(f"a:h{i}.{d}" for i in range(11)) + " -all"]),
+        clave("whois_dominio", d): whois(d, vence=-5), clave("security_txt", d): security(d, codigo=520),
+        clave("buscar_parecidos", d): busqueda(d, [(reciente, "omision", False)]),
+        clave("investigar_parecido", reciente): investigacion(reciente, "omision", dias=10, spf=False)}),
+        "alto", obligatorios=["DOMINIO-VENCIDO", "CORREO-SPF-LOOKUPS"], por_decision=[f"PARECIDO-RECIENTE@{reciente}"],
+        prohibidos=["WEB-SIN-SECURITY-TXT", "PARECIDO-ENVIA"]))
     return casos
 
 

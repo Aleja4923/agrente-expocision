@@ -1,0 +1,2180 @@
+{
+  "id": "real-21",
+  "origen": "real",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-05",
+  "dominio": "tienda-v.com",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|tienda-v.com": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "tienda-v.com",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 0,
+              "host": "tienda-v-com.mail.protection.outlook.com"
+            }
+          ],
+          "proveedor": "microsoft"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3 ip4:203.0.113.4 ip4:203.0.113.5 include:spf.protection.outlook.com include:spf.mandrillapp.com include:mailgun.org include:externo-1.example -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 8,
+          "consultas_vacias": 1,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "reject",
+          "p_ausente": false,
+          "sp": "reject",
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@tienda-v.com",
+            "mailto:contacto@tienda-v.com"
+          ],
+          "pct": 100,
+          "etiquetas_obsoletas": [
+            "pct"
+          ],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3 ip4:203.0.113.4 ip4:203.0.113.5 include:spf.protection.outlook.com include:spf.mandrillapp.com include:mailgun.org include:externo-1.example -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=reject; sp=reject; pct=100; rua=mailto:contacto@tienda-v.com,mailto:contacto@tienda-v.com; adkim=s; aspf=s;"
+        ]
+      },
+      "duracion_ms": 1040
+    },
+    "whois_dominio|tienda-v.com": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "tienda-v.com",
+        "fuente": "rdap",
+        "creado": "2001-04-04T11:34:57+00:00",
+        "vence": "2027-04-04T11:34:57+00:00",
+        "dias_para_vencer": 150,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "pdns13.domaincontrol.com",
+          "pdns14.domaincontrol.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 357
+    },
+    "security_txt|tienda-v.com": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "tienda-v.com",
+        "codigo": 404,
+        "redirige_fuera": null,
+        "existe": false,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 866
+    },
+    "buscar_parecidos|tienda-v.com": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "tienda-v.com",
+        "generadas": 26,
+        "truncadas": false,
+        "existentes": 12,
+        "con_correo": [
+          {
+            "dominio": "tienda-v.com.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "externo-2.example"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "ienda-v.com",
+            "tipo": "omision",
+            "mx": [
+              "aspmx.l.google.com",
+              "alt1.aspmx.l.google.com",
+              "alt2.aspmx.l.google.com",
+              "alt3.aspmx.l.google.com",
+              "alt4.aspmx.l.google.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "itenda-v.com",
+            "tipo": "transposicion",
+            "mx": [
+              "localhost"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "ttienda-v.com",
+            "tipo": "duplicacion",
+            "mx": [
+              "externo-3.example"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [
+          "teinda-v.com"
+        ],
+        "ns_propios": [
+          "pdns14.domaincontrol.com",
+          "pdns13.domaincontrol.com"
+        ],
+        "mx_propios": [
+          "tienda-v-com.mail.protection.outlook.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 5626
+    },
+    "subdominios_ct|tienda-v.com": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "tienda-v.com",
+        "fuente": "crtsh",
+        "total": 42,
+        "mostrados": 42,
+        "truncados": false,
+        "con_sitio": 32,
+        "subdominios": [
+          {
+            "nombre": "bo.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "catalog.tienda-v.com",
+            "ultimo_certificado_vence": "2027-01-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cl.tienda-v.com",
+            "ultimo_certificado_vence": "2026-12-22",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "co.tienda-v.com",
+            "ultimo_certificado_vence": "2026-12-18",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cr.tienda-v.com",
+            "ultimo_certificado_vence": "2026-12-17",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ec.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "gt.tienda-v.com",
+            "ultimo_certificado_vence": "2026-12-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "gy.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "hn.tienda-v.com",
+            "ultimo_certificado_vence": "2026-12-30",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "msg.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "mx.tienda-v.com",
+            "ultimo_certificado_vence": "2026-12-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "pe.tienda-v.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "pr.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "pty.tienda-v.com",
+            "ultimo_certificado_vence": "2026-12-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "referidos-tienda-v-members.tienda-v.com",
+            "ultimo_certificado_vence": "2027-01-08",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "s3r1vc3p4ym3ntb2b.tienda-v.com",
+            "ultimo_certificado_vence": "2027-02-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sostenibilidad.tienda-v.com",
+            "ultimo_certificado_vence": "2027-01-05",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sv.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.gy.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-10",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "autodiscover.tienda-v.com",
+            "ultimo_certificado_vence": "2015-09-30",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "catalogo.tienda-v.com",
+            "ultimo_certificado_vence": "2026-06-22",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "do.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-01",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "expedicion.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-01",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "nic.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-01",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "smtp.tienda-v.com",
+            "ultimo_certificado_vence": "2017-11-29",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "static.tienda-v.com",
+            "ultimo_certificado_vence": "2018-03-04",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ventascorporativas.tienda-v.com",
+            "ultimo_certificado_vence": "2026-10-06",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.tienda-v.com",
+            "ultimo_certificado_vence": "2017-12-26",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ventascorporativas.ec.tienda-v.com",
+            "ultimo_certificado_vence": "2026-10-25",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.nic.tienda-v.com",
+            "ultimo_certificado_vence": "2026-11-02",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.us.tienda-v.com",
+            "ultimo_certificado_vence": "2017-11-12",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.ventascorporativas.tienda-v.com",
+            "ultimo_certificado_vence": "2026-10-06",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "us.tienda-v.com",
+            "ultimo_certificado_vence": "2026-12-28",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.s3r1vc3p4ym3ntb2b.tienda-v.com",
+            "ultimo_certificado_vence": "2027-02-13",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "extranet.tienda-v.com",
+            "ultimo_certificado_vence": "2026-03-02",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "hybrid.tienda-v.com",
+            "ultimo_certificado_vence": "2015-09-30",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "legacy.tienda-v.com",
+            "ultimo_certificado_vence": "2015-09-30",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "testing.tienda-v.com",
+            "ultimo_certificado_vence": "2024-01-10",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "testingqa.tienda-v.com",
+            "ultimo_certificado_vence": "2024-01-23",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "ttrack.tienda-v.com",
+            "ultimo_certificado_vence": "2017-12-21",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "webmail.tienda-v.com",
+            "ultimo_certificado_vence": "2015-09-30",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.static.tienda-v.com",
+            "ultimo_certificado_vence": "2018-03-04",
+            "vigente": false,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 17098
+    },
+    "dkim_selector|tienda-v.com": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "tienda-v.com",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-4.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-5.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "selector1": "[omitido]",
+        "selector2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|bo.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-11-21",
+        "dias_restantes": 15,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "bo.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 181
+    },
+    "tls_certificado|catalog.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-09",
+        "dias_restantes": 64,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "catalog.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 345
+    },
+    "tls_certificado|www.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-13",
+        "dias_restantes": 99,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "www.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 593
+    },
+    "tls_certificado|tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-13",
+        "dias_restantes": 99,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 622
+    },
+    "cabeceras_web|bo.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "bo.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://bo.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1756
+    },
+    "tls_certificado|cl.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-22",
+        "dias_restantes": 46,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "cl.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 196
+    },
+    "cabeceras_web|catalog.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "catalog.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://co.tienda-v.com/",
+        "redirecciones": 2,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 2364
+    },
+    "tls_certificado|co.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-18",
+        "dias_restantes": 43,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "co.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 203
+    },
+    "cabeceras_web|co.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "co.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://co.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 453
+    },
+    "cabeceras_web|cl.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "cl.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://cl.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1417
+    },
+    "tls_certificado|cr.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-17",
+        "dias_restantes": 41,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.11",
+        "host": "cr.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 199
+    },
+    "tls_certificado|ec.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-11-21",
+        "dias_restantes": 15,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.12",
+        "host": "ec.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 175
+    },
+    "cabeceras_web|tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://co.tienda-v.com/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 3655
+    },
+    "cabeceras_web|www.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://co.tienda-v.com/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 3738
+    },
+    "tls_certificado|gt.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-29",
+        "dias_restantes": 54,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.13",
+        "host": "gt.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 238
+    },
+    "tls_certificado|gy.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-28",
+        "dias_restantes": 83,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.14",
+        "host": "gy.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 244
+    },
+    "cabeceras_web|cr.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "cr.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://cr.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1633
+    },
+    "tls_certificado|hn.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-30",
+        "dias_restantes": 55,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.14",
+        "host": "hn.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 375
+    },
+    "cabeceras_web|ec.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ec.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://ec.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1873
+    },
+    "tls_certificado|msg.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-27",
+        "dias_restantes": 82,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.15",
+        "host": "msg.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 591
+    },
+    "cabeceras_web|gt.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "gt.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://gt.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1986
+    },
+    "cabeceras_web|gy.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "gy.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://gy.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 7889238,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 2116
+    },
+    "tls_certificado|mx.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-07",
+        "dias_restantes": 32,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.16",
+        "host": "mx.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 464
+    },
+    "tls_certificado|pe.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 50,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.17",
+        "host": "pe.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 346
+    },
+    "cabeceras_web|hn.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "hn.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://hn.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 7889238,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1582
+    },
+    "tls_certificado|pr.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-28",
+        "dias_restantes": 83,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.18",
+        "host": "pr.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 148
+    },
+    "cabeceras_web|pe.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "pe.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 400,
+        "url_final": "https://pe.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 463
+    },
+    "tls_certificado|pty.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-29",
+        "dias_restantes": 54,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.14",
+        "host": "pty.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 218
+    },
+    "cabeceras_web|pr.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "pr.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://pr.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 634
+    },
+    "cabeceras_web|msg.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "msg.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 404,
+        "url_final": "https://msg.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1951
+    },
+    "tls_certificado|referidos-tienda-v-members.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-08",
+        "dias_restantes": 64,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.19",
+        "host": "referidos-tienda-v-members.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 229
+    },
+    "cabeceras_web|pty.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "pty.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://pty.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 7889238,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1161
+    },
+    "cabeceras_web|mx.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "mx.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://mx.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 2074
+    },
+    "tls_certificado|sv.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-20",
+        "dias_restantes": 75,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.20",
+        "host": "sv.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 136
+    },
+    "tls_certificado|sostenibilidad.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-05",
+        "dias_restantes": 60,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.21",
+        "host": "sostenibilidad.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 340
+    },
+    "cabeceras_web|referidos-tienda-v-members.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "referidos-tienda-v-members.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://referidos-tienda-v-members.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 2155
+    },
+    "cabeceras_web|sostenibilidad.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sostenibilidad.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sostenibilidad.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 1394
+    },
+    "tls_certificado|www.gy.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-09",
+        "dias_restantes": 64,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.22",
+        "host": "www.gy.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 375
+    },
+    "cabeceras_web|sv.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sv.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sv.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 2536
+    },
+    "tls_certificado|catalogo.tienda-v.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tls_fallido",
+      "sugerencia": "El servidor no completó la conexión segura; puede usar una versión de TLS muy antigua.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 632
+    },
+    "cabeceras_web|www.gy.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.gy.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 429,
+        "url_final": "https://gy.tienda-v.com/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 1668
+    },
+    "tls_certificado|do.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-15",
+        "dias_restantes": 71,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.23",
+        "host": "do.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 197
+    },
+    "cabeceras_web|catalogo.tienda-v.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tls_fallido",
+      "sugerencia": "El servidor no completó la conexión segura; tls_certificado da el detalle.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 723
+    },
+    "tls_certificado|s3r1vc3p4ym3ntb2b.tienda-v.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5031
+    },
+    "tls_certificado|expedicion.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-31",
+        "dias_restantes": 56,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.24",
+        "host": "expedicion.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 146
+    },
+    "tls_certificado|autodiscover.tienda-v.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "sin_https",
+      "sugerencia": "El host no acepta conexiones HTTPS en el puerto 443; repórtalo, no reintentes.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 2698
+    },
+    "cabeceras_web|expedicion.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "expedicion.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://expedicion.tienda-v.com/iniciar-sesion",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 63072000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1375
+    },
+    "cabeceras_web|do.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "do.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://do.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 2125
+    },
+    "tls_certificado|nic.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-31",
+        "dias_restantes": 56,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.14",
+        "host": "nic.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 234
+    },
+    "cabeceras_web|nic.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "nic.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://nic.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 7889238,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1280
+    },
+    "tls_certificado|static.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "nombre_no_coincide",
+        "vence": "2027-02-26",
+        "dias_restantes": 113,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.25",
+        "host": "static.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 527
+    },
+    "cabeceras_web|static.tienda-v.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 587
+    },
+    "tls_certificado|ventascorporativas.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-18",
+        "dias_restantes": 74,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.26",
+        "host": "ventascorporativas.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 117
+    },
+    "cabeceras_web|autodiscover.tienda-v.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "sin_conexion",
+      "sugerencia": "El sitio no acepta conexiones; si no hay sitio web, declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5492
+    },
+    "tls_certificado|ventascorporativas.ec.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-22",
+        "dias_restantes": 47,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.27",
+        "host": "ventascorporativas.ec.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 234
+    },
+    "tls_certificado|smtp.tienda-v.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5021
+    },
+    "cabeceras_web|ventascorporativas.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ventascorporativas.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://ventascorporativas.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 3015
+    },
+    "tls_certificado|www.nic.tienda-v.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-31",
+        "dias_restantes": 55,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.22",
+        "host": "www.nic.tienda-v.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 228
+    },
+    "cabeceras_web|ventascorporativas.ec.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ventascorporativas.ec.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://ventascorporativas.ec.tienda-v.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1964
+    },
+    "cabeceras_web|www.nic.tienda-v.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.nic.tienda-v.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://nic.tienda-v.com/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 7889238,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1794
+    },
+    "tls_certificado|www.us.tienda-v.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5033
+    },
+    "cabeceras_web|s3r1vc3p4ym3ntb2b.tienda-v.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20032
+    },
+    "cabeceras_web|smtp.tienda-v.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20040
+    },
+    "cabeceras_web|www.us.tienda-v.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20070
+    },
+    "investigar_parecido|ttienda-v.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "ttienda-v.com",
+        "tipo": "duplicacion",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2018-02-10T14:18:10+00:00",
+        "dias_desde_registro": 3189,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 547
+    },
+    "investigar_parecido|ienda-v.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "ienda-v.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1993-10-28T04:00:00+00:00",
+        "dias_desde_registro": 12061,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 2042
+    },
+    "investigar_parecido|tienda-v.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tienda-v.com.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2016-03-01T18:04:23+00:00",
+        "dias_desde_registro": 3900,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 2297
+    },
+    "investigar_parecido|itenda-v.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "itenda-v.com",
+        "tipo": "transposicion",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2002-12-26T07:03:06+00:00",
+        "dias_desde_registro": 8715,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 3571
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-DMARC-OBSOLETO",
+      "CORREO-DKIM-CLAVE-1024",
+      "WEB-SIN-SECURITY-TXT",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "PARECIDO-ENVIA@ttienda-v.com",
+      "WEB-TLS-POR-VENCER@bo.tienda-v.com",
+      "WEB-TLS-INVALIDO@static.tienda-v.com",
+      "WEB-SIN-HTTPS@autodiscover.tienda-v.com",
+      "WEB-VERSION-EXPUESTA@sostenibilidad.tienda-v.com"
+    ],
+    "hallazgos_prohibidos": [
+      "CORREO-SPF-LOOKUPS",
+      "WEB-SIN-HSTS@tienda-v.com",
+      "PARECIDO-ENVIA@ienda-v.com"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

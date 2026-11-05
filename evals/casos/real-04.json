@@ -1,0 +1,418 @@
+{
+  "id": "real-04",
+  "origen": "real",
+  "perfil": "pyme_estandar",
+  "grabado_el": "2026-11-05",
+  "dominio": "pyme-a.com.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|pyme-a.com.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "pyme-a.com.co",
+        "mx": {
+          "servidores": [],
+          "proveedor": "ninguno"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 include:externo-1.example include:externo-2.example ip4:203.0.113.1/24 -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 2,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "none",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 include:externo-1.example include:externo-2.example ip4:203.0.113.1/24 -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=none;"
+        ]
+      },
+      "duracion_ms": 362
+    },
+    "whois_dominio|pyme-a.com.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "pyme-a.com.co",
+        "fuente": "whois",
+        "creado": "1998-08-26T00:00:00+00:00",
+        "vence": "2026-12-31T23:59:59+00:00",
+        "dias_para_vencer": 56,
+        "estados": [
+          "clientRenewProhibited",
+          "clientTransferProhibited",
+          "clientUpdateProhibited",
+          "clientDeleteProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "carmelo.ns.cloudflare.com",
+          "stella.ns.cloudflare.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 268
+    },
+    "security_txt|pyme-a.com.co": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "pyme-a.com.co",
+        "codigo": 301,
+        "redirige_fuera": "www.pyme-a.co",
+        "existe": null,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 427
+    },
+    "buscar_parecidos|pyme-a.com.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "pyme-a.com.co",
+        "generadas": 19,
+        "truncadas": false,
+        "existentes": 2,
+        "con_correo": [
+          {
+            "dominio": "pyme-a.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "grupopyme-a-com01c.mail.protection.outlook.com"
+            ],
+            "comparte_servidores": true
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "carmelo.ns.cloudflare.com",
+          "stella.ns.cloudflare.com"
+        ],
+        "mx_propios": []
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 302
+    },
+    "subdominios_ct|pyme-a.com.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "pyme-a.com.co",
+        "fuente": "crtsh",
+        "total": 1,
+        "mostrados": 1,
+        "truncados": false,
+        "con_sitio": 1,
+        "subdominios": [
+          {
+            "nombre": "www.pyme-a.com.co",
+            "ultimo_certificado_vence": "2016-04-17",
+            "vigente": false,
+            "tiene_sitio": true
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 12412
+    },
+    "dkim_selector|pyme-a.com.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "pyme-a.com.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-3.example",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-4.example",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.pyme-a.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-14",
+        "dias_restantes": 38,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "www.pyme-a.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 181
+    },
+    "tls_certificado|pyme-a.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-14",
+        "dias_restantes": 38,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "pyme-a.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 183
+    },
+    "cabeceras_web|www.pyme-a.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.pyme-a.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 301,
+        "url_final": "https://www.pyme-a.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": "www.pyme-a.co",
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 459
+    },
+    "cabeceras_web|pyme-a.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "pyme-a.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 301,
+        "url_final": "https://pyme-a.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": "www.pyme-a.co",
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 491
+    },
+    "investigar_parecido|pyme-a.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "pyme-a.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1994-11-01T05:00:00+00:00",
+        "dias_desde_registro": 11692,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": true,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 369
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-SIN-MX",
+      "CORREO-DMARC-NONE",
+      "CORREO-DMARC-SIN-REPORTES",
+      "WEB-SIN-HSTS"
+    ],
+    "hallazgos_por_decision": [
+      "CORREO-DKIM-CLAVE-1024@s2"
+    ],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT",
+      "WEB-SIN-PROTECCION-MARCOS",
+      "PARECIDO-MX"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

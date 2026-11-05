@@ -1,0 +1,2617 @@
+{
+  "id": "real-05",
+  "origen": "real",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-05",
+  "dominio": "banco-i.com",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|banco-i.com": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "banco-i.com",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 10,
+              "host": "mxa-0074de03.gslb.pphosted.com"
+            },
+            {
+              "prioridad": 10,
+              "host": "mxb-0074de03.gslb.pphosted.com"
+            }
+          ],
+          "proveedor": "otro"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 include:%{i}._ip.%{h}._ehlo.%{d}._spf.vali.email -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 1,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "reject",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@externo-1.example",
+            "mailto:contacto@banco-i.com"
+          ],
+          "pct": null,
+          "etiquetas_obsoletas": [
+            "ri"
+          ],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 include:%{i}._ip.%{h}._ehlo.%{d}._spf.vali.email -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=reject; rua=mailto:contacto@externo-1.example,mailto:contacto@banco-i.com; ruf=mailto:contacto@banco-i.com; fo=1; ri=86400"
+        ]
+      },
+      "duracion_ms": 953
+    },
+    "whois_dominio|banco-i.com": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "banco-i.com",
+        "fuente": "rdap",
+        "creado": "1996-11-02T05:00:00+00:00",
+        "vence": "2027-11-01T04:00:00+00:00",
+        "dias_para_vencer": 361,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "externo-2.example",
+          "externo-3.example",
+          "externo-4.example",
+          "externo-5.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 300
+    },
+    "security_txt|banco-i.com": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "banco-i.com",
+        "codigo": 404,
+        "redirige_fuera": null,
+        "existe": false,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 695
+    },
+    "buscar_parecidos|banco-i.com": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "banco-i.com",
+        "generadas": 23,
+        "truncadas": false,
+        "existentes": 8,
+        "con_correo": [
+          {
+            "dominio": "anco-i.com",
+            "tipo": "omision",
+            "mx": [
+              "externo-6.example"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "bnco-i.com",
+            "tipo": "omision",
+            "mx": [
+              "externo-6.example"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "externo-2.example",
+          "externo-3.example",
+          "externo-4.example",
+          "externo-5.example"
+        ],
+        "mx_propios": [
+          "mxa-0074de03.gslb.pphosted.com",
+          "mxb-0074de03.gslb.pphosted.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 690
+    },
+    "subdominios_ct|banco-i.com": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "banco-i.com",
+        "fuente": "crtsh",
+        "total": 303,
+        "mostrados": 100,
+        "truncados": true,
+        "con_sitio": 47,
+        "subdominios": [
+          {
+            "nombre": "access.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-07",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "actualizaciondatos.banco-i.com",
+            "ultimo_certificado_vence": "2024-06-29",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "administracionappemp.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-29",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "administraciondecomercios.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-08",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "afiliacioncomercios.banco-i.com",
+            "ultimo_certificado_vence": "2024-10-15",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almcol.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-23",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-asistente-ws-desarrollo.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-11",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-asistente-ws-laboratorio.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-11",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-asistente-ws.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-11",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-asistente.banco-i.com",
+            "ultimo_certificado_vence": "2024-08-19",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "apiaut.banco-i.com",
+            "ultimo_certificado_vence": "2024-09-22",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "apicomercios.banco-i.com",
+            "ultimo_certificado_vence": "2023-11-16",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "apiempresas.banco-i.com",
+            "ultimo_certificado_vence": "2024-11-06",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "apis.banco-i.com",
+            "ultimo_certificado_vence": "2024-10-28",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "apislab.banco-i.com",
+            "ultimo_certificado_vence": "2024-09-29",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "apps-extranet-lab.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-20",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "apps-extranet.banco-i.com",
+            "ultimo_certificado_vence": "2024-11-21",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "asistentevirtual-asistente.banco-i.com",
+            "ultimo_certificado_vence": "2024-08-07",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "auth.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-01",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "campana.banco-i.com",
+            "ultimo_certificado_vence": "2024-11-07",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "bizagilab.banco-i.com",
+            "ultimo_certificado_vence": "2024-11-12",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "blog.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-03",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cmssuperapp.banco-i.com",
+            "ultimo_certificado_vence": "2024-06-25",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cmssuperapplab.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-29",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cmssuperapplabv2.banco-i.com",
+            "ultimo_certificado_vence": "2024-11-05",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "coleccion.banco-i.com",
+            "ultimo_certificado_vence": "2024-10-14",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "comunicaciones.banco-i.com",
+            "ultimo_certificado_vence": "2024-11-07",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "comunidadesdesoporte.banco-i.com",
+            "ultimo_certificado_vence": "2024-10-25",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "comunidadessoportecam-lab.banco-i.com",
+            "ultimo_certificado_vence": "2024-10-24",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "comunidadessoportecam.banco-i.com",
+            "ultimo_certificado_vence": "2024-10-01",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "conglomeradoslab.banco-i.com",
+            "ultimo_certificado_vence": "2024-09-04",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "conglomeradosprd.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-31",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "consolabancoturno.banco-i.com",
+            "ultimo_certificado_vence": "2024-10-21",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "contencionappemp.banco-i.com",
+            "ultimo_certificado_vence": "2022-09-28",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "contencionpymes.banco-i.com",
+            "ultimo_certificado_vence": "2022-09-28",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "convision.banco-i.com",
+            "ultimo_certificado_vence": "2024-11-04",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "corporacionfinanciera.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-21",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "correocifrado.banco-i.com",
+            "ultimo_certificado_vence": "2016-03-13",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "bancobox.banco-i.com",
+            "ultimo_certificado_vence": "2024-02-17",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "banconegociador.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-25",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "billetera.banco-i.com",
+            "ultimo_certificado_vence": "2024-04-24",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "bancoturno.banco-i.com",
+            "ultimo_certificado_vence": "2024-10-21",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "bancoturnofuncionario.banco-i.com",
+            "ultimo_certificado_vence": "2024-10-21",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "banco-ieleva.banco-i.com",
+            "ultimo_certificado_vence": "2023-01-24",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "banco-ielevalab.banco-i.com",
+            "ultimo_certificado_vence": "2024-09-04",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "banco-igodev.banco-i.com",
+            "ultimo_certificado_vence": "2024-07-14",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "demopymes.banco-i.com",
+            "ultimo_certificado_vence": "2024-11-07",
+            "vigente": false,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "accesscci.banco-i.com",
+            "ultimo_certificado_vence": "2024-04-24",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "alex.banco-i.com",
+            "ultimo_certificado_vence": "2024-09-23",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "aliados2metro.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-01",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "almoctane.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-18",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "api.banco-i.com",
+            "ultimo_certificado_vence": "2023-05-11",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "apibanconegociador.banco-i.com",
+            "ultimo_certificado_vence": "2024-09-10",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "apilab.banco-i.com",
+            "ultimo_certificado_vence": "2022-04-06",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "apimarket.banco-i.com",
+            "ultimo_certificado_vence": "2024-06-02",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "apimarketlab.banco-i.com",
+            "ultimo_certificado_vence": "2023-05-18",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "apisdes.banco-i.com",
+            "ultimo_certificado_vence": "2024-11-08",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "apisdescam.banco-i.com",
+            "ultimo_certificado_vence": "2022-09-29",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "apislabcam.banco-i.com",
+            "ultimo_certificado_vence": "2022-09-29",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "are.banco-i.com",
+            "ultimo_certificado_vence": "2023-09-03",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "arelab.banco-i.com",
+            "ultimo_certificado_vence": "2023-08-03",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "asistente-personas-lab.banco-i.com",
+            "ultimo_certificado_vence": "2023-03-30",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "asistentevirtual.banco-i.com",
+            "ultimo_certificado_vence": "2024-06-29",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "asistentevirtualvivienda.banco-i.com",
+            "ultimo_certificado_vence": "2020-12-28",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "autenticacion.banco-i.com",
+            "ultimo_certificado_vence": "2024-06-06",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "autenticacionsobreseguro.banco-i.com",
+            "ultimo_certificado_vence": "2016-03-28",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "autodiscover.banco-i.com",
+            "ultimo_certificado_vence": "2022-08-29",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "bpmprocesos.banco-i.com",
+            "ultimo_certificado_vence": "2023-11-17",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "cd1.banco-i.com",
+            "ultimo_certificado_vence": "2017-02-26",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "chatcomerciosbilletera.banco-i.com",
+            "ultimo_certificado_vence": "2024-03-16",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "claro.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-31",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "cluster-e.banco-i.com",
+            "ultimo_certificado_vence": "2024-09-24",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "co.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-18",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "comunidadessoporte-lab.banco-i.com",
+            "ultimo_certificado_vence": "2023-10-18",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "conectados.banco-i.com",
+            "ultimo_certificado_vence": "2021-12-21",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "conf.banco-i.com",
+            "ultimo_certificado_vence": "2018-09-08",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "contencionempresarial.banco-i.com",
+            "ultimo_certificado_vence": "2024-08-28",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "cornerstone.banco-i.com",
+            "ultimo_certificado_vence": "2021-05-25",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "correo.banco-i.com",
+            "ultimo_certificado_vence": "2022-08-29",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "credipymedigital.banco-i.com",
+            "ultimo_certificado_vence": "2024-02-01",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "credipymedigitalpback.banco-i.com",
+            "ultimo_certificado_vence": "2024-02-01",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "credipymelabb.banco-i.com",
+            "ultimo_certificado_vence": "2021-10-06",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "credipymelabf.banco-i.com",
+            "ultimo_certificado_vence": "2021-10-14",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "programa.banco-i.com",
+            "ultimo_certificado_vence": "2024-02-24",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "datapower.banco-i.com",
+            "ultimo_certificado_vence": "2024-05-28",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "datapowerlab.banco-i.com",
+            "ultimo_certificado_vence": "2018-12-12",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "datapowerlabpserappipay.banco-i.com",
+            "ultimo_certificado_vence": "2021-11-16",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "datapowersumma.banco-i.com",
+            "ultimo_certificado_vence": "2021-11-15",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "datos.banco-i.com",
+            "ultimo_certificado_vence": "2017-02-26",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "bancoda.banco-i.com",
+            "ultimo_certificado_vence": "2024-12-18",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "bancolunchlab.banco-i.com",
+            "ultimo_certificado_vence": "2023-09-08",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "bancolunchprod.banco-i.com",
+            "ultimo_certificado_vence": "2023-09-07",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "banconet.banco-i.com",
+            "ultimo_certificado_vence": "2023-12-12",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "banconetcci.banco-i.com",
+            "ultimo_certificado_vence": "2023-04-18",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "banconetctg.banco-i.com",
+            "ultimo_certificado_vence": "2023-09-14",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "bancoturnolab.banco-i.com",
+            "ultimo_certificado_vence": "2021-05-02",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "bancovalores.banco-i.com",
+            "ultimo_certificado_vence": "2021-02-12",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "banco-igo.banco-i.com",
+            "ultimo_certificado_vence": "2024-11-19",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "bancovirtual.banco-i.com",
+            "ultimo_certificado_vence": "2020-08-08",
+            "vigente": false,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "dev.banco-i.com",
+            "ultimo_certificado_vence": "2021-09-06",
+            "vigente": false,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 27263
+    },
+    "dkim_selector|banco-i.com": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "banco-i.com",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": true,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-7.example",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s2.domainkey.u57609379.wl130.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "google": "[omitido]",
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-07",
+        "dias_restantes": 32,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 182
+    },
+    "tls_certificado|www.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-07",
+        "dias_restantes": 32,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "www.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 186
+    },
+    "tls_certificado|actualizaciondatos.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-08",
+        "dias_restantes": 64,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "actualizaciondatos.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 188
+    },
+    "tls_certificado|access.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-15",
+        "dias_restantes": 70,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.4",
+        "host": "access.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 214
+    },
+    "cabeceras_web|www.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 630
+    },
+    "cabeceras_web|banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.banco-i.com/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 769
+    },
+    "tls_certificado|administracionappemp.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-10",
+        "dias_restantes": 35,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "administracionappemp.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 177
+    },
+    "tls_certificado|administraciondecomercios.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-16",
+        "dias_restantes": 71,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "administraciondecomercios.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 201
+    },
+    "cabeceras_web|actualizaciondatos.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "actualizaciondatos.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.banco-i.com/?utm_source=actualizaciondatos.banco-i.com",
+        "redirecciones": 2,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 1149
+    },
+    "tls_certificado|afiliacioncomercios.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-27",
+        "dias_restantes": 83,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "afiliacioncomercios.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 180
+    },
+    "cabeceras_web|administracionappemp.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "administracionappemp.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://administracionappemp.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 771
+    },
+    "cabeceras_web|access.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "access.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 302,
+        "url_final": "https://access.banco-i.com/oauth/authorize?brand=default",
+        "redirecciones": 1,
+        "redirige_fuera": "externo-8.example",
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1632
+    },
+    "cabeceras_web|administraciondecomercios.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "administraciondecomercios.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://administraciondecomercios.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 879
+    },
+    "tls_certificado|api-asistente-ws-desarrollo.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-20",
+        "dias_restantes": 75,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "api-asistente-ws-desarrollo.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 267
+    },
+    "tls_certificado|almcol.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-29",
+        "dias_restantes": 84,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "almcol.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 353
+    },
+    "tls_certificado|api-asistente-ws-laboratorio.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-18",
+        "dias_restantes": 74,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "api-asistente-ws-laboratorio.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 194
+    },
+    "cabeceras_web|afiliacioncomercios.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "afiliacioncomercios.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://afiliacioncomercios.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1083
+    },
+    "tls_certificado|api-asistente-ws.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-20",
+        "dias_restantes": 75,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "api-asistente-ws.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 228
+    },
+    "cabeceras_web|almcol.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almcol.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://almcol.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1063
+    },
+    "cabeceras_web|api-asistente-ws-desarrollo.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-asistente-ws-desarrollo.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://api-asistente-ws-desarrollo.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1157
+    },
+    "cabeceras_web|api-asistente-ws-laboratorio.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-asistente-ws-laboratorio.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://api-asistente-ws-laboratorio.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1259
+    },
+    "tls_certificado|api-asistente.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-22",
+        "dias_restantes": 47,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "api-asistente.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 384
+    },
+    "tls_certificado|apiaut.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-22",
+        "dias_restantes": 47,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "apiaut.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 353
+    },
+    "tls_certificado|apicomercios.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-22",
+        "dias_restantes": 47,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "apicomercios.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 158
+    },
+    "cabeceras_web|api-asistente-ws.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-asistente-ws.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://api-asistente-ws.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1028
+    },
+    "tls_certificado|apiempresas.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-22",
+        "dias_restantes": 47,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "apiempresas.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 169
+    },
+    "cabeceras_web|api-asistente.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-asistente.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://api-asistente.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 690
+    },
+    "cabeceras_web|apicomercios.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "apicomercios.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 404,
+        "url_final": "https://apicomercios.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 634
+    },
+    "cabeceras_web|apiaut.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "apiaut.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://apiaut.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 723
+    },
+    "tls_certificado|apislab.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-11-06",
+        "dias_restantes": 0,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "apislab.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 155
+    },
+    "tls_certificado|apis.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-11-20",
+        "dias_restantes": 14,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "apis.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 181
+    },
+    "tls_certificado|apps-extranet-lab.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-23",
+        "dias_restantes": 79,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "apps-extranet-lab.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 175
+    },
+    "cabeceras_web|apiempresas.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "apiempresas.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 200,
+        "url_final": "https://apiempresas.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-powered-by": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 557
+    },
+    "tls_certificado|apps-extranet.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-30",
+        "dias_restantes": 55,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "apps-extranet.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 165
+    },
+    "cabeceras_web|apislab.banco-i.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tls_fallido",
+      "sugerencia": "El servidor no completó la conexión segura; tls_certificado da el detalle.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 766
+    },
+    "cabeceras_web|apps-extranet-lab.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "apps-extranet-lab.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://apps-extranet-lab.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 713
+    },
+    "cabeceras_web|apis.banco-i.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tls_fallido",
+      "sugerencia": "El servidor no completó la conexión segura; tls_certificado da el detalle.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 929
+    },
+    "tls_certificado|auth.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-20",
+        "dias_restantes": 76,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "auth.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 194
+    },
+    "tls_certificado|asistentevirtual-asistente.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-22",
+        "dias_restantes": 47,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "asistentevirtual-asistente.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 290
+    },
+    "cabeceras_web|apps-extranet.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "apps-extranet.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://apps-extranet.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 758
+    },
+    "tls_certificado|campana.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-16",
+        "dias_restantes": 41,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "campana.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 243
+    },
+    "tls_certificado|bizagilab.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-20",
+        "dias_restantes": 45,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "bizagilab.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 185
+    },
+    "cabeceras_web|asistentevirtual-asistente.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "asistentevirtual-asistente.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://asistentevirtual-asistente.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 718
+    },
+    "tls_certificado|blog.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-11",
+        "dias_restantes": 67,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "blog.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 232
+    },
+    "cabeceras_web|campana.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "campana.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://campana.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 857
+    },
+    "cabeceras_web|bizagilab.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "bizagilab.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://bizagilab.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 809
+    },
+    "tls_certificado|cmssuperapplab.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-22",
+        "dias_restantes": 47,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "cmssuperapplab.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 209
+    },
+    "tls_certificado|cmssuperapp.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-06",
+        "dias_restantes": 93,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "cmssuperapp.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 249
+    },
+    "cabeceras_web|auth.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "auth.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 200,
+        "url_final": "https://www.banco-i.com/",
+        "redirecciones": 2,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 1528
+    },
+    "tls_certificado|cmssuperapplabv2.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-22",
+        "dias_restantes": 47,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "cmssuperapplabv2.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 163
+    },
+    "cabeceras_web|blog.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "blog.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://blog.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 712
+    },
+    "cabeceras_web|cmssuperapplab.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "cmssuperapplab.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://cmssuperapplab.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 551
+    },
+    "tls_certificado|coleccion.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-14",
+        "dias_restantes": 190,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "coleccion.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 168
+    },
+    "tls_certificado|comunicaciones.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-17",
+        "dias_restantes": 41,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "comunicaciones.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 183
+    },
+    "cabeceras_web|cmssuperapp.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "cmssuperapp.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://cmssuperapp.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 742
+    },
+    "cabeceras_web|cmssuperapplabv2.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "cmssuperapplabv2.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://cmssuperapplabv2.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 428
+    },
+    "tls_certificado|comunidadesdesoporte.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-27",
+        "dias_restantes": 83,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "comunidadesdesoporte.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 202
+    },
+    "tls_certificado|comunidadessoportecam-lab.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-27",
+        "dias_restantes": 83,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "comunidadessoportecam-lab.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 235
+    },
+    "cabeceras_web|comunicaciones.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "comunicaciones.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://comunicaciones.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 764
+    },
+    "cabeceras_web|comunidadesdesoporte.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "comunidadesdesoporte.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://comunidadesdesoporte.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 704
+    },
+    "tls_certificado|comunidadessoportecam.banco-i.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-27",
+        "dias_restantes": 83,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "comunidadessoportecam.banco-i.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 248
+    },
+    "cabeceras_web|comunidadessoportecam-lab.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "comunidadessoportecam-lab.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://comunidadessoportecam-lab.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 788
+    },
+    "cabeceras_web|coleccion.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "coleccion.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://coleccion.banco-i.com/collections/art/works/externo-9.example?q=obra173",
+        "redirecciones": 2,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 1276
+    },
+    "cabeceras_web|comunidadessoportecam.banco-i.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "comunidadessoportecam.banco-i.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://comunidadessoportecam.banco-i.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 710
+    },
+    "investigar_parecido|anco-i.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "anco-i.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2025-07-16T18:31:40+00:00",
+        "dias_desde_registro": 476,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 844
+    },
+    "investigar_parecido|bnco-i.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "bnco-i.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2022-12-03T19:24:13+00:00",
+        "dias_desde_registro": 1432,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 2319
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "WEB-SIN-SECURITY-TXT",
+      "WEB-SIN-PROTECCION-MARCOS",
+      "WEB-SIN-NOSNIFF"
+    ],
+    "hallazgos_por_decision": [
+      "PARECIDO-ENVIA@anco-i.com",
+      "PARECIDO-ENVIA@bnco-i.com",
+      "WEB-TLS-POR-VENCER@apis.banco-i.com",
+      "WEB-SIN-REDIRECCION-HTTPS@apiempresas.banco-i.com",
+      "CORREO-DKIM-CLAVE-1024@google"
+    ],
+    "hallazgos_prohibidos": [
+      "CORREO-DKIM-NO-ENCONTRADO",
+      "CORREO-SPF-LOOKUPS"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

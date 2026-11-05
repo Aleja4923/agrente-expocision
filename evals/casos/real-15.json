@@ -1,0 +1,410 @@
+{
+  "id": "real-15",
+  "origen": "real",
+  "perfil": "pyme_estandar",
+  "grabado_el": "2026-11-05",
+  "dominio": "pyme-p.com.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|pyme-p.com.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "pyme-p.com.co",
+        "mx": {
+          "servidores": [],
+          "proveedor": "ninguno"
+        },
+        "spf": {
+          "registros": [],
+          "cantidad": 0,
+          "cierre": "ninguno",
+          "consultas_dns": 0,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": false,
+          "valido": false,
+          "multiple": false,
+          "p": null,
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [],
+        "txt_dmarc": []
+      },
+      "duracion_ms": 181
+    },
+    "whois_dominio|pyme-p.com.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "pyme-p.com.co",
+        "fuente": "whois",
+        "creado": "2018-07-24T14:18:42+00:00",
+        "vence": "2027-07-24T23:59:59+00:00",
+        "dias_para_vencer": 261,
+        "estados": [
+          "clientRenewProhibited",
+          "clientTransferProhibited",
+          "clientUpdateProhibited",
+          "clientDeleteProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "ns41.domaincontrol.com",
+          "ns42.domaincontrol.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 188
+    },
+    "security_txt|pyme-p.com.co": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "pyme-p.com.co",
+        "codigo": 200,
+        "redirige_fuera": null,
+        "existe": false,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "security_txt": "[omitido]"
+      },
+      "duracion_ms": 296
+    },
+    "buscar_parecidos|pyme-p.com.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "pyme-p.com.co",
+        "generadas": 19,
+        "truncadas": false,
+        "existentes": 2,
+        "con_correo": [
+          {
+            "dominio": "pyme-p.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "smtp.secureserver.net",
+              "mailstore1.secureserver.net"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "ns41.domaincontrol.com",
+          "ns42.domaincontrol.com"
+        ],
+        "mx_propios": []
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 235
+    },
+    "subdominios_ct|pyme-p.com.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "pyme-p.com.co",
+        "fuente": "certspotter",
+        "total": 1,
+        "mostrados": 1,
+        "truncados": false,
+        "con_sitio": 1,
+        "subdominios": [
+          {
+            "nombre": "www.pyme-p.com.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 29463
+    },
+    "dkim_selector|pyme-p.com.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "pyme-p.com.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "tls_certificado|pyme-p.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-18",
+        "dias_restantes": 43,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "pyme-p.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 207
+    },
+    "tls_certificado|www.pyme-p.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-21",
+        "dias_restantes": 45,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "www.pyme-p.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 210
+    },
+    "cabeceras_web|pyme-p.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "pyme-p.com.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 200,
+        "url_final": "https://pyme-p.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 462
+    },
+    "cabeceras_web|www.pyme-p.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.pyme-p.com.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 200,
+        "url_final": "https://www.pyme-p.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 469
+    },
+    "investigar_parecido|pyme-p.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "pyme-p.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2006-01-16T19:09:47+00:00",
+        "dias_desde_registro": 7597,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 560
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-SIN-MX",
+      "CORREO-SPF-AUSENTE",
+      "CORREO-DMARC-AUSENTE",
+      "WEB-SIN-SECURITY-TXT",
+      "WEB-SIN-REDIRECCION-HTTPS",
+      "WEB-SIN-HSTS",
+      "WEB-SIN-PROTECCION-MARCOS",
+      "WEB-SIN-NOSNIFF",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [],
+    "hallazgos_prohibidos": [
+      "PARECIDO-ENVIA",
+      "DOMINIO-SIN-BLOQUEO"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

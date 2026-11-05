@@ -116,16 +116,24 @@ def _guardar_json(ruta: Path, contenido) -> None:
 
 
 def grabar_caso(real: str, id_caso: str, perfil: str, *, base_seudonimo: str, nombres_libres: list[str] = (),
+                etiquetas: dict[str, str] | None = None,
                 ejecutor: Ejecutor = base.ejecutar, existe: Callable[[str], bool] = existe_en_dns,
-                ruta_privada: Path = RUTA_PRIVADA, hoy: date | None = None) -> Borrador:
+                ruta_privada: Path = RUTA_PRIVADA, hoy: date | None = None, desde_crudo: bool = False) -> Borrador:
+    """Graba (o, con `desde_crudo`, reutiliza lo ya grabado), seudonimiza y comprueba antes de escribir."""
     real = base.normalizar_dominio(real)
-    crudo = grabar_crudo(real, ejecutor)
-    _guardar_json(ruta_privada / "crudo" / f"{id_caso}.json", {k: v.model_dump() for k, v in crudo.items()})
+    archivo_crudo = ruta_privada / "crudo" / f"{id_caso}.json"
+    if desde_crudo:
+        crudo = {k: ResultadoHerramienta.model_validate(v)
+                 for k, v in json.loads(archivo_crudo.read_text(encoding="utf-8")).items()}
+        hoy = hoy or date.fromtimestamp(archivo_crudo.stat().st_mtime)
+    else:
+        crudo = grabar_crudo(real, ejecutor)
+        _guardar_json(archivo_crudo, {k: v.model_dump() for k, v in crudo.items()})
 
     parecidos = _parecidos_reales(real, crudo)
     seudonimo = elegir_seudonimo(base_seudonimo, Counter(p["tipo"] for p in parecidos), existe)
     mapa = Mapa(real=real, seudonimo=seudonimo, parecidos=mapear_parecidos(parecidos, seudonimo, existe),
-                nombres_libres=list(nombres_libres))
+                nombres_libres=list(nombres_libres), etiquetas=etiquetas or {})
     borrador = Borrador(id=id_caso, perfil=perfil, grabado_el=hoy or date.today(), dominio=seudonimo,
                         grabacion=seudonimizar(crudo, mapa))
 
@@ -155,8 +163,13 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--perfil", required=True, choices=["inexistente", "pyme_estandar", "superficie_grande"])
     p.add_argument("--seudonimo", required=True, help="nombre base del seudónimo, con la misma terminación")
     p.add_argument("--nombre", action="append", default=[], help="razón social o marca a borrar (repetible)")
+    p.add_argument("--etiqueta", action="append", default=[],
+                   help="trozo de subdominio que delata a la empresa, como real=generico (repetible)")
+    p.add_argument("--desde-crudo", action="store_true", help="seudonimizar otra vez lo ya grabado, sin consultar")
     a = p.parse_args(argv)
-    b = grabar_caso(a.dominio, a.id, a.perfil, base_seudonimo=a.seudonimo, nombres_libres=a.nombre)
+    etiquetas = dict(e.split("=", 1) for e in a.etiqueta)
+    b = grabar_caso(a.dominio, a.id, a.perfil, base_seudonimo=a.seudonimo, nombres_libres=a.nombre,
+                    etiquetas=etiquetas, desde_crudo=a.desde_crudo)
     fallas = Counter(r.error for r in b.grabacion.values() if not r.ok)
     print(f"{b.id} · seudónimo {b.dominio} · {len(b.grabacion)} resultados grabados · "
           f"fallas: {dict(fallas) or 'ninguna'}")

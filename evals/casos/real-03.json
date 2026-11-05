@@ -1,0 +1,1094 @@
+{
+  "id": "real-03",
+  "origen": "real",
+  "perfil": "pyme_estandar",
+  "grabado_el": "2026-11-05",
+  "dominio": "tienda-h.com",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|tienda-h.com": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "tienda-h.com",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 0,
+              "host": "tienda-h-com.mail.protection.outlook.com"
+            },
+            {
+              "prioridad": 9,
+              "host": "externo-1.example"
+            }
+          ],
+          "proveedor": "microsoft"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 a mx ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3/24 ip4:203.0.113.4/30 ip4:203.0.113.5 ip4:203.0.113.6 include:externo-2.example -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 4,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "quarantine",
+          "p_ausente": false,
+          "sp": "reject",
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@externo-3.example"
+          ],
+          "pct": 100,
+          "etiquetas_obsoletas": [
+            "pct",
+            "ri"
+          ],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 a mx ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3/24 ip4:203.0.113.4/30 ip4:203.0.113.5 ip4:203.0.113.6 include:externo-2.example -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=quarantine; pct=100; rua=mailto:contacto@externo-3.example; ruf=mailto:contacto@externo-3.example; sp=reject; ri=84600;fo=1;"
+        ]
+      },
+      "duracion_ms": 625
+    },
+    "whois_dominio|tienda-h.com": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "tienda-h.com",
+        "fuente": "rdap",
+        "creado": "2000-01-07T00:43:42+00:00",
+        "vence": "2027-01-07T00:43:42+00:00",
+        "dias_para_vencer": 63,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "externo-4.example",
+          "externo-5.example",
+          "externo-6.example",
+          "externo-7.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 635
+    },
+    "security_txt|tienda-h.com": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "tienda-h.com",
+        "codigo": 301,
+        "redirige_fuera": "www.tienda-h.com.well-known",
+        "existe": null,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 743
+    },
+    "buscar_parecidos|tienda-h.com": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "tienda-h.com",
+        "generadas": 26,
+        "truncadas": false,
+        "existentes": 7,
+        "con_correo": [
+          {
+            "dominio": "tienda-h.com.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "tienda-h-com-co.mail.protection.outlook.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "tienda-h.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "tienda-h-co.mail.protection.outlook.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "ienda-h.com",
+            "tipo": "omision",
+            "mx": [
+              "mail.ienda-h.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "tenda-h.com",
+            "tipo": "omision",
+            "mx": [
+              "tenda-h.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "tinda-h.com",
+            "tipo": "omision",
+            "mx": [
+              "externo-8.example",
+              "externo-9.example"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "externo-4.example",
+          "externo-5.example",
+          "externo-6.example",
+          "externo-7.example"
+        ],
+        "mx_propios": [
+          "tienda-h-com.mail.protection.outlook.com",
+          "externo-1.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 888
+    },
+    "subdominios_ct|tienda-h.com": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "tienda-h.com",
+        "fuente": "certspotter",
+        "total": 11,
+        "mostrados": 11,
+        "truncados": false,
+        "con_sitio": 10,
+        "subdominios": [
+          {
+            "nombre": "data.tienda-h.com",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "filavirtual.tienda-h.com",
+            "ultimo_certificado_vence": "2027-04-23",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "qr.tienda-h.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.tienda-h.com",
+            "ultimo_certificado_vence": "2027-01-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "yhuamf.tienda-h.com",
+            "ultimo_certificado_vence": "2027-01-25",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cdn.dam.tienda-h.com",
+            "ultimo_certificado_vence": "2027-02-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "click.email.tienda-h.com",
+            "ultimo_certificado_vence": "2027-05-03",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cloud.email.tienda-h.com",
+            "ultimo_certificado_vence": "2027-05-03",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "image.email.tienda-h.com",
+            "ultimo_certificado_vence": "2027-02-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "view.email.tienda-h.com",
+            "ultimo_certificado_vence": "2027-05-08",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "aws.tienda-h.com",
+            "ultimo_certificado_vence": "2027-01-27",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 28648
+    },
+    "dkim_selector|tienda-h.com": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "tienda-h.com",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-10.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-11.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s1.domainkey.u246613.wl114.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s2.domainkey.u246613.wl114.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "selector1": "[omitido]",
+        "selector2": "[omitido]",
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-12",
+        "dias_restantes": 68,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "www.tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 92
+    },
+    "tls_certificado|data.tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-01",
+        "dias_restantes": 56,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "data.tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 177
+    },
+    "tls_certificado|tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-29",
+        "dias_restantes": 85,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 235
+    },
+    "cabeceras_web|www.tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.tienda-h.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 204
+    },
+    "tls_certificado|filavirtual.tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "filavirtual.tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 357
+    },
+    "tls_certificado|qr.tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 51,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "qr.tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 176
+    },
+    "cabeceras_web|tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.tienda-h.com",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 717
+    },
+    "tls_certificado|yhuamf.tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-25",
+        "dias_restantes": 81,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.11",
+        "host": "yhuamf.tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 169
+    },
+    "cabeceras_web|data.tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "data.tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 400,
+        "url_final": "https://data.tienda-h.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 985
+    },
+    "tls_certificado|cdn.dam.tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-01",
+        "dias_restantes": 88,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.12",
+        "host": "cdn.dam.tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 70
+    },
+    "cabeceras_web|filavirtual.tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "filavirtual.tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 404,
+        "url_final": "https://filavirtual.tienda-h.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 914
+    },
+    "cabeceras_web|qr.tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "qr.tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 200,
+        "url_final": "https://qr.tienda-h.com/?externo-12.example=proxy&externo-13.example=769599",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 978
+    },
+    "tls_certificado|click.email.tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-03",
+        "dias_restantes": 179,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.13",
+        "host": "click.email.tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 178
+    },
+    "cabeceras_web|yhuamf.tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "yhuamf.tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 404,
+        "url_final": "https://yhuamf.tienda-h.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 482
+    },
+    "tls_certificado|cloud.email.tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-03",
+        "dias_restantes": 179,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.14",
+        "host": "cloud.email.tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 189
+    },
+    "cabeceras_web|cdn.dam.tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "cdn.dam.tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://cdn.dam.tienda-h.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 542
+    },
+    "tls_certificado|image.email.tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-20",
+        "dias_restantes": 107,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.15",
+        "host": "image.email.tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 198
+    },
+    "cabeceras_web|click.email.tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "click.email.tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://click.email.tienda-h.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 462
+    },
+    "tls_certificado|view.email.tienda-h.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-08",
+        "dias_restantes": 184,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.16",
+        "host": "view.email.tienda-h.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 170
+    },
+    "cabeceras_web|image.email.tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "image.email.tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://image.email.tienda-h.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 369
+    },
+    "cabeceras_web|cloud.email.tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "cloud.email.tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://cloud.email.tienda-h.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 576
+    },
+    "cabeceras_web|view.email.tienda-h.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "view.email.tienda-h.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://view.email.tienda-h.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 475
+    },
+    "investigar_parecido|ienda-h.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "ienda-h.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1994-12-20T05:00:00+00:00",
+        "dias_desde_registro": 11643,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 543
+    },
+    "investigar_parecido|tienda-h.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tienda-h.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2010-07-21T20:45:10+00:00",
+        "dias_desde_registro": 5950,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 725
+    },
+    "investigar_parecido|tienda-h.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tienda-h.com.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2000-01-18T00:00:00+00:00",
+        "dias_desde_registro": 9788,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 2217
+    },
+    "investigar_parecido|tinda-h.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tinda-h.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2004-03-11T00:45:20+00:00",
+        "dias_desde_registro": 8274,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 1916
+    },
+    "investigar_parecido|tenda-h.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tenda-h.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2000-03-27T20:24:08+00:00",
+        "dias_desde_registro": 9718,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 4177
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-DMARC-OBSOLETO",
+      "CORREO-DKIM-CLAVE-1024",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "PARECIDO-ENVIA@tinda-h.com",
+      "PARECIDO-ENVIA@tenda-h.com"
+    ],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT",
+      "DOMINIO-POR-VENCER"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

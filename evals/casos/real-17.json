@@ -1,0 +1,886 @@
+{
+  "id": "real-17",
+  "origen": "real",
+  "perfil": "pyme_estandar",
+  "grabado_el": "2026-11-05",
+  "dominio": "tienda-r.com.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "tienda-r.com.co",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 0,
+              "host": "tienda-r-com-co.mail.protection.outlook.com"
+            }
+          ],
+          "proveedor": "microsoft"
+        },
+        "spf": {
+          "registros": [],
+          "cantidad": 0,
+          "cierre": "ninguno",
+          "consultas_dns": 0,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "quarantine",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@tienda-r.com.co"
+          ],
+          "pct": 100,
+          "etiquetas_obsoletas": [
+            "pct"
+          ],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [],
+        "txt_dmarc": [
+          "v=DMARC1;p=quarantine;pct=100;rua=mailto:contacto@tienda-r.com.co;ruf=mailto:contacto@tienda-r.com.co;fo=1"
+        ]
+      },
+      "duracion_ms": 206
+    },
+    "whois_dominio|tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "tienda-r.com.co",
+        "fuente": "whois",
+        "creado": "2001-02-09T00:00:00+00:00",
+        "vence": "2027-02-08T23:59:59+00:00",
+        "dias_para_vencer": 95,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "externo-1.example",
+          "externo-2.example",
+          "externo-3.example",
+          "externo-4.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 196
+    },
+    "security_txt|tienda-r.com.co": {
+      "ok": false,
+      "herramienta": "security_txt",
+      "datos": {},
+      "error": "sin_conexion",
+      "sugerencia": "El sitio no acepta conexiones; si no hay sitio web, declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 2774
+    },
+    "buscar_parecidos|tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "tienda-r.com.co",
+        "generadas": 27,
+        "truncadas": false,
+        "existentes": 2,
+        "con_correo": [
+          {
+            "dominio": "tienda-r.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "tienda-r-co.mail.protection.outlook.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "tienda-r.com",
+            "tipo": "otro_tld",
+            "mx": [
+              "aspmx.l.google.com",
+              "alt1.aspmx.l.google.com",
+              "alt2.aspmx.l.google.com",
+              "aspmx2.googlemail.com",
+              "aspmx3.googlemail.com",
+              "externo-5.example",
+              "externo-6.example"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "externo-4.example",
+          "externo-3.example",
+          "externo-2.example",
+          "externo-1.example"
+        ],
+        "mx_propios": [
+          "tienda-r-com-co.mail.protection.outlook.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 440
+    },
+    "subdominios_ct|tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "tienda-r.com.co",
+        "fuente": "certspotter",
+        "total": 15,
+        "mostrados": 15,
+        "truncados": false,
+        "con_sitio": 9,
+        "subdominios": [
+          {
+            "nombre": "gtm.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-01-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "imagenes.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-03-04",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "mobile.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-01-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "old.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-01-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "personalizacion.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-03-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "quiero.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-01-23",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-01-04",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "auth.personalizacion.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-03-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "server.personalizacion.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-03-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "desktop.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-01-07",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "dev.personalizacion.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-03-13",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "test.personalizacion.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-03-13",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.imagenes.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-03-04",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "dev.auth.personalizacion.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-03-18",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "test.auth.personalizacion.tienda-r.com.co",
+            "ultimo_certificado_vence": "2027-03-18",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 5151
+    },
+    "dkim_selector|tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "tienda-r.com.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-7.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-8.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "selector1": "[omitido]",
+        "selector2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-04",
+        "dias_restantes": 60,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "www.tienda-r.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 76
+    },
+    "tls_certificado|gtm.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-26",
+        "dias_restantes": 82,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "gtm.tienda-r.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 183
+    },
+    "cabeceras_web|www.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.tienda-r.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.tienda-r.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 197
+    },
+    "tls_certificado|mobile.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-07",
+        "dias_restantes": 62,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "mobile.tienda-r.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 81
+    },
+    "cabeceras_web|mobile.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "mobile.tienda-r.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 400,
+        "url_final": "https://mobile.tienda-r.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 276
+    },
+    "tls_certificado|old.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-24",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.4",
+        "host": "old.tienda-r.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 63
+    },
+    "cabeceras_web|gtm.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "gtm.tienda-r.com.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 404,
+        "url_final": "https://gtm.tienda-r.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 535
+    },
+    "tls_certificado|personalizacion.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-13",
+        "dias_restantes": 128,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "personalizacion.tienda-r.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 68
+    },
+    "cabeceras_web|old.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "old.tienda-r.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 400,
+        "url_final": "https://old.tienda-r.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 275
+    },
+    "tls_certificado|quiero.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-23",
+        "dias_restantes": 79,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "quiero.tienda-r.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 60
+    },
+    "tls_certificado|tienda-r.com.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "sin_https",
+      "sugerencia": "El host no acepta conexiones HTTPS en el puerto 443; repórtalo, no reintentes.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 2793
+    },
+    "cabeceras_web|personalizacion.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "personalizacion.tienda-r.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://personalizacion.tienda-r.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 2997
+    },
+    "tls_certificado|auth.personalizacion.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-13",
+        "dias_restantes": 128,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "auth.personalizacion.tienda-r.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 90
+    },
+    "cabeceras_web|auth.personalizacion.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "auth.personalizacion.tienda-r.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://auth.personalizacion.tienda-r.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 388
+    },
+    "cabeceras_web|quiero.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "quiero.tienda-r.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://quiero.tienda-r.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 3402
+    },
+    "tls_certificado|server.personalizacion.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-13",
+        "dias_restantes": 128,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.8",
+        "host": "server.personalizacion.tienda-r.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 288
+    },
+    "cabeceras_web|server.personalizacion.tienda-r.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "server.personalizacion.tienda-r.com.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 404,
+        "url_final": "https://server.personalizacion.tienda-r.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 466
+    },
+    "tls_certificado|imagenes.tienda-r.com.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5041
+    },
+    "cabeceras_web|tienda-r.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "sin_conexion",
+      "sugerencia": "El sitio no acepta conexiones; si no hay sitio web, declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 3242
+    },
+    "cabeceras_web|imagenes.tienda-r.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20039
+    },
+    "investigar_parecido|tienda-r.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tienda-r.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2010-02-24T23:12:58+00:00",
+        "dias_desde_registro": 6097,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 755
+    },
+    "investigar_parecido|tienda-r.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tienda-r.com",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1994-08-18T04:00:00+00:00",
+        "dias_desde_registro": 11767,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 995
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-SPF-AUSENTE",
+      "CORREO-DMARC-OBSOLETO",
+      "CORREO-DKIM-CLAVE-1024",
+      "WEB-SIN-HTTPS",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "WEB-SIN-HSTS@www.tienda-r.com.co",
+      "WEB-SIN-NOSNIFF@quiero.tienda-r.com.co"
+    ],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT",
+      "CORREO-DKIM-NO-ENCONTRADO",
+      "PARECIDO-ENVIA"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

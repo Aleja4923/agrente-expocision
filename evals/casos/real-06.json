@@ -1,0 +1,774 @@
+{
+  "id": "real-06",
+  "origen": "real",
+  "perfil": "pyme_estandar",
+  "grabado_el": "2026-11-05",
+  "dominio": "empresa-d.com.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "empresa-d.com.co",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 0,
+              "host": "empresa-d-com-co.mail.protection.outlook.com"
+            }
+          ],
+          "proveedor": "microsoft"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 mx include:externo-1.example include:spf.protection.outlook.com include:externo-2.example ip4:203.0.113.1/24 ip4:203.0.113.2/24 ip4:203.0.113.3 ip4:203.0.113.4 ip4:203.0.113.5 -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 5,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "reject",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@dmarc-reports.cloudflare.net"
+          ],
+          "pct": 100,
+          "etiquetas_obsoletas": [
+            "pct"
+          ],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 mx include:externo-1.example include:spf.protection.outlook.com include:externo-2.example ip4:203.0.113.1/24 ip4:203.0.113.2/24 ip4:203.0.113.3 ip4:203.0.113.4 ip4:203.0.113.5 -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=reject; pct=100; rua=mailto:contacto@dmarc-reports.cloudflare.net; ruf=mailto:contacto@externo-3.example; fo=1"
+        ]
+      },
+      "duracion_ms": 991
+    },
+    "whois_dominio|empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "empresa-d.com.co",
+        "fuente": "whois",
+        "creado": "2005-11-21T00:00:00+00:00",
+        "vence": "2029-11-21T23:59:59+00:00",
+        "dias_para_vencer": 1112,
+        "estados": [
+          "ok"
+        ],
+        "bloqueo_transferencia": false,
+        "servidores_nombre": [
+          "rafe.ns.cloudflare.com",
+          "zeus.ns.cloudflare.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 839
+    },
+    "security_txt|empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "empresa-d.com.co",
+        "codigo": 520,
+        "redirige_fuera": null,
+        "existe": null,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 1977
+    },
+    "buscar_parecidos|empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "empresa-d.com.co",
+        "generadas": 29,
+        "truncadas": false,
+        "existentes": 2,
+        "con_correo": [
+          {
+            "dominio": "empresa-d.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "empresa-d-com.mail.protection.outlook.com"
+            ],
+            "comparte_servidores": true
+          }
+        ],
+        "sin_verificar": [
+          "ernpresa-d.com.co",
+          "mpresa-d.com.co"
+        ],
+        "ns_propios": [
+          "rafe.ns.cloudflare.com",
+          "zeus.ns.cloudflare.com"
+        ],
+        "mx_propios": [
+          "empresa-d-com-co.mail.protection.outlook.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 926
+    },
+    "subdominios_ct|empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "empresa-d.com.co",
+        "fuente": "certspotter",
+        "total": 10,
+        "mostrados": 10,
+        "truncados": false,
+        "con_sitio": 6,
+        "subdominios": [
+          {
+            "nombre": "ayudaseller.empresa-d.com.co",
+            "ultimo_certificado_vence": "2026-12-10",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ctverde.empresa-d.com.co",
+            "ultimo_certificado_vence": "2026-12-04",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "retail-media.empresa-d.com.co",
+            "ultimo_certificado_vence": "2026-12-30",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sadobe.empresa-d.com.co",
+            "ultimo_certificado_vence": "2026-12-11",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "vpnssl.empresa-d.com.co",
+            "ultimo_certificado_vence": "2026-12-11",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "tracking.cs.empresa-d.com.co",
+            "ultimo_certificado_vence": "2027-02-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "aclwmosco.empresa-d.com.co",
+            "ultimo_certificado_vence": "2026-11-22",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "dtecorpco.empresa-d.com.co",
+            "ultimo_certificado_vence": "2026-12-10",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "oms.empresa-d.com.co",
+            "ultimo_certificado_vence": "2027-02-05",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.vpnssl.empresa-d.com.co",
+            "ultimo_certificado_vence": "2026-12-11",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 5312
+    },
+    "dkim_selector|empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "empresa-d.com.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-4.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": true,
+            "destino_cname": "externo-5.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s1.domainkey.u21067439.wl190.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s2.domainkey.u21067439.wl190.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "selector1": "[omitido]",
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-20",
+        "dias_restantes": 76,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "www.empresa-d.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 194
+    },
+    "tls_certificado|ayudaseller.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-10",
+        "dias_restantes": 35,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "ayudaseller.empresa-d.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 198
+    },
+    "tls_certificado|empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-20",
+        "dias_restantes": 76,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "empresa-d.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 209
+    },
+    "tls_certificado|ctverde.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-04",
+        "dias_restantes": 29,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.8",
+        "host": "ctverde.empresa-d.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 537
+    },
+    "cabeceras_web|empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "empresa-d.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.empresa-d.com.co/empresa-d-co",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1007
+    },
+    "cabeceras_web|www.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.empresa-d.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.empresa-d.com.co/empresa-d-co",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1117
+    },
+    "tls_certificado|sadobe.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-11",
+        "dias_restantes": 36,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "sadobe.empresa-d.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 184
+    },
+    "tls_certificado|retail-media.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-30",
+        "dias_restantes": 54,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "retail-media.empresa-d.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 286
+    },
+    "cabeceras_web|sadobe.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sadobe.empresa-d.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sadobe.empresa-d.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 499
+    },
+    "cabeceras_web|ayudaseller.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ayudaseller.empresa-d.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://ayudaseller.empresa-d.com.co/s/?language=es",
+        "redirecciones": 2,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 2387
+    },
+    "cabeceras_web|retail-media.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "retail-media.empresa-d.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 307,
+        "url_final": "https://retail-media.empresa-d.com.co/auth/login",
+        "redirecciones": 1,
+        "redirige_fuera": "externo-6.example",
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 1174
+    },
+    "tls_certificado|tracking.cs.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-01",
+        "dias_restantes": 87,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.11",
+        "host": "tracking.cs.empresa-d.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 380
+    },
+    "cabeceras_web|tracking.cs.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "tracking.cs.empresa-d.com.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 503,
+        "url_final": "https://tracking.cs.empresa-d.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 1028
+    },
+    "cabeceras_web|ctverde.empresa-d.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ctverde.empresa-d.com.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "https://ctverde.empresa-d.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 3475
+    },
+    "tls_certificado|vpnssl.empresa-d.com.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5044
+    },
+    "cabeceras_web|vpnssl.empresa-d.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20056
+    },
+    "investigar_parecido|empresa-d.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "empresa-d.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1998-04-14T04:00:00+00:00",
+        "dias_desde_registro": 10432,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": true,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 556
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "bajo",
+    "hallazgos_obligatorios": [
+      "CORREO-DMARC-OBSOLETO",
+      "CORREO-DKIM-CLAVE-1024",
+      "DOMINIO-SIN-BLOQUEO",
+      "WEB-SIN-NOSNIFF"
+    ],
+    "hallazgos_por_decision": [
+      "WEB-SIN-REDIRECCION-HTTPS@tracking.cs.empresa-d.com.co"
+    ],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT",
+      "PARECIDO-MX",
+      "WEB-SIN-HSTS@empresa-d.com.co"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

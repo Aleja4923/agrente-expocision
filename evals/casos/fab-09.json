@@ -117,8 +117,8 @@
         "dominio": "fab-09.com.co",
         "fuente": "whois",
         "creado": "2015-03-01T00:00:00+00:00",
-        "vence": "2027-12-07T00:00:00+00:00",
-        "dias_para_vencer": 400,
+        "vence": "2026-11-22T00:00:00+00:00",
+        "dias_para_vencer": 20,
         "estados": [
           "clientTransferProhibited"
         ],
@@ -297,7 +297,8 @@
       "CORREO-SPF-MULTIPLE",
       "CORREO-DMARC-INVALIDO",
       "CORREO-DKIM-CLAVE-DEBIL",
-      "WEB-TLS-VERSION-VIEJA"
+      "WEB-TLS-VERSION-VIEJA",
+      "DOMINIO-POR-VENCER"
     ],
     "hallazgos_por_decision": [],
     "hallazgos_prohibidos": [],

@@ -1,0 +1,2475 @@
+{
+  "id": "real-18",
+  "origen": "real",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-05",
+  "dominio": "empresa-s2.com",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|empresa-s2.com": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "empresa-s2.com",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 10,
+              "host": "aspmx.l.google.com"
+            },
+            {
+              "prioridad": 20,
+              "host": "alt1.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 30,
+              "host": "alt2.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 40,
+              "host": "aspmx2.googlemail.com"
+            },
+            {
+              "prioridad": 50,
+              "host": "aspmx3.googlemail.com"
+            }
+          ],
+          "proveedor": "google"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 a mx include:mail.zendesk.com include:externo-1.example include:_spf.google.com include:6180490.spf02.hubspotemail.net -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 6,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "quarantine",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@externo-2.example"
+          ],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 a mx include:mail.zendesk.com include:externo-1.example include:_spf.google.com include:6180490.spf02.hubspotemail.net -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=quarantine; rua=mailto:contacto@externo-2.example; ruf=mailto:contacto@externo-3.example; fo=1;"
+        ]
+      },
+      "duracion_ms": 655
+    },
+    "whois_dominio|empresa-s2.com": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "empresa-s2.com",
+        "fuente": "rdap",
+        "creado": "1997-04-23T04:00:00+00:00",
+        "vence": "2027-04-24T04:00:00+00:00",
+        "dias_para_vencer": 170,
+        "estados": [
+          "clientDeleteProhibited",
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "externo-4.example",
+          "externo-5.example",
+          "externo-6.example",
+          "externo-7.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 44
+    },
+    "security_txt|empresa-s2.com": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "empresa-s2.com",
+        "codigo": 403,
+        "redirige_fuera": null,
+        "existe": null,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 775
+    },
+    "buscar_parecidos|empresa-s2.com": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "empresa-s2.com",
+        "generadas": 32,
+        "truncadas": false,
+        "existentes": 16,
+        "con_correo": [
+          {
+            "dominio": "empresa-s2.com.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "smtp.secureserver.net",
+              "mailstore1.secureserver.net"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "empresa-s2.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "aspmx.l.google.com",
+              "alt1.aspmx.l.google.com",
+              "alt2.aspmx.l.google.com",
+              "aspmx2.googlemail.com",
+              "aspmx3.googlemail.com"
+            ],
+            "comparte_servidores": true
+          },
+          {
+            "dominio": "mpresa-s2.com",
+            "tipo": "omision",
+            "mx": [
+              "externo-8.example",
+              "externo-9.example"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "epresa-s2.com",
+            "tipo": "omision",
+            "mx": [
+              "aspmx.l.google.com",
+              "alt1.aspmx.l.google.com",
+              "alt2.aspmx.l.google.com",
+              "aspmx2.googlemail.com",
+              "aspmx3.googlemail.com"
+            ],
+            "comparte_servidores": true
+          },
+          {
+            "dominio": "emresa-s2.com",
+            "tipo": "omision",
+            "mx": [
+              "mx.emresa-s2.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "empesa-s2.com",
+            "tipo": "omision",
+            "mx": [
+              "externo-10.example"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "mepresa-s2.com",
+            "tipo": "transposicion",
+            "mx": [
+              "externo-11.example"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "eempresa-s2.com",
+            "tipo": "duplicacion",
+            "mx": [
+              "mail.eempresa-s2.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "emmpresa-s2.com",
+            "tipo": "duplicacion",
+            "mx": [
+              "emmpresa-s2.com"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "externo-4.example",
+          "externo-5.example",
+          "externo-6.example",
+          "externo-7.example"
+        ],
+        "mx_propios": [
+          "aspmx.l.google.com",
+          "alt1.aspmx.l.google.com",
+          "alt2.aspmx.l.google.com",
+          "aspmx2.googlemail.com",
+          "aspmx3.googlemail.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 1479
+    },
+    "subdominios_ct|empresa-s2.com": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "empresa-s2.com",
+        "fuente": "certspotter",
+        "total": 40,
+        "mostrados": 40,
+        "truncados": false,
+        "con_sitio": 37,
+        "subdominios": [
+          {
+            "nombre": "ac-upgrade-sf.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "accounting-synchronization.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-10",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-ac-upgrade-sf.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-accounting-synchronization.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-api-ecosystem.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-12-25",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-app-empresa-s2-ledger-voucher-frontend.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-custom-reports-agent.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-12-10",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-data-admin.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-invoices-import-frontend.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-12-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-process-dashboard.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-security-checkup.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-team-2-equipo-2025.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "assisted-wizard.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "data-admin.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "dev-cloud-api.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "estimate-v2.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "invoices-import-frontend.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-12-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "memberships-redeem-rewards.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "opsless.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-05",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "process-dashboard.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sandbox-ac-upgrade-sf.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sandbox-accounting-synchronization.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sandbox-estimate-v2.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sandbox-invoices-import-frontend.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-12-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sandbox-memberships-api.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sandbox-nomina-emission.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sandbox-process-dashboard.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sandbox-security-checkup.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sandbox-team-2-equipo-2025.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "security-checkup.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sellers-api.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "team-2-equipo-2025.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "training-ads.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "training-al-team-10-hackaton-2025.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "training-health-maintainer-agent.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "training-team11.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "empresaejemplar-pan-plus.testing.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-11-25",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "almost-estimate-v2.empresa-s2.com",
+            "ultimo_certificado_vence": "2027-01-07",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "persona-training-pets.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-12-19",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "sandbox-pos.empresa-s2.com",
+            "ultimo_certificado_vence": "2026-12-15",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 7273
+    },
+    "dkim_selector|empresa-s2.com": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "empresa-s2.com",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": true,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": true,
+            "destino_cname": "externo-12.example",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": true,
+            "destino_cname": "externo-12.example",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": true,
+            "destino_cname": "externo-12.example",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": true,
+            "destino_cname": "externo-12.example",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": true,
+            "destino_cname": "externo-12.example",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": true,
+            "destino_cname": "externo-12.example",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s1.domainkey.u37066119.wl120.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s2.domainkey.u37066119.wl120.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "google": "[omitido]",
+        "selector1": "[omitido]",
+        "selector2": "[omitido]",
+        "default": "[omitido]",
+        "dkim": "[omitido]",
+        "k1": "[omitido]",
+        "mail": "[omitido]",
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|ac-upgrade-sf.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-08",
+        "dias_restantes": 154,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "ac-upgrade-sf.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 146
+    },
+    "tls_certificado|accounting-synchronization.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-10",
+        "dias_restantes": 66,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "accounting-synchronization.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 148
+    },
+    "tls_certificado|empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-28",
+        "dias_restantes": 115,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 204
+    },
+    "tls_certificado|www.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-24",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.4",
+        "host": "www.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 478
+    },
+    "cabeceras_web|accounting-synchronization.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "accounting-synchronization.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://accounting-synchronization.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 641
+    },
+    "tls_certificado|almost-ac-upgrade-sf.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-08",
+        "dias_restantes": 154,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "almost-ac-upgrade-sf.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 161
+    },
+    "cabeceras_web|ac-upgrade-sf.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ac-upgrade-sf.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://ac-upgrade-sf.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 930
+    },
+    "tls_certificado|almost-accounting-synchronization.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-09",
+        "dias_restantes": 65,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "almost-accounting-synchronization.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 129
+    },
+    "cabeceras_web|almost-ac-upgrade-sf.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almost-ac-upgrade-sf.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://almost-ac-upgrade-sf.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 738
+    },
+    "cabeceras_web|www.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.empresa-s2.com/colombia/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 1224
+    },
+    "tls_certificado|almost-app-empresa-s2-ledger-voucher-frontend.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-16",
+        "dias_restantes": 162,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "almost-app-empresa-s2-ledger-voucher-frontend.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 231
+    },
+    "cabeceras_web|almost-accounting-synchronization.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almost-accounting-synchronization.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://almost-accounting-synchronization.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 768
+    },
+    "tls_certificado|almost-api-ecosystem.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-12",
+        "dias_restantes": 188,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "almost-api-ecosystem.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 317
+    },
+    "cabeceras_web|empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 200,
+        "url_final": "https://empresa-s2.com/colombia/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 1844
+    },
+    "tls_certificado|almost-custom-reports-agent.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-27",
+        "dias_restantes": 173,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "almost-custom-reports-agent.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 197
+    },
+    "tls_certificado|almost-data-admin.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-13",
+        "dias_restantes": 69,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "almost-data-admin.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 164
+    },
+    "cabeceras_web|almost-data-admin.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almost-data-admin.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://almost-data-admin.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 527
+    },
+    "tls_certificado|almost-invoices-import-frontend.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-30",
+        "dias_restantes": 176,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.11",
+        "host": "almost-invoices-import-frontend.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 83
+    },
+    "cabeceras_web|almost-custom-reports-agent.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almost-custom-reports-agent.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://almost-custom-reports-agent.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 666
+    },
+    "cabeceras_web|almost-app-empresa-s2-ledger-voucher-frontend.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almost-app-empresa-s2-ledger-voucher-frontend.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://almost-app-empresa-s2-ledger-voucher-frontend.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 968
+    },
+    "tls_certificado|almost-process-dashboard.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-19",
+        "dias_restantes": 195,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.12",
+        "host": "almost-process-dashboard.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 93
+    },
+    "tls_certificado|almost-security-checkup.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-07",
+        "dias_restantes": 153,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.13",
+        "host": "almost-security-checkup.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 132
+    },
+    "cabeceras_web|almost-invoices-import-frontend.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almost-invoices-import-frontend.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://almost-invoices-import-frontend.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 561
+    },
+    "tls_certificado|almost-team-2-equipo-2025.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-15",
+        "dias_restantes": 71,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.14",
+        "host": "almost-team-2-equipo-2025.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 109
+    },
+    "cabeceras_web|almost-security-checkup.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almost-security-checkup.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://almost-security-checkup.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 540
+    },
+    "cabeceras_web|almost-process-dashboard.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almost-process-dashboard.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://almost-process-dashboard.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 696
+    },
+    "tls_certificado|assisted-wizard.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-01",
+        "dias_restantes": 147,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.15",
+        "host": "assisted-wizard.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 113
+    },
+    "tls_certificado|data-admin.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-13",
+        "dias_restantes": 69,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.16",
+        "host": "data-admin.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 122
+    },
+    "cabeceras_web|almost-team-2-equipo-2025.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almost-team-2-equipo-2025.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://almost-team-2-equipo-2025.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 569
+    },
+    "tls_certificado|dev-cloud-api.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-11",
+        "dias_restantes": 157,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.17",
+        "host": "dev-cloud-api.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 211
+    },
+    "cabeceras_web|assisted-wizard.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "assisted-wizard.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://assisted-wizard.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 616
+    },
+    "cabeceras_web|data-admin.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "data-admin.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://data-admin.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 576
+    },
+    "tls_certificado|estimate-v2.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-07",
+        "dias_restantes": 63,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.18",
+        "host": "estimate-v2.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 117
+    },
+    "tls_certificado|invoices-import-frontend.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-30",
+        "dias_restantes": 176,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.19",
+        "host": "invoices-import-frontend.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 102
+    },
+    "cabeceras_web|almost-api-ecosystem.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "almost-api-ecosystem.empresa-s2.com",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 404,
+        "url_final": "https://almost-api-ecosystem.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2950
+    },
+    "cabeceras_web|estimate-v2.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "estimate-v2.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://estimate-v2.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 631
+    },
+    "tls_certificado|memberships-redeem-rewards.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-07",
+        "dias_restantes": 153,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.20",
+        "host": "memberships-redeem-rewards.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 115
+    },
+    "cabeceras_web|invoices-import-frontend.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "invoices-import-frontend.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://invoices-import-frontend.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 651
+    },
+    "tls_certificado|process-dashboard.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-19",
+        "dias_restantes": 195,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.21",
+        "host": "process-dashboard.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 108
+    },
+    "tls_certificado|opsless.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-17",
+        "dias_restantes": 104,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.22",
+        "host": "opsless.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 229
+    },
+    "cabeceras_web|memberships-redeem-rewards.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "memberships-redeem-rewards.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://memberships-redeem-rewards.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 535
+    },
+    "tls_certificado|sandbox-ac-upgrade-sf.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-08",
+        "dias_restantes": 154,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.23",
+        "host": "sandbox-ac-upgrade-sf.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 104
+    },
+    "cabeceras_web|process-dashboard.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "process-dashboard.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://process-dashboard.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 548
+    },
+    "tls_certificado|sandbox-accounting-synchronization.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-09",
+        "dias_restantes": 65,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.24",
+        "host": "sandbox-accounting-synchronization.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 60
+    },
+    "cabeceras_web|sandbox-accounting-synchronization.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sandbox-accounting-synchronization.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sandbox-accounting-synchronization.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 497
+    },
+    "cabeceras_web|sandbox-ac-upgrade-sf.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sandbox-ac-upgrade-sf.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sandbox-ac-upgrade-sf.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 664
+    },
+    "tls_certificado|sandbox-estimate-v2.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-07",
+        "dias_restantes": 63,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.25",
+        "host": "sandbox-estimate-v2.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 96
+    },
+    "tls_certificado|sandbox-invoices-import-frontend.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-30",
+        "dias_restantes": 176,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.26",
+        "host": "sandbox-invoices-import-frontend.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 107
+    },
+    "cabeceras_web|sandbox-invoices-import-frontend.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sandbox-invoices-import-frontend.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sandbox-invoices-import-frontend.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 538
+    },
+    "cabeceras_web|dev-cloud-api.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "dev-cloud-api.empresa-s2.com",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://dev-cloud-api.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2835
+    },
+    "cabeceras_web|opsless.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "opsless.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://opsless.empresa-s2.com/login",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 1853
+    },
+    "tls_certificado|sandbox-nomina-emission.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-31",
+        "dias_restantes": 146,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.12",
+        "host": "sandbox-nomina-emission.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 100
+    },
+    "cabeceras_web|sandbox-estimate-v2.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sandbox-estimate-v2.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sandbox-estimate-v2.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 851
+    },
+    "tls_certificado|sandbox-memberships-api.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-31",
+        "dias_restantes": 146,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.27",
+        "host": "sandbox-memberships-api.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 228
+    },
+    "tls_certificado|sandbox-process-dashboard.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-20",
+        "dias_restantes": 195,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.28",
+        "host": "sandbox-process-dashboard.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 128
+    },
+    "tls_certificado|sandbox-security-checkup.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-07",
+        "dias_restantes": 153,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.29",
+        "host": "sandbox-security-checkup.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 103
+    },
+    "cabeceras_web|sandbox-nomina-emission.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sandbox-nomina-emission.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sandbox-nomina-emission.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 528
+    },
+    "tls_certificado|sandbox-team-2-equipo-2025.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-15",
+        "dias_restantes": 71,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.30",
+        "host": "sandbox-team-2-equipo-2025.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 69
+    },
+    "cabeceras_web|sandbox-process-dashboard.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sandbox-process-dashboard.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sandbox-process-dashboard.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 560
+    },
+    "tls_certificado|security-checkup.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-07",
+        "dias_restantes": 153,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.31",
+        "host": "security-checkup.empresa-s2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 109
+    },
+    "cabeceras_web|sandbox-security-checkup.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sandbox-security-checkup.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://sandbox-security-checkup.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 782
+    },
+    "cabeceras_web|sandbox-team-2-equipo-2025.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sandbox-team-2-equipo-2025.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sandbox-team-2-equipo-2025.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 512
+    },
+    "cabeceras_web|security-checkup.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "security-checkup.empresa-s2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://security-checkup.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 614
+    },
+    "cabeceras_web|sandbox-memberships-api.empresa-s2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sandbox-memberships-api.empresa-s2.com",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 401,
+        "url_final": "https://sandbox-memberships-api.empresa-s2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 3005
+    },
+    "investigar_parecido|empresa-s2.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "empresa-s2.com.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2013-05-27T02:21:36+00:00",
+        "dias_desde_registro": 4910,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 325
+    },
+    "investigar_parecido|mpresa-s2.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "mpresa-s2.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2001-05-21T10:34:11+00:00",
+        "dias_desde_registro": 9299,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 329
+    },
+    "investigar_parecido|empresa-s2.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "empresa-s2.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2012-07-16T19:38:38+00:00",
+        "dias_desde_registro": 5224,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": true,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 350
+    },
+    "investigar_parecido|epresa-s2.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "epresa-s2.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1997-07-21T04:00:00+00:00",
+        "dias_desde_registro": 10699,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": true,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 531
+    },
+    "investigar_parecido|emresa-s2.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "emresa-s2.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1997-07-17T04:00:00+00:00",
+        "dias_desde_registro": 10703,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 310
+    },
+    "investigar_parecido|empesa-s2.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "empesa-s2.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2002-07-23T15:30:48+00:00",
+        "dias_desde_registro": 8870,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 495
+    },
+    "investigar_parecido|mepresa-s2.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "mepresa-s2.com",
+        "tipo": "transposicion",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2002-08-16T14:35:06+00:00",
+        "dias_desde_registro": 8846,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 629
+    },
+    "investigar_parecido|eempresa-s2.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "eempresa-s2.com",
+        "tipo": "duplicacion",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2017-01-17T15:00:26+00:00",
+        "dias_desde_registro": 3578,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 826
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-DKIM-CLAVE-1024",
+      "WEB-SIN-REDIRECCION-HTTPS",
+      "WEB-SIN-HSTS",
+      "WEB-SIN-PROTECCION-MARCOS",
+      "WEB-SIN-NOSNIFF",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "PARECIDO-ENVIA@mpresa-s2.com",
+      "PARECIDO-ENVIA@eempresa-s2.com"
+    ],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT",
+      "CORREO-DKIM-NO-ENCONTRADO",
+      "PARECIDO-ENVIA@epresa-s2.com"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

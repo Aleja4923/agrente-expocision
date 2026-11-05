@@ -172,3 +172,23 @@ def test_etiqueta_corta_no_rompe_palabras():
     assert resultado.sugerencia == "El host no está habilitado; empresa-k lo declara en apiempresa-k.empresa-k.co."
     assert restos_reales(resultado.sugerencia, m) == []
     assert restos_reales("lo dice Habi.", m) == ["habi"]
+
+
+def test_etiqueta_de_parecido_dentro_de_proveedor():
+    real_p, seudo_p = PARECIDO_OMISION["dominio"], mapa().parecidos[PARECIDO_OMISION["dominio"]]
+    r = seudonimizar({f"buscar_parecidos|{REAL}": ResultadoHerramienta(ok=True, herramienta="buscar_parecidos", datos={
+        "dominio": REAL, "con_correo": [{"dominio": real_p, "tipo": "omision",
+                                         "mx": [f"{real_p.split('.')[0]}-com-co.mail.protection.outlook.com"],
+                                         "comparte_servidores": False}], "sin_verificar": []})}, mapa())
+    mx = r[f"buscar_parecidos|{SEUDO}"].datos["con_correo"][0]["mx"][0]
+    assert mx == f"{seudo_p.split('.')[0]}-com-co.mail.protection.outlook.com"
+    assert restos_reales(todo(r), mapa()) == []
+
+
+def test_etiquetas_distintivas_de_subdominios():
+    m = mapa().model_copy(update={"etiquetas": {"coleccionarte": "coleccion", "davi": "banco"}})
+    r = seudonimizar({f"tls_certificado|coleccionarte.{REAL}": ResultadoHerramienta(
+        ok=True, herramienta="tls_certificado", datos={"host": f"daviturno.{REAL}"})}, m)
+    (clave, resultado), = r.items()
+    assert clave == f"tls_certificado|coleccion.{SEUDO}" and resultado.datos["host"] == f"bancoturno.{SEUDO}"
+    assert restos_reales(todo(r), m) == [] and restos_reales("api.daviturno.x", m) == ["davi"]

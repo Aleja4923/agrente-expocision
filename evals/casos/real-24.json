@@ -1,0 +1,1522 @@
+{
+  "id": "real-24",
+  "origen": "real",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-05",
+  "dominio": "empresa-y.com",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|empresa-y.com": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "empresa-y.com",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 10,
+              "host": "empresa-y-com.mail.protection.outlook.com"
+            },
+            {
+              "prioridad": 50,
+              "host": "alt1.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 50,
+              "host": "alt2.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 50,
+              "host": "alt3.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 50,
+              "host": "alt4.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 60,
+              "host": "externo-1.example"
+            },
+            {
+              "prioridad": 70,
+              "host": "externo-2.example"
+            }
+          ],
+          "proveedor": "microsoft"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3 ip4:203.0.113.4 ip4:203.0.113.5 ip4:203.0.113.6 ip4:203.0.113.7 include:externo-3.example include:spf.protection.outlook.com include:_spf.google.com include:externo-4.example ~all"
+          ],
+          "cantidad": 1,
+          "cierre": "~all",
+          "consultas_dns": 4,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "reject",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:postmaster@empresa-y.com"
+          ],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3 ip4:203.0.113.4 ip4:203.0.113.5 ip4:203.0.113.6 ip4:203.0.113.7 include:externo-3.example include:spf.protection.outlook.com include:_spf.google.com include:externo-4.example ~all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=reject; rua=mailto:postmaster@empresa-y.com;ruf=mailto:dmarc@empresa-y.com"
+        ]
+      },
+      "duracion_ms": 1062
+    },
+    "whois_dominio|empresa-y.com": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "empresa-y.com",
+        "fuente": "rdap",
+        "creado": "1997-10-10T04:00:00+00:00",
+        "vence": "2034-10-09T04:00:00+00:00",
+        "dias_para_vencer": 2895,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "externo-5.example",
+          "externo-6.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 1
+    },
+    "security_txt|empresa-y.com": {
+      "ok": false,
+      "herramienta": "security_txt",
+      "datos": {},
+      "error": "sin_direccion_web",
+      "sugerencia": "El nombre existe pero no tiene dirección web: no hay sitio en ese host.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 167
+    },
+    "buscar_parecidos|empresa-y.com": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "empresa-y.com",
+        "generadas": 27,
+        "truncadas": false,
+        "existentes": 6,
+        "con_correo": [
+          {
+            "dominio": "empresa-y.com.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "externo-1.example",
+              "externo-2.example",
+              "externo-7.example"
+            ],
+            "comparte_servidores": true
+          },
+          {
+            "dominio": "mpresa-y.com",
+            "tipo": "omision",
+            "mx": [
+              "externo-8.example"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "externo-5.example",
+          "externo-6.example"
+        ],
+        "mx_propios": [
+          "empresa-y-com.mail.protection.outlook.com",
+          "alt1.aspmx.l.google.com",
+          "alt2.aspmx.l.google.com",
+          "alt3.aspmx.l.google.com",
+          "alt4.aspmx.l.google.com",
+          "externo-1.example",
+          "externo-2.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 876
+    },
+    "subdominios_ct|empresa-y.com": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "empresa-y.com",
+        "fuente": "certspotter",
+        "total": 34,
+        "mostrados": 34,
+        "truncados": false,
+        "con_sitio": 29,
+        "subdominios": [
+          {
+            "nombre": "adminfo.empresa-y.com",
+            "ultimo_certificado_vence": "2027-01-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "adminfonet.empresa-y.com",
+            "ultimo_certificado_vence": "2027-04-28",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "appretailmanagement.empresa-y.com",
+            "ultimo_certificado_vence": "2027-02-19",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "apps.empresa-y.com",
+            "ultimo_certificado_vence": "2027-01-28",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "autodiscover.empresa-y.com",
+            "ultimo_certificado_vence": "2027-01-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "canales.empresa-y.com",
+            "ultimo_certificado_vence": "2027-05-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "confirmaciones.empresa-y.com",
+            "ultimo_certificado_vence": "2027-05-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "domiciliosretail.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "edi.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "fe.empresa-y.com",
+            "ultimo_certificado_vence": "2026-12-16",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "integracion.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-04",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ivr.empresa-y.com",
+            "ultimo_certificado_vence": "2027-04-22",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "marketing.empresa-y.com",
+            "ultimo_certificado_vence": "2027-01-02",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "marketplace.empresa-y.com",
+            "ultimo_certificado_vence": "2026-11-19",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "mobile.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-10",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "orionmonitoreo.empresa-y.com",
+            "ultimo_certificado_vence": "2026-12-19",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "aliadovtex.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "portaldeautogestion.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-17",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "retail.empresa-y.com",
+            "ultimo_certificado_vence": "2027-01-28",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "security.empresa-y.com",
+            "ultimo_certificado_vence": "2026-12-16",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "correoapp.empresa-y.com",
+            "ultimo_certificado_vence": "2027-01-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "solucionesconvergentes.empresa-y.com",
+            "ultimo_certificado_vence": "2026-12-31",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "web.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-17",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "websistema.empresa-y.com",
+            "ultimo_certificado_vence": "2027-04-11",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "widget.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-31",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "wms.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-27",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "wsportalempresarios.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-04",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "wssistema.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-05",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.empresa-y.com",
+            "ultimo_certificado_vence": "2027-01-28",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "dev.empresa-y.com",
+            "ultimo_certificado_vence": "2026-12-09",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "docuclass.empresa-y.com",
+            "ultimo_certificado_vence": "2027-01-28",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "fews.empresa-y.com",
+            "ultimo_certificado_vence": "2026-12-16",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "wsmobile.empresa-y.com",
+            "ultimo_certificado_vence": "2027-03-10",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.ivr.empresa-y.com",
+            "ultimo_certificado_vence": "2027-04-22",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 17673
+    },
+    "dkim_selector|empresa-y.com": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "empresa-y.com",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "tls_certificado|empresa-y.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "sin_direccion_web",
+      "sugerencia": "El nombre existe en DNS pero no tiene una dirección web: no hay sitio en ese host. Si es el dominio principal, prueba con www.<dominio>.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 39
+    },
+    "cabeceras_web|empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "sin_direccion_web",
+      "sugerencia": "El nombre existe pero no tiene dirección web: no hay sitio en ese host.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 12
+    },
+    "tls_certificado|www.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-28",
+        "dias_restantes": 84,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "www.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 90
+    },
+    "tls_certificado|appretailmanagement.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "nombre_no_coincide",
+        "vence": "2027-05-13",
+        "dias_restantes": 189,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.9",
+        "host": "appretailmanagement.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 154
+    },
+    "cabeceras_web|www.empresa-y.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.empresa-y.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.empresa-y.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 403
+    },
+    "cabeceras_web|appretailmanagement.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 434
+    },
+    "tls_certificado|apps.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-09",
+        "dias_restantes": 34,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.10",
+        "host": "apps.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 166
+    },
+    "cabeceras_web|apps.empresa-y.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "apps.empresa-y.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://apps.empresa-y.com/Error/externo-9.example",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 969
+    },
+    "tls_certificado|canales.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2027-05-07",
+        "dias_restantes": 183,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.11",
+        "host": "canales.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 523
+    },
+    "tls_certificado|adminfonet.empresa-y.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5053
+    },
+    "tls_certificado|adminfo.empresa-y.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5054
+    },
+    "tls_certificado|autodiscover.empresa-y.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5037
+    },
+    "cabeceras_web|canales.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10098
+    },
+    "tls_certificado|confirmaciones.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-13",
+        "dias_restantes": 189,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.12",
+        "host": "confirmaciones.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 80
+    },
+    "cabeceras_web|confirmaciones.empresa-y.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "confirmaciones.empresa-y.com",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "https://confirmaciones.empresa-y.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 2592000,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 10099
+    },
+    "cabeceras_web|adminfonet.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20060
+    },
+    "cabeceras_web|adminfo.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20061
+    },
+    "tls_certificado|fe.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "nombre_no_coincide",
+        "vence": "2027-05-13",
+        "dias_restantes": 189,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.9",
+        "host": "fe.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 147
+    },
+    "cabeceras_web|fe.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 126
+    },
+    "tls_certificado|integracion.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2027-03-04",
+        "dias_restantes": 119,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.13",
+        "host": "integracion.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 185
+    },
+    "cabeceras_web|autodiscover.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20038
+    },
+    "tls_certificado|ivr.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2027-04-22",
+        "dias_restantes": 168,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.14",
+        "host": "ivr.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 215
+    },
+    "tls_certificado|domiciliosretail.empresa-y.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5022
+    },
+    "tls_certificado|edi.empresa-y.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5032
+    },
+    "cabeceras_web|integracion.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10233
+    },
+    "tls_certificado|marketing.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-02",
+        "dias_restantes": 57,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.15",
+        "host": "marketing.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 191
+    },
+    "cabeceras_web|ivr.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10071
+    },
+    "cabeceras_web|marketing.empresa-y.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "marketing.empresa-y.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 404,
+        "url_final": "https://marketing.empresa-y.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 1236
+    },
+    "tls_certificado|mobile.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-10",
+        "dias_restantes": 125,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.16",
+        "host": "mobile.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 89
+    },
+    "cabeceras_web|mobile.empresa-y.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "mobile.empresa-y.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://mobile.empresa-y.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-powered-by": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 149
+    },
+    "tls_certificado|orionmonitoreo.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2026-12-19",
+        "dias_restantes": 44,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.17",
+        "host": "orionmonitoreo.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 180
+    },
+    "cabeceras_web|edi.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10178
+    },
+    "tls_certificado|marketplace.empresa-y.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5198
+    },
+    "tls_certificado|aliadovtex.empresa-y.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5192
+    },
+    "cabeceras_web|domiciliosretail.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20206
+    },
+    "cabeceras_web|orionmonitoreo.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10055
+    },
+    "tls_certificado|retail.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-09",
+        "dias_restantes": 34,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.18",
+        "host": "retail.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 120
+    },
+    "tls_certificado|portaldeautogestion.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2027-05-13",
+        "dias_restantes": 189,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.19",
+        "host": "portaldeautogestion.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 365
+    },
+    "cabeceras_web|retail.empresa-y.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "retail.empresa-y.com",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "http://retail.empresa-y.com:10200/Error/externo-10.example",
+        "redirecciones": 3,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2552
+    },
+    "tls_certificado|security.empresa-y.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5177
+    },
+    "cabeceras_web|portaldeautogestion.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10061
+    },
+    "cabeceras_web|marketplace.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20033
+    },
+    "tls_certificado|solucionesconvergentes.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2026-12-31",
+        "dias_restantes": 56,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.20",
+        "host": "solucionesconvergentes.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 285
+    },
+    "tls_certificado|correoapp.empresa-y.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5024
+    },
+    "cabeceras_web|aliadovtex.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20027
+    },
+    "tls_certificado|web.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2027-03-17",
+        "dias_restantes": 132,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.21",
+        "host": "web.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 182
+    },
+    "cabeceras_web|web.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 191
+    },
+    "tls_certificado|websistema.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-11",
+        "dias_restantes": 157,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.22",
+        "host": "websistema.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 236
+    },
+    "cabeceras_web|websistema.empresa-y.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "websistema.empresa-y.com",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "https://websistema.empresa-y.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 147
+    },
+    "tls_certificado|widget.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2027-01-15",
+        "dias_restantes": 71,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.23",
+        "host": "widget.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 381
+    },
+    "cabeceras_web|solucionesconvergentes.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10059
+    },
+    "tls_certificado|wms.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2027-03-27",
+        "dias_restantes": 142,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.24",
+        "host": "wms.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 73
+    },
+    "cabeceras_web|security.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20037
+    },
+    "tls_certificado|wsportalempresarios.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-09",
+        "dias_restantes": 34,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.25",
+        "host": "wsportalempresarios.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 295
+    },
+    "cabeceras_web|widget.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10087
+    },
+    "tls_certificado|wssistema.empresa-y.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2027-03-05",
+        "dias_restantes": 120,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.26",
+        "host": "wssistema.empresa-y.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 326
+    },
+    "cabeceras_web|wsportalempresarios.empresa-y.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "wsportalempresarios.empresa-y.com",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "http://retail.empresa-y.com:10200/Error/externo-10.example",
+        "redirecciones": 3,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2544
+    },
+    "cabeceras_web|wssistema.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 2266
+    },
+    "cabeceras_web|wms.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10051
+    },
+    "cabeceras_web|correoapp.empresa-y.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20039
+    },
+    "investigar_parecido|mpresa-y.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "mpresa-y.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2005-12-09T20:58:55+00:00",
+        "dias_desde_registro": 7635,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 585
+    },
+    "investigar_parecido|empresa-y.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "empresa-y.com.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1998-11-12T00:00:00+00:00",
+        "dias_desde_registro": 10220,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": true,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 853
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "medio",
+    "hallazgos_obligatorios": [
+      "CORREO-DKIM-NO-ENCONTRADO",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "WEB-SIN-HSTS@www.empresa-y.com",
+      "WEB-TLS-INVALIDO@canales.empresa-y.com",
+      "WEB-TLS-INVALIDO@portaldeautogestion.empresa-y.com"
+    ],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT",
+      "PARECIDO-ENVIA",
+      "CORREO-SPF-SUAVE"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

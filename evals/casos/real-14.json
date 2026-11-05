@@ -1,0 +1,1056 @@
+{
+  "id": "real-14",
+  "origen": "real",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-05",
+  "dominio": "pyme-o.com",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|pyme-o.com": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "pyme-o.com",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 0,
+              "host": "externo-1.example"
+            },
+            {
+              "prioridad": 0,
+              "host": "externo-2.example"
+            },
+            {
+              "prioridad": 0,
+              "host": "externo-3.example"
+            }
+          ],
+          "proveedor": "otro"
+        },
+        "spf": {
+          "registros": [],
+          "cantidad": 0,
+          "cierre": "ninguno",
+          "consultas_dns": 0,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": false,
+          "valido": false,
+          "multiple": false,
+          "p": null,
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [],
+        "txt_dmarc": []
+      },
+      "duracion_ms": 384
+    },
+    "whois_dominio|pyme-o.com": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "pyme-o.com",
+        "fuente": "rdap",
+        "creado": "1996-04-22T04:00:00+00:00",
+        "vence": "2028-09-27T18:09:14+00:00",
+        "dias_para_vencer": 692,
+        "estados": [
+          "active"
+        ],
+        "bloqueo_transferencia": false,
+        "servidores_nombre": [
+          "externo-4.example",
+          "externo-5.example",
+          "externo-6.example",
+          "externo-7.example",
+          "externo-8.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 281
+    },
+    "security_txt|pyme-o.com": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "pyme-o.com",
+        "codigo": 404,
+        "redirige_fuera": null,
+        "existe": false,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 1224
+    },
+    "buscar_parecidos|pyme-o.com": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "pyme-o.com",
+        "generadas": 19,
+        "truncadas": false,
+        "existentes": 2,
+        "con_correo": [
+          {
+            "dominio": "pyme-o.com.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "203.0.113.1"
+            ],
+            "comparte_servidores": true
+          },
+          {
+            "dominio": "yme-o.com",
+            "tipo": "omision",
+            "mx": [
+              "yme-o-com.mail.protection.outlook.com"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "externo-4.example",
+          "externo-7.example",
+          "externo-5.example",
+          "externo-6.example",
+          "externo-8.example"
+        ],
+        "mx_propios": [
+          "externo-1.example",
+          "externo-2.example",
+          "externo-3.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 558
+    },
+    "subdominios_ct|pyme-o.com": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "pyme-o.com",
+        "fuente": "certspotter",
+        "total": 11,
+        "mostrados": 11,
+        "truncados": false,
+        "con_sitio": 11,
+        "subdominios": [
+          {
+            "nombre": "ar.pyme-o.com",
+            "ultimo_certificado_vence": "2027-01-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "assetlab.pyme-o.com",
+            "ultimo_certificado_vence": "2027-01-03",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "auth--dev.pyme-o.com",
+            "ultimo_certificado_vence": "2027-01-30",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "auth.pyme-o.com",
+            "ultimo_certificado_vence": "2026-12-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cr.pyme-o.com",
+            "ultimo_certificado_vence": "2027-01-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "es.pyme-o.com",
+            "ultimo_certificado_vence": "2026-12-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "intranet.pyme-o.com",
+            "ultimo_certificado_vence": "2026-12-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "nz.pyme-o.com",
+            "ultimo_certificado_vence": "2027-01-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "quickbooks.pyme-o.com",
+            "ultimo_certificado_vence": "2027-01-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.pyme-o.com",
+            "ultimo_certificado_vence": "2026-12-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.intranet.pyme-o.com",
+            "ultimo_certificado_vence": "2026-12-20",
+            "vigente": true,
+            "tiene_sitio": true
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 5778
+    },
+    "dkim_selector|pyme-o.com": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "pyme-o.com",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "tls_certificado|assetlab.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-03",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "assetlab.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 155
+    },
+    "tls_certificado|ar.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-13",
+        "dias_restantes": 69,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "ar.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 196
+    },
+    "tls_certificado|pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-15",
+        "dias_restantes": 39,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.4",
+        "host": "pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 310
+    },
+    "tls_certificado|www.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-15",
+        "dias_restantes": 39,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.4",
+        "host": "www.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 314
+    },
+    "cabeceras_web|assetlab.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "assetlab.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://assetlab.pyme-o.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 63072000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 491
+    },
+    "tls_certificado|auth--dev.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-30",
+        "dias_restantes": 85,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "auth--dev.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 215
+    },
+    "cabeceras_web|ar.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ar.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://ar.pyme-o.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 1157
+    },
+    "tls_certificado|auth.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-29",
+        "dias_restantes": 53,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "auth.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 222
+    },
+    "cabeceras_web|auth--dev.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "auth--dev.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://auth--dev.pyme-o.com/jv/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": true,
+        "nosniff": false,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 1023
+    },
+    "cabeceras_web|pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://pyme-o.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 3600,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1754
+    },
+    "tls_certificado|cr.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-29",
+        "dias_restantes": 85,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "cr.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 197
+    },
+    "tls_certificado|es.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-29",
+        "dias_restantes": 53,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "es.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 406
+    },
+    "cabeceras_web|auth.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "auth.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://auth.pyme-o.com/jv/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": true,
+        "nosniff": false,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 1035
+    },
+    "tls_certificado|intranet.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-20",
+        "dias_restantes": 45,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "intranet.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 205
+    },
+    "cabeceras_web|cr.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "cr.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://cr.pyme-o.com/pedir",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 852
+    },
+    "tls_certificado|nz.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-07",
+        "dias_restantes": 62,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "nz.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 194
+    },
+    "cabeceras_web|intranet.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "intranet.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 404,
+        "url_final": "https://intranet.pyme-o.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31556952,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 665
+    },
+    "tls_certificado|quickbooks.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-09",
+        "dias_restantes": 64,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "quickbooks.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 157
+    },
+    "cabeceras_web|nz.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "nz.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 429,
+        "url_final": "https://nz.pyme-o.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 598
+    },
+    "tls_certificado|www.intranet.pyme-o.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-20",
+        "dias_restantes": 45,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "www.intranet.pyme-o.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 198
+    },
+    "cabeceras_web|www.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://pyme-o.com/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 3600,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 3838
+    },
+    "cabeceras_web|quickbooks.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "quickbooks.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://quickbooks.pyme-o.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 717
+    },
+    "cabeceras_web|www.intranet.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.intranet.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 404,
+        "url_final": "https://www.intranet.pyme-o.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31556952,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 646
+    },
+    "cabeceras_web|es.pyme-o.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "es.pyme-o.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://es.pyme-o.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 6558
+    },
+    "investigar_parecido|yme-o.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "yme-o.com",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2013-06-09T16:47:58+00:00",
+        "dias_desde_registro": 4896,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 454
+    },
+    "investigar_parecido|pyme-o.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "pyme-o.com.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2012-08-04T01:38:03+00:00",
+        "dias_desde_registro": 5206,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": true,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 606
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-SPF-AUSENTE",
+      "CORREO-DMARC-AUSENTE",
+      "DOMINIO-SIN-BLOQUEO",
+      "WEB-SIN-SECURITY-TXT",
+      "WEB-SIN-HSTS"
+    ],
+    "hallazgos_por_decision": [
+      "PARECIDO-ENVIA@yme-o.com",
+      "WEB-VERSION-EXPUESTA@auth.pyme-o.com",
+      "WEB-SIN-PROTECCION-MARCOS@cr.pyme-o.com"
+    ],
+    "hallazgos_prohibidos": [
+      "CORREO-SIN-MX",
+      "PARECIDO-MX@pyme-o.com.co"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

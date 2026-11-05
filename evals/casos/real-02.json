@@ -1,0 +1,1063 @@
+{
+  "id": "real-02",
+  "origen": "real",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-05",
+  "dominio": "pyme-g.net",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|pyme-g.net": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "pyme-g.net",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 0,
+              "host": "pyme-g-net.mail.protection.outlook.com"
+            }
+          ],
+          "proveedor": "microsoft"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 include:spf.protection.outlook.com include:externo-1.example include:amazonses.com ~all"
+          ],
+          "cantidad": 1,
+          "cierre": "~all",
+          "consultas_dns": 3,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "none",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@pyme-g.net"
+          ],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 include:spf.protection.outlook.com include:externo-1.example include:amazonses.com ~all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=none; rua=mailto:contacto@pyme-g.net; ruf=mailto:contacto@pyme-g.net; fo=1"
+        ]
+      },
+      "duracion_ms": 516
+    },
+    "whois_dominio|pyme-g.net": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "pyme-g.net",
+        "fuente": "rdap",
+        "creado": "2010-10-06T14:27:46+00:00",
+        "vence": "2029-10-06T14:27:46+00:00",
+        "dias_para_vencer": 1066,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "externo-2.example",
+          "externo-3.example",
+          "externo-4.example",
+          "externo-5.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 326
+    },
+    "security_txt|pyme-g.net": {
+      "ok": false,
+      "herramienta": "security_txt",
+      "datos": {},
+      "error": "sin_direccion_web",
+      "sugerencia": "El nombre existe pero no tiene dirección web: no hay sitio en ese host.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 87
+    },
+    "buscar_parecidos|pyme-g.net": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "pyme-g.net",
+        "generadas": 19,
+        "truncadas": false,
+        "existentes": 4,
+        "con_correo": [
+          {
+            "dominio": "pyme-g.com.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "pyme-g-com-co.mail.protection.outlook.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "pyme-g.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "pyme-g-co.mail.protection.outlook.com"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "externo-2.example",
+          "externo-3.example",
+          "externo-4.example",
+          "externo-5.example"
+        ],
+        "mx_propios": [
+          "pyme-g-net.mail.protection.outlook.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 387
+    },
+    "subdominios_ct|pyme-g.net": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "pyme-g.net",
+        "fuente": "certspotter",
+        "total": 13,
+        "mostrados": 13,
+        "truncados": false,
+        "con_sitio": 12,
+        "subdominios": [
+          {
+            "nombre": "automation.pyme-g.net",
+            "ultimo_certificado_vence": "2026-12-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "comunidad.pyme-g.net",
+            "ultimo_certificado_vence": "2027-03-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "delta.pyme-g.net",
+            "ultimo_certificado_vence": "2027-01-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "glpi.pyme-g.net",
+            "ultimo_certificado_vence": "2027-01-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "marca.pyme-g.net",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ocs.pyme-g.net",
+            "ultimo_certificado_vence": "2027-01-16",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "portalproveedores.pyme-g.net",
+            "ultimo_certificado_vence": "2026-12-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "recu.pyme-g.net",
+            "ultimo_certificado_vence": "2026-12-27",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "vtex.pyme-g.net",
+            "ultimo_certificado_vence": "2026-11-22",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.pyme-g.net",
+            "ultimo_certificado_vence": "2026-11-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.marca.pyme-g.net",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.recu.pyme-g.net",
+            "ultimo_certificado_vence": "2026-12-27",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.comunidad.pyme-g.net",
+            "ultimo_certificado_vence": "2027-03-13",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 56938
+    },
+    "dkim_selector|pyme-g.net": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "pyme-g.net",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-6.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": true,
+            "destino_cname": "externo-7.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s1.domainkey.u21548766.wl017.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s2.domainkey.u21548766.wl017.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "selector1": "[omitido]",
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|pyme-g.net": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "sin_direccion_web",
+      "sugerencia": "El nombre existe en DNS pero no tiene una dirección web: no hay sitio en ese host. Si es el dominio principal, prueba con www.<dominio>.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 25
+    },
+    "cabeceras_web|pyme-g.net": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "sin_direccion_web",
+      "sugerencia": "El nombre existe pero no tiene dirección web: no hay sitio en ese host.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 9
+    },
+    "tls_certificado|www.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-11-20",
+        "dias_restantes": 15,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "www.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 69
+    },
+    "tls_certificado|delta.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 77,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "delta.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 54
+    },
+    "tls_certificado|automation.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-06",
+        "dias_restantes": 31,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "automation.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 173
+    },
+    "tls_certificado|comunidad.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-05",
+        "dias_restantes": 181,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.4",
+        "host": "comunidad.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 175
+    },
+    "cabeceras_web|delta.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "delta.pyme-g.net",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://delta.pyme-g.net/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 289
+    },
+    "tls_certificado|glpi.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-13",
+        "dias_restantes": 69,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "glpi.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 164
+    },
+    "cabeceras_web|www.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.pyme-g.net",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.pyme-g.net/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1002
+    },
+    "cabeceras_web|glpi.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "glpi.pyme-g.net",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://glpi.pyme-g.net/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 539
+    },
+    "tls_certificado|marca.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-01",
+        "dias_restantes": 56,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "marca.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 163
+    },
+    "tls_certificado|ocs.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-16",
+        "dias_restantes": 71,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "ocs.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 164
+    },
+    "cabeceras_web|ocs.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ocs.pyme-g.net",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://ocs.pyme-g.net/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 461
+    },
+    "cabeceras_web|marca.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "marca.pyme-g.net",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://marca.pyme-g.net/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31556952,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 592
+    },
+    "tls_certificado|portalproveedores.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-09",
+        "dias_restantes": 34,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "portalproveedores.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 180
+    },
+    "tls_certificado|recu.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-27",
+        "dias_restantes": 51,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "recu.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 196
+    },
+    "cabeceras_web|portalproveedores.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "portalproveedores.pyme-g.net",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://portalproveedores.pyme-g.net/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 371
+    },
+    "tls_certificado|vtex.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-11-22",
+        "dias_restantes": 16,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "vtex.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 46
+    },
+    "cabeceras_web|vtex.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "vtex.pyme-g.net",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 404,
+        "url_final": "https://vtex.pyme-g.net/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 201
+    },
+    "cabeceras_web|recu.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "recu.pyme-g.net",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://recu.pyme-g.net/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31556952,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 604
+    },
+    "tls_certificado|www.marca.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-01",
+        "dias_restantes": 56,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "www.marca.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 220
+    },
+    "tls_certificado|www.recu.pyme-g.net": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-27",
+        "dias_restantes": 51,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "www.recu.pyme-g.net"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 196
+    },
+    "cabeceras_web|automation.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "automation.pyme-g.net",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 204,
+        "url_final": "https://automation.pyme-g.net/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2681
+    },
+    "cabeceras_web|www.marca.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.marca.pyme-g.net",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://marca.pyme-g.net/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31556952,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 1077
+    },
+    "cabeceras_web|www.recu.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.recu.pyme-g.net",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://recu.pyme-g.net/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31556952,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 1188
+    },
+    "cabeceras_web|comunidad.pyme-g.net": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "comunidad.pyme-g.net",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "https://comunidad.pyme-g.net/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 10771
+    },
+    "investigar_parecido|pyme-g.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "pyme-g.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2016-12-07T17:03:24+00:00",
+        "dias_desde_registro": 3619,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 918
+    },
+    "investigar_parecido|pyme-g.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "pyme-g.com.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2008-02-29T00:00:00+00:00",
+        "dias_desde_registro": 6824,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 2121
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-DMARC-NONE",
+      "CORREO-SPF-SUAVE",
+      "CORREO-DKIM-CLAVE-1024",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "WEB-TLS-POR-VENCER@www.pyme-g.net",
+      "WEB-SIN-HSTS@delta.pyme-g.net",
+      "WEB-VERSION-EXPUESTA@glpi.pyme-g.net"
+    ],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT",
+      "PARECIDO-ENVIA"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

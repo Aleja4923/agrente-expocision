@@ -85,3 +85,12 @@ def test_no_escribe_si_queda_rastro(tmp_path, monkeypatch):
         grabar_caso(REAL, "real-99", "pyme_estandar", base_seudonimo="comercialolimpo.com.co",
                     ejecutor=EjecutorFalso(), existe=nadie_existe, ruta_privada=tmp_path)
     assert not (tmp_path / "borradores").exists() and not (tmp_path / "mapa_seudonimos.json").exists()
+
+
+def test_desde_crudo_no_consulta(tmp_path):
+    grabar_caso(REAL, "real-99", "pyme_estandar", base_seudonimo="comercialolimpo.com.co",
+                ejecutor=EjecutorFalso(), existe=nadie_existe, ruta_privada=tmp_path)
+    ej = EjecutorFalso()
+    b = grabar_caso(REAL, "real-99", "pyme_estandar", base_seudonimo="comercialolimpo.com.co",
+                    ejecutor=ej, existe=nadie_existe, ruta_privada=tmp_path, desde_crudo=True)
+    assert ej.llamadas == [] and b.dominio == "comercialolimpo.com.co" and len(b.grabacion) > 60

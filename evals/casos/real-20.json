@@ -1,0 +1,1882 @@
+{
+  "id": "real-20",
+  "origen": "real",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-05",
+  "dominio": "empresa-u.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|empresa-u.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "empresa-u.co",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 1,
+              "host": "aspmx.l.google.com"
+            },
+            {
+              "prioridad": 5,
+              "host": "alt1.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 5,
+              "host": "alt2.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 10,
+              "host": "alt3.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 10,
+              "host": "alt4.aspmx.l.google.com"
+            }
+          ],
+          "proveedor": "google"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 include:amazonses.com include:_spf.google.com include:externo-1.example include:sendgrid.net ~all"
+          ],
+          "cantidad": 1,
+          "cierre": "~all",
+          "consultas_dns": 5,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "quarantine",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:dmarc@empresa-u.co"
+          ],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 include:amazonses.com include:_spf.google.com include:externo-1.example include:sendgrid.net ~all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=quarantine; rua=mailto:dmarc@empresa-u.co; ruf=mailto:dmarc@empresa-u.co"
+        ]
+      },
+      "duracion_ms": 828
+    },
+    "whois_dominio|empresa-u.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "empresa-u.co",
+        "fuente": "whois",
+        "creado": "2019-08-28T17:00:05+00:00",
+        "vence": "2027-08-28T23:59:59+00:00",
+        "dias_para_vencer": 296,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "externo-2.example",
+          "externo-3.example",
+          "externo-4.example",
+          "externo-5.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 1
+    },
+    "security_txt|empresa-u.co": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "empresa-u.co",
+        "codigo": 404,
+        "redirige_fuera": null,
+        "existe": false,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 465
+    },
+    "buscar_parecidos|empresa-u.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "empresa-u.co",
+        "generadas": 27,
+        "truncadas": false,
+        "existentes": 10,
+        "con_correo": [
+          {
+            "dominio": "empresa-u.com.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "aspmx.l.google.com",
+              "alt1.aspmx.l.google.com",
+              "alt2.aspmx.l.google.com",
+              "aspmx2.googlemail.com",
+              "aspmx3.googlemail.com"
+            ],
+            "comparte_servidores": true
+          },
+          {
+            "dominio": "ernpresa-u.co",
+            "tipo": "homoglifo",
+            "mx": [
+              "externo-6.example",
+              "externo-7.example"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "mpresa-u.co",
+            "tipo": "omision",
+            "mx": [
+              "aspmx.l.google.com",
+              "alt1.aspmx.l.google.com",
+              "alt2.aspmx.l.google.com",
+              "alt3.aspmx.l.google.com",
+              "alt4.aspmx.l.google.com"
+            ],
+            "comparte_servidores": true
+          },
+          {
+            "dominio": "eempresa-u.co",
+            "tipo": "duplicacion",
+            "mx": [
+              "alt2.aspmx.l.google.com"
+            ],
+            "comparte_servidores": true
+          },
+          {
+            "dominio": "emmpresa-u.co",
+            "tipo": "duplicacion",
+            "mx": [
+              "aspmx.l.google.com",
+              "alt1.aspmx.l.google.com",
+              "alt2.aspmx.l.google.com",
+              "alt3.aspmx.l.google.com",
+              "alt4.aspmx.l.google.com"
+            ],
+            "comparte_servidores": true
+          }
+        ],
+        "sin_verificar": [
+          "emppresa-u.co"
+        ],
+        "ns_propios": [
+          "externo-5.example",
+          "externo-3.example",
+          "externo-2.example",
+          "externo-4.example"
+        ],
+        "mx_propios": [
+          "aspmx.l.google.com",
+          "alt1.aspmx.l.google.com",
+          "alt2.aspmx.l.google.com",
+          "alt3.aspmx.l.google.com",
+          "alt4.aspmx.l.google.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2094
+    },
+    "subdominios_ct|empresa-u.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "empresa-u.co",
+        "fuente": "certspotter",
+        "total": 63,
+        "mostrados": 63,
+        "truncados": false,
+        "con_sitio": 18,
+        "subdominios": [
+          {
+            "nombre": "jitsuv2.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sonar.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-22",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "auth-stg.loki.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "billetera.virtual.empresa-u.co",
+            "ultimo_certificado_vence": "2027-01-03",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "events.acquiring.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "gateway.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-05",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "n8n.ai.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "bo.merchants.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "external.kyc.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "internal.banking.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-03",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "internal.card-processing.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "logistic.internal.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-25",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "qa.api.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "qa.service.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "stg.gateway.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-05",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "stg.bo.merchants.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "stg.internal.banking.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-03",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "stg.internal.card-processing.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "jitsu.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-20",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "bo.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-31",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "kyc.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.crm.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-12",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "events.us-west-2.merchants.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "events.us-west-2.shared.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-28",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "gateway.acquiring.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "internal.isogateway.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-11",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.bo.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-31",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.card-processing.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-12",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.events.credit.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-12",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.events.finance.empresa-u.co",
+            "ultimo_certificado_vence": "2027-01-03",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.events.merchants.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-27",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.events.payments.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-12",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.events.security.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-14",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.gateway.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-03",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.it.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-02",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.logistic.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-26",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.merchants-cde.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-12",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.merchants.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-02",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.payments.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-12",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.security.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-14",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.terminals.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-27",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.bo.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-31",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.finance.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-15",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.kyc.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.bo.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-31",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "wwww.bo.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-30",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.bo.merchants.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-21",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.external.kyc.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-06",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.gateway.acquiring.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-27",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.internal.payments.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-12",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.logistic.internal.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.security.internal.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-14",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "qa.terminals.payments.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-12",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.events.us-west-2.merchants.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.events.us-west-2.shared.empresa-u.co",
+            "ultimo_certificado_vence": "2026-11-28",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.external.kyc.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.gateway.acquiring.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.internal.isogateway.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-11",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.logistic.internal.api.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-25",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.qa.bo.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-31",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.stg.bo.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-31",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "wwww.qa.bo.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-30",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "wwww.stg.bo.pos.empresa-u.co",
+            "ultimo_certificado_vence": "2026-12-30",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 31794
+    },
+    "dkim_selector|empresa-u.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "empresa-u.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": true,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "dkim.mcsv.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s1.domainkey.u20234598.wl099.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s2.domainkey.u20234598.wl099.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "google": "[omitido]",
+        "k1": "[omitido]",
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-30",
+        "dias_restantes": 176,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 49
+    },
+    "tls_certificado|www.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-30",
+        "dias_restantes": 176,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "www.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 188
+    },
+    "tls_certificado|jitsuv2.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-16",
+        "dias_restantes": 162,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.3",
+        "host": "jitsuv2.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 234
+    },
+    "tls_certificado|sonar.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-16",
+        "dias_restantes": 162,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.4",
+        "host": "sonar.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 230
+    },
+    "cabeceras_web|empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "empresa-u.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 289
+    },
+    "cabeceras_web|www.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.empresa-u.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 288
+    },
+    "tls_certificado|auth-stg.loki.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-16",
+        "dias_restantes": 162,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.5",
+        "host": "auth-stg.loki.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 263
+    },
+    "tls_certificado|billetera.virtual.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-03",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.6",
+        "host": "billetera.virtual.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 436
+    },
+    "cabeceras_web|billetera.virtual.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "billetera.virtual.empresa-u.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://billetera.virtual.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1441
+    },
+    "tls_certificado|events.acquiring.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "events.acquiring.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 166
+    },
+    "cabeceras_web|events.acquiring.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "events.acquiring.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://events.acquiring.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2691
+    },
+    "tls_certificado|gateway.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "gateway.api.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 177
+    },
+    "cabeceras_web|gateway.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "gateway.api.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://gateway.api.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2764
+    },
+    "tls_certificado|n8n.ai.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-16",
+        "dias_restantes": 162,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.9",
+        "host": "n8n.ai.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 745
+    },
+    "cabeceras_web|jitsuv2.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "jitsuv2.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "https://jitsuv2.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-powered-by": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 10293
+    },
+    "cabeceras_web|sonar.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sonar.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "https://sonar.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 10335
+    },
+    "tls_certificado|bo.merchants.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "bo.merchants.api.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 158
+    },
+    "tls_certificado|external.kyc.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.11",
+        "host": "external.kyc.api.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 152
+    },
+    "cabeceras_web|auth-stg.loki.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "auth-stg.loki.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 401,
+        "url_final": "https://auth-stg.loki.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 10297
+    },
+    "tls_certificado|internal.banking.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.12",
+        "host": "internal.banking.api.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 176
+    },
+    "cabeceras_web|bo.merchants.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "bo.merchants.api.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://bo.merchants.api.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2728
+    },
+    "cabeceras_web|external.kyc.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "external.kyc.api.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://external.kyc.api.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2692
+    },
+    "tls_certificado|internal.card-processing.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.13",
+        "host": "internal.card-processing.api.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 155
+    },
+    "tls_certificado|logistic.internal.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.14",
+        "host": "logistic.internal.api.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 159
+    },
+    "cabeceras_web|internal.banking.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "internal.banking.api.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://internal.banking.api.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2653
+    },
+    "tls_certificado|qa.api.pos.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-01",
+        "dias_restantes": 57,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.15",
+        "host": "qa.api.pos.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 412
+    },
+    "cabeceras_web|qa.api.pos.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "qa.api.pos.empresa-u.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 200,
+        "url_final": "https://qa.api.pos.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 845
+    },
+    "tls_certificado|qa.service.pos.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-01",
+        "dias_restantes": 57,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.16",
+        "host": "qa.service.pos.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 439
+    },
+    "cabeceras_web|logistic.internal.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "logistic.internal.api.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://logistic.internal.api.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2655
+    },
+    "cabeceras_web|internal.card-processing.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "internal.card-processing.api.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://internal.card-processing.api.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2675
+    },
+    "cabeceras_web|qa.service.pos.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "qa.service.pos.empresa-u.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 200,
+        "url_final": "https://qa.service.pos.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 843
+    },
+    "tls_certificado|stg.gateway.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.17",
+        "host": "stg.gateway.api.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 154
+    },
+    "tls_certificado|stg.bo.merchants.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.18",
+        "host": "stg.bo.merchants.api.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 169
+    },
+    "tls_certificado|stg.internal.banking.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.17",
+        "host": "stg.internal.banking.api.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 176
+    },
+    "cabeceras_web|n8n.ai.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "n8n.ai.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://n8n.ai.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 10306
+    },
+    "tls_certificado|stg.internal.card-processing.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-23",
+        "dias_restantes": 169,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.19",
+        "host": "stg.internal.card-processing.api.empresa-u.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 177
+    },
+    "cabeceras_web|stg.gateway.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "stg.gateway.api.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://stg.gateway.api.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 10360
+    },
+    "cabeceras_web|stg.bo.merchants.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "stg.bo.merchants.api.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://stg.bo.merchants.api.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 10387
+    },
+    "cabeceras_web|stg.internal.banking.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "stg.internal.banking.api.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://stg.internal.banking.api.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 10362
+    },
+    "cabeceras_web|stg.internal.card-processing.api.empresa-u.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "stg.internal.card-processing.api.empresa-u.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://stg.internal.card-processing.api.empresa-u.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 10355
+    },
+    "investigar_parecido|mpresa-u.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "mpresa-u.co",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2015-09-21T18:02:08+00:00",
+        "dias_desde_registro": 4062,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": true,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 193
+    },
+    "investigar_parecido|empresa-u.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "empresa-u.com.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1997-06-06T04:00:00+00:00",
+        "dias_desde_registro": 10744,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": true,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 200
+    },
+    "investigar_parecido|eempresa-u.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "eempresa-u.co",
+        "tipo": "duplicacion",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2024-03-18T20:31:35+00:00",
+        "dias_desde_registro": 961,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": true,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 217
+    },
+    "investigar_parecido|ernpresa-u.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "ernpresa-u.co",
+        "tipo": "homoglifo",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2014-03-24T12:36:13+00:00",
+        "dias_desde_registro": 4609,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 414
+    },
+    "investigar_parecido|emmpresa-u.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "emmpresa-u.co",
+        "tipo": "duplicacion",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2024-02-21T13:55:46+00:00",
+        "dias_desde_registro": 987,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": true,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 239
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "bajo",
+    "hallazgos_obligatorios": [
+      "CORREO-DKIM-CLAVE-1024",
+      "WEB-SIN-SECURITY-TXT",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "WEB-SIN-REDIRECCION-HTTPS@qa.api.pos.empresa-u.co",
+      "WEB-SIN-REDIRECCION-HTTPS@qa.service.pos.empresa-u.co"
+    ],
+    "hallazgos_prohibidos": [
+      "CORREO-SPF-SUAVE",
+      "PARECIDO-ENVIA"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

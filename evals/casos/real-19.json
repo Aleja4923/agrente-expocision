@@ -1,0 +1,829 @@
+{
+  "id": "real-19",
+  "origen": "real",
+  "perfil": "pyme_estandar",
+  "grabado_el": "2026-11-05",
+  "dominio": "empresa-t.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|empresa-t.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "empresa-t.co",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 1,
+              "host": "aspmx.l.google.com"
+            },
+            {
+              "prioridad": 5,
+              "host": "alt1.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 5,
+              "host": "alt2.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 10,
+              "host": "alt3.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 10,
+              "host": "alt4.aspmx.l.google.com"
+            }
+          ],
+          "proveedor": "google"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 include:_spf.google.com  include:mail.zendesk.com ~all"
+          ],
+          "cantidad": 1,
+          "cierre": "~all",
+          "consultas_dns": 2,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "quarantine",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@empresa-t.co",
+            "mailto:rua@externo-1.example"
+          ],
+          "pct": 100,
+          "etiquetas_obsoletas": [
+            "pct"
+          ],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 include:_spf.google.com  include:mail.zendesk.com ~all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s; rua=mailto:contacto@empresa-t.co,mailto:rua@externo-1.example"
+        ]
+      },
+      "duracion_ms": 489
+    },
+    "whois_dominio|empresa-t.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "empresa-t.co",
+        "fuente": "whois",
+        "creado": "2020-06-15T21:40:06+00:00",
+        "vence": "2028-06-15T23:59:59+00:00",
+        "dias_para_vencer": 588,
+        "estados": [
+          "clientRenewProhibited",
+          "clientTransferProhibited",
+          "clientUpdateProhibited",
+          "clientDeleteProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "externo-2.example",
+          "externo-3.example",
+          "externo-4.example",
+          "externo-5.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 174
+    },
+    "security_txt|empresa-t.co": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "empresa-t.co",
+        "codigo": 404,
+        "redirige_fuera": null,
+        "existe": false,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 813
+    },
+    "buscar_parecidos|empresa-t.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "empresa-t.co",
+        "generadas": 27,
+        "truncadas": false,
+        "existentes": 5,
+        "con_correo": [
+          {
+            "dominio": "mpresa-t.co",
+            "tipo": "omision",
+            "mx": [
+              "smtp.google.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "epresa-t.co",
+            "tipo": "omision",
+            "mx": [
+              "mxa.mailgun.org",
+              "mxb.mailgun.org"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "emresa-t.co",
+            "tipo": "omision",
+            "mx": [
+              "eforward1.registrar-servers.com",
+              "eforward2.registrar-servers.com",
+              "eforward3.registrar-servers.com",
+              "eforward4.registrar-servers.com",
+              "eforward5.registrar-servers.com"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "externo-2.example",
+          "externo-3.example",
+          "externo-4.example",
+          "externo-5.example"
+        ],
+        "mx_propios": [
+          "aspmx.l.google.com",
+          "alt1.aspmx.l.google.com",
+          "alt2.aspmx.l.google.com",
+          "alt3.aspmx.l.google.com",
+          "alt4.aspmx.l.google.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 347
+    },
+    "subdominios_ct|empresa-t.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "empresa-t.co",
+        "fuente": "certspotter",
+        "total": 18,
+        "mostrados": 18,
+        "truncados": false,
+        "con_sitio": 8,
+        "subdominios": [
+          {
+            "nombre": "admin.empresa-t.co",
+            "ultimo_certificado_vence": "2026-12-02",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "headscale.empresa-t.co",
+            "ultimo_certificado_vence": "2026-12-02",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "link.empresa-t.co",
+            "ultimo_certificado_vence": "2027-05-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "stg.empresa-t.co",
+            "ultimo_certificado_vence": "2027-05-12",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.empresa-t.co",
+            "ultimo_certificado_vence": "2027-01-08",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "airbyte.data.empresa-t.co",
+            "ultimo_certificado_vence": "2027-02-04",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "link.news.empresa-t.co",
+            "ultimo_certificado_vence": "2027-03-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api.airbyte.data.empresa-t.co",
+            "ultimo_certificado_vence": "2027-02-04",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "data.empresa-t.co",
+            "ultimo_certificado_vence": "2027-04-07",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "dev.empresa-t.co",
+            "ultimo_certificado_vence": "2027-05-13",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "prod.empresa-t.co",
+            "ultimo_certificado_vence": "2027-05-04",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "statuskingo.empresa-t.co",
+            "ultimo_certificado_vence": "2027-01-23",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "dev.data.empresa-t.co",
+            "ultimo_certificado_vence": "2026-12-20",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "dev.p-internal.empresa-t.co",
+            "ultimo_certificado_vence": "2026-12-10",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "dev.p.empresa-t.co",
+            "ultimo_certificado_vence": "2027-02-22",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "p.dev.empresa-t.co",
+            "ultimo_certificado_vence": "2027-01-29",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.p-internal.empresa-t.co",
+            "ultimo_certificado_vence": "2027-01-26",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "stg.p.empresa-t.co",
+            "ultimo_certificado_vence": "2027-01-26",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 42646
+    },
+    "dkim_selector|empresa-t.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "empresa-t.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": true,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "google": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.empresa-t.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-29",
+        "dias_restantes": 85,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "www.empresa-t.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 96
+    },
+    "tls_certificado|empresa-t.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-29",
+        "dias_restantes": 85,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "empresa-t.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 100
+    },
+    "cabeceras_web|www.empresa-t.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.empresa-t.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.empresa-t.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 642
+    },
+    "cabeceras_web|empresa-t.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "empresa-t.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://empresa-t.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 682
+    },
+    "tls_certificado|link.empresa-t.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-14",
+        "dias_restantes": 190,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "link.empresa-t.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 197
+    },
+    "tls_certificado|stg.empresa-t.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-12",
+        "dias_restantes": 188,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.4",
+        "host": "stg.empresa-t.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 222
+    },
+    "cabeceras_web|link.empresa-t.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "link.empresa-t.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://link.empresa-t.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 961
+    },
+    "cabeceras_web|stg.empresa-t.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "stg.empresa-t.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://empresa-t.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 1958
+    },
+    "tls_certificado|link.news.empresa-t.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "nombre_no_coincide",
+        "vence": "2026-12-13",
+        "dias_restantes": 37,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.5",
+        "host": "link.news.empresa-t.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 579
+    },
+    "cabeceras_web|link.news.empresa-t.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 463
+    },
+    "tls_certificado|admin.empresa-t.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5059
+    },
+    "tls_certificado|headscale.empresa-t.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5077
+    },
+    "tls_certificado|airbyte.data.empresa-t.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5050
+    },
+    "tls_certificado|api.airbyte.data.empresa-t.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5045
+    },
+    "cabeceras_web|admin.empresa-t.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20054
+    },
+    "cabeceras_web|headscale.empresa-t.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20051
+    },
+    "cabeceras_web|airbyte.data.empresa-t.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20034
+    },
+    "cabeceras_web|api.airbyte.data.empresa-t.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20053
+    },
+    "investigar_parecido|emresa-t.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "emresa-t.co",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2026-10-15T23:43:37+00:00",
+        "dias_desde_registro": 20,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 627
+    },
+    "investigar_parecido|mpresa-t.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "mpresa-t.co",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2021-08-22T16:14:31+00:00",
+        "dias_desde_registro": 1900,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 2101
+    },
+    "investigar_parecido|epresa-t.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "epresa-t.co",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2018-06-12T18:16:49+00:00",
+        "dias_desde_registro": 3067,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 3522
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-DMARC-OBSOLETO",
+      "CORREO-DKIM-CLAVE-1024",
+      "WEB-SIN-SECURITY-TXT",
+      "WEB-SIN-HSTS",
+      "WEB-SIN-PROTECCION-MARCOS",
+      "WEB-SIN-NOSNIFF",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "PARECIDO-ENVIA@emresa-t.co",
+      "WEB-TLS-INVALIDO@link.news.empresa-t.co"
+    ],
+    "hallazgos_prohibidos": [
+      "CORREO-SPF-SUAVE",
+      "CORREO-DKIM-NO-ENCONTRADO"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

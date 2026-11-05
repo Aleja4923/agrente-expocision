@@ -1,0 +1,226 @@
+{
+  "id": "real-08",
+  "origen": "real",
+  "perfil": "inexistente",
+  "grabado_el": "2026-11-05",
+  "dominio": "inexistente.com.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|inexistente.com.co": {
+      "ok": false,
+      "herramienta": "dns_correo",
+      "datos": {},
+      "error": "dominio_no_existe",
+      "sugerencia": "Verifique que el dominio esté bien escrito; si no existe, no hay más que revisar: entregue el informe indicándolo.",
+      "contenido_no_confiable": {
+        "txt_dominio": [],
+        "txt_dmarc": []
+      },
+      "duracion_ms": 31
+    },
+    "whois_dominio|inexistente.com.co": {
+      "ok": false,
+      "herramienta": "whois_dominio",
+      "datos": {},
+      "error": "no_registrado",
+      "sugerencia": "El registro dice que el dominio no está registrado; verifique el nombre o entréguelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 650
+    },
+    "security_txt|inexistente.com.co": {
+      "ok": false,
+      "herramienta": "security_txt",
+      "datos": {},
+      "error": "dominio_no_existe",
+      "sugerencia": "Ese host no existe en DNS.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 67
+    },
+    "buscar_parecidos|inexistente.com.co": {
+      "ok": false,
+      "herramienta": "buscar_parecidos",
+      "datos": {},
+      "error": "dominio_no_existe",
+      "sugerencia": "Verifique que el dominio esté bien escrito; si no existe, no hay más que revisar: entregue el informe indicándolo.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 59
+    },
+    "subdominios_ct|inexistente.com.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "inexistente.com.co",
+        "fuente": "crtsh",
+        "total": 0,
+        "mostrados": 0,
+        "truncados": false,
+        "con_sitio": 0,
+        "subdominios": []
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 42553
+    },
+    "dkim_selector|inexistente.com.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "inexistente.com.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.inexistente.com.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "dominio_no_existe",
+      "sugerencia": "Ese host no existe en DNS.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 34
+    },
+    "tls_certificado|inexistente.com.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "dominio_no_existe",
+      "sugerencia": "Ese host no existe en DNS.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 36
+    },
+    "cabeceras_web|www.inexistente.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "dominio_no_existe",
+      "sugerencia": "Ese host no existe en DNS.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 17
+    },
+    "cabeceras_web|inexistente.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "dominio_no_existe",
+      "sugerencia": "Ese host no existe en DNS.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 16
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "bajo",
+    "hallazgos_obligatorios": [],
+    "hallazgos_por_decision": [],
+    "hallazgos_prohibidos": [
+      "CORREO-DMARC-AUSENTE",
+      "CORREO-SPF-AUSENTE",
+      "WEB-SIN-SECURITY-TXT"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

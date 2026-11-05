@@ -1,0 +1,2551 @@
+{
+  "id": "real-10",
+  "origen": "real",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-05",
+  "dominio": "empresa-k.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|empresa-k.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "empresa-k.co",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 1,
+              "host": "aspmx.l.google.com"
+            },
+            {
+              "prioridad": 5,
+              "host": "alt1.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 5,
+              "host": "alt2.aspmx.l.google.com"
+            },
+            {
+              "prioridad": 10,
+              "host": "aspmx2.googlemail.com"
+            },
+            {
+              "prioridad": 10,
+              "host": "aspmx3.googlemail.com"
+            }
+          ],
+          "proveedor": "google"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 include:_spf.google.com include:mail.zendesk.com include:6215805.spf07.hubspotemail.net ~all"
+          ],
+          "cantidad": 1,
+          "cierre": "~all",
+          "consultas_dns": 3,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "quarantine",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@empresa-k.co"
+          ],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 include:_spf.google.com include:mail.zendesk.com include:6215805.spf07.hubspotemail.net ~all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=quarantine; rua=mailto:contacto@empresa-k.co"
+        ]
+      },
+      "duracion_ms": 1101
+    },
+    "whois_dominio|empresa-k.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "empresa-k.co",
+        "fuente": "whois",
+        "creado": "2019-09-20T15:29:39+00:00",
+        "vence": "2028-09-20T23:59:59+00:00",
+        "dias_para_vencer": 685,
+        "estados": [
+          "clientRenewProhibited",
+          "clientTransferProhibited",
+          "clientUpdateProhibited",
+          "clientDeleteProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "a11-66.akam.net",
+          "a1-210.akam.net",
+          "a12-64.akam.net",
+          "a22-66.akam.net",
+          "a28-65.akam.net",
+          "a5-65.akam.net"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 332
+    },
+    "security_txt|empresa-k.co": {
+      "ok": false,
+      "herramienta": "security_txt",
+      "datos": {},
+      "error": "demasiadas_redirecciones",
+      "sugerencia": "El sitio redirige más de 3 veces; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 813
+    },
+    "buscar_parecidos|empresa-k.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "empresa-k.co",
+        "generadas": 27,
+        "truncadas": false,
+        "existentes": 7,
+        "con_correo": [
+          {
+            "dominio": "empresa-k.com.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "empresa-k-com.mail.protection.outlook.com",
+              "mx0.empresa-k.com.co"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "ernpresa-k.co",
+            "tipo": "homoglifo",
+            "mx": [
+              "ernpresa-k-co.mail.protection.outlook.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "mpresa-k.co",
+            "tipo": "omision",
+            "mx": [
+              "smtp.europe.secureserver.net",
+              "mailstore1.europe.secureserver.net"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "eempresa-k.co",
+            "tipo": "duplicacion",
+            "mx": [
+              "aspmx.l.google.com",
+              "alt1.aspmx.l.google.com",
+              "alt2.aspmx.l.google.com",
+              "aspmx2.googlemail.com",
+              "aspmx3.googlemail.com"
+            ],
+            "comparte_servidores": true
+          }
+        ],
+        "sin_verificar": [
+          "emmpresa-k.co"
+        ],
+        "ns_propios": [
+          "a5-65.akam.net",
+          "a22-66.akam.net",
+          "a28-65.akam.net",
+          "a11-66.akam.net",
+          "a1-210.akam.net",
+          "a12-64.akam.net"
+        ],
+        "mx_propios": [
+          "aspmx.l.google.com",
+          "alt1.aspmx.l.google.com",
+          "alt2.aspmx.l.google.com",
+          "aspmx2.googlemail.com",
+          "aspmx3.googlemail.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 5688
+    },
+    "subdominios_ct|empresa-k.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "empresa-k.co",
+        "fuente": "certspotter",
+        "total": 94,
+        "mostrados": 94,
+        "truncados": false,
+        "con_sitio": 68,
+        "subdominios": [
+          {
+            "nombre": "accounts.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "alianza-pcom.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-17",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-brokers.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-gobcorp.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-empresa-kmetro.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-im.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-28",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-producto.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-operaciones.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-31",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api-sellers.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-28",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "app-brokers.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "automation-glpi.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "blog-v2.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "brokers.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "consultas.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "csp-report.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "dashboard-backbone.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "defectdojo.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "drools.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "franquicias.empresa-k.co",
+            "ultimo_certificado_vence": "2027-02-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "front-metrics.empresa-k.co",
+            "ultimo_certificado_vence": "2027-02-20",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "goalert.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "gobcorp.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-16",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "grafana.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "gtm.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-12",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "im.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "keycmpresa-kn.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "liquidez.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "n8n-automation.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "n8n-gobcorp.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-30",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "n8n-im.empresa-k.co",
+            "ultimo_certificado_vence": "2027-02-17",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "n8n-liquidez.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "n8n-operaciones.empresa-k.co",
+            "ultimo_certificado_vence": "2027-04-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "n8n-wh-gobcorp.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-30",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "n8n-wh-im.empresa-k.co",
+            "ultimo_certificado_vence": "2027-02-17",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "n8n-wh-operaciones.empresa-k.co",
+            "ultimo_certificado_vence": "2027-04-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "n8n-wh-sellers.empresa-k.co",
+            "ultimo_certificado_vence": "2027-04-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "nexus.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ocd-airbyte.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ofertas-medellin.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ofertas.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-23",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "operaciones.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-17",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ops-camunda.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-11",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ops-lowcoder.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "orangehrm.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "pcom.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "portal-corporativo.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "portalcredit.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "pritunl-server.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-17",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "pritunl.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-27",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "prometheus.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "red.empresa-k.co",
+            "ultimo_certificado_vence": "2027-04-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "redash-server.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sac.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-08",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "segmentation.empresa-k.co",
+            "ultimo_certificado_vence": "2027-02-25",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sellers.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "snipeit-co.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "snipeit-mx.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "tips.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "wazuh.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "wss.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-29",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "zeebe-pri.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api.red.empresa-k.co",
+            "ultimo_certificado_vence": "2027-04-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "auth.radicacion.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-25",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "clerk.red.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-21",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "test.radicacion.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-25",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "dev.auth.radicacion.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-25",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "test.auth.radicacion.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-25",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "apiv2.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-26",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "clerk.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-09",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "data.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-12",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "marketing.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-09",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "minuta.empresa-k.co",
+            "ultimo_certificado_vence": "2027-02-11",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "n8n-sellers.empresa-k.co",
+            "ultimo_certificado_vence": "2027-04-07",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "private.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-25",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "radicacion.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-25",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "un-brokers.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "zero.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-15",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "2a57j77nzkilhq8ntnterpga74mdm83.nexus.empresa-k.co",
+            "ultimo_certificado_vence": "2027-01-29",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "2a57j789io6sl0ybvz0cci88gzlw6pd.dashboard-backbone.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "brokers.private.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-18",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "dev.radicacion.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-25",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "gobcorp.internal.empresa-k.co",
+            "ultimo_certificado_vence": "2027-02-11",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "gobcorp.private.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-28",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "im.internal.empresa-k.co",
+            "ultimo_certificado_vence": "2027-02-04",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "im.private.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-18",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "liquidez.private.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "operaciones.private.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-17",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "pcom.private.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-04",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "sellers.private.empresa-k.co",
+            "ultimo_certificado_vence": "2026-12-18",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "server.radicacion.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-25",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.gtm.empresa-k.co",
+            "ultimo_certificado_vence": "2026-11-11",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "dev.server.radicacion.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-25",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "test.server.radicacion.empresa-k.co",
+            "ultimo_certificado_vence": "2027-03-25",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 32545
+    },
+    "dkim_selector|empresa-k.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "empresa-k.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": true,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s1.domainkey.u39786882.wl133.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s2.domainkey.u39786882.wl133.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "google": "[omitido]",
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "www.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 85
+    },
+    "tls_certificado|accounts.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-09",
+        "dias_restantes": 34,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.2",
+        "host": "accounts.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 193
+    },
+    "tls_certificado|empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 235
+    },
+    "tls_certificado|alianza-pcom.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-15",
+        "dias_restantes": 70,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.4",
+        "host": "alianza-pcom.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 302
+    },
+    "cabeceras_web|accounts.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "accounts.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://accounts.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 63072000,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 523
+    },
+    "tls_certificado|api-brokers.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "api-brokers.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 139
+    },
+    "cabeceras_web|www.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://empresa-k.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 853
+    },
+    "tls_certificado|api-gobcorp.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "api-gobcorp.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 87
+    },
+    "cabeceras_web|empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 987
+    },
+    "tls_certificado|api-empresa-kmetro.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "api-empresa-kmetro.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 110
+    },
+    "cabeceras_web|alianza-pcom.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "alianza-pcom.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://alianza-pcom.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1268
+    },
+    "cabeceras_web|api-brokers.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-brokers.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://api-brokers.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 787
+    },
+    "tls_certificado|api-producto.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "api-producto.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 94
+    },
+    "tls_certificado|api-im.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-28",
+        "dias_restantes": 53,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "api-im.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 186
+    },
+    "cabeceras_web|api-gobcorp.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-gobcorp.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://api-gobcorp.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 935
+    },
+    "tls_certificado|api-operaciones.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "api-operaciones.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 86
+    },
+    "cabeceras_web|api-empresa-kmetro.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-empresa-kmetro.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://api-empresa-kmetro.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 925
+    },
+    "tls_certificado|api-sellers.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "api-sellers.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 101
+    },
+    "cabeceras_web|api-producto.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-producto.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 404,
+        "url_final": "https://api-producto.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 795
+    },
+    "tls_certificado|app-brokers.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-15",
+        "dias_restantes": 71,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "app-brokers.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 201
+    },
+    "cabeceras_web|api-operaciones.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-operaciones.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://api-operaciones.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 902
+    },
+    "tls_certificado|automation-glpi.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "automation-glpi.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 69
+    },
+    "cabeceras_web|api-sellers.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-sellers.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://api-sellers.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 845
+    },
+    "tls_certificado|blog-v2.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "blog-v2.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 83
+    },
+    "cabeceras_web|app-brokers.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "app-brokers.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 503,
+        "url_final": "https://app-brokers.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 855
+    },
+    "tls_certificado|brokers.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-20",
+        "dias_restantes": 135,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "brokers.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 52
+    },
+    "cabeceras_web|brokers.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "brokers.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://brokers.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 537
+    },
+    "tls_certificado|consultas.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-08",
+        "dias_restantes": 63,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "consultas.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 243
+    },
+    "cabeceras_web|api-im.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api-im.empresa-k.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 403,
+        "url_final": "https://api-im.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 2769
+    },
+    "tls_certificado|csp-report.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.1",
+        "host": "csp-report.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 115
+    },
+    "cabeceras_web|blog-v2.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "blog-v2.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://empresa-k.co:443/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1361
+    },
+    "tls_certificado|dashboard-backbone.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-05-12",
+        "dias_restantes": 187,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "dashboard-backbone.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 195
+    },
+    "cabeceras_web|automation-glpi.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "automation-glpi.empresa-k.co",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "https://automation-glpi.empresa-k.co:443/glpi/",
+        "redirecciones": 3,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 1895
+    },
+    "tls_certificado|defectdojo.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "defectdojo.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 55
+    },
+    "cabeceras_web|consultas.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "consultas.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://consultas.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 588
+    },
+    "tls_certificado|drools.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "drools.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 86
+    },
+    "cabeceras_web|csp-report.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "csp-report.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 404,
+        "url_final": "https://csp-report.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 719
+    },
+    "tls_certificado|franquicias.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.11",
+        "host": "franquicias.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 91
+    },
+    "cabeceras_web|defectdojo.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "defectdojo.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 404,
+        "url_final": "https://defectdojo.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 722
+    },
+    "tls_certificado|front-metrics.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-20",
+        "dias_restantes": 107,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.12",
+        "host": "front-metrics.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 225
+    },
+    "cabeceras_web|franquicias.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "franquicias.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://franquicias.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 63072000,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1129
+    },
+    "tls_certificado|goalert.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "goalert.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 101
+    },
+    "cabeceras_web|front-metrics.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "front-metrics.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 500,
+        "url_final": "https://front-metrics.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 1007
+    },
+    "tls_certificado|gobcorp.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-16",
+        "dias_restantes": 41,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "gobcorp.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 83
+    },
+    "cabeceras_web|dashboard-backbone.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "dashboard-backbone.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://dashboard-backbone.empresa-k.co/api/auth/signin?callbackUrl=%2Fdashboard",
+        "redirecciones": 2,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 2330
+    },
+    "tls_certificado|grafana.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "grafana.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 78
+    },
+    "cabeceras_web|goalert.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "goalert.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://goalert.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 776
+    },
+    "tls_certificado|gtm.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-08",
+        "dias_restantes": 63,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.13",
+        "host": "gtm.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 162
+    },
+    "cabeceras_web|gobcorp.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "gobcorp.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 503,
+        "url_final": "https://gobcorp.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 1083
+    },
+    "cabeceras_web|gtm.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "gtm.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 400,
+        "url_final": "https://gtm.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 661
+    },
+    "tls_certificado|im.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-24",
+        "dias_restantes": 49,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.14",
+        "host": "im.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 192
+    },
+    "tls_certificado|keycmpresa-kn.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.3",
+        "host": "keycmpresa-kn.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 59
+    },
+    "cabeceras_web|grafana.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "grafana.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://grafana.empresa-k.co/login",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1294
+    },
+    "tls_certificado|liquidez.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 51,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.15",
+        "host": "liquidez.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 181
+    },
+    "cabeceras_web|keycmpresa-kn.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "keycmpresa-kn.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 401,
+        "url_final": "https://keycmpresa-kn.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 741
+    },
+    "tls_certificado|n8n-automation.empresa-k.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-02",
+        "dias_restantes": 89,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.5",
+        "host": "n8n-automation.empresa-k.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 91
+    },
+    "cabeceras_web|im.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "im.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 503,
+        "url_final": "https://im.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 892
+    },
+    "tls_certificado|n8n-gobcorp.empresa-k.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "ip_bloqueada",
+      "sugerencia": "El host apunta a una red privada o especial; no se revisa por seguridad.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "cabeceras_web|n8n-gobcorp.empresa-k.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "ip_bloqueada",
+      "sugerencia": "El sitio apunta a una red privada o especial; no se revisa por seguridad.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "tls_certificado|n8n-im.empresa-k.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "ip_bloqueada",
+      "sugerencia": "El host apunta a una red privada o especial; no se revisa por seguridad.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "cabeceras_web|n8n-im.empresa-k.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "ip_bloqueada",
+      "sugerencia": "El sitio apunta a una red privada o especial; no se revisa por seguridad.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "cabeceras_web|liquidez.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "liquidez.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 503,
+        "url_final": "https://liquidez.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 881
+    },
+    "cabeceras_web|n8n-automation.empresa-k.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "n8n-automation.empresa-k.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 503,
+        "url_final": "https://n8n-automation.empresa-k.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 730
+    },
+    "cabeceras_web|drools.empresa-k.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20289
+    },
+    "investigar_parecido|eempresa-k.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "eempresa-k.co",
+        "tipo": "duplicacion",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2013-11-04T23:43:20+00:00",
+        "dias_desde_registro": 4748,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": true,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 1063
+    },
+    "investigar_parecido|mpresa-k.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "mpresa-k.co",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2010-07-21T21:53:07+00:00",
+        "dias_desde_registro": 5950,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 2293
+    },
+    "investigar_parecido|empresa-k.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "empresa-k.com.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1997-12-12T05:00:00+00:00",
+        "dias_desde_registro": 10555,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 2587
+    },
+    "investigar_parecido|ernpresa-k.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "ernpresa-k.co",
+        "tipo": "homoglifo",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2024-02-13T09:00:04+00:00",
+        "dias_desde_registro": 996,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 3797
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-DKIM-CLAVE-1024",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "PARECIDO-ENVIA@ernpresa-k.co",
+      "WEB-SIN-HSTS@brokers.empresa-k.co",
+      "WEB-SIN-PROTECCION-MARCOS@dashboard-backbone.empresa-k.co"
+    ],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT",
+      "CORREO-SPF-SUAVE",
+      "PARECIDO-ENVIA@eempresa-k.co"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

@@ -68,3 +68,17 @@ def test_inyecciones_con_marca():
         c = por_id(id_)
         crudo = str([r.contenido_no_confiable.get(campo) for r in c.grabacion.values()])
         assert c.marca_inyeccion and c.marca_inyeccion in crudo
+
+
+def test_hay_35_casos():
+    assert len(CASOS) == 35 and sum(c.origen == "real" for c in CASOS) == 25
+
+
+def test_cobertura_31_reglas():
+    """Cada regla de scoring.py aparece al menos una vez con la grabación completa de algún caso."""
+    from auditor import scoring
+    from evals.reglas import llamadas_completas
+    vistas = set()
+    for c in CASOS:
+        vistas |= set(scoring.evaluar(llamadas_completas(c), c.dominio, c.grabado_el))
+    assert len(scoring.REGLAS) == 31 and set(scoring.REGLAS) - vistas == set()

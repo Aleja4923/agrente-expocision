@@ -1,0 +1,2073 @@
+{
+  "id": "real-25",
+  "origen": "real",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-05",
+  "dominio": "entidad-z.edu.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "entidad-z.edu.co",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 10,
+              "host": "entidad-z-edu-co.mail.protection.outlook.com"
+            }
+          ],
+          "proveedor": "microsoft"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 include:spf.protection.outlook.com ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3 ip4:203.0.113.4 include:amazonses.com ip4:203.0.113.5 include:_spf.salesforce.com include:externo-1.example include:_spf1.mailgun.org include:_spf2.mailgun.org include:_spf.eu.mailgun.org include:servers.mcsv.net ip4:203.0.113.6/28 ip4:203.0.113.7 ip4:203.0.113.8/26 ip4:203.0.113.9 ip4:203.0.113.10/28 ip4:203.0.113.11/28 ip4:203.0.113.12 ip4:203.0.113.13/28 ip4:203.0.113.14/25 ip4:203.0.113.15/25 ip4:203.0.113.16/25 ip4:203.0.113.17/25 ip4:203.0.113.18/27 ip4:203.0.113.19/27 ip4:203.0.113.20/26 ip4:203.0.113.21 ip4:203.0.113.22 ip4:203.0.113.23 ip4:203.0.113.24 ip4:203.0.113.25 ip4:203.0.113.26/27 ip4:203.0.113.27/25 ip4:203.0.113.28/24 ip4:203.0.113.29/24 ip4:203.0.113.30/24 ip4:203.0.113.31/24 ip4:203.0.113.32/24 ip4:203.0.113.33/24 ip4:203.0.113.34/24 ip4:203.0.113.35/24 ip4:203.0.113.36/24 ip4:203.0.113.37/31 ip4:203.0.113.22/30 ip4:203.0.113.38 ip4:203.0.113.39/32 ip4:203.0.113.40/32 ~all"
+          ],
+          "cantidad": 1,
+          "cierre": "~all",
+          "consultas_dns": 10,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "quarantine",
+          "p_ausente": false,
+          "sp": "none",
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@entidad-z.edu.co"
+          ],
+          "pct": 10,
+          "etiquetas_obsoletas": [
+            "pct"
+          ],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 include:spf.protection.outlook.com ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3 ip4:203.0.113.4 include:amazonses.com ip4:203.0.113.5 include:_spf.salesforce.com include:externo-1.example include:_spf1.mailgun.org include:_spf2.mailgun.org include:_spf.eu.mailgun.org…"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=quarantine; sp=none; aspf=r; adkim=r; pct=10; rua=mailto:contacto@entidad-z.edu.co; ruf=mailto:contacto@entidad-z.edu.co; fo=1"
+        ]
+      },
+      "duracion_ms": 781
+    },
+    "whois_dominio|entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "entidad-z.edu.co",
+        "fuente": "whois",
+        "creado": "1996-01-01T00:00:00+00:00",
+        "vence": "2028-12-31T23:59:59+00:00",
+        "dias_para_vencer": 787,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "dsit-saz020.eastus.cloudapp.azure.com",
+          "ayax.entidad-z.edu.co"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 6
+    },
+    "security_txt|entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "security_txt",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 169
+    },
+    "buscar_parecidos|entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "entidad-z.edu.co",
+        "generadas": 31,
+        "truncadas": false,
+        "existentes": 1,
+        "con_correo": [
+          {
+            "dominio": "entidad-z.com.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "smtp.secureserver.net",
+              "mailstore1.secureserver.net"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [
+          "entidad-z.co",
+          "entidad-z.com"
+        ],
+        "ns_propios": [
+          "ayax.entidad-z.edu.co",
+          "dsit-saz020.eastus.cloudapp.azure.com"
+        ],
+        "mx_propios": [
+          "entidad-z-edu-co.mail.protection.outlook.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 5447
+    },
+    "subdominios_ct|entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "entidad-z.edu.co",
+        "fuente": "certspotter",
+        "total": 43,
+        "mostrados": 43,
+        "truncados": false,
+        "con_sitio": 41,
+        "subdominios": [
+          {
+            "nombre": "apiproyectoprod.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-08",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "apiqa.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "arqdis.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-12-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "asignacionproyectosvic.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-08",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "bloqueneon.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-03-11",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "capsulainstitucional.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "civilyambiental.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "crdfacartes.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "crm-facultades.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-08",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "economia.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-05",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "evalua-siac.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-08",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "eventos.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-02-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "exaforms-qa.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-12-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "exaforms.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-12-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ezproxy.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-01-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "fisica.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "gaceta.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-05",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "geociencias.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-05",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "simuladorimulador.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "hiles.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "liee.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "moodleinstitucional.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-12-17",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "nodo.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-08",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "obertura.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-12-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "onlineadmon.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-01-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "patrimoniodocumental.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-11",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "platypus.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-12-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "prestamosingquimica.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-05",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "quimicayalimentos.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "ued.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-09",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "virtual.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-01-17",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api.evalua-siac.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-08",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "click.crmemk.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-12-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cloud.crmemk.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-02-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "image.crmemk.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-02-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "pages.crmemk.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-02-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "platypus.az.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-12-13",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "view.crmemk.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-02-06",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "vivero2.virtual.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-07",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.portalserviciosestudiantes.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-02-03",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "portalserviciosestudiantes.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2027-02-03",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.patrimoniodocumental.entidad-z.edu.co",
+            "ultimo_certificado_vence": "2026-11-11",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 12159
+    },
+    "dkim_selector|entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "entidad-z.edu.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-2.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "externo-3.example",
+            "destino_microsoft": true,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "dkim.mcsv.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": true,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s1.domainkey.u14685246.wl247.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s2.domainkey.u14685246.wl247.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 1024,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "selector1": "[omitido]",
+        "selector2": "[omitido]",
+        "k1": "[omitido]",
+        "mail": "[omitido]",
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-05",
+        "dias_restantes": 61,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.41",
+        "host": "www.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 174
+    },
+    "tls_certificado|apiproyectoprod.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-06",
+        "dias_restantes": 61,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.41",
+        "host": "apiproyectoprod.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 193
+    },
+    "tls_certificado|apiqa.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-07",
+        "dias_restantes": 62,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.41",
+        "host": "apiqa.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 192
+    },
+    "tls_certificado|entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "cadena_incompleta",
+        "vence": "2027-02-25",
+        "dias_restantes": 112,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.42",
+        "host": "entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 391
+    },
+    "cabeceras_web|www.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 699
+    },
+    "tls_certificado|arqdis.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-16",
+        "dias_restantes": 72,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.41",
+        "host": "arqdis.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 196
+    },
+    "cabeceras_web|apiqa.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "apiqa.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://apiqa.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1016
+    },
+    "cabeceras_web|entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 900
+    },
+    "tls_certificado|asignacionproyectosvic.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-07",
+        "dias_restantes": 62,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.41",
+        "host": "asignacionproyectosvic.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 179
+    },
+    "tls_certificado|bloqueneon.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-11",
+        "dias_restantes": 126,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.43",
+        "host": "bloqueneon.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 240
+    },
+    "cabeceras_web|arqdis.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "arqdis.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://arqdis.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 779
+    },
+    "tls_certificado|capsulainstitucional.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-04",
+        "dias_restantes": 60,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.44",
+        "host": "capsulainstitucional.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 177
+    },
+    "cabeceras_web|asignacionproyectosvic.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "asignacionproyectosvic.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://asignacionproyectosvic.entidad-z.edu.co/auth/login/?next=/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1150
+    },
+    "tls_certificado|civilyambiental.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-04",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.41",
+        "host": "civilyambiental.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 176
+    },
+    "cabeceras_web|capsulainstitucional.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "capsulainstitucional.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://capsulainstitucional.entidad-z.edu.co/login/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1115
+    },
+    "tls_certificado|crdfacartes.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-05",
+        "dias_restantes": 61,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.41",
+        "host": "crdfacartes.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 169
+    },
+    "cabeceras_web|civilyambiental.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "civilyambiental.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://civilyambiental.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 736
+    },
+    "tls_certificado|crm-facultades.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-06",
+        "dias_restantes": 62,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.45",
+        "host": "crm-facultades.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 179
+    },
+    "cabeceras_web|bloqueneon.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "bloqueneon.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 302,
+        "url_final": "https://bloqueneon.entidad-z.edu.co/d2l/lp/auth/saml/login",
+        "redirecciones": 2,
+        "redirige_fuera": "externo-4.example",
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 63113904,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 2158
+    },
+    "tls_certificado|economia.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-04",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.44",
+        "host": "economia.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 192
+    },
+    "cabeceras_web|crm-facultades.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "crm-facultades.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://crm-facultades.entidad-z.edu.co/s/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 63072000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 1316
+    },
+    "tls_certificado|evalua-siac.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-07",
+        "dias_restantes": 62,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.41",
+        "host": "evalua-siac.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 199
+    },
+    "cabeceras_web|evalua-siac.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "evalua-siac.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://evalua-siac.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 1259
+    },
+    "tls_certificado|eventos.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-13",
+        "dias_restantes": 100,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.46",
+        "host": "eventos.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 61
+    },
+    "cabeceras_web|eventos.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "eventos.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://eventos.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 109
+    },
+    "cabeceras_web|economia.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "economia.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://economia.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 2916
+    },
+    "tls_certificado|exaforms-qa.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "vencido",
+        "vence": "2026-10-02",
+        "dias_restantes": -34,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.47",
+        "host": "exaforms-qa.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 408
+    },
+    "tls_certificado|exaforms.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-25",
+        "dias_restantes": 112,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.47",
+        "host": "exaforms.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 203
+    },
+    "cabeceras_web|exaforms-qa.entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 552
+    },
+    "tls_certificado|ezproxy.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-26",
+        "dias_restantes": 82,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.48",
+        "host": "ezproxy.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 180
+    },
+    "cabeceras_web|exaforms.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "exaforms.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 302,
+        "url_final": "https://exaforms.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": "externo-4.example",
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 1750
+    },
+    "tls_certificado|fisica.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-25",
+        "dias_restantes": 112,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.49",
+        "host": "fisica.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 80
+    },
+    "cabeceras_web|fisica.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "fisica.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://fisica.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 354
+    },
+    "cabeceras_web|ezproxy.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ezproxy.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://login.ezproxy.entidad-z.edu.co/login",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1522
+    },
+    "tls_certificado|gaceta.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-04",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.44",
+        "host": "gaceta.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 168
+    },
+    "tls_certificado|geociencias.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-03",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.41",
+        "host": "geociencias.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 187
+    },
+    "cabeceras_web|geociencias.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "geociencias.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://geociencias.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1005
+    },
+    "tls_certificado|simuladorimulador.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-09",
+        "dias_restantes": 64,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.50",
+        "host": "simuladorimulador.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 272
+    },
+    "cabeceras_web|simuladorimulador.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "simuladorimulador.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://simuladorimulador.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 63072000,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 586
+    },
+    "tls_certificado|hiles.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-04",
+        "dias_restantes": 60,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.44",
+        "host": "hiles.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 176
+    },
+    "cabeceras_web|apiproyectoprod.entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20525
+    },
+    "tls_certificado|liee.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-04",
+        "dias_restantes": 60,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.44",
+        "host": "liee.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 158
+    },
+    "cabeceras_web|crdfacartes.entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20555
+    },
+    "tls_certificado|moodleinstitucional.entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5028
+    },
+    "cabeceras_web|gaceta.entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20498
+    },
+    "tls_certificado|nodo.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-07",
+        "dias_restantes": 62,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.41",
+        "host": "nodo.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 181
+    },
+    "cabeceras_web|nodo.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "nodo.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://nodo.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 918
+    },
+    "tls_certificado|obertura.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-25",
+        "dias_restantes": 112,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.47",
+        "host": "obertura.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 361
+    },
+    "cabeceras_web|hiles.entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20519
+    },
+    "tls_certificado|onlineadmon.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-15",
+        "dias_restantes": 70,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.51",
+        "host": "onlineadmon.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 195
+    },
+    "cabeceras_web|obertura.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "obertura.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://obertura.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 1463
+    },
+    "tls_certificado|patrimoniodocumental.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-11-11",
+        "dias_restantes": 6,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.52",
+        "host": "patrimoniodocumental.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 360
+    },
+    "cabeceras_web|onlineadmon.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "onlineadmon.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://onlineadmon.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 631138519,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1474
+    },
+    "tls_certificado|platypus.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-25",
+        "dias_restantes": 112,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.47",
+        "host": "platypus.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 305
+    },
+    "cabeceras_web|patrimoniodocumental.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "patrimoniodocumental.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://patrimoniodocumental.entidad-z.edu.co/customizations/global/pages/externo-5.example",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 1471
+    },
+    "tls_certificado|prestamosingquimica.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-03",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.44",
+        "host": "prestamosingquimica.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 170
+    },
+    "cabeceras_web|platypus.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "platypus.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://platypus.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": true,
+        "nosniff": false,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1946
+    },
+    "tls_certificado|quimicayalimentos.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-07",
+        "dias_restantes": 62,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.44",
+        "host": "quimicayalimentos.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 195
+    },
+    "cabeceras_web|quimicayalimentos.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "quimicayalimentos.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://quimicayalimentos.entidad-z.edu.co/es",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1930
+    },
+    "tls_certificado|ued.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-08",
+        "dias_restantes": 64,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.53",
+        "host": "ued.entidad-z.edu.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 110
+    },
+    "cabeceras_web|ued.entidad-z.edu.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ued.entidad-z.edu.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://ued.entidad-z.edu.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 281
+    },
+    "cabeceras_web|liee.entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20561
+    },
+    "cabeceras_web|moodleinstitucional.entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20037
+    },
+    "cabeceras_web|prestamosingquimica.entidad-z.edu.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20562
+    },
+    "investigar_parecido|entidad-z.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "entidad-z.com.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2000-03-04T14:46:49+00:00",
+        "dias_desde_registro": 9741,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 573
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-DMARC-OBSOLETO",
+      "WEB-TLS-INVALIDO",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "WEB-TLS-INVALIDO@exaforms-qa.entidad-z.edu.co",
+      "WEB-TLS-POR-VENCER@patrimoniodocumental.entidad-z.edu.co",
+      "CORREO-DKIM-CLAVE-1024@k1",
+      "WEB-SIN-HSTS@arqdis.entidad-z.edu.co"
+    ],
+    "hallazgos_prohibidos": [
+      "CORREO-SPF-SUAVE",
+      "CORREO-SPF-LOOKUPS",
+      "CORREO-DMARC-NONE",
+      "WEB-SIN-SECURITY-TXT"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

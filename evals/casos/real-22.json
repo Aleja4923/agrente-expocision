@@ -1,0 +1,2132 @@
+{
+  "id": "real-22",
+  "origen": "real",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-05",
+  "dominio": "tienda-w2.com",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|tienda-w2.com": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "tienda-w2.com",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 10,
+              "host": "externo-1.example"
+            },
+            {
+              "prioridad": 10,
+              "host": "externo-2.example"
+            },
+            {
+              "prioridad": 50,
+              "host": "externo-3.example"
+            }
+          ],
+          "proveedor": "otro"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3 ip4:203.0.113.4 ip4:203.0.113.5 include:_spf.google.com -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 1,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "quarantine",
+          "p_ausente": false,
+          "sp": "none",
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@dmarc-reports.cloudflare.net",
+            "mailto:contacto@tienda-w2.com",
+            "mailto:contacto@externo-4.example"
+          ],
+          "pct": 100,
+          "etiquetas_obsoletas": [
+            "pct",
+            "ri"
+          ],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3 ip4:203.0.113.4 ip4:203.0.113.5 include:_spf.google.com -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=quarantine; rua=mailto:contacto@dmarc-reports.cloudflare.net,mailto:contacto@tienda-w2.com, mailto:contacto@externo-4.example; ruf=mailto:contacto@tienda-w2.com; pct=100; adkim=r; sp=none; fo=1; ri=43200"
+        ]
+      },
+      "duracion_ms": 220
+    },
+    "whois_dominio|tienda-w2.com": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "tienda-w2.com",
+        "fuente": "rdap",
+        "creado": "1999-01-12T05:00:00+00:00",
+        "vence": "2030-01-12T05:00:00+00:00",
+        "dias_para_vencer": 1164,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "annalise.ns.cloudflare.com",
+          "rocco.ns.cloudflare.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 1
+    },
+    "security_txt|tienda-w2.com": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "tienda-w2.com",
+        "codigo": 403,
+        "redirige_fuera": null,
+        "existe": null,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 416
+    },
+    "buscar_parecidos|tienda-w2.com": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "tienda-w2.com",
+        "generadas": 32,
+        "truncadas": false,
+        "existentes": 2,
+        "con_correo": [
+          {
+            "dominio": "tienda-w2.com.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "externo-1.example",
+              "externo-2.example",
+              "externo-3.example"
+            ],
+            "comparte_servidores": true
+          },
+          {
+            "dominio": "tienda-w2.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "smtp.secureserver.net",
+              "mailstore1.secureserver.net"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "annalise.ns.cloudflare.com",
+          "rocco.ns.cloudflare.com"
+        ],
+        "mx_propios": [
+          "externo-1.example",
+          "externo-2.example",
+          "externo-3.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 476
+    },
+    "subdominios_ct|tienda-w2.com": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "tienda-w2.com",
+        "fuente": "certspotter",
+        "total": 37,
+        "mostrados": 37,
+        "truncados": false,
+        "con_sitio": 29,
+        "subdominios": [
+          {
+            "nombre": "acercate.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-25",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "acloud.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "atalento.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-11-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "digital.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "bi.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-01-02",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "calendar.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cr.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-11-12",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "dana.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "docs.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "gt.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "app1.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "modo.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-23",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "moodle.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-01-03",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "negocioscorporativos.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "pa.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-11-11",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sap-dev.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-01-28",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sap.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-03-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sms.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-11-24",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "talento.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "wia.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-02-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.acercate.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.acloud.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.bi.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-01-02",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.gt.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.modo.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-23",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.moodle.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-01-03",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.pe.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.talento.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-12-26",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "acibp1qa.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-03-11",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "acibpprod.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-02-27",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "aws.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-03-12",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "rfid.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-11-25",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.acibp1qa.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-03-11",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.acibpprod.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-02-27",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.rfid.tienda-w2.com",
+            "ultimo_certificado_vence": "2026-11-25",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "www.wia.tienda-w2.com",
+            "ultimo_certificado_vence": "2027-02-26",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 6965
+    },
+    "dkim_selector|tienda-w2.com": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "tienda-w2.com",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": true,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s1.domainkey.u46093874.wl125.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": true,
+            "via_cname": true,
+            "destino_cname": "s2.domainkey.u46093874.wl125.sendgrid.net",
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "google": "[omitido]",
+        "s1": "[omitido]",
+        "s2": "[omitido]"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|acloud.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-03",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "acloud.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 68
+    },
+    "tls_certificado|www.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-14",
+        "dias_restantes": 69,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.7",
+        "host": "www.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 78
+    },
+    "tls_certificado|tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 50,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 165
+    },
+    "tls_certificado|acercate.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-25",
+        "dias_restantes": 50,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "acercate.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 168
+    },
+    "cabeceras_web|tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 520
+    },
+    "cabeceras_web|acercate.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "acercate.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://acercate.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 576
+    },
+    "tls_certificado|api.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 50,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "api.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 197
+    },
+    "tls_certificado|atalento.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-13",
+        "dias_restantes": 69,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "atalento.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 197
+    },
+    "cabeceras_web|api.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "api.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://api.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 545
+    },
+    "cabeceras_web|atalento.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "atalento.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://atalento.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 514
+    },
+    "tls_certificado|bi.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-03",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.10",
+        "host": "bi.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 93
+    },
+    "tls_certificado|digital.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 51,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "digital.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 196
+    },
+    "cabeceras_web|www.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1922
+    },
+    "cabeceras_web|digital.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "digital.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://digital.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 520
+    },
+    "tls_certificado|calendar.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 50,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "calendar.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 172
+    },
+    "tls_certificado|cr.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-10",
+        "dias_restantes": 66,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "cr.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 189
+    },
+    "cabeceras_web|calendar.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "calendar.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://calendar.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 525
+    },
+    "cabeceras_web|cr.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "cr.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://cr.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 509
+    },
+    "tls_certificado|dana.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 50,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "dana.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 181
+    },
+    "tls_certificado|docs.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 50,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "docs.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 171
+    },
+    "cabeceras_web|dana.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "dana.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://dana.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 557
+    },
+    "cabeceras_web|docs.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "docs.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://docs.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 510
+    },
+    "tls_certificado|gt.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-30",
+        "dias_restantes": 55,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.11",
+        "host": "gt.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 174
+    },
+    "tls_certificado|app1.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 51,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "app1.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 187
+    },
+    "cabeceras_web|gt.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "gt.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://gt.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 647
+    },
+    "cabeceras_web|app1.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "app1.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://app1.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 638
+    },
+    "tls_certificado|modo.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-23",
+        "dias_restantes": 48,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "modo.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 224
+    },
+    "tls_certificado|moodle.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 77,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "moodle.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 167
+    },
+    "cabeceras_web|modo.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "modo.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://modo.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 502
+    },
+    "cabeceras_web|moodle.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "moodle.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://moodle.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 512
+    },
+    "tls_certificado|negocioscorporativos.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 51,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "negocioscorporativos.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 186
+    },
+    "tls_certificado|pa.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-09",
+        "dias_restantes": 64,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "pa.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 185
+    },
+    "cabeceras_web|pa.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "pa.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://pa.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 533
+    },
+    "cabeceras_web|negocioscorporativos.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "negocioscorporativos.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 200,
+        "url_final": "https://www.tienda-w2.com/negocios-corporativos-arturo-calle",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 2944
+    },
+    "cabeceras_web|acloud.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "acloud.tienda-w2.com",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "https://acloud.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]"
+      },
+      "duracion_ms": 10085
+    },
+    "tls_certificado|sms.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-23",
+        "dias_restantes": 78,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "sms.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 171
+    },
+    "tls_certificado|sap.tienda-w2.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "sin_https",
+      "sugerencia": "El host no acepta conexiones HTTPS en el puerto 443; repórtalo, no reintentes.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 2387
+    },
+    "tls_certificado|sap-dev.tienda-w2.com": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "No respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 5028
+    },
+    "cabeceras_web|sms.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sms.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://sms.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 565
+    },
+    "tls_certificado|talento.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 51,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "talento.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 160
+    },
+    "cabeceras_web|talento.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "talento.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://talento.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 590
+    },
+    "cabeceras_web|bi.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "bi.tienda-w2.com",
+        "http_responde": false,
+        "redirige_a_https": null,
+        "codigo_final": 200,
+        "url_final": "https://bi.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 10118
+    },
+    "tls_certificado|wia.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-02-26",
+        "dias_restantes": 112,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.12",
+        "host": "wia.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 71
+    },
+    "tls_certificado|www.acercate.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 50,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "www.acercate.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 191
+    },
+    "cabeceras_web|wia.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "wia.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 200,
+        "url_final": "https://wia.tienda-w2.com/WIA/externo-5.example",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": true
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 236
+    },
+    "tls_certificado|www.acloud.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "nombre_no_coincide",
+        "vence": "2027-01-03",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.6",
+        "host": "www.acloud.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 138
+    },
+    "cabeceras_web|www.acercate.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.acercate.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://www.acercate.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 551
+    },
+    "tls_certificado|www.bi.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "nombre_no_coincide",
+        "vence": "2027-01-03",
+        "dias_restantes": 59,
+        "version_tls": "TLSv1.2",
+        "ip": "203.0.113.10",
+        "host": "www.bi.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 150
+    },
+    "cabeceras_web|sap.tienda-w2.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "sin_conexion",
+      "sugerencia": "El sitio no acepta conexiones; si no hay sitio web, declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 4772
+    },
+    "tls_certificado|www.gt.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-30",
+        "dias_restantes": 55,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.11",
+        "host": "www.gt.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 167
+    },
+    "cabeceras_web|www.gt.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.gt.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://gt.tienda-w2.com/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]"
+      },
+      "duracion_ms": 2102
+    },
+    "tls_certificado|www.modo.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-23",
+        "dias_restantes": 48,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "www.modo.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 194
+    },
+    "cabeceras_web|www.modo.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.modo.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://www.modo.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 522
+    },
+    "tls_certificado|www.moodle.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 77,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.9",
+        "host": "www.moodle.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 183
+    },
+    "cabeceras_web|www.moodle.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.moodle.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://www.moodle.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 518
+    },
+    "tls_certificado|www.pe.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 77,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "www.pe.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 173
+    },
+    "cabeceras_web|www.pe.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.pe.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://www.pe.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 544
+    },
+    "tls_certificado|www.talento.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2026-12-26",
+        "dias_restantes": 51,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.8",
+        "host": "www.talento.tienda-w2.com"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 173
+    },
+    "cabeceras_web|www.talento.tienda-w2.com": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.talento.tienda-w2.com",
+        "http_responde": true,
+        "redirige_a_https": false,
+        "codigo_final": 403,
+        "url_final": "https://www.talento.tienda-w2.com/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 527
+    },
+    "cabeceras_web|www.acloud.tienda-w2.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10084
+    },
+    "cabeceras_web|www.bi.tienda-w2.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "respuesta_invalida",
+      "sugerencia": "El sitio respondió algo que no es HTTP válido; declárelo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 10091
+    },
+    "cabeceras_web|sap-dev.tienda-w2.com": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20026
+    },
+    "investigar_parecido|tienda-w2.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tienda-w2.com.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1999-01-08T00:00:00+00:00",
+        "dias_desde_registro": 10163,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": true,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 165
+    },
+    "investigar_parecido|tienda-w2.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tienda-w2.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2016-10-15T21:46:33+00:00",
+        "dias_desde_registro": 3672,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 229
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "medio",
+    "hallazgos_obligatorios": [
+      "CORREO-DMARC-OBSOLETO",
+      "WEB-SIN-REDIRECCION-HTTPS",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "WEB-SIN-HSTS@www.tienda-w2.com",
+      "WEB-TLS-INVALIDO@www.bi.tienda-w2.com",
+      "WEB-SIN-HTTPS@sap.tienda-w2.com"
+    ],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT",
+      "WEB-SIN-HSTS@tienda-w2.com",
+      "CORREO-DKIM-NO-ENCONTRADO"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

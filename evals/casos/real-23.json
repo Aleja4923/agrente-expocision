@@ -1,0 +1,951 @@
+{
+  "id": "real-23",
+  "origen": "real",
+  "perfil": "pyme_estandar",
+  "grabado_el": "2026-11-05",
+  "dominio": "tienda-x.com.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "tienda-x.com.co",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 5,
+              "host": "tienda-x-co.mail.protection.outlook.com"
+            },
+            {
+              "prioridad": 10,
+              "host": "appliance.tienda-x.com.co"
+            },
+            {
+              "prioridad": 100,
+              "host": "externo-1.example"
+            }
+          ],
+          "proveedor": "microsoft"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 mx a ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3 ip4:203.0.113.4 ip4:203.0.113.5 ip4:203.0.113.6 ip4:203.0.113.7 ip4:203.0.113.8 ip4:203.0.113.9 include:externo-2.example include:externo-3.example include:spf.protection.outlook.com -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 9,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "none",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:contacto@dmarc-reports.cloudflare.net",
+            "mailto:dmarc@externo-4.example"
+          ],
+          "pct": 100,
+          "etiquetas_obsoletas": [
+            "pct"
+          ],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 mx a ip4:203.0.113.1 ip4:203.0.113.2 ip4:203.0.113.3 ip4:203.0.113.4 ip4:203.0.113.5 ip4:203.0.113.6 ip4:203.0.113.7 ip4:203.0.113.8 ip4:203.0.113.9 include:externo-2.example include:externo-3.example include:spf.protection.outlook.com -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=none; pct=100; rua=mailto:contacto@dmarc-reports.cloudflare.net,mailto:dmarc@externo-4.example; ruf=mailto:contacto@externo-5.example; fo=1"
+        ]
+      },
+      "duracion_ms": 370
+    },
+    "whois_dominio|tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "tienda-x.com.co",
+        "fuente": "whois",
+        "creado": "1998-07-17T00:00:00+00:00",
+        "vence": "2027-12-31T23:59:59+00:00",
+        "dias_para_vencer": 421,
+        "estados": [
+          "ok"
+        ],
+        "bloqueo_transferencia": false,
+        "servidores_nombre": [
+          "rafe.ns.cloudflare.com",
+          "zeus.ns.cloudflare.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 1
+    },
+    "security_txt|tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "tienda-x.com.co",
+        "codigo": 404,
+        "redirige_fuera": null,
+        "existe": false,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 950
+    },
+    "buscar_parecidos|tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "tienda-x.com.co",
+        "generadas": 27,
+        "truncadas": false,
+        "existentes": 3,
+        "con_correo": [
+          {
+            "dominio": "tienda-x.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "tienda-x-co.mail.protection.outlook.com"
+            ],
+            "comparte_servidores": true
+          },
+          {
+            "dominio": "tienda-x.com",
+            "tipo": "otro_tld",
+            "mx": [
+              "externo-6.example",
+              "externo-7.example",
+              "externo-8.example"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "ienda-x.com.co",
+            "tipo": "omision",
+            "mx": [
+              "externo-9.example"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "rafe.ns.cloudflare.com",
+          "zeus.ns.cloudflare.com"
+        ],
+        "mx_propios": [
+          "tienda-x-co.mail.protection.outlook.com",
+          "appliance.tienda-x.com.co",
+          "externo-1.example"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 822
+    },
+    "subdominios_ct|tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "tienda-x.com.co",
+        "fuente": "certspotter",
+        "total": 8,
+        "mostrados": 8,
+        "truncados": false,
+        "con_sitio": 8,
+        "subdominios": [
+          {
+            "nombre": "empresa.tienda-x.com.co",
+            "ultimo_certificado_vence": "2027-01-23",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "empresas.tienda-x.com.co",
+            "ultimo_certificado_vence": "2027-01-23",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "sadobe.tienda-x.com.co",
+            "ultimo_certificado_vence": "2027-03-28",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "api.mobile.tienda-x.com.co",
+            "ultimo_certificado_vence": "2027-01-15",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "click.corp.tienda-x.com.co",
+            "ultimo_certificado_vence": "2027-04-22",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "image.corp.tienda-x.com.co",
+            "ultimo_certificado_vence": "2027-04-14",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "view.corp.tienda-x.com.co",
+            "ultimo_certificado_vence": "2027-03-12",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "www.gtm.tienda-x.com.co",
+            "ultimo_certificado_vence": "2027-01-25",
+            "vigente": true,
+            "tiene_sitio": true
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 5388
+    },
+    "dkim_selector|tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "tienda-x.com.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "selector2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "default",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "dkim",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "k1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "mail",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s1",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          },
+          {
+            "selector": "s2",
+            "existe": false,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": null,
+            "bits": null,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "tls_certificado|empresa.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-23",
+        "dias_restantes": 79,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "empresa.tienda-x.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 195
+    },
+    "tls_certificado|www.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-25",
+        "dias_restantes": 81,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.11",
+        "host": "www.tienda-x.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 203
+    },
+    "tls_certificado|empresas.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-23",
+        "dias_restantes": 79,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.11",
+        "host": "empresas.tienda-x.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 214
+    },
+    "tls_certificado|tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-25",
+        "dias_restantes": 81,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.12",
+        "host": "tienda-x.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 227
+    },
+    "cabeceras_web|empresa.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "empresa.tienda-x.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 525,
+        "url_final": "https://empresa.tienda-x.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 707
+    },
+    "cabeceras_web|empresas.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "empresas.tienda-x.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 404,
+        "url_final": "https://empresas.tienda-x.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]"
+      },
+      "duracion_ms": 767
+    },
+    "tls_certificado|sadobe.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-28",
+        "dias_restantes": 143,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.13",
+        "host": "sadobe.tienda-x.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 165
+    },
+    "tls_certificado|api.mobile.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-15",
+        "dias_restantes": 71,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.12",
+        "host": "api.mobile.tienda-x.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 183
+    },
+    "cabeceras_web|www.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.tienda-x.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.tienda-x.com.co/tienda-x-co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1120
+    },
+    "tls_certificado|click.corp.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-22",
+        "dias_restantes": 168,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.14",
+        "host": "click.corp.tienda-x.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 227
+    },
+    "cabeceras_web|sadobe.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "sadobe.tienda-x.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://sadobe.tienda-x.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 543
+    },
+    "cabeceras_web|tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "tienda-x.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.tienda-x.com.co/tienda-x-co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1487
+    },
+    "tls_certificado|view.corp.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-03-12",
+        "dias_restantes": 127,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.15",
+        "host": "view.corp.tienda-x.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 217
+    },
+    "cabeceras_web|click.corp.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "click.corp.tienda-x.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://click.corp.tienda-x.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": true,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 559
+    },
+    "tls_certificado|image.corp.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-04-14",
+        "dias_restantes": 160,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.16",
+        "host": "image.corp.tienda-x.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 519
+    },
+    "tls_certificado|www.gtm.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-25",
+        "dias_restantes": 81,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "www.gtm.tienda-x.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "[omitido]",
+        "sujeto": "[omitido]",
+        "nombres": "[omitido]"
+      },
+      "duracion_ms": 205
+    },
+    "cabeceras_web|view.corp.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "view.corp.tienda-x.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://view.corp.tienda-x.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 570
+    },
+    "cabeceras_web|image.corp.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "image.corp.tienda-x.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 403,
+        "url_final": "https://image.corp.tienda-x.com.co/",
+        "redirecciones": 0,
+        "redirige_fuera": null,
+        "evaluable": false,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": false,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "content-security-policy": "[omitido]"
+      },
+      "duracion_ms": 815
+    },
+    "cabeceras_web|www.gtm.tienda-x.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.gtm.tienda-x.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.tienda-x.com.co/tienda-x-co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 15552000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": false,
+        "csp_presente": false,
+        "referrer_policy": false,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "server": "[omitido]",
+        "x-powered-by": "[omitido]",
+        "strict-transport-security": "[omitido]",
+        "x-frame-options": "[omitido]"
+      },
+      "duracion_ms": 1462
+    },
+    "cabeceras_web|api.mobile.tienda-x.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "El sitio no respondió a tiempo; puedes reintentar una vez.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 20558
+    },
+    "investigar_parecido|tienda-x.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tienda-x.com",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "1995-08-30T04:00:00+00:00",
+        "dias_desde_registro": 11390,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "rdap",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 201
+    },
+    "investigar_parecido|ienda-x.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "ienda-x.com.co",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2011-03-20T23:05:54+00:00",
+        "dias_desde_registro": 5708,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 390
+    },
+    "investigar_parecido|tienda-x.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "tienda-x.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2010-02-25T01:18:17+00:00",
+        "dias_desde_registro": 6097,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": true,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "[omitido]"
+      },
+      "duracion_ms": 2374
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "CORREO-DMARC-NONE",
+      "CORREO-DMARC-OBSOLETO",
+      "CORREO-DKIM-NO-ENCONTRADO",
+      "DOMINIO-SIN-BLOQUEO",
+      "WEB-SIN-SECURITY-TXT",
+      "WEB-SIN-NOSNIFF",
+      "PARECIDO-MX"
+    ],
+    "hallazgos_por_decision": [
+      "PARECIDO-ENVIA@ienda-x.com.co",
+      "WEB-SIN-PROTECCION-MARCOS@view.corp.tienda-x.com.co"
+    ],
+    "hallazgos_prohibidos": [
+      "CORREO-SPF-LOOKUPS",
+      "WEB-SIN-HSTS@tienda-x.com.co",
+      "PARECIDO-ENVIA@tienda-x.co"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}
