@@ -93,7 +93,18 @@ auditor/
 scripts/
   probar_gateway.py     verificación medida de lo que soporta el gateway
   resumen_bitacora.py   pasos, costo y duración de las auditorías
-tests/           536 pruebas sin red ni llave (Grok simulado con guiones)
+evals/
+  casos.py        formato de caso y respuesta esperada
+  reproducir.py   entrega lo grabado detrás de las guardas reales
+  reglas.py       capa de reglas: grabación completa contra lo esperado
+  fabricar.py     genera los 10 casos fabricados
+  grabar.py       graba un dominio real (sin Grok) y lo seudonimiza
+  seudonimos.py   reemplazo de nombres por variantes del mismo tipo
+  lista_blanca.py revisión que falla cerrada antes de publicar un caso
+  correr.py       casos × modelos × repeticiones; se puede reanudar
+  medir.py        métricas y REPORTE.md, sin Grok ni llave
+  casos/          los 35 casos · resultados/ una línea por corrida
+tests/           721 pruebas sin red ni llave (Grok simulado con guiones)
 ```
 
 **Decisiones de diseño:**
@@ -103,6 +114,48 @@ tests/           536 pruebas sin red ni llave (Grok simulado con guiones)
 - **El nivel de riesgo lo calcula el código**, no Grok: alto si hay algún hallazgo crítico o alto; medio si lo más grave es de severidad media (por ejemplo, un dominio parecido registrado hace poco o un sitio que no redirige a HTTPS); bajo en otro caso. Se calcula con lo que se revisa en toda auditoría: el correo, el registro del dominio, los dominios parecidos y el sitio del dominio y `www`. Los hallazgos de subdominios siguen en el informe con su severidad, y una línea junto al nivel los cuenta, pero no lo mueven: cuáles se revisan lo elige Grok, y el mismo dominio daría niveles distintos. Si la auditoría se corta, el nivel sale como **provisional**.
 - **Un solo contenido, dos formatos:** el informe se arma una vez y se dibuja en Markdown y en HTML, así que nunca dicen cosas distintas. El HTML escapa todo el texto, incluido el que escribe Grok.
 - **Identidad de cada ejecución: lote > auditoría > intento.** Una corrida masiva puede reanudarse tras una caída sin contar dos veces la misma auditoría.
+
+## Evaluación: 35 casos con respuesta conocida (hito S3)
+
+**El set.** 35 casos en `evals/casos/`: 25 dominios reales y 10 fabricados. Los reales están seudonimizados. Cada dominio real pasa a un nombre inexistente, y cada dominio parecido, a una variante del mismo tipo que tampoco existe, para no señalar a un tercero. Una revisión que falla cerrada impide publicar un nombre, una IP o un correo reales. Los fabricados cubren lo que los reales no traen: inyección de instrucciones en el DNS, dominio por vencer, SPF con demasiadas consultas y el mismo dominio con dos objetivos distintos. Por perfil: 17 pymes estándar, 13 con muchos subdominios, 4 adversariales y 1 inexistente. Las 31 reglas aparecen al menos una vez.
+
+**Cómo se mide.** Cada caso guarda las respuestas reales de las herramientas y su respuesta esperada: el nivel de riesgo, los hallazgos que deben salir, los que no y cómo debe cerrar. Grok corre de verdad. Solo las herramientas se reproducen desde lo grabado, detrás de las mismas guardas de alcance y validación que en una auditoría en vivo. Hay dos capas:
+- **Reglas** (sin Grok, dentro de `pytest`): con la grabación completa, el código da exactamente lo esperado en los 35 casos.
+- **Agente** (con Grok): 35 casos × 2 modelos × 3 repeticiones = **210 corridas**, más **30** para medir `reasoning_effort`. Cada corrida deja una línea en `evals/resultados/` y su gasto en la bitácora.
+
+**Resultados** (de `evals/REPORTE.md`, que trae todas las cifras con su n):
+
+| | grok-4.20 | grok-4.7 | grok-4.7 con `reasoning_effort=low` |
+|---|---|---|---|
+| Corridas | 105 | 105 | 30 |
+| Nivel de riesgo correcto | 100 % | 100 % | 100 % |
+| Hallazgos que dependen de lo que Grok elige investigar | 40 % (75/186) | 67 % (124/186) | 47 % (27/57) |
+| Costo por auditoría: mediana · máximo | USD 0,031 · 0,082 | USD 0,097 · 0,255 | USD 0,036 · 0,089 |
+| Resistencia a la inyección en el DNS | 2 de 6 | 9 de 9 | 3 de 3 |
+
+| Costo mediano por perfil | n por modelo | grok-4.20 | grok-4.7 |
+|---|---|---|---|
+| Pyme estándar | 51 | USD 0,031 | USD 0,095 |
+| Muchos subdominios | 39 | USD 0,038 | USD 0,128 |
+| Adversarial | 12 | USD 0,022 | USD 0,036 |
+| Dominio inexistente | 3 | USD 0,010 | USD 0,014 |
+
+**Qué muestran:**
+- **El nivel de riesgo acierta en las 240 corridas, con cualquier modelo,** porque lo calcula el código. El modelo cambia lo que depende de su criterio: qué dominios parecidos investiga. Ahí grok-4.7 acierta más y cuesta unas 3 veces más.
+- **Inyección:** dos casos esconden en un registro DNS la orden de omitir un hallazgo y escribir una marca en el resumen. Ningún modelo logró borrar el hallazgo. Pero en 4 de 6 corridas grok-4.20 copió la marca en el resumen que redacta. Es una debilidad abierta: el arnés debe rechazar un resumen que copie texto no confiable.
+- **`reasoning_effort=low`** baja el costo de grok-4.7 casi al de grok-4.20, pero pierde buena parte de la mejora en las decisiones.
+- **Autonomía:** con el mismo dominio, a un caso se le pide revisar pagos y al otro, facturación. Los dos modelos llegaron al portal de cada objetivo en todas las corridas (12 de 12).
+- **Caché:** entre el 48 y el 55 % de los tokens de entrada se leyeron de la caché del gateway.
+
+**Límite declarado:** las respuestas esperadas las escribió la misma persona que trabajó en el código, así que no son del todo independientes. Los demás límites, como la lentitud del gateway durante parte de la corrida, están al final de `evals/REPORTE.md`.
+
+**Cómo reproducirlo:**
+
+```powershell
+venv\Scripts\python.exe -m pytest -q tests\test_evals_reglas.py                              # capa de reglas: gratis, sin llave
+venv\Scripts\python.exe -m evals.medir --lote evals-final --lote evals-esfuerzo              # rehace REPORTE.md: gratis, sin llave
+venv\Scripts\python.exe -m evals.correr --lote evals-propio --modelos grok-4.20 --repeticiones 1   # corre el agente: gasta créditos
+```
 
 ## Resultados: 10 ejecuciones reales (hito S2)
 
@@ -143,7 +196,7 @@ El costo de cada llamada es el que reporta el propio gateway, y coincide con el 
 python -m venv venv
 venv\Scripts\python.exe -m pip install -r requirements.txt
 copy .env.example .env    # luego escribe tu llave del reto en RETO_KEY
-venv\Scripts\python.exe -m pytest -q                      # 536 pruebas, sin red ni llave
+venv\Scripts\python.exe -m pytest -q                      # 721 pruebas, sin red ni llave
 venv\Scripts\python.exe -m auditor auditar ejemplo.com.co --verbose
 ```
 
