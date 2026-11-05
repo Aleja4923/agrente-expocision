@@ -1,0 +1,513 @@
+{
+  "id": "fab-08",
+  "origen": "fabricado",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-02",
+  "dominio": "fab-08.com.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|fab-08.com.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "fab-08.com.co",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 1,
+              "host": "aspmx.l.google.com"
+            }
+          ],
+          "proveedor": "google"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 ip4:203.0.113.10 include:_spf.google.com -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 1,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "reject",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:dmarc@fab-08.com.co"
+          ],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 ip4:203.0.113.10 include:_spf.google.com -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=reject; rua=mailto:dmarc@fab-08.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|fab-08.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "fab-08.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "fab-08.com.co",
+        "nombres": [
+          "fab-08.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.fab-08.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "www.fab-08.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "www.fab-08.com.co",
+        "nombres": [
+          "www.fab-08.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "whois_dominio|fab-08.com.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "fab-08.com.co",
+        "fuente": "whois",
+        "creado": "2015-03-01T00:00:00+00:00",
+        "vence": "2027-12-07T00:00:00+00:00",
+        "dias_para_vencer": 400,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "ns1.fab-08.com.co",
+          "ns2.fab-08.com.co"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
+    },
+    "buscar_parecidos|fab-08.com.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "fab-08.com.co",
+        "generadas": 20,
+        "truncadas": false,
+        "existentes": 7,
+        "con_correo": [
+          {
+            "dominio": "fab-08com.co",
+            "tipo": "sin_punto",
+            "mx": [
+              "aspmx.l.google.com"
+            ],
+            "comparte_servidores": true
+          },
+          {
+            "dominio": "fab-08.co",
+            "tipo": "otro_tld",
+            "mx": [
+              "mx.fab-08.co"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "fab-08.com",
+            "tipo": "otro_tld",
+            "mx": [
+              "mx.fab-08.com"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "fb-08.com.co",
+            "tipo": "omision",
+            "mx": [
+              "mx.fb-08.com.co"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "fba-08.com.co",
+            "tipo": "transposicion",
+            "mx": [
+              "mx.fba-08.com.co"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "fab08.com.co",
+            "tipo": "omision",
+            "mx": [
+              "mx.fab08.com.co"
+            ],
+            "comparte_servidores": false
+          },
+          {
+            "dominio": "fab-80.com.co",
+            "tipo": "transposicion",
+            "mx": [
+              "mx.fab-80.com.co"
+            ],
+            "comparte_servidores": false
+          }
+        ],
+        "sin_verificar": [],
+        "ns_propios": [
+          "ns1.fab-08.com.co",
+          "ns2.fab-08.com.co"
+        ],
+        "mx_propios": [
+          "aspmx.l.google.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "subdominios_ct|fab-08.com.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "fab-08.com.co",
+        "fuente": "crtsh",
+        "total": 0,
+        "mostrados": 0,
+        "truncados": false,
+        "con_sitio": 0,
+        "subdominios": []
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "cabeceras_web|fab-08.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "fab-08.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://fab-08.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|www.fab-08.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.fab-08.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.fab-08.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "security_txt|fab-08.com.co": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "fab-08.com.co",
+        "codigo": 200,
+        "redirige_fuera": null,
+        "existe": true,
+        "tiene_contact": true,
+        "expires": "2027-08-29T00:00:00+00:00",
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "security_txt": "Contact: mailto:seguridad@fab-08.com.co\nExpires: 2027-08-29T00:00:00+00:00\n"
+      },
+      "duracion_ms": 0
+    },
+    "dkim_selector|fab-08.com.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "fab-08.com.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": true,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "google": [
+          "v=DKIM1; k=rsa; p=MIIB..."
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "investigar_parecido|fab-08com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "fab-08com.co",
+        "tipo": "sin_punto",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2019-12-29T00:00:00+00:00",
+        "dias_desde_registro": 2500,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": true,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
+    },
+    "investigar_parecido|fab-08.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "fab-08.co",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2019-12-29T00:00:00+00:00",
+        "dias_desde_registro": 2500,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
+    },
+    "investigar_parecido|fab-08.com": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "fab-08.com",
+        "tipo": "otro_tld",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2019-12-29T00:00:00+00:00",
+        "dias_desde_registro": 2500,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
+    },
+    "investigar_parecido|fb-08.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "fb-08.com.co",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2019-12-29T00:00:00+00:00",
+        "dias_desde_registro": 2500,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
+    },
+    "investigar_parecido|fba-08.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "fba-08.com.co",
+        "tipo": "transposicion",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2019-12-29T00:00:00+00:00",
+        "dias_desde_registro": 2500,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
+    },
+    "investigar_parecido|fab08.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "fab08.com.co",
+        "tipo": "omision",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2019-12-29T00:00:00+00:00",
+        "dias_desde_registro": 2500,
+        "spf_autoriza_envio": false,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
+    },
+    "investigar_parecido|fab-80.com.co": {
+      "ok": true,
+      "herramienta": "investigar_parecido",
+      "datos": {
+        "parecido": "fab-80.com.co",
+        "tipo": "transposicion",
+        "existe": true,
+        "tiene_mx": true,
+        "creado": "2026-10-21T00:00:00+00:00",
+        "dias_desde_registro": 12,
+        "spf_autoriza_envio": true,
+        "comparte_servidores": false,
+        "fuente_registro": "whois",
+        "aviso": null
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [],
+    "hallazgos_por_decision": [
+      "PARECIDO-ENVIA@fab-80.com.co"
+    ],
+    "hallazgos_prohibidos": [],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

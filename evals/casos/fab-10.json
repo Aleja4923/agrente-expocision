@@ -1,0 +1,302 @@
+{
+  "id": "fab-10",
+  "origen": "fabricado",
+  "perfil": "pyme_estandar",
+  "grabado_el": "2026-11-02",
+  "dominio": "fab-10.com.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|fab-10.com.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "fab-10.com.co",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 1,
+              "host": "aspmx.l.google.com"
+            }
+          ],
+          "proveedor": "google"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 ip4:203.0.113.10 include:_spf.google.com -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 1,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "reject",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:dmarc@fab-10.com.co"
+          ],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 ip4:203.0.113.10 include:_spf.google.com -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=reject; rua=mailto:dmarc@fab-10.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|fab-10.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "fab-10.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "fab-10.com.co",
+        "nombres": [
+          "fab-10.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.fab-10.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "www.fab-10.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "www.fab-10.com.co",
+        "nombres": [
+          "www.fab-10.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "whois_dominio|fab-10.com.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "fab-10.com.co",
+        "fuente": "whois",
+        "creado": "2015-03-01T00:00:00+00:00",
+        "vence": "2026-10-28T00:00:00+00:00",
+        "dias_para_vencer": -5,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "ns1.fab-10.com.co",
+          "ns2.fab-10.com.co"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
+    },
+    "buscar_parecidos|fab-10.com.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "fab-10.com.co",
+        "generadas": 20,
+        "truncadas": false,
+        "existentes": 0,
+        "con_correo": [],
+        "sin_verificar": [],
+        "ns_propios": [
+          "ns1.fab-10.com.co",
+          "ns2.fab-10.com.co"
+        ],
+        "mx_propios": [
+          "aspmx.l.google.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "subdominios_ct|fab-10.com.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "fab-10.com.co",
+        "fuente": "crtsh",
+        "total": 0,
+        "mostrados": 0,
+        "truncados": false,
+        "con_sitio": 0,
+        "subdominios": []
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "cabeceras_web|fab-10.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "fab-10.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://fab-10.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|www.fab-10.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.fab-10.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.fab-10.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "security_txt|fab-10.com.co": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "fab-10.com.co",
+        "codigo": 520,
+        "redirige_fuera": null,
+        "existe": null,
+        "tiene_contact": false,
+        "expires": null,
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "dkim_selector|fab-10.com.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "fab-10.com.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": true,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "google": [
+          "v=DKIM1; k=rsa; p=MIIB..."
+        ]
+      },
+      "duracion_ms": 0
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "alto",
+    "hallazgos_obligatorios": [
+      "DOMINIO-VENCIDO"
+    ],
+    "hallazgos_por_decision": [],
+    "hallazgos_prohibidos": [
+      "WEB-SIN-SECURITY-TXT"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

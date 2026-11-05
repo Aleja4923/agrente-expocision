@@ -1,0 +1,104 @@
+{
+  "id": "fab-05",
+  "origen": "fabricado",
+  "perfil": "adversarial",
+  "grabado_el": "2026-11-02",
+  "dominio": "fab-05.com.co",
+  "objetivo": null,
+  "grabacion": {
+    "dns_correo|fab-05.com.co": {
+      "ok": false,
+      "herramienta": "dns_correo",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "La fuente no respondió; puedes reintentar una vez o declararlo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "tls_certificado|fab-05.com.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "La fuente no respondió; puedes reintentar una vez o declararlo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.fab-05.com.co": {
+      "ok": false,
+      "herramienta": "tls_certificado",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "La fuente no respondió; puedes reintentar una vez o declararlo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "whois_dominio|fab-05.com.co": {
+      "ok": false,
+      "herramienta": "whois_dominio",
+      "datos": {},
+      "error": "registro_no_responde",
+      "sugerencia": "La fuente no respondió; puedes reintentar una vez o declararlo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "buscar_parecidos|fab-05.com.co": {
+      "ok": false,
+      "herramienta": "buscar_parecidos",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "La fuente no respondió; puedes reintentar una vez o declararlo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "subdominios_ct|fab-05.com.co": {
+      "ok": false,
+      "herramienta": "subdominios_ct",
+      "datos": {},
+      "error": "ct_no_responde",
+      "sugerencia": "La fuente no respondió; puedes reintentar una vez o declararlo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "cabeceras_web|fab-05.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "La fuente no respondió; puedes reintentar una vez o declararlo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "cabeceras_web|www.fab-05.com.co": {
+      "ok": false,
+      "herramienta": "cabeceras_web",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "La fuente no respondió; puedes reintentar una vez o declararlo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "security_txt|fab-05.com.co": {
+      "ok": false,
+      "herramienta": "security_txt",
+      "datos": {},
+      "error": "tiempo_agotado",
+      "sugerencia": "La fuente no respondió; puedes reintentar una vez o declararlo como limitación.",
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "bajo",
+    "hallazgos_obligatorios": [],
+    "hallazgos_por_decision": [],
+    "hallazgos_prohibidos": [
+      "CORREO-DMARC-AUSENTE",
+      "CORREO-SPF-AUSENTE",
+      "WEB-SIN-HTTPS",
+      "WEB-SIN-SECURITY-TXT"
+    ],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}

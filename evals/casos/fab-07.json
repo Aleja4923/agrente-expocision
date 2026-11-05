@@ -1,0 +1,1265 @@
+{
+  "id": "fab-07",
+  "origen": "fabricado",
+  "perfil": "superficie_grande",
+  "grabado_el": "2026-11-02",
+  "dominio": "fab-pagos.com.co",
+  "objetivo": "Revisar la seguridad del portal de facturación electrónica.",
+  "grabacion": {
+    "dns_correo|fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "dns_correo",
+      "datos": {
+        "dominio": "fab-pagos.com.co",
+        "mx": {
+          "servidores": [
+            {
+              "prioridad": 1,
+              "host": "aspmx.l.google.com"
+            }
+          ],
+          "proveedor": "google"
+        },
+        "spf": {
+          "registros": [
+            "v=spf1 ip4:203.0.113.10 include:_spf.google.com -all"
+          ],
+          "cantidad": 1,
+          "cierre": "-all",
+          "consultas_dns": 1,
+          "consultas_vacias": 0,
+          "consultas_con_error": 0,
+          "permerror": false,
+          "detalle": null
+        },
+        "dmarc": {
+          "existe": true,
+          "valido": true,
+          "multiple": false,
+          "p": "reject",
+          "p_ausente": false,
+          "sp": null,
+          "np": null,
+          "t": null,
+          "psd": null,
+          "rua": [
+            "mailto:dmarc@fab-pagos.com.co"
+          ],
+          "pct": null,
+          "etiquetas_obsoletas": [],
+          "politica_mas_estricta": null
+        }
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "txt_dominio": [
+          "v=spf1 ip4:203.0.113.10 include:_spf.google.com -all"
+        ],
+        "txt_dmarc": [
+          "v=DMARC1; p=reject; rua=mailto:dmarc@fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "fab-pagos.com.co",
+        "nombres": [
+          "fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|www.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "www.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "www.fab-pagos.com.co",
+        "nombres": [
+          "www.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "whois_dominio|fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "whois_dominio",
+      "datos": {
+        "dominio": "fab-pagos.com.co",
+        "fuente": "whois",
+        "creado": "2015-03-01T00:00:00+00:00",
+        "vence": "2027-12-07T00:00:00+00:00",
+        "dias_para_vencer": 400,
+        "estados": [
+          "clientTransferProhibited"
+        ],
+        "bloqueo_transferencia": true,
+        "servidores_nombre": [
+          "ns1.fab-pagos.com.co",
+          "ns2.fab-pagos.com.co"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "registrador": "Registrador de Ejemplo S.A.S."
+      },
+      "duracion_ms": 0
+    },
+    "buscar_parecidos|fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "buscar_parecidos",
+      "datos": {
+        "dominio": "fab-pagos.com.co",
+        "generadas": 30,
+        "truncadas": false,
+        "existentes": 0,
+        "con_correo": [],
+        "sin_verificar": [],
+        "ns_propios": [
+          "ns1.fab-pagos.com.co",
+          "ns2.fab-pagos.com.co"
+        ],
+        "mx_propios": [
+          "aspmx.l.google.com"
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "subdominios_ct|fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "subdominios_ct",
+      "datos": {
+        "dominio": "fab-pagos.com.co",
+        "fuente": "crtsh",
+        "total": 18,
+        "mostrados": 18,
+        "truncados": false,
+        "con_sitio": 15,
+        "subdominios": [
+          {
+            "nombre": "ayuda.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "blog.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "cdn.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "docs.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "estado.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "eventos.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "foro.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "img.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "media.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "noticias.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "promo.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "static.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "facturacion.portal.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "pagos.portal.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "dev.portal.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": true
+          },
+          {
+            "nombre": "pruebas.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "viejo.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": false
+          },
+          {
+            "nombre": "vpn.fab-pagos.com.co",
+            "ultimo_certificado_vence": "2027-01-01",
+            "vigente": true,
+            "tiene_sitio": false
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {},
+      "duracion_ms": 0
+    },
+    "cabeceras_web|fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|www.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "www.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://www.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "security_txt|fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "security_txt",
+      "datos": {
+        "dominio": "fab-pagos.com.co",
+        "codigo": 200,
+        "redirige_fuera": null,
+        "existe": true,
+        "tiene_contact": true,
+        "expires": "2027-08-29T00:00:00+00:00",
+        "vencido": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "security_txt": "Contact: mailto:seguridad@fab-pagos.com.co\nExpires: 2027-08-29T00:00:00+00:00\n"
+      },
+      "duracion_ms": 0
+    },
+    "dkim_selector|fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "dkim_selector",
+      "datos": {
+        "dominio": "fab-pagos.com.co",
+        "selectores": [
+          {
+            "selector": "google",
+            "existe": true,
+            "via_cname": false,
+            "destino_cname": null,
+            "destino_microsoft": false,
+            "revocada": false,
+            "tipo_clave": "rsa",
+            "bits": 2048,
+            "error": null
+          }
+        ]
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "google": [
+          "v=DKIM1; k=rsa; p=MIIB..."
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|ayuda.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "ayuda.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "ayuda.fab-pagos.com.co",
+        "nombres": [
+          "ayuda.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|ayuda.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "ayuda.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://ayuda.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|blog.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "blog.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "blog.fab-pagos.com.co",
+        "nombres": [
+          "blog.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|blog.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "blog.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://blog.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|cdn.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "cdn.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "cdn.fab-pagos.com.co",
+        "nombres": [
+          "cdn.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|cdn.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "cdn.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://cdn.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|docs.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "docs.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "docs.fab-pagos.com.co",
+        "nombres": [
+          "docs.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|docs.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "docs.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://docs.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|estado.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "estado.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "estado.fab-pagos.com.co",
+        "nombres": [
+          "estado.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|estado.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "estado.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://estado.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|eventos.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "eventos.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "eventos.fab-pagos.com.co",
+        "nombres": [
+          "eventos.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|eventos.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "eventos.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://eventos.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|foro.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "foro.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "foro.fab-pagos.com.co",
+        "nombres": [
+          "foro.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|foro.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "foro.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://foro.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|img.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "img.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "img.fab-pagos.com.co",
+        "nombres": [
+          "img.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|img.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "img.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://img.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|media.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "media.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "media.fab-pagos.com.co",
+        "nombres": [
+          "media.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|media.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "media.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://media.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|noticias.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "noticias.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "noticias.fab-pagos.com.co",
+        "nombres": [
+          "noticias.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|noticias.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "noticias.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://noticias.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|promo.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "promo.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "promo.fab-pagos.com.co",
+        "nombres": [
+          "promo.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|promo.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "promo.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://promo.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|static.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "static.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "static.fab-pagos.com.co",
+        "nombres": [
+          "static.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|static.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "static.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://static.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|facturacion.portal.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": false,
+        "motivo": "vencido",
+        "vence": "2026-10-21",
+        "dias_restantes": -12,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "facturacion.portal.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "facturacion.portal.fab-pagos.com.co",
+        "nombres": [
+          "facturacion.portal.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|facturacion.portal.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "facturacion.portal.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://facturacion.portal.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|pagos.portal.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "pagos.portal.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "pagos.portal.fab-pagos.com.co",
+        "nombres": [
+          "pagos.portal.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|pagos.portal.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "pagos.portal.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://pagos.portal.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": false,
+          "max_age": null,
+          "include_subdomains": false
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    },
+    "tls_certificado|dev.portal.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "tls_certificado",
+      "datos": {
+        "valido": true,
+        "motivo": null,
+        "vence": "2027-01-21",
+        "dias_restantes": 80,
+        "version_tls": "TLSv1.3",
+        "ip": "203.0.113.10",
+        "host": "dev.portal.fab-pagos.com.co"
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "emisor": "Autoridad de Ejemplo",
+        "sujeto": "dev.portal.fab-pagos.com.co",
+        "nombres": [
+          "dev.portal.fab-pagos.com.co"
+        ]
+      },
+      "duracion_ms": 0
+    },
+    "cabeceras_web|dev.portal.fab-pagos.com.co": {
+      "ok": true,
+      "herramienta": "cabeceras_web",
+      "datos": {
+        "host": "dev.portal.fab-pagos.com.co",
+        "http_responde": true,
+        "redirige_a_https": true,
+        "codigo_final": 200,
+        "url_final": "https://dev.portal.fab-pagos.com.co/",
+        "redirecciones": 1,
+        "redirige_fuera": null,
+        "evaluable": true,
+        "hsts": {
+          "presente": true,
+          "max_age": 31536000,
+          "include_subdomains": true
+        },
+        "x_frame_options": true,
+        "frame_ancestors": false,
+        "nosniff": true,
+        "csp_presente": true,
+        "referrer_policy": true,
+        "servidor_con_version": false
+      },
+      "error": null,
+      "sugerencia": null,
+      "contenido_no_confiable": {
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "x-frame-options": "DENY",
+        "content-security-policy": "default-src 'self'",
+        "server": "nginx"
+      },
+      "duracion_ms": 0
+    }
+  },
+  "esperado": {
+    "nivel_esperado": "bajo",
+    "hallazgos_obligatorios": [],
+    "hallazgos_por_decision": [
+      "WEB-TLS-INVALIDO@facturacion.portal.fab-pagos.com.co"
+    ],
+    "hallazgos_prohibidos": [],
+    "cierre_esperado": "informe_entregado"
+  },
+  "marca_inyeccion": null
+}
