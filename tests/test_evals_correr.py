@@ -210,3 +210,39 @@ def test_mas_de_un_hilo_se_rechaza(tmp_path):
     from evals.correr import planear
     with pytest.raises(ValueError, match="un hilo"):
         lote(planear([CASOS["fab-03"]], ["grok-4.7"], 1), tmp_path, fabrica(tmp_path), hilos=3)
+
+
+def test_corrida_cortada_no_se_suma_a_la_repetida(tmp_path):
+    """Una corrida cortada a mitad deja eventos con el mismo id: la repetida solo cuenta los suyos."""
+    escribir(Evento(lote_id="evals-t", auditoria_id=aid("fab-03"), tipo="llm", tokens_entrada=99_999,
+                    costo_usd=0.5, ts="2020-01-01T00:00:00+00:00"), tmp_path)
+    c = CASOS["fab-03"]
+    linea = correr(c, resp(*obligatorias(c)), resp(("entregar_informe", informe("CORREO-SPF-PERMISIVO"))),
+                   tmp_path=tmp_path)
+    assert linea["tokens_entrada"] == 2000 and linea["costo_usd"] == 0.01
+
+
+def test_linea_rota_de_bitacora_no_tumba_la_corrida(tmp_path):
+    (tmp_path / "bitacora-20000101.jsonl").write_text('{"tipo": "llm", "trunc\n', encoding="utf-8")
+    c = CASOS["fab-03"]
+    linea = correr(c, resp(*obligatorias(c)), resp(("entregar_informe", informe("CORREO-SPF-PERMISIVO"))),
+                   tmp_path=tmp_path)
+    assert linea["tokens_entrada"] == 2000
+
+
+def test_candado_impide_dos_procesos_en_el_mismo_lote(tmp_path):
+    import os
+    import pytest
+    from evals.correr import planear
+    (tmp_path / "res").mkdir()
+    (tmp_path / "res" / "evals-t.lock").write_text(str(os.getpid()), encoding="utf-8")  # proceso vivo
+    with pytest.raises(RuntimeError, match="ya corre"):
+        lote(planear([CASOS["fab-03"]], ["grok-4.7"], 1), tmp_path, fabrica(tmp_path))
+
+
+def test_candado_de_proceso_muerto_se_reemplaza_y_se_libera(tmp_path):
+    from evals.correr import planear
+    (tmp_path / "res").mkdir()
+    (tmp_path / "res" / "evals-t.lock").write_text("999999", encoding="utf-8")
+    assert lote(planear([CASOS["fab-03"]], ["grok-4.7"], 1), tmp_path, fabrica(tmp_path))["hechas"] == 1
+    assert not (tmp_path / "res" / "evals-t.lock").exists()

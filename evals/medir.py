@@ -241,7 +241,14 @@ def reporte(filas: list[Fila]) -> str:
 
     r += ["", "## Límites", "",
           "- La respuesta esperada no es del todo independiente: quien la escribió también trabajó en el código.",
-          "- Las herramientas se reproducen desde lo grabado; la latencia es solo la de Grok.", ""]
+          "- Las herramientas se reproducen desde lo grabado; la latencia es solo la de Grok.",
+          "- Tiempo máximo por respuesta de Grok: 60 s hasta real-13 de grok-4.7 en `evals-final`; 120 s desde ahí "
+          "y en `evals-esfuerzo`. El gateway se volvió lento en la tarde y las corridas que terminaron en "
+          "`error_gateway` son todas del tramo de 60 s; no se repitieron más de una vez, como manda la regla.",
+          "- La latencia de Grok mezcla los dos tramos y depende de la carga del gateway a esa hora: sirve para "
+          "comparar órdenes de magnitud, no como medida fina.",
+          "- \"Sin datos grabados\": Grok pidió un host o una consulta que no está en la grabación (se grabaron hasta "
+          "30 subdominios por caso). El agente lo recibe como herramienta fallida y sigue.", ""]
     return "\n".join(r)
 
 

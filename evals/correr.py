@@ -5,17 +5,20 @@
 - La línea no guarda justificaciones ni el texto del informe, solo lo que se mide.
 - El lote se puede reanudar: salta lo que ya tiene línea y repite una vez lo que cerró por error del gateway.
 - Corre en un solo hilo: la bitácora pierde líneas si varios hilos escriben a la vez en Windows.
+- Un candado por lote impide lanzar un segundo proceso sobre el mismo lote (dos escritores la rompen).
 """
 
 import argparse
 import json
+import os
+from contextlib import contextmanager
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
 from auditor import agent
 from auditor.config import MODELOS_PERMITIDOS, RUTA_LOGS
 from auditor.llm import ClienteLLM
-from auditor.metricas import leer_eventos
 from evals.casos import Caso, cargar_casos
 from evals.reglas import alcanzado
 from evals.reproducir import SIN_DATOS, Reproductor
@@ -49,11 +52,12 @@ def correr_una(caso: Caso, modelo: str, esfuerzo: str | None, repeticion: int, l
     auditoria_id = id_corrida(lote, caso.id, modelo, esfuerzo, repeticion, gateway)
     cliente = cliente_llm or ClienteLLM(lote, auditoria_id, modelo, dominio=caso.dominio, ruta_logs=ruta_logs,
                                         reasoning_effort=esfuerzo)
+    inicio = datetime.now(timezone.utc).isoformat()  # una corrida cortada antes deja eventos con el mismo id
     estado = agent.auditar(caso.dominio, caso.objetivo, lote_id=lote, auditoria_id=auditoria_id, modelo=modelo,
                            cliente_llm=cliente, ejecutor=Reproductor(caso), ruta_logs=ruta_logs)
 
-    eventos = [e for e in leer_eventos(sorted(ruta_logs.glob("bitacora-*.jsonl")))
-               if e.get("auditoria_id") == auditoria_id]
+    eventos = [e for archivo in sorted(ruta_logs.glob("bitacora-*.jsonl")) for e in _leer_lineas(archivo)
+               if e.get("auditoria_id") == auditoria_id and e["ts"] >= inicio]  # una línea rota no tumba la corrida
     llm = [e for e in eventos if e["tipo"] == "llm"]
     rechazos = [e for e in eventos if e["tipo"] == "rechazo"]
 
@@ -102,7 +106,7 @@ def planear(casos: list[Caso], modelos: list[str], repeticiones: int,
 
 
 def _leer_lineas(archivo: Path) -> list[dict[str, Any]]:
-    """Líneas completas del lote; una línea cortada a mitad de escritura se ignora."""
+    """Líneas JSON completas de un archivo (lote o bitácora); una línea cortada o rota se ignora."""
     if not archivo.exists():
         return []
     lineas = []
@@ -114,6 +118,39 @@ def _leer_lineas(archivo: Path) -> list[dict[str, Any]]:
     return lineas
 
 
+def _proceso_vivo(pid: int) -> bool:
+    if os.name == "nt":  # en Windows, os.kill terminaría el proceso: se pregunta su código de salida
+        import ctypes
+        kernel = ctypes.windll.kernel32
+        manejador = kernel.OpenProcess(0x1000, False, pid)  # PROCESS_QUERY_LIMITED_INFORMATION
+        if not manejador:
+            return False
+        codigo = ctypes.c_ulong()
+        kernel.GetExitCodeProcess(manejador, ctypes.byref(codigo))
+        kernel.CloseHandle(manejador)
+        return codigo.value == 259  # STILL_ACTIVE
+    try:
+        os.kill(pid, 0)
+    except OSError:
+        return False
+    return True
+
+
+@contextmanager
+def _candado(ruta: Path):
+    """Un solo proceso por lote; el candado de un proceso que ya murió se reemplaza."""
+    if ruta.exists():
+        texto = ruta.read_text(encoding="utf-8").strip()
+        if texto.isdigit() and _proceso_vivo(int(texto)):
+            raise RuntimeError(f"El lote ya corre en el proceso {texto}: no se lanza otro (dos escritores "
+                               "rompen la bitácora).")
+    ruta.write_text(str(os.getpid()), encoding="utf-8")
+    try:
+        yield
+    finally:
+        ruta.unlink(missing_ok=True)
+
+
 def correr_lote(plan: Plan, lote: str, *, hilos: int = 1, ruta_resultados: Path = RUTA_RESULTADOS,
                 fabrica_cliente: Callable[[Caso, str], Any] | None = None,
                 ruta_logs: Path = RUTA_LOGS, avisar: Callable[[str], None] = lambda _: None) -> dict[str, Any]:
@@ -121,6 +158,12 @@ def correr_lote(plan: Plan, lote: str, *, hilos: int = 1, ruta_resultados: Path 
     if hilos != 1:
         raise ValueError("El lote corre en un hilo: la bitácora pierde líneas con varios hilos (registro_s3).")
     ruta_resultados.mkdir(parents=True, exist_ok=True)
+    with _candado(ruta_resultados / f"{lote}.lock"):
+        return _correr_lote(plan, lote, ruta_resultados, fabrica_cliente, ruta_logs, avisar)
+
+
+def _correr_lote(plan: Plan, lote: str, ruta_resultados: Path, fabrica_cliente, ruta_logs: Path,
+                 avisar: Callable[[str], None]) -> dict[str, Any]:
     archivo = ruta_resultados / f"{lote}.jsonl"
     hechas: dict[str, list[dict[str, Any]]] = {}
     for linea in _leer_lineas(archivo):

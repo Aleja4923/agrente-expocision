@@ -33,7 +33,7 @@ USD_POR_TICK = 1e-10
 REASONING_EFFORT = None
 
 # Llamadas a Grok: tiempo máximo por intento, intentos y espera máxima entre reintentos.
-TIMEOUT_LLM_SEGUNDOS = 60
+TIMEOUT_LLM_SEGUNDOS = 120  # S3: el gateway llegó a tardar más de 60 s por respuesta en la tarde
 MAX_INTENTOS_LLM = 4
 ESPERA_MAX_SEGUNDOS = 30
 
