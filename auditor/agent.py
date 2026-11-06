@@ -7,6 +7,7 @@ cada resultado junto con los hallazgos actuales. Termina cuando Grok llama a
 """
 
 import json
+import re
 import time
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
@@ -162,6 +163,63 @@ def problemas_del_informe(informe: InformeFinal, hallazgos: dict[str, Hallazgo])
     problemas += [f"no cita el hallazgo {h.severidad.value} {h.id}" for h in hallazgos.values()
                   if h.severidad in GRAVES and h.id not in informe.hallazgos_citados]
     return problemas
+
+
+# Herramientas cuyo contenido no confiable es texto libre que puede escribir cualquiera (registros TXT, security.txt).
+# El registrador, las cabeceras o los nombres del certificado tienen formato fijo y se pueden citar.
+FUENTES_TEXTO_LIBRE = frozenset({"dns_correo", "dkim_selector", "security_txt"})
+_FRAGMENTO = re.compile(r"[^\s\"'<>()\[\]{},;]+")
+_BORDES = ".:=-/_+@"
+_REGISTROS_DE_PROTOCOLO = ("v=spf1", "v=dmarc1", "v=dkim1")
+# Etiquetas de los protocolos que el informe puede nombrar aunque vengan de un registro crudo.
+_VOCABULARIO_FIJO = "v=spf1 v=dmarc1 v=dkim1 ~all -all ?all +all p=none p=quarantine p=reject rua=mailto: k=rsa"
+
+
+def _textos(valor: Any) -> list[str]:
+    if isinstance(valor, str):
+        return [valor]
+    if isinstance(valor, dict):
+        return [t for v in valor.values() for t in _textos(v)]
+    if isinstance(valor, list):
+        return [t for v in valor for t in _textos(v)]
+    return []
+
+
+_NOMBRE_DE_HOST = re.compile(r"[a-z0-9-]+\.[a-z]{2,}", re.IGNORECASE)
+
+
+def _distintivo(fragmento: str) -> bool:
+    """Una marca o un código, no una palabra: letras más algún dígito o signo (MARCA-EVALS-7Q2, abc123).
+
+    Los nombres de host, correos y URL no cuentan: el informe puede nombrar un proveedor o un contacto."""
+    return (len(fragmento) >= 6 and any(c.isalpha() for c in fragmento)
+            and any(c.isdigit() or c in _BORDES for c in fragmento) and not _NOMBRE_DE_HOST.search(fragmento))
+
+
+def copia_no_confiable(informe: InformeFinal, estado: EstadoAuditoria) -> list[str]:
+    """Fragmentos distintivos que el informe copió de texto libre externo y que no están en ningún dato confiable.
+
+    Defensa contra la inyección: un TXT puede pedirle a Grok que escriba algo en el resumen. Las conclusiones ya
+    las calcula el código; esto evita además que el texto para el dueño repita lo que dicta un tercero.
+    """
+    confiable = " ".join([json.dumps([r.datos for _, r in estado.llamadas], ensure_ascii=False, default=str),
+                          json.dumps([h.model_dump(mode="json") for h in estado.hallazgos.values()],
+                                     ensure_ascii=False), estado.dominio, estado.objetivo, _VOCABULARIO_FIJO]).lower()
+    escrito = " ".join(_textos(informe.model_dump(mode="json"))).lower()
+    copiados = set()
+    for _, r in estado.llamadas:
+        if r.herramienta not in FUENTES_TEXTO_LIBRE:
+            continue
+        for texto in _textos(r.contenido_no_confiable):
+            if texto.strip().lower().startswith(_REGISTROS_DE_PROTOCOLO):
+                continue  # SPF, DMARC y DKIM: el código ya los interpretó y Grok puede citar sus etiquetas
+            for f in _FRAGMENTO.findall(texto):
+                f = f.strip(_BORDES)
+                bajo = f.lower()
+                if (_distintivo(f) and bajo not in confiable and estado.dominio not in bajo
+                        and bajo in escrito):
+                    copiados.add(f)
+    return [f"copia texto de datos externos no confiables ({f}); redacta sin repetirlo" for f in sorted(copiados)]
 
 
 def informe_de_respaldo(estado: EstadoAuditoria, motivo: str) -> InformeFinal:
@@ -402,7 +460,8 @@ def auditar(
             pendientes = faltantes(estado)
             try:
                 propuesto = InformeFinal.model_validate_json(entrega["argumentos"])
-                problemas = problemas_del_informe(propuesto, estado.hallazgos)
+                problemas = (problemas_del_informe(propuesto, estado.hallazgos)
+                             + copia_no_confiable(propuesto, estado))
             except ValidationError as e:
                 propuesto, problemas = None, [f"argumentos inválidos para entregar_informe: {str(e)[:300]}"]
 
