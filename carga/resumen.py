@@ -41,6 +41,25 @@ def gasto_en_bitacora(lote: str, ruta_logs: Path = RUTA_LOGS) -> float:
     return total
 
 
+def pasadas(eventos: list[dict]) -> list[dict[str, Any]]:
+    """Cada arranque del corredor con su fin (o el último evento, si se cayó) y su duración en horas."""
+    salida = []
+    for i, e in enumerate(eventos):
+        if e["tipo"] != "inicio_corrida":
+            continue
+        siguientes = []
+        for f in eventos[i + 1:]:
+            if f["tipo"] == "inicio_corrida":
+                break
+            siguientes.append(f)
+        fin = next((f for f in siguientes if f["tipo"] == "fin_corrida"), None)
+        ultimo = fin or (siguientes[-1] if siguientes else e)
+        horas = (datetime.fromisoformat(ultimo["ts"]) - datetime.fromisoformat(e["ts"])).total_seconds() / 3600
+        salida.append({"inicio": e["ts"], "fin": ultimo["ts"], "horas": horas, "terminó": fin is not None,
+                       "completadas_al_final": fin["completadas"] if fin else None})
+    return salida
+
+
 def metricas(tareas: list[dict], eventos: list[dict], privado: list[dict]) -> dict[str, Any]:
     completadas = [t for t in tareas if t["resultado"] == "completada"]
     fallidas = [t for t in tareas if t["resultado"] == "fallida"]
@@ -61,6 +80,7 @@ def metricas(tareas: list[dict], eventos: list[dict], privado: list[dict]) -> di
         "inicio": min(inicios).isoformat(timespec="minutes") if tareas else "—",
         "fin": max(fines).isoformat(timespec="minutes") if tareas else "—",
         "arranques": len(corridas),
+        "pasadas": pasadas(eventos),
         "costo_total": total,
         "costo_por_completada": total / len(completadas) if completadas else 0,
         "costo_media": statistics.fmean(costos) if costos else 0,
@@ -97,7 +117,12 @@ def reporte(lote: str, m: dict[str, Any], gasto_bitacora: float | None) -> str:
          f"| Primera tarea → última (UTC) | {m['inicio']} → {m['fin']} |",
          f"| Horas | **{m['horas']:.1f}** |",
          f"| Arranques del corredor | {m['arranques']} (más de 1 = relanzado por `lanzar.ps1` o reanudado) |",
+         f"| **Pasada más larga sin intervención** | **{max((x['horas'] for x in m['pasadas']), default=0):.1f} h** |",
          f"| Duración por tarea (mediana) | {m['duracion_mediana']:.0f} s |",
+         "", "| Pasada | Inicio (UTC) | Fin (UTC) | Horas | Cómo terminó |", "|---|---|---|---|---|",
+         *[f"| {i} | {x['inicio']} | {x['fin']} | {x['horas']:.1f} | "
+           f"{'fin de la pasada' if x['terminó'] else 'se cortó (sin evento de fin)'} |"
+           for i, x in enumerate(m["pasadas"], start=1)],
          "", "## Costo", "",
          "| | |", "|---|---|",
          f"| **Costo total** | **{_usd(m['costo_total'])}** |",

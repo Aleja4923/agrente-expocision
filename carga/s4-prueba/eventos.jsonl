@@ -1,2 +1,4 @@
 {"ts": "2026-11-06T02:27:28+00:00", "lote_id": "s4-prueba", "tipo": "inicio_corrida", "pid": 14536, "hilos": 2, "modelo": "grok-4.20", "pendientes": 3, "hechas_antes": 0, "gasto_previo_usd": 0}
 {"ts": "2026-11-06T02:28:47+00:00", "lote_id": "s4-prueba", "tipo": "fin_corrida", "completadas": 3, "fallidas": 0, "gasto_usd": 0.0593, "frenada": false, "pendientes": 0}
+{"ts": "2026-11-06T14:09:19+00:00", "lote_id": "s4-prueba", "tipo": "inicio_corrida", "pid": 38400, "hilos": 2, "modelo": "grok-4.20", "ritmo_s": 0.0, "pendientes": 17, "hechas_antes": 3, "gasto_previo_usd": 0.0593}
+{"ts": "2026-11-06T14:22:06+00:00", "lote_id": "s4-prueba", "tipo": "fin_corrida", "completadas": 20, "fallidas": 0, "gasto_usd": 0.5202, "frenada": false, "pendientes": 0}

@@ -209,3 +209,16 @@ def test_ritmo_minimo_entre_tareas(tmp_path):
     a = AuditorFalso()
     cola(tmp_path, a, filas=FILAS[:4], ritmo=42.0, reloj=lambda: reloj[0], dormir=dormir)
     assert dormidos == [42.0, 42.0, 42.0]  # la primera arranca ya; el auditor falso no gasta tiempo
+
+
+def test_pasadas_separa_arranques():
+    from carga import resumen
+    ev = [{"ts": "2026-11-06T02:00:00+00:00", "tipo": "inicio_corrida"},
+          {"ts": "2026-11-06T03:00:00+00:00", "tipo": "fin_corrida", "completadas": 3},
+          {"ts": "2026-11-06T14:00:00+00:00", "tipo": "inicio_corrida"},
+          {"ts": "2026-11-06T16:30:00+00:00", "tipo": "pausa_gateway", "segundos": 300},
+          {"ts": "2026-11-06T17:00:00+00:00", "tipo": "inicio_corrida"},
+          {"ts": "2026-11-07T06:00:00+00:00", "tipo": "fin_corrida", "completadas": 1000}]
+    p = resumen.pasadas(ev)
+    assert [round(x["horas"], 1) for x in p] == [1.0, 2.5, 13.0]
+    assert [x["terminó"] for x in p] == [True, False, True]
