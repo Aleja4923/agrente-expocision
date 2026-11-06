@@ -67,3 +67,18 @@ def test_hash_args_no_depende_del_orden():
 
 def test_intento_por_defecto_es_1():
     assert Evento(lote_id="l", tipo="inicio").intento == 1
+
+
+def test_escritura_desde_varios_hilos_no_pierde_lineas(tmp_path):
+    """S4: la corrida larga usa 2 hilos; antes se perdían líneas (registro del S3 §4.2)."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    from auditor.bitacora import Evento, escribir
+
+    def una(i):
+        escribir(Evento(lote_id="L", auditoria_id=f"A{i}", tipo="inicio", justificacion="x" * 3000), tmp_path)
+
+    with ThreadPoolExecutor(8) as ex:
+        list(ex.map(una, range(400)))
+    lineas = next(tmp_path.glob("bitacora-*.jsonl")).read_text(encoding="utf-8").splitlines()
+    assert len(lineas) == 400 and all(l.endswith("}") for l in lineas)

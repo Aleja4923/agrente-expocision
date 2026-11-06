@@ -1,0 +1,4 @@
+pos,dominio,inicio,fin,duracion_s,resultado,exito,motivo_cierre,respaldo,dominio_existe,intentos,pasos,tokens_entrada,tokens_cache,tokens_salida,tokens_razonamiento,costo_usd,errores,recuperacion,lote_id,auditoria_id
+1,alightmotionmodapk.com.co,2026-11-06T02:27:28+00:00,2026-11-06T02:28:17+00:00,48.4,completada,True,informe_entregado,False,True,1,2,10774,3072,622,2935,0.019134,,,s4-prueba,s4-prueba-0001
+2,casabritanica.com.co,2026-11-06T02:27:28+00:00,2026-11-06T02:28:14+00:00,45.4,completada,True,informe_entregado,False,True,1,3,18387,9344,721,3167,0.022893,security_txt:tiempo_agotado,,s4-prueba,s4-prueba-0002
+3,dpsgroup.com.co,2026-11-06T02:28:14+00:00,2026-11-06T02:28:47+00:00,33.2,completada,True,informe_entregado,False,False,1,3,13800,7424,521,2604,0.017267,buscar_parecidos:dominio_no_existe;cabeceras_web:dominio_no_existe;dns_correo:dominio_no_existe;security_txt:dominio_no_existe;tls_certificado:dominio_no_existe,,s4-prueba,s4-prueba-0003

@@ -3,6 +3,7 @@ import hashlib
 import json
 import os
 import re
+import threading
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Literal
@@ -60,11 +61,15 @@ def hash_args(args: dict[str, Any]) -> str:
     return hashlib.sha256(canonico.encode("utf-8")).hexdigest()[:16]
 
 
+# Varios hilos del mismo proceso (la corrida del S4) escriben aquí: sin candado se perdían líneas.
+_CANDADO = threading.Lock()
+
+
 def escribir(evento: Evento, ruta_logs: Path = RUTA_LOGS) -> Path:
-    """Agrega el evento como una línea JSON al archivo del día y devuelve su ruta."""
+    """Agrega el evento como una línea JSON al archivo del día y devuelve su ruta. Seguro entre hilos."""
     ruta_logs.mkdir(parents=True, exist_ok=True)
     archivo = ruta_logs / f"bitacora-{datetime.now():%Y%m%d}.jsonl"
     linea = enmascarar(json.dumps(evento.model_dump(), ensure_ascii=False))
-    with archivo.open("a", encoding="utf-8") as f:
+    with _CANDADO, archivo.open("a", encoding="utf-8") as f:
         f.write(linea + "\n")
     return archivo

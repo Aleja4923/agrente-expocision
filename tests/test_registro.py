@@ -7,6 +7,8 @@ from pathlib import Path
 
 import pytest
 
+from auditor.config import PAUSA_REGISTRO_SEGUNDOS
+
 from auditor.tools import base, registro
 from auditor.tools.registro import ErrorRegistro, fuente_para, parsear_rdap, parsear_whois_co
 
@@ -118,7 +120,8 @@ def test_pausa_entre_consultas_al_mismo_servidor(red_falsa):
     registro.consultar_registro("uno.com.co")
     red_falsa["reloj"] += 0.5
     registro.consultar_registro("dos.com.co")
-    assert red_falsa["dormido"] == [1.0]
+    assert red_falsa["dormido"] == [pytest.approx(PAUSA_REGISTRO_SEGUNDOS - 0.5)]
+    assert PAUSA_REGISTRO_SEGUNDOS == 3.0  # S4: ritmo lento por el volumen (CentralNic prohíbe consultas masivas)
 
 
 def test_rdap_para_com(red_falsa):

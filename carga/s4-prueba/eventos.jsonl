@@ -1,0 +1,2 @@
+{"ts": "2026-11-06T02:27:28+00:00", "lote_id": "s4-prueba", "tipo": "inicio_corrida", "pid": 14536, "hilos": 2, "modelo": "grok-4.20", "pendientes": 3, "hechas_antes": 0, "gasto_previo_usd": 0}
+{"ts": "2026-11-06T02:28:47+00:00", "lote_id": "s4-prueba", "tipo": "fin_corrida", "completadas": 3, "fallidas": 0, "gasto_usd": 0.0593, "frenada": false, "pendientes": 0}

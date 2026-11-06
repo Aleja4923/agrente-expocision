@@ -61,7 +61,7 @@ MAX_PARECIDOS_INVESTIGADOS = 4   # cupo por auditoría: obliga a Grok a elegir
 DIAS_REGISTRO_RECIENTE = 32      # "registrado hace poco"
 DIAS_DOMINIO_POR_VENCER = 30
 REGISTRO_TIMEOUT_SEGUNDOS = 10   # WHOIS (puerto 43) y RDAP
-PAUSA_REGISTRO_SEGUNDOS = 1.5    # entre consultas al mismo servidor de registro
+PAUSA_REGISTRO_SEGUNDOS = 3.0    # entre consultas al mismo servidor de registro (S4: de 1,5 a 3 por el volumen)
 VIGENCIA_CACHE_HORAS = 24
 
 # S2 · Certificate Transparency (crt.sh con Cert Spotter de respaldo)
