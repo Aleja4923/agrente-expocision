@@ -222,3 +222,50 @@ def test_pasadas_separa_arranques():
     p = resumen.pasadas(ev)
     assert [round(x["horas"], 1) for x in p] == [1.0, 2.5, 13.0]
     assert [x["terminó"] for x in p] == [True, False, True]
+
+
+def test_error_fuera_de_la_auditoria_no_mata_el_hilo(tmp_path):
+    """Si falla algo después de auditar (p. ej. la consola), la tarea queda sin línea y la cola sigue."""
+    vistos = []
+
+    def avisar(texto):
+        vistos.append(texto)
+        if " d2.com.co " in texto:
+            raise OSError("consola cerrada")
+
+    r = cola(tmp_path, AuditorFalso(), filas=FILAS[:4], avisar=avisar)
+    assert r["completadas"] == 4 and r["pendientes"] == 0  # la línea se escribió antes de avisar
+    assert any(e["tipo"] == "error_tarea" and e["pos"] == 2 for e in eventos(tmp_path))
+
+
+def test_tarea_sin_linea_queda_pendiente(tmp_path, monkeypatch):
+    original = correr._recuperacion
+
+    def falla_en_d3(cierres, estado, completada):
+        if estado is not None and estado.dominio == "d3.com.co":
+            raise ValueError("raro")
+        return original(cierres, estado, completada)
+
+    monkeypatch.setattr(correr, "_recuperacion", falla_en_d3)
+    r = cola(tmp_path, AuditorFalso(), filas=FILAS[:4])
+    assert r["pendientes"] == 1 and r["completadas"] == 3
+    monkeypatch.setattr(correr, "_recuperacion", original)
+    assert cola(tmp_path, AuditorFalso(), filas=FILAS[:4])["completadas"] == 4  # al relanzar se retoma
+
+
+def test_tras_una_pausa_basta_un_fallo_para_pausar_otra_vez(tmp_path):
+    dormidos = []
+    a = AuditorFalso({f"d{i}.com.co": ["error_gateway"] for i in range(1, 9)})
+    cola(tmp_path, a, dormir=dormidos.append, caidas_seguidas=3)
+    pausas = [e["segundos"] for e in eventos(tmp_path) if e["tipo"] == "pausa_gateway"]
+    assert pausas[:3] == [300, 600, 1200]  # tras 3 fallos; luego cada fallo pausa otra vez
+
+
+def test_codigo_de_salida(monkeypatch):
+    monkeypatch.setattr(correr, "leer_csv", lambda: [(1, "d1.com.co", "corrida")])
+    monkeypatch.setattr(correr, "escribir_csv", lambda c: None)
+    for r, codigo in (({"frenada": True, "pendientes": 0}, 3), ({"frenada": False, "pendientes": 2}, 4),
+                      ({"frenada": False, "pendientes": 0}, 0)):
+        monkeypatch.setattr(correr, "correr_cola", lambda *a, r=r, **k: {"completadas": 1, "fallidas": 0,
+                                                                        "gasto_usd": 0.0, **r})
+        assert correr.main(["--lote", "s4-carga"]) == codigo

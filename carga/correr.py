@@ -139,6 +139,7 @@ class _Cola:
         self.fallidas = sum(1 for t in previas if t.get("resultado") == "fallida")
         self.seguidas_gateway = 0
         self.pausa_n = 0
+        self.escritas = 0
         self.frenada = False
 
     def _agregar(self, ruta: Path, dato: dict) -> None:
@@ -207,7 +208,8 @@ def correr_cola(lote: str, filas: list[tuple[int, str, str]], *, hilos: int = 2,
                     c.evento("pausa_gateway", segundos=segundos, fallidas_seguidas=c.seguidas_gateway)
                     avisar(f"   … el gateway no responde: la cola espera {segundos // 60} min")
                     c.pausa_n += 1
-                    c.seguidas_gateway = 0
+                    # La tarea siguiente sirve de prueba: si también falla, se pausa otra vez sin gastar 5 tareas.
+                    c.seguidas_gateway = caidas_seguidas - 1
                     dormir(segundos)  # con el candado tomado: toda la cola espera
                 return True
 
@@ -256,6 +258,7 @@ def correr_cola(lote: str, filas: list[tuple[int, str, str]], *, hilos: int = 2,
             }
             with c.candado:
                 c._agregar(c.tareas, linea)
+                c.escritas += 1
                 if estado is not None:
                     c._agregar(c.privado, {"pos": pos, "dominio": dominio, "motivo_cierre": cierres[-1],
                                            "existe": linea["dominio_existe"],
@@ -282,7 +285,11 @@ def correr_cola(lote: str, filas: list[tuple[int, str, str]], *, hilos: int = 2,
                 if not puede_seguir():
                     parar.set()
                     return
-                una_tarea(pos, dominio)
+                try:
+                    una_tarea(pos, dominio)
+                except Exception as e:  # p. ej. el disco o la consola: se anota y la cola sigue
+                    with c.candado:
+                        c.evento("error_tarea", pos=pos, dominio=dominio, error=type(e).__name__)
 
         def vigia() -> None:
             antes = time.time()
@@ -293,16 +300,23 @@ def correr_cola(lote: str, filas: list[tuple[int, str, str]], *, hilos: int = 2,
                         c.evento("salto_reloj", segundos=round(ahora - antes))
                 antes = ahora
 
-        hilos_lista = [threading.Thread(target=trabajador, name=f"tarea-{i}") for i in range(hilos)]
+        hilos_lista = [threading.Thread(target=trabajador, name=f"tarea-{i}", daemon=True) for i in range(hilos)]
         if vigilar_reloj:
             threading.Thread(target=vigia, name="vigia", daemon=True).start()
         for h in hilos_lista:
             h.start()
-        for h in hilos_lista:
-            h.join()
+        try:
+            while any(h.is_alive() for h in hilos_lista):  # join con espera corta: Ctrl+C sí detiene la cola
+                for h in hilos_lista:
+                    h.join(1)
+        except KeyboardInterrupt:
+            parar.set()
+            with c.candado:
+                c.evento("interrumpida", completadas=c.completadas, gasto_usd=round(c.gasto, 4))
+            raise
         parar.set()
         resumen = {"completadas": c.completadas, "fallidas": c.fallidas, "gasto_usd": round(c.gasto, 4),
-                   "frenada": c.frenada, "pendientes": trabajo.qsize()}
+                   "frenada": c.frenada, "pendientes": len(pendientes) - c.escritas}
         c.evento("fin_corrida", **resumen)
         return resumen
 
@@ -338,7 +352,9 @@ def main(argv: list[str] | None = None) -> int:
     escribir_csv(CARPETA / a.lote)
     print(f"completadas {r['completadas']} · fallidas {r['fallidas']} · USD {r['gasto_usd']:.2f} · "
           f"pendientes {r['pendientes']}{' · FRENADA POR GASTO' if r['frenada'] else ''}")
-    return 3 if r["frenada"] else 0
+    if r["frenada"]:
+        return 3
+    return 4 if r["pendientes"] else 0  # 4: quedaron tareas sin línea; lanzar.ps1 relanza y se retoman
 
 
 if __name__ == "__main__":

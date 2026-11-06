@@ -40,7 +40,7 @@ create table if not exists registro_cache (
 def _conectar(ruta_db: Path) -> Iterator[sqlite3.Connection]:
     """Conexión con el esquema creado; confirma la transacción al salir y siempre cierra."""
     ruta_db.parent.mkdir(parents=True, exist_ok=True)
-    conexion = sqlite3.connect(ruta_db)
+    conexion = sqlite3.connect(ruta_db, timeout=30)  # S4: dos hilos escriben a la vez
     try:
         conexion.executescript(_ESQUEMA)
         with conexion:  # transacción: commit si todo va bien, rollback si falla

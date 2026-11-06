@@ -1,6 +1,7 @@
 # Lanza la corrida del S4 y la relanza sola si el proceso de Python se cae.
 # Uso, desde la carpeta del proyecto:  powershell -ExecutionPolicy Bypass -File carga\lanzar.ps1 -Lote s4-carga
-# Termina cuando la cola se acaba (codigo 0) o cuando frena por gasto (codigo 3).
+# Termina cuando la cola se acaba (codigo 0) o cuando frena por gasto (codigo 3). Con cualquier otro codigo
+# (4 = quedaron tareas sin linea, 1 = Python se cayo) espera 60 s y relanza; la cola se retoma donde quedo.
 param([string]$Lote = "s4-carga", [int]$Hilos = 2)
 
 Set-Location (Split-Path $PSScriptRoot -Parent)
