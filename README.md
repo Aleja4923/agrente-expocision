@@ -12,7 +12,7 @@ Proyecto del Track 1 del [Reto Agente 2026](https://reto.pltk.mx/) (Platica.mx �
 | Costo por auditoría | **USD 0,027** con grok-4.20, medido llamada por llamada |
 | Set de evaluación propio | **35 casos y 240 corridas con Grok:** nivel de riesgo correcto en el **100 %** ([`evals/REPORTE.md`](evals/REPORTE.md)) |
 | Lo que encontró en dominios `.com.co` reales | el **56 %** no tiene DMARC y el **45 %** no tiene SPF (n=1.131) |
-| Pruebas automáticas | **809**, sin red ni llave |
+| Pruebas automáticas | **816**, sin red ni llave |
 
 ---
 
@@ -121,8 +121,9 @@ carga/
   correr.py       cola desatendida: hilos, reintentos, pausas, freno de gasto; se puede reanudar
   resumen.py      RESUMEN.md y tareas.csv desde la bitácora por tarea, sin Grok ni llave
   lanzar.ps1      relanza el corredor si Python se cae
+  consumo.py      bitácora de consumo pública (consumo/) y cruce con el panel del reto
   s4-prueba/ s4-carga/   bitácora por tarea de cada corrida
-tests/           809 pruebas sin red ni llave (Grok simulado con guiones)
+tests/           816 pruebas sin red ni llave (Grok simulado con guiones)
 ```
 
 **Decisiones de diseño:**
@@ -274,32 +275,56 @@ El costo de cada llamada es el que reporta el propio gateway, y coincide con el 
 
 ## Instalación y uso
 
-**Windows (PowerShell):**
-
-```powershell
-python -m venv venv
-venv\Scripts\python.exe -m pip install -r requirements.txt
-copy .env.example .env    # luego escribe tu llave del reto en RETO_KEY
-venv\Scripts\python.exe -m pytest -q                      # 809 pruebas, sin red ni llave
-venv\Scripts\python.exe -m auditor auditar ejemplo.com.co --verbose
-```
-
-**macOS y Linux:**
+**Arranque de un comando.** El script crea el entorno e instala las dependencias la primera vez, y audita. Solo hace falta Python 3.12 o superior y la llave del reto en la variable `RETO_KEY` (o en un archivo `.env`, copiado de `.env.example`).
 
 ```bash
-python3 -m venv venv
-venv/bin/python -m pip install -r requirements.txt
-cp .env.example .env      # luego escribe tu llave del reto en RETO_KEY
-venv/bin/python -m pytest -q
-venv/bin/python -m auditor auditar ejemplo.com.co --verbose
+export RETO_KEY=pk_...                        # Linux y macOS
+./iniciar.sh ejemplo.com.co                   # informe para el dueño
+./iniciar.sh ejemplo.com.co --json            # el mismo resultado como JSON, para otro programa
+./iniciar.sh --lote casos.txt --json          # varios dominios: una línea JSON por dominio
 ```
 
-Opciones: `--objetivo "texto libre"` (por ejemplo, *"¿Es seguro el sitio de pagos de mi tienda?"*), `--modelo` (uno de los permitidos por el reto; por defecto grok-4.7) y `--verbose` (muestra en vivo cada decisión de Grok con su justificación y su costo).
+```powershell
+$env:RETO_KEY = "pk_..."                                                  # Windows
+powershell -ExecutionPolicy Bypass -File iniciar.ps1 ejemplo.com.co --verbose
+```
 
-- **Informe:** `salidas/<dominio>-<fecha>.md` y, al lado, la versión imprimible `.html`. **Bitácora:** `logs/bitacora-<fecha>.jsonl`. **Registro:** `cache/auditor.db`.
-- `scripts/resumen_bitacora.py --desde <instante ISO>` resume pasos, costo y duración de las auditorías.
-- **Códigos de salida:** 0 bien, 1 dominio inválido, 2 falta configuración (llave o modelo).
-- `scripts\probar_gateway.py` repite la verificación del gateway (~USD 0,05).
+**Para correr casos propios (por ejemplo, un evaluador automático):**
+- **`--lote archivo.txt`:** un dominio por línea, con un objetivo opcional (`dominio;objetivo`). Las líneas vacías o que empiezan con `#` se saltan, y un dominio inválido no detiene el lote.
+- **`--json`:** cada dominio sale como una línea JSON con lo mismo que ve el dueño:
+  - `existe`, `nivel` y `provisional`;
+  - los `hallazgos`, con id, severidad, título y evidencia;
+  - las `acciones` en orden, el `resumen` y las `limitaciones`;
+  - el `motivo_cierre`, los `pasos`, el `costo_usd` y la ruta del informe.
+
+  La trayectoria de `--verbose` va a stderr, así que stdout queda solo para el JSON.
+
+**Otras opciones:**
+- **`--objetivo "texto libre"`:** por ejemplo, *«¿Es seguro el sitio de pagos de mi tienda?»*.
+- **`--modelo`:** uno de los permitidos por el reto; por defecto, grok-4.7.
+- **`--verbose`:** muestra en vivo cada decisión de Grok, con su justificación y su costo.
+
+**Instalación paso a paso** (lo mismo que hace el script):
+
+```bash
+python3 -m venv venv && venv/bin/python -m pip install -r requirements.txt
+venv/bin/python -m pytest -q                                   # 816 pruebas, sin red ni llave
+venv/bin/python -m auditor auditar ejemplo.com.co --verbose    # en Windows: venv\Scripts\python.exe
+```
+
+**Dónde queda cada cosa:**
+- **Informe:** `salidas/<dominio>-<fecha>.md` y, al lado, la versión imprimible `.html`.
+- **Bitácora:** `logs/bitacora-<fecha>.jsonl`. **Registro:** `cache/auditor.db`.
+- **Códigos de salida:** 0 bien, 1 dominio inválido (o alguno inválido en el lote), 2 falta configuración (llave o modelo).
+- `scripts/resumen_bitacora.py --desde <instante ISO>` resume pasos, costo y duración de las auditorías. `scripts/probar_gateway.py` repite la verificación del gateway (~USD 0,05).
+
+## Bitácora de consumo
+
+[`consumo/consumo.csv`](consumo/consumo.csv) tiene **cada petición a Grok del proyecto**, del S1 a hoy: fecha, hito, lote, modelo, tokens y costo. [`consumo/RESUMEN.md`](consumo/RESUMEN.md) la cruza con el panel del reto, que solo muestra los últimos registros y los totales por modelo:
+- **grok-4.20:** las peticiones cuadran exactas (4.374 en la bitácora y 4.374 en el panel).
+- **grok-4.7:** el panel muestra más costo que la bitácora. Casi toda la diferencia son peticiones que el cliente cortó por tiempo durante una tarde lenta del gateway: el gateway las cobró, pero no devolvió su consumo. El cruce lo explica con sus cifras.
+
+No se publica el dominio de las corridas hechas por la CLI. Se regenera con `python -m carga.consumo`.
 
 La llave **nunca** va al repositorio: `.env` está en `.gitignore`, y la bitácora enmascara cualquier texto con forma de llave.
 

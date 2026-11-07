@@ -75,3 +75,38 @@ def test_cli_guarda_e_imprime_el_html(entorno, capsys):
     assert cli.main(["auditar", "ejemplo.com.co"]) == 0
     [html] = list((tmp_path / "salidas").glob("*.html"))
     assert f"Informe imprimible: {html}" in capsys.readouterr().out
+
+
+# --- Entrega final: salida JSON y lote para que el harness corra sus propios casos ------------------------
+
+import json  # noqa: E402
+
+
+def test_cli_json_es_una_linea_con_el_resultado(entorno, capsys):
+    assert cli.main(["auditar", "ejemplo.com.co", "--json", "--verbose"]) == 0
+    salida = capsys.readouterr()
+    r = json.loads(salida.out.strip())
+    assert r["dominio"] == "ejemplo.com.co" and r["existe"] is True and r["nivel"] == "alto"
+    assert r["hallazgos"][0]["id"] == "CORREO-DMARC-NONE" and r["acciones"][0]["hallazgo_id"] == "CORREO-DMARC-NONE"
+    assert {"provisional", "limitaciones", "costo_usd", "pasos", "motivo_cierre", "informe_md"} <= set(r)
+    assert "paso 1 · Grok" in salida.err  # con --json, la trayectoria va a stderr y stdout queda limpio
+
+
+def test_cli_lote_audita_cada_linea_y_sigue_con_un_invalido(entorno, capsys, tmp_path):
+    _, llamadas = entorno
+    lote = tmp_path / "casos.txt"
+    lote.write_text("# casos del harness\nejemplo.com.co\n\nno es un dominio\notro.com.co;¿Es seguro mi portal de pagos?\n",
+                    encoding="utf-8")
+    assert cli.main(["auditar", "--lote", str(lote), "--json"]) == 1  # hubo un dominio inválido
+    lineas = [json.loads(x) for x in capsys.readouterr().out.strip().splitlines()]
+    assert [x.get("error") for x in lineas] == [None, "dominio_invalido", None]
+    assert [c["dominio"] for c in llamadas] == ["ejemplo.com.co", "otro.com.co"]
+    assert llamadas[1]["objetivo"] == "¿Es seguro mi portal de pagos?"
+    assert llamadas[0]["lote_id"] == llamadas[1]["lote_id"]
+
+
+def test_cli_exige_dominio_o_lote(entorno):
+    with pytest.raises(SystemExit):
+        cli.main(["auditar"])
+    with pytest.raises(SystemExit):
+        cli.main(["auditar", "ejemplo.com.co", "--lote", "x.txt"])

@@ -1,0 +1,9 @@
+{
+  "consultado": "2026-11-07, sección «Consumo por modelo» del panel del reto (copiado a mano por la autora)",
+  "modelos": {
+    "grok-4.20": {"peticiones": 4374, "entrada": 33512481, "salida": 1297432, "costo": 36.44},
+    "grok-4.7": {"peticiones": 1010, "entrada": 11556421, "salida": 498214, "costo": 25.93},
+    "grok-4.6": {"peticiones": 1, "entrada": 637, "salida": 12, "costo": 0.0},
+    "—": {"peticiones": 2, "entrada": 0, "salida": 0, "costo": 0.0}
+  }
+}
