@@ -5,9 +5,12 @@ reciben texto y devuelven datos, así se prueban sin red. Solo reportan lo que h
 qué es un hallazgo y con qué severidad lo decide scoring.py (CONTEXT.md §6b).
 """
 
+import ipaddress
+import re
 from typing import Any, Callable
 
 import dns.exception
+import dns.name
 import dns.resolver
 from pydantic import BaseModel, Field
 
@@ -22,8 +25,10 @@ POLITICAS_DMARC = {"none", "quarantine", "reject"}
 
 
 def inferir_proveedor(mx_hosts: list[str]) -> str:
-    """google, microsoft, otro o ninguno, según los servidores MX."""
-    hosts = [h.lower().rstrip(".") for h in mx_hosts]
+    """google, microsoft, otro o ninguno, según los servidores MX.
+
+    Un MX nulo ("0 .", RFC 7505) declara que el dominio no recibe correo: cuenta como ninguno."""
+    hosts = [h.lower().rstrip(".") for h in mx_hosts if h.strip(". ")]
     if not hosts:
         return "ninguno"
     for h in hosts:
@@ -46,12 +51,38 @@ def spf_autoriza_envio(txts: list[str]) -> bool:
         t.lstrip("+-~?").lower() != "all" for t in registro.split()[1:])
 
 
+_MECANISMO_SPF = re.compile(
+    r"^[+\-~?]?(?:all|include:\S+|exists:\S+|ptr(?::\S+)?"
+    r"|(?:a|mx)(?::[^/\s]+)?(?:/(?P<c4>\d{1,3}))?(?://(?P<c6>\d{1,3}))?"
+    r"|ip4:(?P<ip4>[^/\s]+)(?:/(?P<p4>\d{1,3}))?|ip6:(?P<ip6>[^/\s]+)(?:/(?P<p6>\d{1,3}))?)$")
+_MODIFICADOR_SPF = re.compile(r"^[a-z][a-z0-9_.\-]*=\S*$")
+
+
+def termino_spf_valido(termino: str) -> bool:
+    """Sintaxis de un término SPF (RFC 7208 §4.6.1 y §5): un término desconocido o mal escrito es permerror."""
+    t = termino.lower()
+    if _MODIFICADOR_SPF.match(t):
+        return not (t.startswith(("redirect=", "exp=")) and t.endswith("="))
+    m = _MECANISMO_SPF.match(t)
+    if not m:
+        return False
+    try:
+        if m["ip4"]:
+            ipaddress.IPv4Address(m["ip4"])
+        if m["ip6"]:
+            ipaddress.IPv6Address(m["ip6"])
+    except ValueError:
+        return False
+    limites = {"c4": 32, "p4": 32, "c6": 128, "p6": 128}
+    return all(m[k] is None or int(m[k]) <= tope for k, tope in limites.items())
+
+
 def analizar_spf(txts: list[str], consultar_txt: Callable[[str], list[str]]) -> dict[str, Any]:
     """Registros SPF, cierre y consultas DNS contadas de forma recursiva (include y redirect)."""
     registros = [t.strip() for t in txts if _es_spf(t)]
     r: dict[str, Any] = {"registros": registros, "cantidad": len(registros), "cierre": "ninguno",
                          "consultas_dns": 0, "consultas_vacias": 0, "consultas_con_error": 0,
-                         "permerror": False, "detalle": None}
+                         "terminos_invalidos": 0, "permerror": False, "detalle": None}
     if len(registros) != 1:
         if registros:
             r["permerror"], r["detalle"] = True, "hay más de un registro SPF"
@@ -59,6 +90,8 @@ def analizar_spf(txts: list[str], consultar_txt: Callable[[str], list[str]]) -> 
 
     for termino in registros[0].split()[1:]:
         t = termino.lower()
+        if not termino_spf_valido(t):
+            r["terminos_invalidos"] += 1
         if t.startswith("redirect="):
             r["cierre"] = "redirect"
         elif t.lstrip("+-~?") == "all":
@@ -89,7 +122,10 @@ def analizar_spf(txts: list[str], consultar_txt: Callable[[str], list[str]]) -> 
             visitados.add(destino)
             try:
                 spf_destino = [x for x in consultar_txt(destino) if _es_spf(x)]
-            except ErrorDNS:
+            except ErrorDNS as e:
+                if e.codigo == "nombre_invalido":  # include:_spf..google.com: el nombre está mal escrito
+                    r["terminos_invalidos"] += 1
+                    continue
                 # Tiempo agotado o servidor que no responde: no es una consulta "vacía" del RFC,
                 # es algo que no se pudo verificar. No debe producir un permerror falso.
                 r["consultas_con_error"] += 1
@@ -100,7 +136,10 @@ def analizar_spf(txts: list[str], consultar_txt: Callable[[str], list[str]]) -> 
                 r["consultas_vacias"] += 1
 
     contar(registros[0])
-    if r["consultas_dns"] > MAX_CONSULTAS_SPF:
+    if r["terminos_invalidos"]:
+        n = r["terminos_invalidos"]
+        r["permerror"], r["detalle"] = True, f"{n} {'término mal escrito' if n == 1 else 'términos mal escritos'}"
+    elif r["consultas_dns"] > MAX_CONSULTAS_SPF:
         r["permerror"], r["detalle"] = True, f"más de {MAX_CONSULTAS_SPF} consultas DNS"
     elif r["consultas_vacias"] > MAX_CONSULTAS_VACIAS:
         r["permerror"], r["detalle"] = True, f"más de {MAX_CONSULTAS_VACIAS} consultas sin respuesta"
@@ -154,7 +193,7 @@ def analizar_dmarc(txts: list[str]) -> dict[str, Any]:
 # --- consulta DNS (lo único de este archivo que toca la red) --------------------
 
 class ErrorDNS(Exception):
-    """Fallo de DNS con código corto: dominio_no_existe, sin_respuesta o tiempo_agotado."""
+    """Fallo de DNS con código corto: dominio_no_existe, sin_respuesta, tiempo_agotado o nombre_invalido."""
 
     def __init__(self, codigo: str):
         self.codigo = codigo
@@ -184,6 +223,10 @@ class ResolverDNS:
             raise ErrorDNS("sin_respuesta") from None
         except dns.exception.Timeout:
             raise ErrorDNS("tiempo_agotado") from None
+        except (dns.name.EmptyLabel, dns.name.LabelTooLong, dns.name.NameTooLong, dns.exception.SyntaxError):
+            raise ErrorDNS("nombre_invalido") from None  # p. ej. un include del SPF con ".." o una etiqueta larga
+        except dns.exception.DNSException:
+            raise ErrorDNS("sin_respuesta") from None
 
     def txt(self, nombre: str) -> list[str]:
         return [_unir_fragmentos(r.strings) for r in self._consultar(nombre, "TXT")]
@@ -214,6 +257,7 @@ SUGERENCIAS = {
                          "entregue el informe indicándolo.",
     "tiempo_agotado": "El DNS no respondió a tiempo; puede reintentar una vez o declararlo como limitación.",
     "sin_respuesta": "Los servidores DNS del dominio no responden; declárelo como limitación.",
+    "nombre_invalido": "El nombre no es un nombre DNS válido; declárelo como limitación.",
 }
 
 

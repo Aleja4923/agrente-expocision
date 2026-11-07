@@ -63,19 +63,21 @@ Entrada 425,687 (en caché 233,984, 55 %) · salida 18,393 · razonamiento 75,13
 | `fin_corrida` | 2 |
 | `inicio_corrida` | 2 |
 
-> Los errores de herramientas (`tls_certificado:sin_https`, `subdominios_ct:ct_no_responde`…) no son fallos de la tarea: el agente los declara como limitación y sigue. `gateway` cuenta las llamadas a Grok que fallaron después de los reintentos del cliente.
+> Los errores de herramientas (`subdominios_ct:limite_de_consultas`, `cabeceras_web:tiempo_agotado`…) no son fallos de la tarea: el agente los declara como limitación y sigue. `no_verificable` agrupa los códigos que dirían algo de la seguridad de la empresa (por ejemplo, que su sitio no acepta HTTPS); el código exacto queda en el archivo privado. `gateway` cuenta las llamadas a Grok que fallaron después de los reintentos del cliente.
 
 ## Prevalencia agregada (dominios que existen, n=19)
 
 Sobre dominios `.com.co` de la lista Tranco, no sobre "pymes". No se publica el resultado de ninguna empresa concreta.
 
-| Nivel de riesgo | Dominios |
+| Nivel de riesgo (n=18, sin los provisionales) | Dominios |
 |---|---|
-| alto | 84.2 % (16/19) |
-| bajo | 10.5 % (2/19) |
-| medio | 5.3 % (1/19) |
+| alto | 88.9 % (16/18) |
+| bajo | 5.6 % (1/18) |
+| medio | 5.6 % (1/18) |
 
-| Hallazgo más frecuente | Dominios |
+Con nivel **provisional** (no entran en la tabla de niveles): **1** dominios. Son los que cerraron con informe de respaldo o en los que falló una revisión principal (por ejemplo, la consulta DNS del correo no respondió a tiempo): su nivel se calculó sin esa revisión.
+
+| Hallazgo más frecuente (n=19) | Dominios |
 |---|---|
 | `WEB-SIN-HSTS` | 84.2 % (16/19) |
 | `WEB-SIN-SECURITY-TXT` | 63.2 % (12/19) |

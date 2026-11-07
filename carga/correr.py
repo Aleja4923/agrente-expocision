@@ -28,6 +28,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from auditor.modelos import EstadoAuditoria, MotivoCierre
+from auditor.report import nivel_provisional
 from carga.dominios import leer_csv
 from evals.correr import _candado, _leer_lineas
 
@@ -44,9 +45,22 @@ SALTO_RELOJ_SEGUNDOS = 600
 # 42 s dan unas 13,4 h. Si las tareas tardan más, no se espera nada extra.
 RITMO_SEGUNDOS = 42.0
 
+# Códigos de herramienta que dicen algo de la seguridad de la empresa (sin_https es el hallazgo WEB-SIN-HTTPS):
+# en la bitácora pública salen como `no_verificable`; el código exacto queda en el archivo privado.
+CODIGOS_PRIVADOS = frozenset({"sin_https", "tls_fallido", "certificado_invalido"})
+
 COLUMNAS = ["pos", "dominio", "inicio", "fin", "duracion_s", "resultado", "exito", "motivo_cierre", "respaldo",
             "dominio_existe", "intentos", "pasos", "tokens_entrada", "tokens_cache", "tokens_salida",
             "tokens_razonamiento", "costo_usd", "errores", "recuperacion", "lote_id", "auditoria_id"]
+
+
+def errores_publicos(errores: list[str]) -> list[str]:
+    """Los errores de la tarea sin los códigos que revelan un hallazgo de la empresa."""
+    salida = set()
+    for e in errores:
+        herramienta, _, codigo = e.partition(":")
+        salida.add(f"{herramienta}:no_verificable" if codigo in CODIGOS_PRIVADOS else e)
+    return sorted(salida)
 
 
 def _ahora() -> str:
@@ -59,6 +73,7 @@ class ContadorLLM:
     def __init__(self, cliente: Any):
         self.cliente = cliente
         self.tokens = {"entrada": 0, "cache": 0, "salida": 0, "razonamiento": 0}
+        self.costo = 0.0  # para no perder el gasto de un intento que termina en error interno
         self.errores: list[str] = []
 
     def completar(self, *args, **kwargs):
@@ -70,6 +85,7 @@ class ContadorLLM:
             raise
         for k in self.tokens:
             self.tokens[k] += getattr(r, f"tokens_{k}", 0) or 0
+        self.costo += getattr(r, "costo_usd", 0) or 0
         return r
 
 
@@ -226,6 +242,7 @@ def correr_cola(lote: str, filas: list[tuple[int, str, str]], *, hilos: int = 2,
                                         cliente_llm=contador if contador.cliente is not None else None)
                 except Exception as e:  # una tarea nunca tumba la cola
                     estado = None
+                    costo += contador.costo  # lo gastado antes del error también cuenta (bitácora y freno)
                     errores.append(f"error_interno:{type(e).__name__}")
                     cierres.append("error_interno")
                 else:
@@ -253,7 +270,7 @@ def correr_cola(lote: str, filas: list[tuple[int, str, str]], *, hilos: int = 2,
                 "motivo_cierre": cierres[-1], "respaldo": bool(estado and estado.informe_de_respaldo),
                 "dominio_existe": _existe(estado) if completada else None,
                 "intentos": len(cierres), "pasos": pasos, **{f"tokens_{k}": v for k, v in tokens.items()},
-                "costo_usd": round(costo, 6), "errores": sorted(set(errores)),
+                "costo_usd": round(costo, 6), "errores": errores_publicos(errores),
                 "recuperacion": _recuperacion(cierres, estado, completada), "lote_id": lote, "auditoria_id": aid,
             }
             with c.candado:
@@ -263,7 +280,9 @@ def correr_cola(lote: str, filas: list[tuple[int, str, str]], *, hilos: int = 2,
                     c._agregar(c.privado, {"pos": pos, "dominio": dominio, "motivo_cierre": cierres[-1],
                                            "existe": linea["dominio_existe"],
                                            "nivel": estado.nivel_riesgo.value if estado.nivel_riesgo else None,
-                                           "hallazgos": sorted(estado.hallazgos)})
+                                           "hallazgos": sorted(estado.hallazgos),
+                                           "provisional": nivel_provisional(estado),
+                                           "errores": sorted(set(errores))})
                 c.gasto += costo
                 if completada:
                     c.completadas += 1
@@ -311,8 +330,13 @@ def correr_cola(lote: str, filas: list[tuple[int, str, str]], *, hilos: int = 2,
                     h.join(1)
         except KeyboardInterrupt:
             parar.set()
-            with c.candado:
+            # Un hilo puede estar en una pausa del gateway con el candado tomado (hasta 20 min): no se espera.
+            tomado = c.candado.acquire(timeout=5)
+            try:
                 c.evento("interrumpida", completadas=c.completadas, gasto_usd=round(c.gasto, 4))
+            finally:
+                if tomado:
+                    c.candado.release()
             raise
         parar.set()
         resumen = {"completadas": c.completadas, "fallidas": c.fallidas, "gasto_usd": round(c.gasto, 4),

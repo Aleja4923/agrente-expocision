@@ -16,7 +16,10 @@ def leer_eventos(rutas: list[Path]) -> list[dict[str, Any]]:
     for ruta in rutas:
         for linea in ruta.read_text(encoding="utf-8").splitlines():
             if linea.strip():
-                eventos.append(json.loads(linea))
+                try:
+                    eventos.append(json.loads(linea))
+                except ValueError:  # una línea cortada por una caída no tumba el resumen
+                    pass
     return eventos
 
 

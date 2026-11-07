@@ -72,9 +72,9 @@ REGLAS: dict[str, tuple[Categoria, Severidad, str, str, str]] = {
         "quarantine o reject. Ganará fuerza cuando endurezca su DMARC.",
         "REC-DMARC-ENDURECER"),
     "CORREO-SPF-LOOKUPS": (
-        C, S.ALTA, "SPF demasiado largo para ser evaluado",
-        "Su SPF necesita más consultas de las que el estándar permite, así que los receptores lo marcan "
-        "como error y no lo aplican.",
+        C, S.ALTA, "SPF con un error que impide aplicarlo",
+        "Su SPF necesita más consultas de las que el estándar permite o tiene un término mal escrito, así que "
+        "los receptores lo marcan como error y no lo aplican.",
         "REC-SPF-SIMPLIFICAR"),
     "CORREO-SIN-MX": (
         C, S.INFORMATIVA, "El dominio no recibe correo",
@@ -196,8 +196,11 @@ def reglas_correo(datos: dict[str, Any]) -> list[Hallazgo]:
     if not dmarc["existe"]:
         h.append(_hallazgo("CORREO-DMARC-AUSENTE", f"no existe registro DMARC en _dmarc.{dominio}"))
     elif not dmarc["valido"]:
+        # El valor crudo de p lo escribe un tercero: solo se muestra si tiene forma de palabra corta.
+        p = dmarc["p"] or ""
         evidencia = ("hay más de un registro DMARC" if dmarc["multiple"]
-                     else f"política p={dmarc['p']} no válida")
+                     else f"política p={p} no válida" if p.isascii() and p.isalpha() and len(p) <= 15
+                     else "la política p no tiene un valor válido")
         h.append(_hallazgo("CORREO-DMARC-INVALIDO", evidencia))
     else:
         if dmarc["p"] == "none":
@@ -223,8 +226,12 @@ def reglas_correo(datos: dict[str, Any]) -> list[Hallazgo]:
         elif cierre == "~all" and not dmarc_estricto:
             h.append(_hallazgo("CORREO-SPF-SUAVE", "SPF termina en ~all y DMARC no está en quarantine ni reject"))
         if spf["permerror"]:
-            evidencia = (f"{spf['consultas_dns']} consultas DNS (máximo 10)" if spf["consultas_dns"] > 10
-                         else f"{spf['consultas_vacias']} consultas sin respuesta (máximo 2)")
+            if spf.get("terminos_invalidos"):
+                evidencia = f"el SPF tiene {spf['detalle']} (no sigue el estándar)"
+            elif spf["consultas_dns"] > 10:
+                evidencia = f"{spf['consultas_dns']} consultas DNS (máximo 10)"
+            else:
+                evidencia = f"{spf['consultas_vacias']} consultas sin respuesta (máximo 2)"
             h.append(_hallazgo("CORREO-SPF-LOOKUPS", evidencia))
 
     if mx["proveedor"] == "ninguno":

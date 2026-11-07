@@ -286,3 +286,54 @@ def test_cname_devuelve_destino_o_none(monkeypatch):
     assert r.cname("selector1._domainkey.ejemplo.com.co") == "selector1-x._domainkey.x.onmicrosoft.com"
     monkeypatch.setattr(r, "_consultar", lambda nombre, tipo: [])
     assert r.cname("google._domainkey.ejemplo.com.co") is None
+
+
+# --- Revisión de código posterior al S4 -------------------------------------------------------------------
+
+from auditor.scoring import reglas_correo  # noqa: E402
+from auditor.tools.correo import termino_spf_valido  # noqa: E402
+
+
+def test_mx_nulo_es_ninguno():
+    # RFC 7505: "0 ." declara que el dominio no recibe correo.
+    assert inferir_proveedor([""]) == "ninguno"
+    assert inferir_proveedor(["."]) == "ninguno"
+
+
+def test_dns_correo_con_mx_nulo(monkeypatch):
+    r = auditar(monkeypatch, ResolverFalso(txt={"ejemplo.com.co": ["v=spf1 -all"]},
+                                           mx={"ejemplo.com.co": [(0, "")]}))
+    assert r.datos["mx"]["proveedor"] == "ninguno"
+    assert "CORREO-SIN-MX" in [h.id for h in reglas_correo(r.datos)]
+
+
+def test_resolver_real_convierte_nombre_mal_formado():
+    # dnspython lanza EmptyLabel antes de consultar la red: debe salir como ErrorDNS con nombre.
+    with pytest.raises(ErrorDNS, match="nombre_invalido"):
+        ResolverDNS().txt("_spf..google.com")
+
+
+def test_include_mal_formado_no_tumba_el_spf(monkeypatch):
+    def consultar(nombre):
+        raise ErrorDNS("nombre_invalido")
+    r = analizar_spf(["v=spf1 include:_spf..google.com ~all"], consultar)
+    assert r["permerror"] and r["terminos_invalidos"] == 1 and r["cierre"] == "~all"
+
+
+@pytest.mark.parametrize("termino,valido", [
+    ("include:_spf.google.com", True), ("~all", True), ("-all", True), ("a", True), ("mx/24", True),
+    ("a:mail.x.co/24//64", True), ("ip4:1.2.3.4", True), ("ip4:10.0.0.0/8", True), ("ip6:2001:db8::/32", True),
+    ("exists:%{i}.x.co", True), ("ptr", True), ("redirect=_spf.x.co", True), ("exp=explica.x.co", True),
+    ("v-futuro=algo", True),
+    ("inlcude:_spf.google.com", False), ("ip4:1.2.3.4/33", False), ("ip4:999.1.1.1", False),
+    ("ip6:2001:db8::/129", False), ("redirect=", False), ("include:", False), ("nota;rara", False)])
+def test_sintaxis_de_terminos_spf(termino, valido):
+    assert termino_spf_valido(termino) is valido
+
+
+def test_spf_mal_escrito_es_hallazgo(monkeypatch):
+    r = auditar(monkeypatch, ResolverFalso(txt={"ejemplo.com.co": ["v=spf1 inlcude:_spf.google.com ~all"]},
+                                           mx={"ejemplo.com.co": [(1, "smtp.google.com")]}))
+    assert r.datos["spf"]["permerror"]
+    hallazgo = next(h for h in reglas_correo(r.datos) if h.id == "CORREO-SPF-LOOKUPS")
+    assert "1 término mal escrito" in hallazgo.evidencia and "inlcude" not in hallazgo.evidencia

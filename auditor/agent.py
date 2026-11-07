@@ -34,7 +34,8 @@ from auditor.tools import base
 from auditor.tools.base import DominioInvalido, en_alcance, normalizar_dominio
 
 MAX_RECHAZOS_INFORME = 2
-# Revisiones mínimas antes de entregar; las dos últimas valen también si se pidieron sobre un subdominio.
+# Revisiones mínimas antes de entregar, sobre el dominio objetivo; las de SOBRE_EL_REGISTRABLE valen también si se
+# pidieron sobre un subdominio (se resuelven contra el dominio registrable).
 OBLIGATORIAS = ("dns_correo", "tls_certificado", "whois_dominio", "buscar_parecidos", "subdominios_ct",
                 "cabeceras_web", "security_txt")
 SOBRE_EL_REGISTRABLE = ("whois_dominio", "buscar_parecidos", "subdominios_ct")
@@ -138,6 +139,19 @@ def _host(argumentos: dict[str, Any]) -> str | None:
         return None
 
 
+def _parecido(argumentos: dict[str, Any]) -> str:
+    """El parecido pedido, normalizado como lo hace la guarda: 'https://X.co/' y 'x.co' son el mismo."""
+    texto = str(argumentos.get("parecido") or "")
+    try:
+        return normalizar_dominio(texto)
+    except DominioInvalido:
+        return texto.lower().strip(".")
+
+
+# Llamadas que la guarda rechazó antes de ejecutarse: no gastan cupo.
+RECHAZADAS_POR_LA_GUARDA = ("fuera_de_alcance", "dominio_invalido", "argumentos_invalidos")
+
+
 def faltantes(estado: EstadoAuditoria) -> list[str]:
     """Verificaciones mínimas (OBLIGATORIAS) que todavía no se intentaron sobre el dominio objetivo."""
     intentadas = {}
@@ -165,9 +179,9 @@ def problemas_del_informe(informe: InformeFinal, hallazgos: dict[str, Hallazgo])
     return problemas
 
 
-# Herramientas cuyo contenido no confiable es texto libre que puede escribir cualquiera (registros TXT, security.txt).
-# El registrador, las cabeceras o los nombres del certificado tienen formato fijo y se pueden citar.
-FUENTES_TEXTO_LIBRE = frozenset({"dns_correo", "dkim_selector", "security_txt"})
+# Herramientas cuyo contenido no confiable es texto que escribe un tercero: registros TXT, security.txt, cabeceras
+# como Server o X-Powered-By y el emisor o el sujeto de un certificado (en uno autofirmado son texto libre).
+FUENTES_TEXTO_LIBRE = frozenset({"dns_correo", "dkim_selector", "security_txt", "cabeceras_web", "tls_certificado"})
 _FRAGMENTO = re.compile(r"[^\s\"'<>()\[\]{},;]+")
 _BORDES = ".:=-/_+@"
 _REGISTROS_DE_PROTOCOLO = ("v=spf1", "v=dmarc1", "v=dkim1")
@@ -186,6 +200,18 @@ def _textos(valor: Any) -> list[str]:
 
 
 _NOMBRE_DE_HOST = re.compile(r"[a-z0-9-]+\.[a-z]{2,}", re.IGNORECASE)
+# Etiquetas DMARC y DKIM del estándar con un valor de forma conocida: se pueden citar. Una etiqueta desconocida o un
+# valor raro (p=<instrucción>) sí se revisa: un tercero puede esconder texto dentro de un registro válido.
+_ETIQUETA_DE_PROTOCOLO = re.compile(
+    r"^(?:v=(?:spf1|dmarc1|dkim1)|p=(?:none|quarantine|reject|[a-z0-9+/]+=*)|sp=(?:none|quarantine|reject)"
+    r"|np=(?:none|quarantine|reject)|t=[yns:]+|psd=[ynu]|pct=\d{1,3}|fo=[01ds:]+|rf=[a-z:]+|ri=\d+"
+    r"|adkim=[rs]|aspf=[rs]|k=(?:rsa|ed25519)|h=[a-z0-9:]+|s=[a-z*:]+)$", re.IGNORECASE)
+# En cabeceras y certificados: un producto con su versión o una directiva con número (nginx/1.18.0,
+# max-age=31536000) es un valor con formato que el informe cita; el texto libre alrededor sí se revisa.
+_VALOR_CON_FORMATO = re.compile(r"^[a-z][a-z0-9_.-]*[=/]v?\d[\w.:-]*$", re.IGNORECASE)
+FUENTES_CON_FORMATO = frozenset({"cabeceras_web", "tls_certificado"})
+# De las cabeceras crudas, solo estas son texto libre; HSTS, CSP y X-Frame-Options son directivas del estándar.
+CABECERAS_TEXTO_LIBRE = ("server", "x-powered-by")
 
 
 def _distintivo(fragmento: str) -> bool:
@@ -196,13 +222,41 @@ def _distintivo(fragmento: str) -> bool:
             and any(c.isdigit() or c in _BORDES for c in fragmento) and not _NOMBRE_DE_HOST.search(fragmento))
 
 
+def _datos_confiables(r: ResultadoHerramienta) -> Any:
+    """Los datos de una herramienta sin las copias del texto crudo: el SPF tal cual y los valores DMARC que no son
+    del estándar son texto de un tercero, aunque viajen en `datos`."""
+    if r.herramienta != "dns_correo" or not r.ok:
+        return r.datos
+    datos = json.loads(json.dumps(r.datos, default=str))
+    datos.get("spf", {}).pop("registros", None)
+    dmarc = datos.get("dmarc", {})
+    for clave in ("p", "sp", "np", "t", "psd"):
+        if dmarc.get(clave) not in (None, "none", "quarantine", "reject", "y", "n", "u"):
+            dmarc[clave] = None
+    return datos
+
+
+def _revisable(fragmento: str, es_registro: bool, herramienta: str = "") -> bool:
+    """En un SPF, DMARC o DKIM no se revisan los términos del estándar; sí el texto agregado (nota=..., palabras).
+    En cabeceras y certificados no se revisan los valores con formato (versiones, directivas con número)."""
+    if herramienta in FUENTES_CON_FORMATO and _VALOR_CON_FORMATO.match(fragmento):
+        return False
+    if not es_registro:
+        return True
+    from auditor.tools.correo import termino_spf_valido
+    t = fragmento.lower()
+    es_mecanismo_spf = termino_spf_valido(t) and "=" not in t
+    return not (_ETIQUETA_DE_PROTOCOLO.match(t) or es_mecanismo_spf or t.startswith(("redirect=", "exp=")))
+
+
 def copia_no_confiable(informe: InformeFinal, estado: EstadoAuditoria) -> list[str]:
     """Fragmentos distintivos que el informe copió de texto libre externo y que no están en ningún dato confiable.
 
     Defensa contra la inyección: un TXT puede pedirle a Grok que escriba algo en el resumen. Las conclusiones ya
     las calcula el código; esto evita además que el texto para el dueño repita lo que dicta un tercero.
     """
-    confiable = " ".join([json.dumps([r.datos for _, r in estado.llamadas], ensure_ascii=False, default=str),
+    confiable = " ".join([json.dumps([_datos_confiables(r) for _, r in estado.llamadas], ensure_ascii=False,
+                                     default=str),
                           json.dumps([h.model_dump(mode="json") for h in estado.hallazgos.values()],
                                      ensure_ascii=False), estado.dominio, estado.objetivo, _VOCABULARIO_FIJO]).lower()
     escrito = " ".join(_textos(informe.model_dump(mode="json"))).lower()
@@ -210,15 +264,21 @@ def copia_no_confiable(informe: InformeFinal, estado: EstadoAuditoria) -> list[s
     for _, r in estado.llamadas:
         if r.herramienta not in FUENTES_TEXTO_LIBRE:
             continue
-        for texto in _textos(r.contenido_no_confiable):
-            if texto.strip().lower().startswith(_REGISTROS_DE_PROTOCOLO):
-                continue  # SPF, DMARC y DKIM: el código ya los interpretó y Grok puede citar sus etiquetas
-            for f in _FRAGMENTO.findall(texto):
-                f = f.strip(_BORDES)
-                bajo = f.lower()
-                if (_distintivo(f) and bajo not in confiable and estado.dominio not in bajo
-                        and bajo in escrito):
-                    copiados.add(f)
+        crudo_de_la_herramienta = r.contenido_no_confiable
+        if r.herramienta == "cabeceras_web":
+            crudo_de_la_herramienta = {k: v for k, v in crudo_de_la_herramienta.items() if k in CABECERAS_TEXTO_LIBRE}
+        for texto in _textos(crudo_de_la_herramienta):
+            # SPF, DMARC y DKIM: Grok puede citar sus términos del estándar, pero no el texto agregado dentro.
+            es_registro = texto.strip().lower().startswith(_REGISTROS_DE_PROTOCOLO)
+            for crudo in _FRAGMENTO.findall(texto):
+                if not _revisable(crudo, es_registro, r.herramienta):
+                    continue
+                # En "nota=MARCA" se revisa el término completo y también su valor.
+                for f in {crudo.strip(_BORDES), crudo.split("=", 1)[-1].strip(_BORDES)}:
+                    bajo = f.lower()
+                    if (_distintivo(f) and bajo not in confiable and estado.dominio not in bajo
+                            and bajo in escrito):
+                        copiados.add(f)
     return [f"copia texto de datos externos no confiables ({f}); redacta sin repetirlo" for f in sorted(copiados)]
 
 
@@ -389,14 +449,14 @@ def auditar(
 
         # Cupos por parecido distinto y por host extra distinto, contando lo ya hecho y en orden.
         gratis = {dominio, f"www.{dominio}"}
-        investigados = {str(a.get("parecido", "")).lower().strip(".") for a, r in estado.llamadas
-                        if r.herramienta == "investigar_parecido"}
+        investigados = {_parecido(a) for a, r in estado.llamadas
+                        if r.herramienta == "investigar_parecido" and r.error not in RECHAZADAS_POR_LA_GUARDA}
         hosts = {h for a, r in estado.llamadas if r.herramienta in POR_HOST and (h := _host(a)) not in gratis
-                 and r.error not in ("fuera_de_alcance", "dominio_invalido", "argumentos_invalidos")}
+                 and r.error not in RECHAZADAS_POR_LA_GUARDA}
         sin_cupo = set()
         for i, (tc, argumentos, *_) in enumerate(preparadas):
             if tc["nombre"] == "investigar_parecido" and isinstance(argumentos, dict):
-                parecido = str(argumentos.get("parecido", "")).lower().strip(".")
+                parecido = _parecido(argumentos)
                 if parecido not in investigados:  # reintentar el mismo parecido no gasta cupo
                     if len(investigados) >= MAX_PARECIDOS_INVESTIGADOS:
                         sin_cupo.add(i)

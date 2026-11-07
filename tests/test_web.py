@@ -196,3 +196,35 @@ def test_sin_direccion_web_tiene_sugerencia(monkeypatch):
     r, llamadas = revisar(monkeypatch, lambda v: (cert(), "TLSv1.3"), ip=ErrorConexion("sin_direccion_web"))
     assert (r.ok, r.error) == (False, "sin_direccion_web")
     assert "www." in r.sugerencia and llamadas == []
+
+
+# --- Revisión de código posterior al S4 -------------------------------------------------------------------
+
+class _ConexionFalsa:
+    def __init__(self, error):
+        self.error = error
+
+    def __call__(self, *a, **k):
+        raise self.error
+
+
+@pytest.mark.parametrize("error,codigo", [(ConnectionRefusedError(), "sin_https"),
+                                          (ConnectionResetError(), "sin_conexion"),
+                                          (OSError("red inalcanzable"), "sin_conexion"),
+                                          (TimeoutError(), "tiempo_agotado")])
+def test_solo_el_puerto_cerrado_es_sin_https(monkeypatch, error, codigo):
+    # Un firewall que corta el saludo no prueba que no haya HTTPS: antes salía WEB-SIN-HTTPS (alta).
+    monkeypatch.setattr(web.socket, "create_connection", _ConexionFalsa(error))
+    with pytest.raises(ErrorConexion) as e:
+        web._conectar("192.0.2.1", "ejemplo.com.co", verificar=True)
+    assert e.value.codigo == codigo
+    assert codigo in web.SUGERENCIAS
+
+
+def test_resolver_ip_prefiere_ipv4(monkeypatch):
+    monkeypatch.setattr(web.socket, "getaddrinfo", lambda *a, **k: [
+        (_socket.AF_INET6, 1, 6, "", ("2001:db8::1", 443, 0, 0)), (_socket.AF_INET, 1, 6, "", ("192.0.2.1", 443))])
+    assert web.resolver_ip("ejemplo.com.co") == "192.0.2.1"
+    monkeypatch.setattr(web.socket, "getaddrinfo", lambda *a, **k: [
+        (_socket.AF_INET6, 1, 6, "", ("2001:db8::1", 443, 0, 0))])
+    assert web.resolver_ip("ejemplo.com.co") == "2001:db8::1"

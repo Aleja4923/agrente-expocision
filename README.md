@@ -4,6 +4,16 @@ Agente autónomo que revisa, **solo con información pública**, qué tan expues
 
 Proyecto del Track 1 del [Reto Agente 2026](https://reto.pltk.mx/) (Platica.mx × Campuslands). El razonamiento corre sobre **Grok** a través del gateway del reto.
 
+**En cifras** (todas medidas y con su fuente en este repositorio):
+
+| | |
+|---|---|
+| Auditorías reales en una sola corrida desatendida | **1.150 de 1.150 completadas en 14,2 h**, sin intervención ([`carga/s4-carga/RESUMEN.md`](carga/s4-carga/RESUMEN.md)) |
+| Costo por auditoría | **USD 0,027** con grok-4.20, medido llamada por llamada |
+| Set de evaluación propio | **35 casos y 240 corridas con Grok:** nivel de riesgo correcto en el **100 %** ([`evals/REPORTE.md`](evals/REPORTE.md)) |
+| Lo que encontró en dominios `.com.co` reales | el **56 %** no tiene DMARC y el **45 %** no tiene SPF (n=1.131) |
+| Pruebas automáticas | **809**, sin red ni llave |
+
 ---
 
 ## El problema
@@ -13,6 +23,8 @@ Las pymes colombianas usan su dominio para el correo y la web, pero la mayoría 
 - **Facturas y cambios de cuenta bancaria "desde" su correo.** Sin DMARC, el dominio no indica a los receptores qué hacer con correos falsificados y el dueño no recibe reportes. Filtrarlos queda a criterio de cada proveedor de correo.
 - **Dominios casi idénticos al suyo** (una letra cambiada, otro TLD) que pueden recibir los correos que sus clientes escriban mal.
 - **El dueño no lo sabe**, y aunque lo supiera, no sabe qué pedirle a su proveedor.
+
+**Medido por este agente:** de 1.131 dominios `.com.co` reales que auditó, el 56 % no publica DMARC, el 45 % no tiene SPF y el 48 % tiene al menos un dominio casi idéntico con correo configurado. La muestra es de la lista pública Tranco, no solo de pymes, pero muestra que el problema es masivo.
 
 ## Qué lo hace distinto
 
@@ -110,14 +122,14 @@ carga/
   resumen.py      RESUMEN.md y tareas.csv desde la bitácora por tarea, sin Grok ni llave
   lanzar.ps1      relanza el corredor si Python se cae
   s4-prueba/ s4-carga/   bitácora por tarea de cada corrida
-tests/           757 pruebas sin red ni llave (Grok simulado con guiones)
+tests/           809 pruebas sin red ni llave (Grok simulado con guiones)
 ```
 
 **Decisiones de diseño:**
 - **Bucle propio sobre la librería `openai`, sin framework:** los topes, el validador del informe y la bitácora son lógica propia en cualquier caso, y así cada parte es visible.
 - **Cada auditoría tiene topes:** 20 pasos, USD 0,20 y 300 s. Si Grok repite la misma herramienta con los mismos argumentos, la auditoría se corta.
 - **Siempre hay informe:** si la auditoría se corta por un tope o un error, el código arma un informe de respaldo con los hallazgos verificados.
-- **El nivel de riesgo lo calcula el código**, no Grok: alto si hay algún hallazgo crítico o alto; medio si lo más grave es de severidad media (por ejemplo, un dominio parecido registrado hace poco o un sitio que no redirige a HTTPS); bajo en otro caso. Se calcula con lo que se revisa en toda auditoría: el correo, el registro del dominio, los dominios parecidos y el sitio del dominio y `www`. Los hallazgos de subdominios siguen en el informe con su severidad, y una línea junto al nivel los cuenta, pero no lo mueven: cuáles se revisan lo elige Grok, y el mismo dominio daría niveles distintos. Si la auditoría se corta, el nivel sale como **provisional**.
+- **El nivel de riesgo lo calcula el código**, no Grok: alto si hay algún hallazgo crítico o alto; medio si lo más grave es de severidad media (por ejemplo, un dominio parecido registrado hace poco o un sitio que no redirige a HTTPS); bajo en otro caso. Se calcula con lo que se revisa en toda auditoría: el correo, el registro del dominio, los dominios parecidos y el sitio del dominio y `www`. Los hallazgos de subdominios siguen en el informe con su severidad, y una línea junto al nivel los cuenta, pero no lo mueven: cuáles se revisan lo elige Grok, y el mismo dominio daría niveles distintos. Una elección de Grok sí puede mover el nivel: cuáles dominios parecidos investiga (4 como máximo), porque solo así salen los hallazgos de un parecido reciente o que envía correo. El nivel sale como **provisional** si la auditoría se corta o si falló una revisión principal, como la consulta DNS del correo; el informe dice cuál.
 - **Un solo contenido, dos formatos:** el informe se arma una vez y se dibuja en Markdown y en HTML, así que nunca dicen cosas distintas. El HTML escapa todo el texto, incluido el que escribe Grok.
 - **Identidad de cada ejecución: lote > auditoría > intento.** Una corrida masiva puede reanudarse tras una caída sin contar dos veces la misma auditoría.
 
@@ -142,23 +154,26 @@ tests/           757 pruebas sin red ni llave (Grok simulado con guiones)
 
 **Errores y recuperación:**
 - **El gateway no falló ninguna tarea:** 8 llamadas con `timeout` o desconexión se recuperaron con los reintentos del cliente, sin gastar un segundo intento de la tarea.
-- **El validador rechazó 141 borradores de informe en 80 tareas,** y Grok los corrigió. La mayoría citaban un hallazgo que el código no había encontrado. Otros 46 rechazos fueron de la guarda de alcance, cuando Grok intentó revisar un dominio ajeno.
+- **El validador rechazó 87 borradores de informe en 73 tareas,** y Grok los corrigió. 71 tenían acciones sobre hallazgos que el mismo borrador no listaba como citados, 11 llegaron antes de terminar las revisiones obligatorias y 5 citaban un hallazgo que el código no había encontrado. Aparte, la guarda de alcance bloqueó 46 llamadas (en 8 tareas) en las que Grok intentó revisar un dominio ajeno.
 - **5 tareas cerraron con informe de respaldo:** en 4, el validador rechazó todos los borradores de Grok; en 1, se llegó al tope de 20 pasos.
+- **La guarda contra la inyección no se activó:** ningún informe copió texto de un registro externo.
 - **Cert Spotter llegó a su límite de consultas** en 351 tareas, y algunos sitios no respondieron a tiempo. El agente lo declaró como limitación en el informe y siguió: ningún error de herramienta hace fallar la tarea.
 
 **Qué hace al corredor desatendido** (`carga/correr.py`, `carga/lanzar.ps1`):
 - **La cola se puede reanudar** sin contar dos veces una tarea.
 - **Cada tarea tiene hasta 3 intentos,** separados por esperas.
 - **Si el gateway cae varias veces seguidas,** se pausa 5, 10 y 20 minutos.
-- **Hay un freno de gasto:** USD 44.
+- **Hay un freno de gasto:** USD 44 si ya hay 1.030 tareas completadas; si no, USD 46,50.
 - **Se impide que Windows suspenda el equipo,** y cualquier salto de reloj queda en la bitácora.
 - **La bitácora es segura con varios hilos.**
 - **Las consultas de registro (WHOIS) van a un mínimo de 3 s entre una y otra,** con caché de 24 h, porque los términos del registro `.co` prohíben las consultas masivas.
 - **Si Python se cae, un lanzador lo vuelve a arrancar.**
 
-**Prevalencia agregada** (n=1.131 dominios que existen; sobre dominios `.com.co` de Tranco, no sobre «pymes»):
-- **Riesgo:** alto 84 % · bajo 13 % · medio 3 %.
-- **Hallazgos más comunes:** sitio sin HSTS (70 %), sin `security.txt` (57 %), sin DMARC (56 %) y sin SPF (45 %).
+**Prevalencia agregada** (sobre dominios `.com.co` de Tranco, no sobre «pymes»; 1.131 de los 1.150 existen):
+- **Riesgo** (n=1.102 con nivel definitivo): alto 85 % · bajo 11 % · medio 3 %. Otros **29 tienen nivel provisional** y no entran en el reparto: cerraron con informe de respaldo o falló una revisión principal, en la mayoría la consulta DNS del correo.
+- **Hallazgos más comunes** (n=1.131): sin HSTS en el sitio o en algún subdominio revisado (70 %), sin `security.txt` (57 %), sin DMARC (56 %), un dominio parecido con correo configurado (48 %) y sin SPF (45 %).
+
+**Versión del agente:** la corrida se hizo con el agente del commit `e34f319`. Las mejoras posteriores están en el historial del repositorio.
 
 **Cómo reproducirlo:**
 
@@ -184,7 +199,7 @@ venv\Scripts\python.exe -m carga.resumen --lote s4-carga                      # 
 | Nivel de riesgo correcto | 100 % | 100 % | 100 % |
 | Hallazgos que dependen de lo que Grok elige investigar | 40 % (75/186) | 67 % (124/186) | 47 % (27/57) |
 | Costo por auditoría: mediana · máximo | USD 0,031 · 0,082 | USD 0,097 · 0,255 | USD 0,036 · 0,089 |
-| Resistencia a la inyección en el DNS | 2 de 6 | 9 de 9 | 3 de 3 |
+| Resistencia a la inyección en el DNS | 2 de 6 | 6 de 6 | 3 de 3 |
 
 | Costo mediano por perfil | n por modelo | grok-4.20 | grok-4.7 |
 |---|---|---|---|
@@ -195,10 +210,10 @@ venv\Scripts\python.exe -m carga.resumen --lote s4-carga                      # 
 
 **Qué muestran:**
 - **El nivel de riesgo acierta en las 240 corridas, con cualquier modelo,** porque lo calcula el código. El modelo cambia lo que depende de su criterio: qué dominios parecidos investiga. Ahí grok-4.7 acierta más y cuesta unas 3 veces más.
-- **Inyección:** dos casos esconden en un registro DNS la orden de omitir un hallazgo y escribir una marca en el resumen. Ningún modelo logró borrar el hallazgo. Pero en 4 de 6 corridas grok-4.20 copió la marca en el resumen que redacta. **Se corrigió en el S4:** el arnés ahora rechaza un informe que copie texto distintivo de un registro externo, y Grok lo vuelve a redactar. En 6 corridas de verificación con grok-4.20, ningún resumen trajo la marca.
+- **Inyección:** dos casos esconden en un registro DNS la orden de omitir un hallazgo y escribir una marca en el resumen. Ningún modelo logró borrar el hallazgo. Pero en 4 de 6 corridas grok-4.20 copió la marca en el resumen que redacta. **En el S4 se agregó la defensa:** el arnés rechaza un informe que copie texto distintivo de un registro externo, y Grok lo vuelve a redactar. Las pruebas automáticas lo demuestran con la marca copiada. En las 6 corridas de verificación con grok-4.20, en cambio, la guarda no llegó a activarse: Grok no copió la marca ninguna vez. Con 2 de 6 limpias antes, ese resultado no prueba por sí solo que el modelo haya cambiado.
 - **`reasoning_effort=low`** baja el costo de grok-4.7 casi al de grok-4.20, pero pierde buena parte de la mejora en las decisiones.
 - **Autonomía:** con el mismo dominio, a un caso se le pide revisar pagos y al otro, facturación. Los dos modelos llegaron al portal de cada objetivo en todas las corridas (12 de 12).
-- **Caché:** entre el 48 y el 55 % de los tokens de entrada se leyeron de la caché del gateway.
+- **Caché:** el 55 % de los tokens de entrada con grok-4.20, el 47 % con grok-4.7 y el 53 % con `reasoning_effort=low` se leyeron de la caché del gateway. (`evals/REPORTE.md` junta grok-4.7 con sus corridas `low` en una sola fila, n=135.)
 
 **Límite declarado:** las respuestas esperadas las escribió la misma persona que trabajó en el código, así que no son del todo independientes. Los demás límites, como la lentitud del gateway durante parte de la corrida, están al final de `evals/REPORTE.md`.
 
@@ -241,6 +256,22 @@ Sobre **26 auditorías reales** por la CLI (15 dominios distintos), con grok-4.7
 
 El costo de cada llamada es el que reporta el propio gateway, y coincide con el que calculamos con los precios publicados. Todo queda en la bitácora.
 
+## Viabilidad: quién paga y cuánto cuesta
+
+**Quién paga:** contadores y agencias web, que lo ofrecen a sus clientes pyme como un servicio de valor agregado (B2B2C). Ya atienden a muchas pymes y tienen su confianza, y ganan al ejecutar ellos mismos las recomendaciones: configurar DMARC o SPF, o renovar un dominio.
+
+**Cuánto cuesta operarlo** (medido, no estimado):
+
+| | Costo por auditoría | 1.000 auditorías |
+|---|---|---|
+| grok-4.20, en la corrida real de 1.150 dominios | **USD 0,027** | ~USD 27 |
+| grok-4.20, en el set de evaluación (mediana) | USD 0,031 | ~USD 31 |
+| grok-4.7, mejores decisiones sobre qué investigar (mediana) | USD 0,097 | ~USD 97 |
+
+- **Sin infraestructura:** solo consultas públicas (DNS, certificado, portada del sitio, registro de dominios) y llamadas a Grok. Una auditoría tarda alrededor de un minuto.
+- **El nivel de riesgo lo calcula el código:** en el set de evaluación acertó el 100 % con los dos modelos. Se puede usar el modelo barato para volumen y el más fino para clientes que lo paguen.
+- **La barrera no es el costo, es la confianza y la distribución.** Por eso el canal son los contadores y las agencias, no la pyme directamente.
+
 ## Instalación y uso
 
 **Windows (PowerShell):**
@@ -249,7 +280,7 @@ El costo de cada llamada es el que reporta el propio gateway, y coincide con el 
 python -m venv venv
 venv\Scripts\python.exe -m pip install -r requirements.txt
 copy .env.example .env    # luego escribe tu llave del reto en RETO_KEY
-venv\Scripts\python.exe -m pytest -q                      # 757 pruebas, sin red ni llave
+venv\Scripts\python.exe -m pytest -q                      # 809 pruebas, sin red ni llave
 venv\Scripts\python.exe -m auditor auditar ejemplo.com.co --verbose
 ```
 

@@ -57,17 +57,16 @@ Entrada 28,856,251 (en caché 18,216,960, 63 %) · salida 1,123,911 · razonamie
 | `security_txt:sin_direccion_web` | 53 |
 | `cabeceras_web:tiempo_agotado` | 45 |
 | `security_txt:tiempo_agotado` | 45 |
+| `tls_certificado:no_verificable` | 43 |
 | `cabeceras_web:respuesta_invalida` | 36 |
 | `security_txt:respuesta_invalida` | 33 |
-| `tls_certificado:tls_fallido` | 25 |
-| `tls_certificado:sin_https` | 19 |
 | `buscar_parecidos:dominio_no_existe` | 19 |
 | `dns_correo:dominio_no_existe` | 19 |
-| `cabeceras_web:tls_fallido` | 17 |
+| `cabeceras_web:no_verificable` | 17 |
 | `buscar_parecidos:sin_respuesta` | 16 |
 | `dns_correo:sin_respuesta` | 16 |
 | `whois_dominio:registro_no_responde` | 15 |
-| `security_txt:tls_fallido` | 14 |
+| `security_txt:no_verificable` | 14 |
 | `cabeceras_web:sin_conexion` | 12 |
 | `security_txt:sin_conexion` | 12 |
 | `cabeceras_web:fuera_de_alcance` | 7 |
@@ -95,19 +94,21 @@ Entrada 28,856,251 (en caché 18,216,960, 63 %) · salida 1,123,911 · razonamie
 | `fin_corrida` | 1 |
 | `inicio_corrida` | 1 |
 
-> Los errores de herramientas (`tls_certificado:sin_https`, `subdominios_ct:ct_no_responde`…) no son fallos de la tarea: el agente los declara como limitación y sigue. `gateway` cuenta las llamadas a Grok que fallaron después de los reintentos del cliente.
+> Los errores de herramientas (`subdominios_ct:limite_de_consultas`, `cabeceras_web:tiempo_agotado`…) no son fallos de la tarea: el agente los declara como limitación y sigue. `no_verificable` agrupa los códigos que dirían algo de la seguridad de la empresa (por ejemplo, que su sitio no acepta HTTPS); el código exacto queda en el archivo privado. `gateway` cuenta las llamadas a Grok que fallaron después de los reintentos del cliente.
 
 ## Prevalencia agregada (dominios que existen, n=1131)
 
 Sobre dominios `.com.co` de la lista Tranco, no sobre "pymes". No se publica el resultado de ninguna empresa concreta.
 
-| Nivel de riesgo | Dominios |
+| Nivel de riesgo (n=1102, sin los provisionales) | Dominios |
 |---|---|
-| alto | 83.8 % (948/1131) |
-| bajo | 12.9 % (146/1131) |
-| medio | 3.3 % (37/1131) |
+| alto | 85.4 % (941/1102) |
+| bajo | 11.3 % (124/1102) |
+| medio | 3.4 % (37/1102) |
 
-| Hallazgo más frecuente | Dominios |
+Con nivel **provisional** (no entran en la tabla de niveles): **29** dominios. Son los que cerraron con informe de respaldo o en los que falló una revisión principal (por ejemplo, la consulta DNS del correo no respondió a tiempo): su nivel se calculó sin esa revisión.
+
+| Hallazgo más frecuente (n=1131) | Dominios |
 |---|---|
 | `WEB-SIN-HSTS` | 69.8 % (789/1131) |
 | `WEB-SIN-SECURITY-TXT` | 56.9 % (644/1131) |

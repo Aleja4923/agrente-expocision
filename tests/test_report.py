@@ -507,3 +507,56 @@ def test_respaldo_dice_nivel_provisional():
     md = generar_informe(estado(nivel="bajo", respaldo=True))
     assert "**Nivel de riesgo provisional: 🟢 BAJO**" in md
     assert "**Nivel de riesgo provisional" not in generar_informe(estado(nivel="bajo"))
+
+
+# --- Revisión de código posterior al S4: una revisión principal fallida no puede dar un nivel tranquilo ------
+
+from auditor.report import nivel_provisional, revisiones_principales_fallidas  # noqa: E402
+from auditor.report_html import generar_informe_html  # noqa: E402
+
+
+def _fallo(herramienta, error, **argumentos):
+    return (argumentos, ResultadoHerramienta(ok=False, herramienta=herramienta, error=error, sugerencia="x"))
+
+
+def test_dns_correo_fallido_da_nivel_provisional_y_limitacion():
+    # Caso real del S4: 21 dominios con dns_correo en tiempo_agotado salieron BAJO sin aviso.
+    e = estado(nivel="bajo")
+    e.llamadas = [_fallo("dns_correo", "tiempo_agotado", dominio=D)]
+    assert revisiones_principales_fallidas(e) == {"dns_correo": "tiempo_agotado"}
+    assert nivel_provisional(e)
+    md = generar_informe(e)
+    assert "Nivel de riesgo provisional" in md
+    seccion = md.split("## Lo que no se pudo verificar")[1]
+    assert "No se pudo revisar la configuración de correo (MX, SPF y DMARC)" in seccion
+    assert "tiempo_agotado" in seccion
+    assert "Nivel de riesgo provisional" in generar_informe_html(e)
+
+
+def test_un_reintento_exitoso_quita_lo_provisional():
+    e = estado(nivel="bajo")
+    e.llamadas.insert(0, _fallo("dns_correo", "tiempo_agotado", dominio=D))
+    assert not nivel_provisional(e)
+    assert "Nivel de riesgo provisional" not in generar_informe(e)
+
+
+def test_sitio_vale_dominio_o_www_y_los_resultados_no_son_fallas():
+    e = estado(nivel="bajo")
+    ok_www = ({"host": f"www.{D}"}, ResultadoHerramienta(ok=True, herramienta="tls_certificado", datos={}))
+    e.llamadas += [_fallo("tls_certificado", "tiempo_agotado", host=D), ok_www,
+                   _fallo("cabeceras_web", "sin_direccion_web", host=D)]
+    assert revisiones_principales_fallidas(e) == {}
+    e.llamadas.append(_fallo("buscar_parecidos", "sin_respuesta", dominio=D))
+    assert revisiones_principales_fallidas(e) == {"buscar_parecidos": "sin_respuesta"}
+
+
+def test_falla_en_un_subdominio_no_hace_provisional():
+    e = estado(nivel="bajo")
+    e.llamadas.append(_fallo("tls_certificado", "tiempo_agotado", host=f"pagos.{D}"))
+    assert not nivel_provisional(e)
+
+
+def test_dominio_inexistente_no_es_provisional():
+    e = estado(nivel="bajo")
+    e.llamadas = [_fallo("dns_correo", "dominio_no_existe", dominio=D)]
+    assert not nivel_provisional(e)

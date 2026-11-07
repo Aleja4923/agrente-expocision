@@ -12,7 +12,7 @@ from datetime import datetime
 
 from auditor.agent import auditar
 from auditor.config import RUTA_DB, RUTA_SALIDAS, modelo_elegido
-from auditor.report import dominio_no_existe, guardar_informe
+from auditor.report import dominio_no_existe, guardar_informe, nivel_provisional
 from auditor.store import guardar_auditoria
 from auditor.tools.base import DominioInvalido, normalizar_dominio
 
@@ -54,7 +54,8 @@ def main(argv: list[str] | None = None) -> int:
     ruta = guardar_informe(estado, RUTA_SALIDAS)
     guardar_auditoria(estado, ruta, RUTA_DB)
     resultado = ("El dominio no existe" if dominio_no_existe(estado)
-                 else f"Riesgo: {estado.nivel_riesgo.value.upper()} · Hallazgos: {len(estado.hallazgos)}")
+                 else f"Riesgo: {estado.nivel_riesgo.value.upper()}{' (provisional)' if nivel_provisional(estado) else ''}"
+                      f" · Hallazgos: {len(estado.hallazgos)}")
     print(f"\nInforme: {ruta}")
     print(f"Informe imprimible: {ruta.with_suffix('.html')}")
     print(f"{resultado} · Pasos: {estado.pasos} · Costo: USD {estado.costo_usd:.4f} · "

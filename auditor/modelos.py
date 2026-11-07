@@ -124,10 +124,13 @@ class InformeFinal(BaseModel):
 
     @model_validator(mode="after")
     def _acciones_citan_hallazgos(self):
-        sin_citar = [a.hallazgo_id for a in self.acciones_priorizadas
-                     if a.hallazgo_id not in self.hallazgos_citados]
-        if sin_citar:
-            raise ValueError(f"acciones que citan hallazgos no listados en hallazgos_citados: {sin_citar}")
+        """Una acción sobre un hallazgo también lo cita: se agrega a hallazgos_citados en vez de rechazar.
+
+        En el S4, rechazar el borrador entero por esto causó 71 de 87 rechazos y 4 informes de respaldo. Que el id
+        exista de verdad lo sigue revisando el arnés (agent.problemas_del_informe)."""
+        for a in self.acciones_priorizadas:
+            if a.hallazgo_id not in self.hallazgos_citados:
+                self.hallazgos_citados.append(a.hallazgo_id)
         return self
 
 

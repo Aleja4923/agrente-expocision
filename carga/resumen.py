@@ -69,6 +69,7 @@ def metricas(tareas: list[dict], eventos: list[dict], privado: list[dict]) -> di
     fines = [datetime.fromisoformat(t["fin"]) for t in tareas]
     corridas = [e for e in eventos if e["tipo"] == "inicio_corrida"]
     existentes = [p for p in privado if p.get("existe")]
+    definitivos = [p for p in existentes if not p.get("provisional")]
     hallazgos = Counter(h for p in existentes for h in p["hallazgos"])
     entrada = sum(t["tokens_entrada"] for t in tareas)
     return {
@@ -93,7 +94,9 @@ def metricas(tareas: list[dict], eventos: list[dict], privado: list[dict]) -> di
         "cache_pct": sum(t["tokens_cache"] for t in tareas) / entrada if entrada else 0,
         "errores": Counter(e.split(":")[0] if e.startswith("gateway") else e for t in tareas for e in t["errores"]),
         "eventos": Counter(e["tipo"] for e in eventos),
-        "niveles": Counter(p["nivel"] for p in existentes),
+        "niveles": Counter(p["nivel"] for p in definitivos),
+        "definitivos": len(definitivos),
+        "provisionales": len(existentes) - len(definitivos),
         "existentes": len(existentes),
         "hallazgos": hallazgos,
     }
@@ -142,15 +145,20 @@ def reporte(lote: str, m: dict[str, Any], gasto_bitacora: float | None) -> str:
     r += [f"| `{k}` | {v} |" for k, v in m["errores"].most_common()] or ["| — | 0 |"]
     r += ["", "| Evento de la corrida | Veces |", "|---|---|"]
     r += [f"| `{k}` | {v} |" for k, v in sorted(m["eventos"].items())]
-    r += ["", "> Los errores de herramientas (`tls_certificado:sin_https`, `subdominios_ct:ct_no_responde`…) no "
-          "son fallos de la tarea: el agente los declara como limitación y sigue. `gateway` cuenta las llamadas a "
-          "Grok que fallaron después de los reintentos del cliente.",
+    r += ["", "> Los errores de herramientas (`subdominios_ct:limite_de_consultas`, `cabeceras_web:tiempo_agotado`…) "
+          "no son fallos de la tarea: el agente los declara como limitación y sigue. `no_verificable` agrupa los "
+          "códigos que dirían algo de la seguridad de la empresa (por ejemplo, que su sitio no acepta HTTPS); el "
+          "código exacto queda en el archivo privado. `gateway` cuenta las llamadas a Grok que fallaron después de "
+          "los reintentos del cliente.",
           "", f"## Prevalencia agregada (dominios que existen, n={m['existentes']})", "",
           "Sobre dominios `.com.co` de la lista Tranco, no sobre \"pymes\". No se publica el resultado de ninguna "
           "empresa concreta.", "",
-          "| Nivel de riesgo | Dominios |", "|---|---|"]
-    r += [f"| {k} | {_pct(v, m['existentes'])} |" for k, v in m["niveles"].most_common()]
-    r += ["", "| Hallazgo más frecuente | Dominios |", "|---|---|"]
+          f"| Nivel de riesgo (n={m['definitivos']}, sin los provisionales) | Dominios |", "|---|---|"]
+    r += [f"| {k} | {_pct(v, m['definitivos'])} |" for k, v in m["niveles"].most_common()]
+    r += ["", f"Con nivel **provisional** (no entran en la tabla de niveles): **{m['provisionales']}** dominios. Son "
+          "los que cerraron con informe de respaldo o en los que falló una revisión principal (por ejemplo, la "
+          "consulta DNS del correo no respondió a tiempo): su nivel se calculó sin esa revisión."]
+    r += ["", f"| Hallazgo más frecuente (n={m['existentes']}) | Dominios |", "|---|---|"]
     r += [f"| `{k}` | {_pct(v, m['existentes'])} |" for k, v in m["hallazgos"].most_common(15)]
     return "\n".join(r) + "\n"
 

@@ -182,8 +182,11 @@ def investigar_parecido(entrada: EntradaParecido) -> ResultadoHerramienta:
     try:
         ns_propios, mx_propios = _servidores_del_dueno(registrable)
         estado, ns, mx = _revisar_variante(parecido)
-        if estado == "sin_verificar":
-            raise ErrorDNS("tiempo_agotado")
+    except ErrorDNS as e:  # incluido un dominio del dueño que no existe: nada que comparar
+        return _fallo("investigar_parecido", e)
+    if estado == "sin_verificar":
+        return _fallo("investigar_parecido", ErrorDNS("tiempo_agotado"))
+    try:
         txt = dns.txt(parecido) if estado == "existe" else []
     except ErrorDNS as e:
         if e.codigo != "dominio_no_existe":

@@ -73,14 +73,22 @@ def test_informe_sin_hallazgos_es_valido():
     assert informe.acciones_priorizadas == []
 
 
-def test_accion_que_cita_hallazgo_no_listado_se_rechaza():
-    with pytest.raises(ValidationError):
-        InformeFinal(
-            resumen="r",
-            hallazgos_citados=["CORREO-SPF-AUSENTE"],
-            acciones_priorizadas=[AccionPriorizada(hallazgo_id="CORREO-DMARC-AUSENTE",
-                                                   por_que_primero="p", recomendacion="r")],
-        )
+def test_accion_que_cita_hallazgo_no_listado_lo_agrega_a_los_citados():
+    # Antes se rechazaba el borrador entero (71 de 87 rechazos del S4); ahora la acción cuenta como cita.
+    informe = InformeFinal(
+        resumen="r",
+        hallazgos_citados=["CORREO-SPF-AUSENTE"],
+        acciones_priorizadas=[AccionPriorizada(hallazgo_id="CORREO-DMARC-AUSENTE",
+                                               por_que_primero="p", recomendacion="r")],
+    )
+    assert informe.hallazgos_citados == ["CORREO-SPF-AUSENTE", "CORREO-DMARC-AUSENTE"]
+
+
+def test_accion_sobre_hallazgo_inexistente_la_rechaza_el_arnes():
+    from auditor.agent import problemas_del_informe
+    informe = InformeFinal(resumen="r", hallazgos_citados=[], acciones_priorizadas=[
+        AccionPriorizada(hallazgo_id="INVENTADO", por_que_primero="p", recomendacion="r")])
+    assert problemas_del_informe(informe, {}) == ["cita INVENTADO, que no está entre los hallazgos"]
 
 
 def test_informe_rechaza_campos_extra():

@@ -124,6 +124,9 @@ PLANTILLAS: dict[str, Callable[[str, dict], str]] = {
         f"Cambiar el final del registro SPF de {d} por ~all (o por -all cuando haya confirmado todos los "
         f"servicios que envían correo con @{d})."),
     "REC-SPF-SIMPLIFICAR": lambda d, ctx: (
+        f"Corregir el registro SPF de {d} ({ctx['evidencia']}): revisar con su proveedor la escritura de cada "
+        f"include, ip4 e ip6 según el estándar SPF."
+        if "mal escrito" in ctx["evidencia"] else
         f"Reducir el registro SPF de {d} a 10 consultas DNS como máximo (hoy: {ctx['evidencia']}): quitar los "
         f"include de servicios que ya no use o reemplazarlos por sus rangos ip4/ip6."),
     "REC-SIN-MX": lambda d, ctx: (
@@ -235,6 +238,7 @@ class Contenido:
     verificaciones: list[str]
     limitaciones: list[str]
     pie: str
+    provisional: bool = False  # el nivel no es definitivo: la revisión se cortó o falló una revisión principal
 
 
 EXPLICACION_NO_EXISTE = ("No está registrado en internet (no responde en DNS), así que no hay correo ni sitio que "
@@ -263,7 +267,7 @@ def contenido(estado: EstadoAuditoria) -> Contenido:
     return Contenido(d, False, estado.nivel_riesgo or NivelRiesgo.BAJO, informe.resumen.strip(), None,
                      estado.informe_de_respaldo, aviso_de_subdominios(estado), acciones,
                      list(estado.hallazgos.values()), verificaciones,
-                     _limitaciones(estado), _pie(estado))
+                     _limitaciones(estado), _pie(estado), provisional=nivel_provisional(estado))
 
 
 SEVERIDAD_EN_PLURAL = {"critica": ("crítico", "críticos"), "alta": ("alto", "altos"), "media": ("medio", "medios"),
@@ -287,8 +291,50 @@ def aviso_de_subdominios(estado: EstadoAuditoria) -> str | None:
 
 
 def titulo_del_nivel(c: Contenido) -> str:
-    """Si la revisión se cortó, el nivel no puede tranquilizar: se dice que es provisional."""
-    return "Nivel de riesgo provisional" if c.respaldo else "Nivel de riesgo"
+    """Si la revisión se cortó o falló una revisión principal, el nivel no puede tranquilizar: es provisional."""
+    return "Nivel de riesgo provisional" if c.respaldo or c.provisional else "Nivel de riesgo"
+
+
+# Revisiones con las que se calcula el nivel. Si fallan, el nivel se calculó sin ellas.
+# El registro del dominio y security.txt ya tienen su propia limitación (limitaciones_de_parecidos y de_security_txt).
+REVISIONES_PRINCIPALES = {
+    "dns_correo": "la configuración de correo (MX, SPF y DMARC)",
+    "tls_certificado": "el certificado del sitio",
+    "cabeceras_web": "las cabeceras de seguridad del sitio",
+    "buscar_parecidos": "los dominios parecidos",
+}
+# Errores que son un resultado (lo que hay que reportar), no una revisión que no se pudo hacer.
+ERRORES_QUE_SON_RESULTADO = frozenset({"dominio_no_existe", "sin_direccion_web", "sin_https", "ip_bloqueada"})
+
+
+def revisiones_principales_fallidas(estado: EstadoAuditoria) -> dict[str, str]:
+    """{herramienta: último error} de las revisiones principales que se intentaron y nunca dieron resultado.
+
+    Para el sitio vale el dominio o www: basta con que uno de los dos haya respondido.
+    """
+    d = estado.dominio
+    validos = {"dns_correo": {d}, "buscar_parecidos": {d}, "tls_certificado": {d, f"www.{d}"},
+               "cabeceras_web": {d, f"www.{d}"}}
+    fallidas = {}
+    for herramienta, hosts in validos.items():
+        intentos = [r for a, r in estado.llamadas if r.herramienta == herramienta
+                    and _host_normalizado(a.get("dominio") or a.get("host")) in hosts]
+        if intentos and not any(r.ok or r.error in ERRORES_QUE_SON_RESULTADO for r in intentos):
+            fallidas[herramienta] = intentos[-1].error or "error"
+    return fallidas
+
+
+def nivel_provisional(estado: EstadoAuditoria) -> bool:
+    """El nivel no es definitivo si la revisión se cortó o si una revisión principal no dio resultado."""
+    if dominio_no_existe(estado):
+        return False
+    return estado.informe_de_respaldo or bool(revisiones_principales_fallidas(estado))
+
+
+def limitaciones_de_principales(estado: EstadoAuditoria) -> list[str]:
+    """Cada revisión principal que falló, dicha por el código: el nivel se calculó sin ella."""
+    return [f"No se pudo revisar {REVISIONES_PRINCIPALES[h]} de {estado.dominio} ({error}). El nivel de riesgo se "
+            "calculó sin esa revisión, por eso es provisional." for h, error in revisiones_principales_fallidas(estado).items()]
 
 
 def generar_informe(estado: EstadoAuditoria) -> str:
@@ -330,7 +376,7 @@ def generar_informe(estado: EstadoAuditoria) -> str:
 def dominio_no_existe(estado: EstadoAuditoria) -> bool:
     """True si el último dns_correo sobre el objetivo dijo que el dominio no existe."""
     for argumentos, r in reversed(estado.llamadas):
-        if r.herramienta == "dns_correo" and (argumentos.get("dominio") or "").lower().strip(".") == estado.dominio:
+        if r.herramienta == "dns_correo" and _host_normalizado(argumentos.get("dominio")) == estado.dominio:
             return r.error == "dominio_no_existe"
     return False
 
@@ -437,7 +483,8 @@ def _host_normalizado(texto) -> str | None:
 def _limitaciones(estado: EstadoAuditoria, fijas: list[str] | None = None) -> list[str]:
     """Las limitaciones que escribió Grok y, después, las que agrega el código."""
     if fijas is None:
-        fijas = [*limitaciones_de_dkim(estado), *limitaciones_de_parecidos(estado),
+        fijas = [*([] if estado.informe_de_respaldo else limitaciones_de_principales(estado)),
+                 *limitaciones_de_dkim(estado), *limitaciones_de_parecidos(estado),
                  *limitaciones_de_subdominios(estado), *limitaciones_de_security_txt(estado),
                  LIMITACION_PRIMERA_IP, LIMITACION_PARECIDOS]
         if any(r.herramienta == "cabeceras_web" and r.ok for _, r in estado.llamadas):

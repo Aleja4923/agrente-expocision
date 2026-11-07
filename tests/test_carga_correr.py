@@ -269,3 +269,59 @@ def test_codigo_de_salida(monkeypatch):
         monkeypatch.setattr(correr, "correr_cola", lambda *a, r=r, **k: {"completadas": 1, "fallidas": 0,
                                                                         "gasto_usd": 0.0, **r})
         assert correr.main(["--lote", "s4-carga"]) == codigo
+
+
+# --- Revisión de código posterior al S4 -------------------------------------------------------------------
+
+from auditor.modelos import ResultadoHerramienta  # noqa: E402
+
+
+def test_errores_que_revelan_un_hallazgo_no_se_publican():
+    publicos = correr.errores_publicos(["tls_certificado:sin_https", "cabeceras_web:tls_fallido",
+                                        "subdominios_ct:limite_de_consultas", "tls_certificado:tiempo_agotado"])
+    assert publicos == ["cabeceras_web:no_verificable", "subdominios_ct:limite_de_consultas",
+                        "tls_certificado:no_verificable", "tls_certificado:tiempo_agotado"]
+
+
+class AuditorConLlamadas(AuditorFalso):
+    def __call__(self, dominio, **kw):
+        e = super().__call__(dominio, **kw)
+        e.llamadas = [({"dominio": dominio}, ResultadoHerramienta(ok=False, herramienta="dns_correo",
+                                                                   error="tiempo_agotado", sugerencia="s")),
+                      ({"host": dominio}, ResultadoHerramienta(ok=False, herramienta="tls_certificado",
+                                                                error="sin_https", sugerencia="s"))]
+        return e
+
+
+def test_linea_publica_sin_sin_https_y_privada_con_detalle(tmp_path):
+    cola(tmp_path, AuditorConLlamadas(), filas=FILAS[:1])
+    t = tareas(tmp_path)[0]
+    assert "tls_certificado:no_verificable" in t["errores"] and "sin_https" not in json.dumps(t)
+    privado = json.loads((tmp_path / "priv" / "s4-test-hallazgos.jsonl").read_text("utf-8").splitlines()[0])
+    assert "tls_certificado:sin_https" in privado["errores"]
+    assert privado["provisional"] is True  # dns_correo nunca respondió: el nivel no es definitivo
+
+
+def test_error_interno_conserva_lo_gastado(tmp_path):
+    class Cliente:
+        def completar(self, *a, **k):
+            return type("R", (), {"costo_usd": 0.02, "tokens_entrada": 10})()
+
+    def auditar(dominio, *, cliente_llm, **kw):
+        cliente_llm.completar([])
+        raise RuntimeError("falla después de gastar")
+
+    cola(tmp_path, auditar, filas=FILAS[:1], nuevo_cliente=lambda *a: Cliente())
+    t = tareas(tmp_path)[0]
+    assert t["resultado"] == "fallida" and t["costo_usd"] == pytest.approx(0.06)  # 3 intentos × 0,02
+
+
+def test_resumen_separa_los_niveles_provisionales(tmp_path):
+    from carga import resumen
+    privado = [{"existe": True, "nivel": "bajo", "hallazgos": [], "provisional": True},
+               {"existe": True, "nivel": "alto", "hallazgos": ["CORREO-DMARC-AUSENTE"], "provisional": False},
+               {"existe": True, "nivel": "bajo", "hallazgos": []}]
+    m = resumen.metricas([], [], privado)
+    assert (m["existentes"], m["definitivos"], m["provisionales"]) == (3, 2, 1)
+    assert m["niveles"] == {"alto": 1, "bajo": 1}
+    assert "provisional** (no entran en la tabla de niveles): **1**" in resumen.reporte("s4-test", m, None)

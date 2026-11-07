@@ -60,7 +60,7 @@ def datos_de_certificado(der: bytes, ahora: datetime) -> tuple[dict[str, Any], d
 # --- conexión (lo único de este archivo que toca la red) -----------------------
 
 class ErrorConexion(Exception):
-    """Fallo de conexión con código corto: sin_https, tiempo_agotado, tls_fallido o dominio_no_existe."""
+    """Fallo de conexión con código corto: sin_https, sin_conexion, tiempo_agotado, tls_fallido o dominio_no_existe."""
 
     def __init__(self, codigo: str):
         self.codigo = codigo
@@ -83,9 +83,12 @@ def _existe_en_dns(host: str) -> bool:
 
 
 def resolver_ip(host: str) -> str:
-    """Primera IP del host. Se revisa con ip_permitida y luego se conecta a ESA misma IP."""
+    """IP del host (IPv4 si tiene: no todas las redes tienen salida IPv6). Se revisa con ip_permitida y luego
+    se conecta a ESA misma IP."""
     try:
-        return socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)[0][4][0]
+        direcciones = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
+        ipv4 = [d for d in direcciones if d[0] == socket.AF_INET]
+        return (ipv4 or direcciones)[0][4][0]
     except socket.gaierror:
         # Distinguir "no existe" de "existe pero no tiene sitio web en esa dirección".
         codigo = "sin_direccion_web" if _existe_en_dns(host) else "dominio_no_existe"
@@ -115,13 +118,19 @@ def _conectar(ip: str, host: str, verificar: bool) -> tuple[bytes, str]:
         raise ErrorConexion("tls_fallido") from None
     except TimeoutError:
         raise ErrorConexion("tiempo_agotado") from None
+    except ConnectionRefusedError:
+        raise ErrorConexion("sin_https") from None  # el servidor rechaza el puerto 443: no ofrece HTTPS
     except OSError:
-        raise ErrorConexion("sin_https") from None
+        # Conexión cortada en pleno saludo (p. ej. un firewall que bloquea bots) o red inalcanzable: no se sabe
+        # si hay HTTPS, así que no es el hallazgo WEB-SIN-HTTPS.
+        raise ErrorConexion("sin_conexion") from None
 
 
 SUGERENCIAS = {
     "sin_https": "El host no acepta conexiones HTTPS en el puerto 443; repórtalo, no reintentes.",
     "tiempo_agotado": "No respondió a tiempo; puedes reintentar una vez.",
+    "sin_conexion": "La conexión se cortó o la red no llegó al servidor; no se sabe si ofrece HTTPS. Puedes "
+                    "reintentar una vez o declararlo como limitación.",
     "ip_bloqueada": "El host apunta a una red privada o especial; no se revisa por seguridad.",
     "dominio_no_existe": "Ese host no existe en DNS.",
     "sin_direccion_web": "El nombre existe en DNS pero no tiene una dirección web: no hay sitio en ese host. "

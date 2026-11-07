@@ -239,3 +239,10 @@ def test_investigar_por_ejecutar_rechaza_no_variante(entorno):
     entorno["usar"](_dns_base())
     r = investigar("otro.com")
     assert (r.ok, r.error) == (False, "fuera_de_alcance")
+
+
+def test_investigar_con_dueno_inexistente_da_error_con_nombre(entorno):
+    # Antes: UnboundLocalError (las variables del dueño nunca se asignaban) → error_interno.
+    entorno["usar"](_dns_base(errores={("ns", DUENO): "dominio_no_existe"}))
+    r = investigar("ejemplo.co")
+    assert (r.ok, r.error) == (False, "dominio_no_existe")
