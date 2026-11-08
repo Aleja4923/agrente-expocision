@@ -110,7 +110,7 @@ código calcula el nivel de riesgo y arma el informe con los datos técnicos lit
   que se entregue antes de las revisiones obligatorias o que copie texto distintivo de un registro externo (defensa
   contra la inyección de instrucciones en el DNS). Grok recibe el motivo y corrige.</li>
   <li><b>Costo real por llamada</b>, con los tokens de caché y de razonamiento por separado. La bitácora se cruza con
-  el panel del reto: con grok-4.20, <b>4.374 peticiones en la bitácora y 4.374 en el panel</b>.</li>
+  el panel del reto: con grok-4.20, <b>4.379 peticiones en la bitácora y 4.379 en el panel</b>.</li>
   <li><b>Caché del gateway:</b> el 63 % de los tokens de entrada de la corrida de carga se leyó de la caché, gracias a
   un prompt de sistema fijo y a una conversación por intento.</li>
   <li><b>Robustez:</b> reintentos con espera; tiempo máximo por respuesta subido de 60 a 120 s con evidencia (en una
@@ -168,8 +168,9 @@ es el costo sino la confianza y la distribución; por eso el canal son los inter
   decisiones (grok-4.7 acierta más, a unas 3 veces el costo).</li>
   <li><b>Las respuestas esperadas del set las escribió la misma autora del código,</b> así que no son del todo
   independientes.</li>
-  <li><b>El panel del reto muestra más costo de grok-4.7 que la bitácora:</b> sobre todo son peticiones que el cliente
-  cortó por tiempo y que el gateway cobró sin devolver su consumo. El cruce está en <code>consumo/RESUMEN.md</code>.</li>
+  <li><b>El panel del reto muestra más costo de grok-4.7 que la bitácora:</b> registra 211 peticiones que la bitácora
+  no pudo costear (156 cortadas por tiempo, cuyo consumo el gateway no devolvió, y 55 sin línea). El cruce está en
+  <code>consumo/RESUMEN.md</code>.</li>
 </ul>
 
 <h2>8. Cómo reproducirlo</h2>

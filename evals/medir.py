@@ -161,7 +161,8 @@ def autonomia(filas: list[Fila]) -> dict[str, Any]:
                                       "caso", "modelo").items():
         rutas[(caso, modelo)] = {"n": len(g),
                                  "decision": (sum(f["decision_ok"] for f in g), sum(f["decision_total"] for f in g)),
-                                 "hosts": dict(Counter(h for f in g for h in _hosts_extra(f["ruta"])).most_common())}
+                                 "hosts": dict(sorted(Counter(h for f in g for h in _hosts_extra(f["ruta"])).items(),
+                                                     key=lambda x: (-x[1], x[0])))}  # empates en orden fijo
     perfiles = {perfil: {"n": len(g), "pasos_mediana": _mediana([f["pasos"] for f in g]),
                          "herramientas_mediana": _mediana([len({r[0] for r in f["ruta"]}) for f in g])}
                 for (perfil,), g in _agrupar(base, "perfil").items()}

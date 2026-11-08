@@ -116,8 +116,9 @@ def reporte(filas: list[dict[str, Any]], panel: dict[str, Any] | None) -> str:
               "- Las peticiones de la bitácora incluyen las que el cliente cortó por tiempo (columna «cortadas» "
               "abajo). El gateway las procesó y las cobró, pero el cliente no recibió su consumo, así que en la "
               "bitácora tienen costo 0. Con grok-4.20 las peticiones cuadran exactas.",
-              f"- Con grok-4.7, la diferencia de costo sale sobre todo de esas peticiones cortadas: {cortadas_47}, casi "
-              "todas en la tarde lenta del gateway durante el S3, cuando el tiempo máximo por respuesta era de 60 s.",
+              f"- Con grok-4.7 hay {cortadas_47} peticiones cortadas, casi todas en la tarde lenta del gateway durante el "
+              "S3, cuando el tiempo máximo por respuesta era de 60 s. Su costo no se conoce desde la bitácora: es "
+              "parte de la diferencia de costo con el panel.",
               f"- Quedan {sin_linea} peticiones de grok-4.7 en el panel sin línea en la bitácora. La causa más "
               "probable, no comprobada una por una, es la pérdida de líneas cuando escribían varios hilos o procesos "
               "a la vez durante el S3, un problema documentado que se corrigió para el S4. Las peticiones a grok-4.6 y sin modelo del panel tampoco están en la "

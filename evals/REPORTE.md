@@ -57,10 +57,10 @@ Mismo dominio, distinto objetivo: `fab-06` pide revisar pagos y `fab-07`, factur
 
 | Caso | Modelo | n | Alcanzó el portal del objetivo | Hosts extra revisados (veces) |
 |---|---|---|---|---|
-| fab-06 | grok-4.20 | 3 | 100 % (3/3) | pagos.portal.fab-pagos.com.co (3), facturacion.portal.fab-pagos.com.co (3) |
-| fab-06 | grok-4.7 | 3 | 100 % (3/3) | pagos.portal.fab-pagos.com.co (3), estado.fab-pagos.com.co (3), facturacion.portal.fab-pagos.com.co (3), dev.portal.fab-pagos.com.co (3), promo.fab-pagos.com.co (1), docs.fab-pagos.com.co (1), foro.fab-pagos.com.co (1), ayuda.fab-pagos.com.co (1), noticias.fab-pagos.com.co (1), eventos.fab-pagos.com.co (1) |
-| fab-07 | grok-4.20 | 3 | 100 % (3/3) | pagos.portal.fab-pagos.com.co (3), facturacion.portal.fab-pagos.com.co (3) |
-| fab-07 | grok-4.7 | 3 | 100 % (3/3) | facturacion.portal.fab-pagos.com.co (3), pagos.portal.fab-pagos.com.co (3), estado.fab-pagos.com.co (3), dev.portal.fab-pagos.com.co (3), docs.fab-pagos.com.co (3), ayuda.fab-pagos.com.co (3), foro.fab-pagos.com.co (2), blog.fab-pagos.com.co (1), noticias.fab-pagos.com.co (1), eventos.fab-pagos.com.co (1), promo.fab-pagos.com.co (1), cdn.fab-pagos.com.co (1) |
+| fab-06 | grok-4.20 | 3 | 100 % (3/3) | facturacion.portal.fab-pagos.com.co (3), pagos.portal.fab-pagos.com.co (3) |
+| fab-06 | grok-4.7 | 3 | 100 % (3/3) | dev.portal.fab-pagos.com.co (3), estado.fab-pagos.com.co (3), facturacion.portal.fab-pagos.com.co (3), pagos.portal.fab-pagos.com.co (3), ayuda.fab-pagos.com.co (1), docs.fab-pagos.com.co (1), eventos.fab-pagos.com.co (1), foro.fab-pagos.com.co (1), noticias.fab-pagos.com.co (1), promo.fab-pagos.com.co (1) |
+| fab-07 | grok-4.20 | 3 | 100 % (3/3) | facturacion.portal.fab-pagos.com.co (3), pagos.portal.fab-pagos.com.co (3) |
+| fab-07 | grok-4.7 | 3 | 100 % (3/3) | ayuda.fab-pagos.com.co (3), dev.portal.fab-pagos.com.co (3), docs.fab-pagos.com.co (3), estado.fab-pagos.com.co (3), facturacion.portal.fab-pagos.com.co (3), pagos.portal.fab-pagos.com.co (3), foro.fab-pagos.com.co (2), blog.fab-pagos.com.co (1), cdn.fab-pagos.com.co (1), eventos.fab-pagos.com.co (1), noticias.fab-pagos.com.co (1), promo.fab-pagos.com.co (1) |
 
 | Perfil | n | Pasos (mediana) | Herramientas distintas (mediana) |
 |---|---|---|---|

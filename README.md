@@ -67,7 +67,7 @@ Trayectorias reales distintas (dominios seudonimizados): en `banco-i.com`, los r
 | Herramienta | Qué revisa | Fuente pública | Si falla |
 |---|---|---|---|
 | `dns_correo` | MX y proveedor, SPF (conteo recursivo, RFC 7208), DMARC (RFC 9989) | DNS | error con nombre (`dominio_no_existe`, `tiempo_agotado`…) |
-| `tls_certificado` | validez del certificado, vencimiento, versión de TLS | saludo TLS al puerto 443 | `sin_https`, `sin_direccion_web`… |
+| `tls_certificado` | validez del certificado, vencimiento, versión de TLS | saludo TLS al puerto 443 | `sin_https` (puerto 443 cerrado), `sin_conexion`, `sin_direccion_web`… |
 | `dkim_selector` | si hay firma DKIM y el tamaño de la clave, en los selectores que elige Grok | DNS (`<selector>._domainkey`) | selector sin respuesta: se declara aparte |
 | `whois_dominio` | vencimiento y bloqueo de transferencia del dominio | WHOIS de `.co` (puerto 43) o RDAP de `.com`, `.net` y `.org` | caché de 24 h; pausa entre consultas; `registro_no_responde` |
 | `buscar_parecidos` | variantes que existen y tienen correo; si comparten servidores con el dueño | DNS | una variante que no responde queda "sin verificar" |
@@ -126,6 +126,9 @@ carga/
   consumo.py      bitácora de consumo pública (consumo/) y cruce con el panel del reto
   s4-prueba/ s4-carga/   bitácora por tarea de cada corrida
 tests/           816 pruebas sin red ni llave (Grok simulado con guiones)
+consumo/         bitácora de consumo pública y su cruce con el panel del reto
+reporte/         reporte técnico (PDF y su HTML de origen)
+iniciar.sh, iniciar.ps1   arranque de un comando
 ```
 
 **Decisiones de diseño:**
@@ -323,8 +326,8 @@ venv/bin/python -m auditor auditar ejemplo.com.co --verbose    # en Windows: ven
 ## Bitácora de consumo
 
 [`consumo/consumo.csv`](consumo/consumo.csv) tiene **cada petición a Grok del proyecto**, del S1 a hoy: fecha, hito, lote, modelo, tokens y costo. [`consumo/RESUMEN.md`](consumo/RESUMEN.md) la cruza con el panel del reto, que solo muestra los últimos registros y los totales por modelo:
-- **grok-4.20:** las peticiones cuadran exactas (4.374 en la bitácora y 4.374 en el panel).
-- **grok-4.7:** el panel muestra más costo que la bitácora. Casi toda la diferencia son peticiones que el cliente cortó por tiempo durante una tarde lenta del gateway: el gateway las cobró, pero no devolvió su consumo. El cruce lo explica con sus cifras.
+- **grok-4.20:** las peticiones cuadran exactas (4.379 en la bitácora y 4.379 en el panel).
+- **grok-4.7:** el panel registra 211 peticiones que la bitácora no pudo costear: 156 que el cliente cortó por tiempo durante una tarde lenta del gateway (el gateway las procesó, pero no devolvió su consumo) y 55 sin línea en la bitácora. Por eso el panel muestra más costo. El cruce lo detalla con sus cifras.
 
 No se publica el dominio de las corridas hechas por la CLI. Se regenera con `python -m carga.consumo`.
 
