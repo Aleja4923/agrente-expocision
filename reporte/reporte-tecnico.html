@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reporte técnico · Auditor de exposición digital para pymes</title>
+<style>
+  @page { size: A4; margin: 13mm 14mm 13mm 14mm; }
+  :root { --tinta: #1d2430; --suave: #5a6472; --linea: #d5dae1; --acento: #1f5fae; --fondo: #f3f6fa; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 9.2pt; line-height: 1.38; color: var(--tinta);
+         margin: 0; background: #fff; }
+  h1 { font-size: 15.5pt; margin: 0 0 1mm; color: var(--acento); }
+  .sub { color: var(--suave); font-size: 8.6pt; margin-bottom: 3mm; }
+  h2 { font-size: 10.8pt; margin: 3.4mm 0 1.2mm; color: var(--acento); border-bottom: 1px solid var(--linea);
+       padding-bottom: 0.6mm; break-after: avoid; }
+  h2 .pts { float: right; font-weight: 400; color: var(--suave); font-size: 8pt; margin-top: 0.8mm; }
+  p { margin: 0 0 1.5mm; }
+  ul { margin: 0 0 1.5mm; padding-left: 4.5mm; }
+  li { margin: 0 0 0.6mm; }
+  table { border-collapse: collapse; width: 100%; margin: 1mm 0 2mm; font-size: 8.4pt; break-inside: avoid; }
+  th, td { border: 1px solid var(--linea); padding: 0.9mm 1.6mm; text-align: left; vertical-align: top; }
+  th { background: var(--fondo); font-weight: 600; }
+  td.n { text-align: right; white-space: nowrap; }
+  code { font-family: Consolas, monospace; font-size: 8.2pt; background: var(--fondo); padding: 0 0.6mm; }
+  .cifras { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6mm; margin: 1mm 0 2mm; }
+  .cifra { background: var(--fondo); border: 1px solid var(--linea); padding: 1.4mm 2mm; }
+  .cifra b { display: block; font-size: 12.5pt; color: var(--acento); }
+  .cifra span { font-size: 7.8pt; color: var(--suave); }
+  .flujo { background: var(--fondo); border: 1px solid var(--linea); padding: 1.6mm 2.2mm; font-size: 8.4pt;
+           margin: 1mm 0 2mm; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+  .nota { color: var(--suave); font-size: 8pt; }
+</style>
+</head>
+<body>
+
+<h1>Auditor de exposición digital para pymes</h1>
+<div class="sub">Reporte técnico · Track 1 del Reto Agente 2026 (Platica.mx × Campuslands) · Autora: Aleja (GitHub
+Aleja4923) · Repositorio: github.com/Aleja4923/agrente-expocision · Licencia MIT · Razonamiento sobre Grok por el
+gateway del reto</div>
+
+<div class="cifras">
+  <div class="cifra"><b>1.150 / 1.150</b><span>auditorías reales completadas en una corrida de 14,2 h sin intervención</span></div>
+  <div class="cifra"><b>USD 0,027</b><span>costo por auditoría (grok-4.20), medido llamada por llamada</span></div>
+  <div class="cifra"><b>100 %</b><span>nivel de riesgo correcto en 240 corridas sobre 35 casos con respuesta conocida</span></div>
+  <div class="cifra"><b>816</b><span>pruebas automáticas, sin red ni llave</span></div>
+</div>
+
+<h2>1. El problema <span class="pts">Impacto</span></h2>
+<p>Las pymes colombianas usan su dominio para el correo y la web, pero la mayoría no publica las protecciones que
+permiten a un receptor reconocer un correo falso (SPF, DKIM, DMARC). El resultado son facturas y cambios de cuenta
+bancaria «desde» su correo, y dominios casi idénticos al suyo listos para recibir los correos que sus clientes
+escriban mal. El dueño no lo sabe y, aunque lo supiera, no sabe qué pedirle a su proveedor.</p>
+<p><b>Medido por el propio agente</b> sobre 1.131 dominios <code>.com.co</code> reales que existen (lista pública
+Tranco): el <b>56 %</b> no publica DMARC, el <b>45 %</b> no tiene SPF y el <b>48 %</b> tiene al menos un dominio casi
+idéntico con correo configurado. La muestra no es solo de pymes (incluye grandes empresas y dominios aparcados), pero
+muestra que el problema es masivo.</p>
+
+<h2>2. Qué entrega y por qué es distinto</h2>
+<p>Herramientas como MXToolbox o internet.nl hacen los chequeos técnicos gratis. Este agente aporta dos cosas que
+ellas no dan:</p>
+<ul>
+  <li><b>Un plan, no un tablero:</b> prioriza qué hacer primero, lo explica en lenguaje de dueño y adjunta el dato
+  técnico exacto, listo para reenviar al proveedor. Los cambios son graduales (DMARC primero en observación) para no
+  mandar a spam correo legítimo como la facturación electrónica.</li>
+  <li><b>Dominios parecidos preparados para enviar correo:</b> genera variantes del dominio y revisa cuáles existen,
+  tienen correo, se registraron hace poco o autorizan envío en su SPF. Es la señal más cercana a un fraude de
+  facturas antes del primer correo falso, y se presenta como algo a verificar, nunca como acusación.</li>
+</ul>
+<p>Además revisa SPF, DKIM y DMARC; el registro del dominio (vencimiento y bloqueo de transferencia); los subdominios
+de los registros públicos de certificados; y las cabeceras de seguridad y el <code>security.txt</code> del sitio.
+Entrega el informe en Markdown y en HTML imprimible, con la misma información.</p>
+
+<h2>3. Arquitectura: Grok investiga, el código concluye <span class="pts">Autonomía y funcionalidad</span></h2>
+<div class="flujo"><b>Bucle propio sobre la librería <code>openai</code></b> (sin framework): Grok recibe el
+objetivo y 9 herramientas → pide varias en paralelo, cada una con una justificación de una línea → el arnés valida el
+alcance, ejecuta y devuelve los resultados (lo externo, marcado como no confiable) más los hallazgos que calcula el
+código → Grok decide qué más investigar o entrega el informe → el arnés lo valida o lo rechaza con el motivo → el
+código calcula el nivel de riesgo y arma el informe con los datos técnicos literales.</div>
+<div class="dos">
+<div>
+<ul>
+  <li><b>Grok elige el camino:</b> qué revisar, en qué orden y cuándo tiene suficiente. Hay más candidatos que
+  presupuesto (4 parecidos y 10 subdominios por auditoría), así que tiene que priorizar según el objetivo, que el
+  usuario escribe en texto libre.</li>
+  <li><b>Hay dependencias reales:</b> primero ve el proveedor de correo y después elige los selectores DKIM; primero
+  ve la lista de parecidos y después decide cuáles investigar.</li>
+  <li><b>31 reglas deterministas</b> calculan los hallazgos, cada uno con id, severidad y evidencia. Grok no puede
+  crear hallazgos ni cambiar su severidad: redacta y prioriza.</li>
+</ul>
+</div>
+<div>
+<ul>
+  <li><b>Siempre hay informe:</b> topes por auditoría de 20 pasos, USD 0,20 y 300 s. Si se alcanza uno, el código
+  arma un informe de respaldo con lo verificado, y el nivel sale como provisional.</li>
+  <li><b>Trayectorias distintas por dominio:</b> en un banco con cientos de subdominios eligió los de autenticación y
+  comercio; con Microsoft 365 probó sus dos selectores DKIM y encontró una clave de 1024 bits; con un dominio
+  inexistente entregó en 2 pasos.</li>
+  <li><b>Alcance ético pasivo:</b> solo información pública, sin escaneos ni accesos, y con protección contra SSRF.
+  Ninguna herramienta acepta un dominio ajeno; a los parecidos solo se les consulta DNS y registro, nunca su sitio.</li>
+</ul>
+</div>
+</div>
+
+<h2>4. Ingeniería sobre Grok <span class="pts">Ingeniería sobre Grok</span></h2>
+<ul>
+  <li><b><code>chat/completions</code> con llamadas a herramientas en paralelo:</b> en el primer paso Grok pide juntas
+  las 7 revisiones de base; la mediana fue de 3 pasos por auditoría en la corrida de carga.</li>
+  <li><b>Validador del informe:</b> rechaza un informe que cite hallazgos inexistentes, que omita uno crítico o alto,
+  que se entregue antes de las revisiones obligatorias o que copie texto distintivo de un registro externo (defensa
+  contra la inyección de instrucciones en el DNS). Grok recibe el motivo y corrige.</li>
+  <li><b>Costo real por llamada</b>, con los tokens de caché y de razonamiento por separado. La bitácora se cruza con
+  el panel del reto: con grok-4.20, <b>4.374 peticiones en la bitácora y 4.374 en el panel</b>.</li>
+  <li><b>Caché del gateway:</b> el 63 % de los tokens de entrada de la corrida de carga se leyó de la caché, gracias a
+  un prompt de sistema fijo y a una conversación por intento.</li>
+  <li><b>Robustez:</b> reintentos con espera; tiempo máximo por respuesta subido de 60 a 120 s con evidencia (en una
+  tarde lenta del gateway, con 60 s, se cortaron 26 de 48 intentos de grok-4.7; con 120 s, cero); detección de
+  repeticiones; guarda de alcance; identidad lote &gt; auditoría &gt; intento para reanudar sin contar dos veces.</li>
+  <li><b>Corrida desatendida:</b> cola con 2 hilos y bitácora con candado; pausas automáticas si cae el gateway; freno
+  de gasto; impide que Windows suspenda el equipo; relanzador si se cae Python.</li>
+</ul>
+
+<h2>5. Evidencia con datos reales <span class="pts">Evidencia con datos reales</span></h2>
+<p><b>Evaluación (S3).</b> 35 casos con respuesta conocida: 25 dominios reales seudonimizados y 10 fabricados
+(inyección en el DNS, dominio por vencer, SPF con demasiadas consultas, mismo dominio con dos objetivos), que cubren
+las 31 reglas. Grok corre de verdad; las respuestas de las herramientas se reproducen desde lo grabado detrás de las
+mismas guardas.</p>
+<table>
+  <tr><th></th><th>grok-4.20</th><th>grok-4.7</th><th>grok-4.7, <code>reasoning_effort=low</code></th></tr>
+  <tr><td>Corridas</td><td class="n">105</td><td class="n">105</td><td class="n">30</td></tr>
+  <tr><td>Nivel de riesgo correcto</td><td class="n">100 %</td><td class="n">100 %</td><td class="n">100 %</td></tr>
+  <tr><td>Hallazgos que dependen de lo que Grok elige investigar</td><td class="n">40 % (75/186)</td><td class="n">67 % (124/186)</td><td class="n">47 % (27/57)</td></tr>
+  <tr><td>Costo por auditoría: mediana · máximo</td><td class="n">USD 0,031 · 0,082</td><td class="n">USD 0,097 · 0,255</td><td class="n">USD 0,036 · 0,089</td></tr>
+  <tr><td>Resistencia a la inyección en el DNS (no copió la marca)</td><td class="n">2 de 6</td><td class="n">6 de 6</td><td class="n">3 de 3</td></tr>
+</table>
+<p><b>Carga (S4).</b> 1.150 dominios <code>.com.co</code> sorteados de la lista Tranco con semilla fija, auditados de
+punta a punta con grok-4.20 en una sola pasada desatendida.</p>
+<table>
+  <tr><th>Completadas · fallidas</th><th>Duración</th><th>Costo total · por tarea</th><th>Por tarea: mediana · p90 · máximo</th><th>Tokens</th></tr>
+  <tr><td>1.150 · 0 (100 %)</td><td>14,2 h, un solo arranque</td><td>USD 31,10 · USD 0,027</td><td>USD 0,026 · 0,038 · 0,147</td><td>28,9 M de entrada (63 % de caché) · 1,1 M de salida · 4,5 M de razonamiento</td></tr>
+</table>
+<p>Hay una bitácora pública por tarea (hora, resultado, intentos, pasos, tokens, costo, errores y recuperación), sin
+el riesgo de ninguna empresa concreta. Además, en el S2 hubo 10 auditorías reales de perfiles distintos (10 de 10 con
+el informe de Grok) y en el S1, 26 auditorías por la CLI.</p>
+
+<h2>6. Viabilidad <span class="pts">Viabilidad</span></h2>
+<p><b>Quién paga:</b> contadores y agencias web, que lo ofrecen a sus clientes pyme como servicio de valor agregado
+(B2B2C). Ya tienen su confianza y ganan al ejecutar las recomendaciones. <b>Costo de operación medido:</b> USD 0,027
+por auditoría con grok-4.20 (unos USD 27 por cada 1.000), o USD 0,097 de mediana con grok-4.7 cuando importa la
+calidad de las decisiones. Sin infraestructura propia: solo consultas públicas y Grok, alrededor de un minuto por
+auditoría. El nivel de riesgo lo calcula el código, así que se puede usar el modelo barato para volumen. La barrera no
+es el costo sino la confianza y la distribución; por eso el canal son los intermediarios.</p>
+
+<h2>7. Límites y fallos, dichos con sus cifras</h2>
+<ul>
+  <li><b>En la corrida de carga:</b>
+    <ul>
+      <li>5 de 1.150 tareas cerraron con informe de respaldo (4 por rechazos agotados y 1 por el tope de pasos);</li>
+      <li>el validador rechazó 87 borradores en 73 tareas, y Grok los corrigió;</li>
+      <li>Cert Spotter llegó a su límite de consultas en 351 tareas, y quedó declarado como limitación;</li>
+      <li>29 dominios tienen nivel provisional porque falló una revisión principal o cerraron con respaldo.</li>
+    </ul></li>
+  <li><b>Inyección:</b> con grok-4.20, 4 de 6 corridas copiaron una marca trampa en el resumen, aunque ningún modelo
+  logró borrar un hallazgo. Se agregó la defensa en el arnés, probada con pruebas automáticas. En la verificación con
+  Grok la marca no reapareció y la guarda no llegó a activarse, así que eso no prueba por sí solo que el modelo haya
+  cambiado.</li>
+  <li><b>Qué parecidos investiga Grok puede mover el nivel</b> de riesgo; por eso el modelo importa en esas
+  decisiones (grok-4.7 acierta más, a unas 3 veces el costo).</li>
+  <li><b>Las respuestas esperadas del set las escribió la misma autora del código,</b> así que no son del todo
+  independientes.</li>
+  <li><b>El panel del reto muestra más costo de grok-4.7 que la bitácora:</b> sobre todo son peticiones que el cliente
+  cortó por tiempo y que el gateway cobró sin devolver su consumo. El cruce está en <code>consumo/RESUMEN.md</code>.</li>
+</ul>
+
+<h2>8. Cómo reproducirlo</h2>
+<p><code>./iniciar.sh ejemplo.com.co</code> (o <code>iniciar.ps1</code> en Windows) prepara el entorno y audita;
+<code>--json</code> devuelve el resultado como datos y <code>--lote casos.txt</code> corre una lista de dominios. Sin
+llave ni red: <code>pytest</code> (816 pruebas), <code>python -m evals.medir</code> (rehace el reporte de
+evaluación), <code>python -m carga.resumen --lote s4-carga</code> y <code>python -m carga.consumo</code>.</p>
+<p class="nota">Las cifras salen de <code>evals/REPORTE.md</code>, <code>carga/s4-carga/RESUMEN.md</code> y
+<code>consumo/RESUMEN.md</code>, que se regeneran desde las bitácoras del repositorio.</p>
+
+</body>
+</html>

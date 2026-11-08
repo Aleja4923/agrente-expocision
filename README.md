@@ -14,6 +14,8 @@ Proyecto del Track 1 del [Reto Agente 2026](https://reto.pltk.mx/) (Platica.mx �
 | Lo que encontró en dominios `.com.co` reales | el **56 %** no tiene DMARC y el **45 %** no tiene SPF (n=1.131) |
 | Pruebas automáticas | **816**, sin red ni llave |
 
+**Reporte técnico (3 páginas):** [`reporte/reporte-tecnico.pdf`](reporte/reporte-tecnico.pdf).
+
 ---
 
 ## El problema
